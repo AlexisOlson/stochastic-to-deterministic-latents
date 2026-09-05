@@ -27,7 +27,8 @@ heading, and the parse below is written against the exact current shape of that
 picture. The rules, so a change to the text is caught rather than misread:
 
   * The heading `## Dependencies` must occur exactly once, and exactly one
-    fenced ```text block must lie between it and the next `## ` heading.
+    fenced ```text block must lie between it and the next `## ` heading;
+    other fenced blocks there (the generated ```mermaid diagram) are skipped.
   * Every non-blank line of the block must match one of four forms:
       1. `LHS ---> RHS`             sources LHS, target RHS
       2. `LHS ---> RHS ---+`        as 1, and RHS also joins the open group
@@ -214,10 +215,16 @@ def find_dependency_block(lines: list[str]) -> tuple[int, int]:
         fail(f"expected exactly one '## Dependencies' heading, found {len(heads)}")
     start = heads[0] + 1
     end = next((i for i in range(start, len(lines)) if lines[i].startswith("## ")), len(lines))
+    # The section also holds this script's own ```mermaid output, so only the
+    # ```text fence pair is the picture; any other fenced block is skipped.
     fences = [i for i in range(start, end) if lines[i].strip().startswith("```")]
-    if len(fences) != 2 or lines[fences[0]].strip() != "```text":
+    if len(fences) % 2 != 0:
+        fail("unbalanced fences in the Dependencies section")
+    text = [(fences[k], fences[k + 1]) for k in range(0, len(fences), 2)
+            if lines[fences[k]].strip() == "```text"]
+    if len(text) != 1:
         fail("expected exactly one ```text fence in the Dependencies section")
-    return fences[0] + 1, fences[1]  # half-open line index range of the body
+    return text[0][0] + 1, text[0][1]  # half-open line index range of the body
 
 
 def parse_dag(lines: list[str], lo: int, hi: int) -> list[tuple[str, str]]:
