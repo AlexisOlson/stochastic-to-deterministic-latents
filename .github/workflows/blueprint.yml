@@ -3,10 +3,20 @@ name: blueprint
 on:
   pull_request:
     branches: [main]
+    paths:
+      - 'blueprint/**'
+      - '.github/workflows/blueprint.yml'
+      - '**/*.lean'
+      - 'lake-manifest.json'
+      - 'lean-toolchain'
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: blueprint-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:

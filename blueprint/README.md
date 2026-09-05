@@ -42,7 +42,8 @@ changes source paths only; declaration records and graph status are preserved.
 Each `lean` attribute names existing public declarations from imported
 modules. Strict resolution makes a missing or ambiguous name an elaboration
 error. Verso derives graph status from the presence and completeness of those
-declarations. Tags record the ledger classification and do not set status.
+declarations. For claims, tags record the ledger classification; they do not
+set status.
 
 Verso's generated-data check verifies preview references, cache coverage,
 group membership, and graph preview keys. It is not the library's theorem
@@ -52,9 +53,11 @@ graph statuses as well as the nine rows in the ledger.
 
 The ledger's `paper proof` spelling maps to the graph tag `paper-proof`.
 Its external-source qualifier maps to `external`; this does not introduce a
-new evidence tier. The count and rational definition sub-nodes are tagged
-`definition` and `kernel-verified` for their compiled definitions. The
-refinement claim itself remains tagged `paper-proof` and unformalized.
+new evidence tier. Definition nodes, including the count and rational
+backend sub-nodes, carry only the `definition` tag and require a complete
+set of resolved declarations. They carry no claim tier: a compiled
+definition is not proof evidence. The refinement claim itself remains
+tagged `paper-proof` and unformalized.
 
 The binary selected-latent and named-selector bounds require full support.
 The all-law result concerns `T` and an existential deterministic code.
@@ -69,7 +72,9 @@ provides the `vbp` CLI and targets the package root module, as prescribed by
 its project template.
 
 The workflow `blueprint.yml` builds the site, checks its metadata and ledger
-tiers, and uploads a Pages artifact for pull requests targeting `main`.
+tiers, and uploads a Pages artifact for pull requests targeting `main`
+that change the blueprint, Lean sources, the root manifest or toolchain,
+or the blueprint workflow. New runs cancel older runs for the same ref.
 It also supports manual dispatch. Its deploy job is skipped for both events.
 Once Pages is enabled, enable pushes to `main` in that workflow to activate
 deployment.

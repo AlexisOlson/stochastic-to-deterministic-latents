@@ -23,11 +23,11 @@ DEFINITIONS = (
     "DEF-LAW", "DEF-INFO", "DEF-LATENT", "DEF-SCORE", "DEF-TAU",
     "DEF-CODE", "DEF-DETSCORE", "DEF-W3", "DEF-SELECTOR",
 )
+DEFINITION_SUBNODES = ("BIN-COUNT-SELECTOR", "BIN-RATIONAL-SELECTOR")
 SUBNODES = (
     "PRICE-IDENTITY", "BIN-NORMAL-FORM", "BIN-PHASE-NONPOS",
     "BIN-PHASE-POS", "BIN-SEAM-BALANCED", "BIN-SEAM-LOW-PRIOR",
-    "BIN-SPARSE", "BIN-SELECTOR-C9", "BIN-COUNT-SELECTOR",
-    "BIN-RATIONAL-SELECTOR",
+    "BIN-SPARSE", "BIN-SELECTOR-C9", *DEFINITION_SUBNODES,
 )
 TIER_TAGS = {"kernel-verified", "paper-proof", "conjecture", "external"}
 
@@ -143,15 +143,21 @@ def check(ledger, manifest):
             unresolved += len(decls) - len(resolved)
             statement, proof = formalized(node)
             details = (
+                f"tags={','.join(sorted(tags))} "
                 f"declarations={len(resolved)}/{len(decls)} "
                 f"statement={enum(node['statementStatus'])} "
                 f"proof={enum(node['proofStatus'])}"
             )
+            if label in DEFINITIONS or label in DEFINITION_SUBNODES:
+                if tags != {"definition"}:
+                    errors.append("definition node must be tagged definition only")
+                if not resolved or len(resolved) != len(decls):
+                    errors.append("no complete set of resolved declarations")
             if label in SUBNODES:
                 # A parent is a graph-group relation, not a proof dependency.
                 parent = entry.get("parent")
                 group_name = name(parent) if parent is not None else None
-                if "sub-node" not in tags:
+                if label not in DEFINITION_SUBNODES and "sub-node" not in tags:
                     errors.append("missing sub-node tag")
                 if group_name not in groups or node.get("parent") != parent:
                     errors.append("missing or inconsistent parent relation")
@@ -160,8 +166,8 @@ def check(ledger, manifest):
                     for member in groups[group_name]["entries"]
                 ):
                     errors.append("parent group does not contain this node")
-            else:
-                tier = tiers.get(LEDGER_IDS[label]) if label in LEDGER_IDS else "kernel-verified"
+            elif label in LEDGER_IDS:
+                tier = tiers.get(LEDGER_IDS[label])
                 if tier is None:
                     errors.append("missing ledger row")
                 elif tags & TIER_TAGS != {tier}:

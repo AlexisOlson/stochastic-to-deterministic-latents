@@ -17,11 +17,11 @@ Executable refinement, general conjectures, and external evidence.
 
 The ledger distinguishes the executable refinement contract from the compiled definitions and the binary numerical theorems.
 
-:::definition "BIN-COUNT-SELECTOR" (parent := "open") (lean := "StochasticToDeterministicLatents.Binary.CountTable, StochasticToDeterministicLatents.Binary.CountTable.realTable, StochasticToDeterministicLatents.Binary.CountTable.catalog, StochasticToDeterministicLatents.Binary.CountTable.selector") (uses := "DEF-SELECTOR") (tags := "definition, kernel-verified, sub-node")
+:::definition "BIN-COUNT-SELECTOR" (parent := "open") (lean := "StochasticToDeterministicLatents.Binary.CountTable, StochasticToDeterministicLatents.Binary.CountTable.realTable, StochasticToDeterministicLatents.Binary.CountTable.catalog, StochasticToDeterministicLatents.Binary.CountTable.selector") (uses := "DEF-SELECTOR") (tags := "definition")
 The count backend defines a finite selector using integer products and score keys. Its compiled definition does not establish agreement with the mathematical real selector; that refinement requires the positive-total input condition.
 :::
 
-:::definition "BIN-RATIONAL-SELECTOR" (parent := "open") (lean := "StochasticToDeterministicLatents.Binary.RationalTable, StochasticToDeterministicLatents.Binary.RationalTable.toCountTable, StochasticToDeterministicLatents.Binary.RationalTable.realTable, StochasticToDeterministicLatents.Binary.RationalTable.selector") (uses := "DEF-SELECTOR") (tags := "definition, kernel-verified, sub-node")
+:::definition "BIN-RATIONAL-SELECTOR" (parent := "open") (lean := "StochasticToDeterministicLatents.Binary.RationalTable, StochasticToDeterministicLatents.Binary.RationalTable.toCountTable, StochasticToDeterministicLatents.Binary.RationalTable.realTable, StochasticToDeterministicLatents.Binary.RationalTable.selector") (uses := "DEF-SELECTOR") (tags := "definition")
 The rational backend clears denominators and applies the count selector. Its agreement with the mathematical real selector remains an unimplemented refinement target.
 :::
 
