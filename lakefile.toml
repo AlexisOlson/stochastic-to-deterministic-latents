@@ -1,0 +1,17 @@
+name = "stochastic_to_deterministic_latents"
+version = "0.1.0"
+keywords = ["information-theory", "lean", "probability"]
+defaultTargets = ["StochasticToDeterministicLatents"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "stoch_to_det"
+git = "https://github.com/DLorell/stoch_to_det.git"
+rev = "299c75264b07db05eab8e6d232ef88e0988f4790"
+
+[[lean_lib]]
+name = "StochasticToDeterministicLatents"

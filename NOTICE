@@ -1,0 +1,17 @@
+Stochastic-to-Deterministic Latents
+
+This project is a fresh explanatory and formalization repository derived from work
+in DLorell/stoch_to_det:
+
+    https://github.com/DLorell/stoch_to_det
+
+That upstream project is distributed under the Apache License, Version 2.0. Any
+adapted upstream source retains appropriate attribution and a notice of changes.
+The finite-information foundation is reused directly through a pinned Lake
+dependency; its implementation is not copied into this repository.
+
+This repository selectively rewrites or adapts mathematical content. Raw reports,
+transcripts, review records, exploratory output, and workspace history are not part
+of the public source tree.
+
+Copyright 2026 Alexis Olson. Licensed under the Apache License, Version 2.0.

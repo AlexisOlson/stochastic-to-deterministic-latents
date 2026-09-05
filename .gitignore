@@ -1,0 +1,10 @@
+.lake/
+build/
+*.olean
+*.ilean
+*.c
+*.o
+*.out
+.DS_Store
+
+.claude/
