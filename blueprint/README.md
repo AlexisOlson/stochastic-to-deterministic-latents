@@ -68,7 +68,9 @@ The package root module imports `Blueprint.lean`, which assembles the
 provides the `vbp` CLI and targets the package root module, as prescribed by
 its project template.
 
-The workflow `blueprint.yml` currently supports manual dispatch and uploads
-a Pages artifact. Its deploy job runs only on a push event. Once Pages is
-enabled, enable pushes to `main` in that workflow to activate deployment.
+The workflow `blueprint.yml` builds the site, checks its metadata and ledger
+tiers, and uploads a Pages artifact for pull requests targeting `main`.
+It also supports manual dispatch. Its deploy job is skipped for both events.
+Once Pages is enabled, enable pushes to `main` in that workflow to activate
+deployment.
 No package build changes the root toolchain or dependency configuration.
