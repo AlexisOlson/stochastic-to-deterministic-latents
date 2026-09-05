@@ -1,6 +1,14 @@
 name: blueprint
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'blueprint/**'
+      - '.github/workflows/blueprint.yml'
+      - '**/*.lean'
+      - 'lake-manifest.json'
+      - 'lean-toolchain'
   pull_request:
     branches: [main]
     paths:
@@ -37,6 +45,17 @@ jobs:
         run: |
           if pgrep -x 'lean|lake|lean.exe|lake.exe'; then exit 75; fi
           lake exe cache get 2>&1 | tee "$RUNNER_TEMP/blueprint-root-cache.log"
+      # Restore only after Lake has cloned the dependency directories.
+      # This key and these paths are shared with the verify job.
+      - name: Cache root build products
+        uses: actions/cache@v5
+        with:
+          path: |
+            .lake/build
+            .lake/packages/stoch_to_det/.lake/build
+          key: lake-build-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-${{ hashFiles('StochasticToDeterministicLatents.lean', 'StochasticToDeterministicLatents/**/*.lean', 'Verify.lean') }}
+          restore-keys: |
+            lake-build-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-
       - name: Build the root library
         shell: bash
         run: |
@@ -49,6 +68,21 @@ jobs:
         run: |
           if pgrep -x 'lean|lake|lean.exe|lake.exe'; then exit 75; fi
           lake exe cache get 2>&1 | tee "$RUNNER_TEMP/blueprint-nested-cache.log"
+      # The nested fetch creates the package directories before restoration.
+      - name: Cache Verso build products
+        uses: actions/cache@v5
+        with:
+          path: |
+            blueprint/.lake/packages/verso/.lake/build
+            blueprint/.lake/packages/VersoBlueprint/.lake/build
+            blueprint/.lake/packages/subverso/.lake/build
+            blueprint/.lake/packages/MD4Lean/.lake/build
+            blueprint/.lake/packages/illuminate/.lake/build
+            blueprint/.lake/packages/verso-slides/.lake/build
+            blueprint/.lake/build
+          key: verso-build-${{ runner.os }}-${{ hashFiles('blueprint/lake-manifest.json', 'blueprint/lean-toolchain') }}-${{ hashFiles('blueprint/**/*.lean') }}
+          restore-keys: |
+            verso-build-${{ runner.os }}-${{ hashFiles('blueprint/lake-manifest.json', 'blueprint/lean-toolchain') }}-
       - name: Build and check the blueprint
         working-directory: blueprint
         shell: bash

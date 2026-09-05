@@ -117,10 +117,9 @@ jobs:
           use-mathlib-cache: false
           use-github-cache: false
 
-      # No Actions cache of `.lake`. The tree is about 8 GB uncompressed, and
-      # on the first run the save step filled the runner's disk while writing
-      # the archive ("No space left on device") and failed. Every run instead
-      # fetches the Mathlib oleans below, which costs about 2.5 minutes.
+      # Cache only the root and stoch_to_det build products. Archiving all of
+      # `.lake` previously filled the runner's disk; Mathlib oleans are fetched
+      # separately below and never enter the Actions cache.
 
       # Mathlib oleans. Mathlib is not a direct dependency: it arrives
       # transitively through the pinned `stoch_to_det` git dependency, and
@@ -137,6 +136,19 @@ jobs:
           if ! lake exe cache get; then
             echo "::warning::lake exe cache get failed; lake build will compile Mathlib from source"
           fi
+
+      # Fetch first so Lake has cloned stoch_to_det before restoring its build
+      # directory. The blueprint job uses this same key and these same paths.
+      - if: steps.changes.outputs.lean == 'true'
+        name: Cache root build products
+        uses: actions/cache@v5
+        with:
+          path: |
+            .lake/build
+            .lake/packages/stoch_to_det/.lake/build
+          key: lake-build-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-${{ hashFiles('StochasticToDeterministicLatents.lean', 'StochasticToDeterministicLatents/**/*.lean', 'Verify.lean') }}
+          restore-keys: |
+            lake-build-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-
 
       # Builds the default target (the root library) with the leanOptions from
       # lakefile.toml. Prints `Build completed successfully` on success; lint
