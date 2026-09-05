@@ -1,0 +1,62 @@
+name: blueprint
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1.6.0
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - name: Fetch root Mathlib artifacts
+        shell: bash
+        run: |
+          if pgrep -x 'lean|lake|lean.exe|lake.exe'; then exit 75; fi
+          lake exe cache get 2>&1 | tee "$RUNNER_TEMP/blueprint-root-cache.log"
+      - name: Build the root library
+        shell: bash
+        run: |
+          if pgrep -x 'lean|lake|lean.exe|lake.exe'; then exit 75; fi
+          lake build 2>&1 | tee "$RUNNER_TEMP/blueprint-root-build.log"
+      # The committed nested manifest resolves a separate Mathlib checkout.
+      - name: Fetch nested Mathlib artifacts
+        working-directory: blueprint
+        shell: bash
+        run: |
+          if pgrep -x 'lean|lake|lean.exe|lake.exe'; then exit 75; fi
+          lake exe cache get 2>&1 | tee "$RUNNER_TEMP/blueprint-nested-cache.log"
+      - name: Build and check the blueprint
+        working-directory: blueprint
+        shell: bash
+        run: bash scripts/ci.sh
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: blueprint/_out/site/html-multi
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency: pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - id: deployment
+        uses: actions/deploy-pages@v4

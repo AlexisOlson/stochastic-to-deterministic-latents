@@ -26,6 +26,7 @@ the finitely many codes. Both are in bits. The blueprint fixes the notation.
 | Follow the complete proof | [Binary factor nine](docs/binary-factor-nine.md) |
 | Inspect the Lean statements | [Existing endpoints and target contracts](docs/lean-contracts.md) |
 | Check the verification | [Verification procedure](verification/README.md) |
+| Explore the declaration graph | [Verso dependency blueprint](https://AlexisOlson.github.io/stochastic-to-deterministic-latents/) (available once GitHub Pages is enabled and the first deployment completes) |
 
 ## Results and targets
 
