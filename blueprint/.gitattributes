@@ -1,0 +1,2 @@
+# Preserve the root toolchain file byte-for-byte, including its final blank line.
+lean-toolchain whitespace=-blank-at-eof
