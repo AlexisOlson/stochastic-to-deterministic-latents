@@ -22,8 +22,11 @@
 
 name: verify
 
+# Pushes run only on main; every other branch is verified through its pull
+# request, so one commit gets one run rather than two.
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
