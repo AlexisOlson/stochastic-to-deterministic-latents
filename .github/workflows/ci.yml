@@ -4,19 +4,29 @@
 # The job reproduces the local verification procedure from CLAUDE.md and
 # verification/README.md, in this order:
 #   1. install elan and the toolchain pinned by `lean-toolchain`
-#   2. restore `.lake` from the Actions cache (keyed on the pins)
-#   3. `lake exe cache get`      -- Mathlib oleans through the inherited dependency
-#   4. `lake build`              -- the root library (default target)
-#   5. `lake env lean Verify.lean` -- kernel audit: assert_no_sorry + pinned axiom sets
-#   6. the trust-shortcut grep   -- must print nothing
+#   2. `lake exe cache get`      -- Mathlib oleans through the inherited dependency
+#   3. `lake build`              -- the root library (default target)
+#   4. `lake env lean Verify.lean` -- kernel audit: assert_no_sorry + pinned axiom sets
+#   5. the trust-shortcut grep   -- must print nothing
 # Nothing here runs `lake update` or touches the pins, so the Mathlib oleans
 # stay valid across runs and no rebuild of Mathlib is triggered by the workflow
 # itself (see "Do not trigger a Mathlib rebuild" in CLAUDE.md).
+#
+# The Lean steps (2 to 4) run only when the change touches something Lean
+# reads: a `.lean` file, the toolchain, the lakefile, the manifest, or this
+# workflow. A change confined to Markdown, scripts, licence, or git metadata
+# skips them and the job still succeeds, so the `verify` check required by
+# the branch ruleset is satisfied without a ten-minute build. Whenever the
+# comparison base is unavailable the job builds; skipping is never the
+# fallback. The trust-shortcut scan runs on every change.
 
 name: verify
 
+# Pushes run only on main; every other branch is verified through its pull
+# request, so one commit gets one run rather than two.
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -30,18 +40,55 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    # A warm-cache root build takes about eleven minutes locally (632 s,
-    # recorded in CLAUDE.md) and `Verify.lean` elaborates 495 pinned endpoints,
-    # which can also exceed ten minutes. The pinned `stoch_to_det` dependency
-    # is not in the Mathlib cache and compiles from source; CLAUDE.md records
-    # about six minutes for a build that had to recompile it, noted before the
-    # root reached its present size. 180 minutes leaves room for a slower runner and a cold `.lake`
-    # that still gets its Mathlib oleans from the cache tool. It is NOT enough
-    # for building Mathlib from source; see the cache step below.
+    # Measured on the first run (2026-09-05, ubuntu-latest): Mathlib oleans
+    # fetched in about 2.5 minutes, `lake build` in about 6.5 minutes, the
+    # audit in seconds; ten minutes end to end. The pinned `stoch_to_det`
+    # dependency is not in the Mathlib cache and compiles from source inside
+    # that build. 180 minutes leaves room for a slower runner. It is NOT
+    # enough for building Mathlib from source; see the note on caching below.
     timeout-minutes: 180
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history so the change detection below can diff against the
+          # pull request base or the previous push.
+          fetch-depth: 0
+
+      # Decide whether the Lean steps are needed. Outputs `lean=true` unless
+      # every changed file is outside the Lean-relevant set. Any doubt (no
+      # base commit, unknown event) resolves to building.
+      - id: changes
+        name: Detect Lean-relevant changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${{ github.event_name }}" in
+            pull_request)
+              base="${{ github.event.pull_request.base.sha }}"
+              ;;
+            push)
+              base="${{ github.event.before }}"
+              ;;
+            *)
+              base=""
+              ;;
+          esac
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            echo "no comparison base; running the Lean steps"
+            echo "lean=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          changed="$(git diff --name-only "$base" "${{ github.sha }}")"
+          echo "changed files:"
+          echo "$changed"
+          if echo "$changed" | grep -E -q '(^|/)[^/]*\.lean$|^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^\.github/workflows/ci\.yml$'; then
+            echo "Lean-relevant change found; running the Lean steps"
+            echo "lean=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "no Lean-relevant change; skipping the Lean steps"
+            echo "lean=false" >> "$GITHUB_OUTPUT"
+          fi
 
       # Lean installer. `leanprover/lean-action` is maintained by the Lean
       # organisation, installs elan, and selects the toolchain named in
@@ -56,10 +103,11 @@ jobs:
       #                                          inherited Mathlib entry in
       #                                          lake-manifest.json and run
       #                                          `cache get` a second time
-      #   use-github-cache: false             -- caching is done explicitly below
-      # Install-only use of the action is documented in its README; it has not
-      # been exercised on this repository.
-      - uses: leanprover/lean-action@v1.6.0
+      #   use-github-cache: false             -- see the note on caching below
+      # Install-only use of the action is documented in its README and works
+      # here (first run 2026-09-05).
+      - if: steps.changes.outputs.lean == 'true'
+        uses: leanprover/lean-action@v1.6.0
         with:
           auto-config: false
           build: false
@@ -68,41 +116,22 @@ jobs:
           use-mathlib-cache: false
           use-github-cache: false
 
-      # Cache the whole `.lake` tree (packages, Mathlib oleans, local build
-      # products). The key changes whenever a pin changes, which is exactly
-      # when the oleans become invalid. `restore-keys` lets a run with a new
-      # key start from the previous tree; `lake` rebuilds only what the pin
-      # change invalidated.
-      #
-      # Caveats, unverified on a GitHub runner:
-      #   * The local `.lake` measured 7.8 GB on 2026-09-04 (6.3 GB of it Mathlib
-      #     oleans, before the Actions cache compresses it). GitHub allows 10 GB of cache
-      #     per repository; if saves fail or evict each other, drop the two
-      #     cache steps and rely on `lake exe cache get` every run.
-      #   * Restore and save are split so the save also happens when a later
-      #     step fails (`if: always()`); a partial build is worth keeping when
-      #     a cold run hits the timeout.
-      - id: lake-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .lake
-          key: lake-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
-          restore-keys: |
-            lake-${{ runner.os }}-
+      # No Actions cache of `.lake`. The tree is about 8 GB uncompressed, and
+      # on the first run the save step filled the runner's disk while writing
+      # the archive ("No space left on device") and failed. Every run instead
+      # fetches the Mathlib oleans below, which costs about 2.5 minutes.
 
       # Mathlib oleans. Mathlib is not a direct dependency: it arrives
       # transitively through the pinned `stoch_to_det` git dependency, and
-      # `lake exe cache get` is expected to find Mathlib's `cache` executable
-      # through that inherited entry (it does locally, where
-      # `.lake/packages/mathlib/.lake/build/bin/cache` exists). This has NOT
-      # been tested in CI. If Lake reports that the `cache` executable is
-      # unknown, this step only warns; the following `lake build` then
-      # compiles Mathlib from source. That takes hours on a 4-vCPU runner and
-      # will not finish inside `timeout-minutes` (GitHub-hosted jobs are capped
-      # at 360 minutes regardless), so in that case fix the cache invocation
-      # rather than raising the timeout -- for example by checking whether
-      # `lake exe cache get` needs to be run from `.lake/packages/mathlib`.
-      - name: Fetch Mathlib oleans
+      # `lake exe cache get` finds Mathlib's `cache` executable through that
+      # inherited entry (confirmed on the first run: 8681 files decompressed).
+      # If it ever fails, this step only warns; the following `lake build`
+      # then compiles Mathlib from source, which takes hours on a 4-vCPU
+      # runner and will not finish inside `timeout-minutes` (GitHub-hosted
+      # jobs are capped at 360 minutes regardless). Fix the cache invocation
+      # rather than raising the timeout.
+      - if: steps.changes.outputs.lean == 'true'
+        name: Fetch Mathlib oleans
         run: |
           if ! lake exe cache get; then
             echo "::warning::lake exe cache get failed; lake build will compile Mathlib from source"
@@ -111,7 +140,8 @@ jobs:
       # Builds the default target (the root library) with the leanOptions from
       # lakefile.toml. Prints `Build completed successfully` on success; lint
       # warnings replayed from cached upstream jobs are not failures.
-      - name: Build the root library
+      - if: steps.changes.outputs.lean == 'true'
+        name: Build the root library
         run: lake build
 
       # Kernel audit. Every public theorem endpoint has an `assert_no_sorry`
@@ -121,8 +151,13 @@ jobs:
       # (verification/README.md adds `-DrelaxedAutoImplicit=false` to this
       # command; CLAUDE.md gives it without. The flag only tightens
       # auto-implicit binding for Verify.lean itself.)
-      - name: Kernel audit (Verify.lean)
+      - if: steps.changes.outputs.lean == 'true'
+        name: Kernel audit (Verify.lean)
         run: lake env lean Verify.lean
+
+      - if: steps.changes.outputs.lean != 'true'
+        name: Lean steps skipped
+        run: echo "No Lean-relevant file changed; toolchain install, build, and kernel audit were skipped."
 
       # Trust-shortcut scan, verbatim from CLAUDE.md. `grep` exits 1 when it
       # finds nothing, which is the passing case, so the exit code cannot be
@@ -137,9 +172,3 @@ jobs:
             exit 1
           fi
           echo "trust-shortcut scan printed nothing"
-
-      - if: always() && steps.lake-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .lake
-          key: ${{ steps.lake-cache.outputs.cache-primary-key }}
