@@ -11,11 +11,22 @@
 # Nothing here runs `lake update` or touches the pins, so the Mathlib oleans
 # stay valid across runs and no rebuild of Mathlib is triggered by the workflow
 # itself (see "Do not trigger a Mathlib rebuild" in CLAUDE.md).
+#
+# The Lean steps (2 to 4) run only when the change touches something Lean
+# reads: a `.lean` file, the toolchain, the lakefile, the manifest, or this
+# workflow. A change confined to Markdown, scripts, licence, or git metadata
+# skips them and the job still succeeds, so the `verify` check required by
+# the branch ruleset is satisfied without a ten-minute build. Whenever the
+# comparison base is unavailable the job builds; skipping is never the
+# fallback. The trust-shortcut scan runs on every change.
 
 name: verify
 
+# Pushes run only on main; every other branch is verified through its pull
+# request, so one commit gets one run rather than two.
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -39,6 +50,45 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history so the change detection below can diff against the
+          # pull request base or the previous push.
+          fetch-depth: 0
+
+      # Decide whether the Lean steps are needed. Outputs `lean=true` unless
+      # every changed file is outside the Lean-relevant set. Any doubt (no
+      # base commit, unknown event) resolves to building.
+      - id: changes
+        name: Detect Lean-relevant changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${{ github.event_name }}" in
+            pull_request)
+              base="${{ github.event.pull_request.base.sha }}"
+              ;;
+            push)
+              base="${{ github.event.before }}"
+              ;;
+            *)
+              base=""
+              ;;
+          esac
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            echo "no comparison base; running the Lean steps"
+            echo "lean=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          changed="$(git diff --name-only "$base" "${{ github.sha }}")"
+          echo "changed files:"
+          echo "$changed"
+          if echo "$changed" | grep -E -q '(^|/)[^/]*\.lean$|^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^\.github/workflows/ci\.yml$'; then
+            echo "Lean-relevant change found; running the Lean steps"
+            echo "lean=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "no Lean-relevant change; skipping the Lean steps"
+            echo "lean=false" >> "$GITHUB_OUTPUT"
+          fi
 
       # Lean installer. `leanprover/lean-action` is maintained by the Lean
       # organisation, installs elan, and selects the toolchain named in
@@ -56,7 +106,8 @@ jobs:
       #   use-github-cache: false             -- see the note on caching below
       # Install-only use of the action is documented in its README and works
       # here (first run 2026-09-05).
-      - uses: leanprover/lean-action@v1.6.0
+      - if: steps.changes.outputs.lean == 'true'
+        uses: leanprover/lean-action@v1.6.0
         with:
           auto-config: false
           build: false
@@ -79,7 +130,8 @@ jobs:
       # runner and will not finish inside `timeout-minutes` (GitHub-hosted
       # jobs are capped at 360 minutes regardless). Fix the cache invocation
       # rather than raising the timeout.
-      - name: Fetch Mathlib oleans
+      - if: steps.changes.outputs.lean == 'true'
+        name: Fetch Mathlib oleans
         run: |
           if ! lake exe cache get; then
             echo "::warning::lake exe cache get failed; lake build will compile Mathlib from source"
@@ -88,7 +140,8 @@ jobs:
       # Builds the default target (the root library) with the leanOptions from
       # lakefile.toml. Prints `Build completed successfully` on success; lint
       # warnings replayed from cached upstream jobs are not failures.
-      - name: Build the root library
+      - if: steps.changes.outputs.lean == 'true'
+        name: Build the root library
         run: lake build
 
       # Kernel audit. Every public theorem endpoint has an `assert_no_sorry`
@@ -98,8 +151,13 @@ jobs:
       # (verification/README.md adds `-DrelaxedAutoImplicit=false` to this
       # command; CLAUDE.md gives it without. The flag only tightens
       # auto-implicit binding for Verify.lean itself.)
-      - name: Kernel audit (Verify.lean)
+      - if: steps.changes.outputs.lean == 'true'
+        name: Kernel audit (Verify.lean)
         run: lake env lean Verify.lean
+
+      - if: steps.changes.outputs.lean != 'true'
+        name: Lean steps skipped
+        run: echo "No Lean-relevant file changed; toolchain install, build, and kernel audit were skipped."
 
       # Trust-shortcut scan, verbatim from CLAUDE.md. `grep` exits 1 when it
       # finds nothing, which is the passing case, so the exit code cannot be
