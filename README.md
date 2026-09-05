@@ -26,13 +26,15 @@ the finitely many codes. Both are in bits. The blueprint fixes the notation.
 | Follow the complete proof | [Binary factor nine](docs/binary-factor-nine.md) |
 | Inspect the Lean statements | [Existing endpoints and target contracts](docs/lean-contracts.md) |
 | Check the verification | [Verification procedure](verification/README.md) |
-| Explore the declaration graph | [Verso dependency blueprint](https://AlexisOlson.github.io/stochastic-to-deterministic-latents/) (available once GitHub Pages is enabled and the first deployment completes) |
+| Pick a problem | [Open problems](docs/open-problems.md), with the standing of each target and where a contribution lands |
+| Explore the declaration graph | [Verso dependency blueprint](https://AlexisOlson.github.io/stochastic-to-deterministic-latents/) |
 
 ## Results and targets
 
 | Scope | Bound | Construction | Current evidence |
 |---|---:|---|---|
 | Binary `2 x 2` | `T(p) <= 9*tau(p)` | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
+| Binary `2 x 2` | `T(p) <= 2*tau(p)` | Open | `conjecture` |
 | Arbitrary finite alphabets | `T(p) <= 9*tau(p)` | Open | `conjecture` |
 
 For a full-support binary law, the deterministic witness can be chosen from the
