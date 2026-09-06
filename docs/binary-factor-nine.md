@@ -53,7 +53,7 @@ attained $`\tau`$-optimal latent with at most two distinct active
 component laws.
 
 If there is one active component, the latent is constant. The constant code has
-`W3Cost = 0`, so $`\mathrm{W3}(L) = 0`$.
+$`\mathrm{W3Cost} = 0`$, so $`\mathrm{W3}(L) = 0`$.
 
 Otherwise observable and latent relabeling put the optimizer on the
 two-contact chart. It is convenient to display its closed compactification:
@@ -94,7 +94,7 @@ e &= r + \pi\,(1-r), \\
 \end{aligned}
 ```
 
-The observable law on the chart is `(A,ell,e,D)/Q`.
+The observable law on the chart is $`(A,\ell,e,D)/Q`$.
 
 The exact binary code reduction applies to the global minimum over all
 deterministic codes. It leaves two candidates: the constant code and the
@@ -120,7 +120,7 @@ Then
 \mathrm{W3Cost}_L(g) = K - \mathrm{Reward}_L(g).
 ```
 
-Let `R_H` be the reward of the high singleton. Choose $`g_{\mathrm{chart}}`$ to
+Let $`R_H`$ be the reward of the high singleton. Choose $`g_{\mathrm{chart}}`$ to
 be that singleton when $`R_H \ge 0`$ and the constant code otherwise. Its cost
 is exactly
 
@@ -183,29 +183,25 @@ In particular,
 \end{aligned}
 ```
 
-Here `Bq` is the sum of the two latent-observable conditional information terms
+Here $`\mathrm{Bq}`$ is the sum of the two latent-observable conditional information terms
 in $`\mathrm{score}_p(L)`$. If $`M = I(X;Y \mid L)`$ and
-$`\mathrm{Mbar} = Q\,\log(2)\,M`$, then optimality gives
+$`\bar M = Q\,\log(2)\,M`$, then optimality gives
 
 ```math
 \begin{aligned}
-Q\,\log(2)\,\tau(p) &= \mathrm{Mbar} + \bar B, \\
-\mathrm{Mbar} &\ge 0.
+Q\,\log(2)\,\tau(p) &= \bar M + \bar B, \\
+\bar M &\ge 0.
 \end{aligned}
 ```
 
 Differentiating in $`C`$ and integrating from $`C=0`$ gives
 
-```text
-Kbar
-  = integral_0^C integral_0^infinity
-      1/(U(z)+c) dz dc,
-
-b(z)
-  = integral_0^C integral_0^z
-      1/(U(t)+c) dt dc,
-
-b'(z) = beta(z) = log(1+C/U(z)).
+```math
+\begin{aligned}
+\bar K &= \int_0^C \int_0^\infty \frac{1}{U(z)+c}\,dz\,dc, \\[1ex]
+b(z) &= \int_0^C \int_0^z \frac{1}{U(t)+c}\,dt\,dc, \\[1ex]
+b'(z) &= \beta(z) = \log(1+C/U(z)).
+\end{aligned}
 ```
 
 Hence $`b`$ is nonnegative, increasing, and concave, while $`\beta`$ is
@@ -215,11 +211,11 @@ positivity needs extra hypotheses on the chart, and the argument below never
 uses it.
 
 Every fixed logarithm bound below is exact rational arithmetic. For $`u>0`$,
-put `y=(u-1)/(u+1)`. Then $`\lvert y \rvert<1`$ and
+put $`y=(u-1)/(u+1)`$. Then $`\lvert y \rvert<1`$ and
 
 ```math
 \begin{aligned}
-\log(u) &= 2\,\sum_(k=0)^n y^{2k+1}/(2k+1) + R_n, \\[1ex]
+\log(u) &= 2\,\sum_{k=0}^n y^{2k+1}/(2k+1) + R_n, \\[1ex]
 \lvert R_n \rvert &\le 2\,\lvert y \rvert^{2n+3}/((2n+3)\,(1-y^2)).
 \end{aligned}
 ```
@@ -235,7 +231,7 @@ Assume $`R_H \le 0`$. It is enough to prove
 \bar K \le 8\,\bar B,
 ```
 
-because $`\mathrm{Mbar} \ge 0`$.
+because $`\bar M \ge 0`$.
 
 Put
 
@@ -251,11 +247,8 @@ The contact equation is equivalent to
 
 Differentiation along this fiber gives
 
-```text
-d Bbar/ds
-  = integral_0^C
-      c/((U(A)+c)*(U(D)+c)) dc
-  >= 0.
+```math
+\frac{d\bar B}{ds} = \int_0^C \frac{c}{(U(A)+c)\,(U(D)+c)}\,dc \ge 0.
 ```
 
 At the lower seam $`s=2m`$, one has $`A=D=m`$. Therefore
@@ -278,28 +271,26 @@ It remains to prove $`\bar K \le 16\,b(m)`$.
 
 ### Small `x`
 
-For `x <= 3/10`, the condition $`\bar R \le 0`$ forces
+For $`x \le 3/10`$, the condition $`\bar R \le 0`$ forces
 
 ```math
 \pi < 10r.
 ```
 
 Indeed, at the upper fiber endpoint $`s=x^2`$, exact entropy bounds give
-positive reward at both $`\pi=10r`$ and `pi=1/2`. Put $`q=x^2`$, so
-`0<q<=9/100`, $`r=q^2`$, $`Q=1+q+q^2`$, and at $`\pi=10r`$ put
-`a=e/r=11-10q^2`. Cubic lower and upper entropy bounds give
+positive reward at both $`\pi=10r`$ and $`\pi=1/2`$. Put $`q=x^2`$, so
+$`0<q\le 9/100`$, $`r=q^2`$, $`Q=1+q+q^2`$, and at $`\pi=10r`$ put
+$`a=e/r=11-10q^2`$. Cubic lower and upper entropy bounds give
 
-```text
-Rbar/r >= P(q)
-  +(7-40q-10q^2)*log(Q)
-  +40q(1+q)*log(1+q)
-  -2(7-20q+10q^2)*log(q)
-  -a*log(a),
-
-P(q)
-  = [1000*q^10 - 3400*q^8 - 100*q^7 + 3730*q^6 + 180*q^5
-     -1314*q^4 -249*q^3 -215*q^2 -52*q +14]
-    / [2*(1+q+q^2)^2].
+```math
+\begin{aligned}
+\bar R/r &\ge P(q) \\
+&+(7-40q-10q^2)\,\log(Q) \\
+&+40q(1+q)\,\log(1+q) \\
+&-2(7-20q+10q^2)\,\log(q) \\
+&-a\,\log(a), \\[1ex]
+P(q) &= \frac{1000q^{10} - 3400q^8 - 100q^7 + 3730q^6 + 180q^5 -1314q^4 -249q^3 -215q^2 -52q +14}{2(1+q+q^2)^2}.
+\end{aligned}
 ```
 
 The first two logarithmic terms are nonnegative. Also
@@ -314,7 +305,7 @@ a\,\log(a) &\le 11\,\log(11), \\
 ```
 
 Dropping the positive numerator monomials of $`P`$ and maximizing every
-negative monomial and the denominator at `q=9/100` gives
+negative monomial and the denominator at $`q=9/100`$ gives
 
 ```math
 P(q) \ge 365537402057293/120582361000000.
@@ -331,7 +322,7 @@ Consequently
 
 at $`\pi=10r`$.
 
-For balance, let $`f(q)`$ be $`\bar R`$ at $`s=x^2`$ and `pi=1/2`.
+For balance, let $`f(q)`$ be $`\bar R`$ at $`s=x^2`$ and $`\pi=1/2`$.
 Differentiation simplifies to
 
 ```math
@@ -344,14 +335,14 @@ f'(q) &= (2q+1)\,\log(2) \\
 \end{aligned}
 ```
 
-Discarding the last two negative terms and using `log(2)<7/10`, `log(q)<-9/4`,
+Discarding the last two negative terms and using $`\log(2)<7/10`$, $`\log(q)<-9/4`$,
 and $`\log(1+q)\le q`$ gives
 
 ```math
 f'(q) < (59/50)\,(7/10) - 2\,(9/4) + (109/50)\,(9/100) = -17389/5000 < 0.
 ```
 
-At `q=9/100`, the exact logarithm lemma gives
+At $`q=9/100`$, the exact logarithm lemma gives
 
 ```math
 \begin{aligned}
@@ -370,7 +361,7 @@ f(9/100) > 900483/1250000000 > 20241/100000000
 ```
 
 at balance. Strict concavity in $`\pi`$ makes the reward positive throughout
-the interval between $`10r`$ and `1/2`, contradicting reward monotonicity
+the interval between $`10r`$ and $`1/2`$, contradicting reward monotonicity
 in $`s`$.
 
 For each $`c`$ in $`[0,C]`$, let $`e_c \le \ell_c`$ have sum $`1+r`$ and
@@ -387,23 +378,20 @@ e_c &\le 11r, \\
 and
 
 ```math
-6561\,625 > 1331\,2401
+6561 \cdot 625 > 1331 \cdot 2401
 ```
 
 give
 
-```text
-16 * integral_0^m
-       1/((z+e_c)*(z+ell_c)) dz
-  >= integral_0^infinity
-       1/((z+e_c)*(z+ell_c)) dz.
+```math
+16\int_0^m \frac{1}{(z+e_c)\,(z+\ell_c)}\,dz \ge \int_0^\infty \frac{1}{(z+e_c)\,(z+\ell_c)}\,dz.
 ```
 
 Integrating in $`c`$ yields $`\bar K \le 16\,b(m)`$.
 
 ### Remaining `x`
 
-For `x >= 3/10`, put
+For $`x \ge 3/10`$, put
 
 ```math
 G(\pi) = 16\,b(m) - \bar K.
@@ -422,19 +410,19 @@ Writing the ratio of the two logarithms as
 
 ```math
 \begin{aligned}
-&\mathrm{atanh}(k\,\mathrm{zeta})/\mathrm{atanh}(\mathrm{zeta}), \\
-\mathrm{zeta} &= (\ell-e)/(\ell+e), \\
+&\mathrm{atanh}(k\,\zeta)/\mathrm{atanh}(\zeta), \\
+\zeta &= (\ell-e)/(\ell+e), \\
 k &= (1+r)/(1+r+2m),
 \end{aligned}
 ```
 
 exposes positive odd-power series whose coefficient ratios $`k^{2n+1}`$
 decrease with $`n`$. Differentiating and pairing terms shows that the quotient
-decreases with `zeta`. Since `zeta` decreases with $`\pi`$, $`G'`$ can change
+decreases with $`\zeta`$. Since $`\zeta`$ decreases with $`\pi`$, $`G'`$ can change
 sign only from positive to negative. Thus $`G`$ has no interior minimum. At
 $`\pi=0`$, $`G=0`$.
 
-At `pi=1/2` and `3/10 <= x <= 1/2`,
+At $`\pi=1/2`$ and $`3/10 \le x \le 1/2`$,
 
 ```math
 b(m) \ge m\,\log((1+x^3)^2/(4x^3)).
@@ -445,14 +433,14 @@ reduce to the integer inequalities
 
 ```math
 \begin{aligned}
-39^9 &> 2^47, \\
-3^32 &> 2^47.
+39^9 &> 2^{47}, \\
+3^{32} &> 2^{47}.
 \end{aligned}
 ```
 
 They imply $`16\,b(m) \ge \log 2 \ge \bar K`$.
 
-For `1/2 <= x < 1`, put `y=(1+r)/2`. The same rational-kernel comparison used
+For $`1/2 \le x < 1`$, put $`y=(1+r)/2`$. The same rational-kernel comparison used
 for small $`x`$ applies whenever
 
 ```math
@@ -466,7 +454,7 @@ $`y^3 \le (9m)^4`$. The factorization
 238x^3 - 16\,(1+x+x^2)\,(1+x^4) = -2\,(x-2)\,(2x-1)\,(4x^4+14x^3+35x^2+14x+4) \ge 0
 ```
 
-gives `m >= (16/119)*y`. Also `y >= 17/32` and the exact rational comparison
+gives $`m \ge (16/119)\,y`$. Also $`y \ge 17/32`$ and the exact rational comparison
 
 ```math
 (144/119)^4\,(17/32) \ge 1
@@ -480,7 +468,7 @@ y^3 \le ((144/119)\,y)^4 \le (9m)^4.
 
 The rational-kernel estimate therefore gives $`\bar K \le 16\,b(m)`$ after
 integration in $`c`$, completing the balanced-prior endpoint. The endpoint
-minimum in $`\pi`$ then gives the same bound for every prior in `[0,1/2]`.
+minimum in $`\pi`$ then gives the same bound for every prior in $`[0,1/2]`$.
 
 
 Consequently
@@ -536,7 +524,7 @@ I_{\mathrm{diff}}''(\pi) &= \delta^2\,(1/(u\,(1-u)) - 1/(v\,(1-v))) \le 0,
 \end{aligned}
 ```
 
-because $`v \le u \le 1-v`$ on `0 <= pi <= 1/2`. Hence
+because $`v \le u \le 1-v`$ on $`0 \le \pi \le 1/2`$. Hence
 
 ```math
 \begin{aligned}
@@ -566,15 +554,15 @@ A_H \le (5/2)\,F.
 ### Reduction to two seam endpoints
 
 Reward monotonicity in $`s`$ reduces phase exclusion to the seam $`s=2m`$. An
-exact Bernoulli-entropy comparison at `x=2/5` gives $`\bar R<0`$. For larger
-$`x`$, the seam channel is an affine garbling of the `x=2/5` channel. Its
+exact Bernoulli-entropy comparison at $`x=2/5`$ gives $`\bar R<0`$. For larger
+$`x`$, the seam channel is an affine garbling of the $`x=2/5`$ channel. Its
 mutual information decreases while its conditional entropy increases. Therefore
 
 ```math
 R_H \ge 0 \implies x < 2/5.
 ```
 
-For `x<2/5`, concavity of $`\bar R`$ in $`\pi`$ bounds it by its tangent at
+For $`x<2/5`$, concavity of $`\bar R`$ in $`\pi`$ bounds it by its tangent at
 zero. Writing
 
 ```math
@@ -623,7 +611,7 @@ J_s &= (5/2)\,\beta(s) \\
 \end{aligned}
 ```
 
-On `x<2/5` and $`\pi\ge3r`$, one has
+On $`x<2/5`$ and $`\pi\ge3r`$, one has
 
 ```math
 \begin{aligned}
@@ -633,16 +621,15 @@ On `x<2/5` and $`\pi\ge3r`$, one has
 ```
 
 Hence $`J_s \ge 0`$. The function $`J`$ is concave in $`\pi`$, so its minimum
-on `[3r,1/2]` occurs at an endpoint. The positive phase is reduced to
+on $`[3r,1/2]`$ occurs at an endpoint. The positive phase is reduced to
 
-```text
-s = 2m,
-pi = 3r or pi = 1/2.
+```math
+s = 2m, \qquad \pi = 3r \ \text{or} \ \pi = 1/2.
 ```
 
 ### Balanced endpoint
 
-At `pi=1/2`, put `y=(1+r)/2`. Convexity of $`\beta`$ gives
+At $`\pi=1/2`$, put $`y=(1+r)/2`$. Convexity of $`\beta`$ gives
 
 ```math
 \begin{aligned}
@@ -654,10 +641,7 @@ F &\ge 2m\,\beta(m), \\
 An entropy upper bound gives $`A_H \le U_{\mathrm{bal}}`$, where
 
 ```math
-\begin{aligned}
-U_{\mathrm{bal}} &= (1/2)\, \\
-&(r\,(1+\log(Q/r)) + (r+2m)\,(1+\log(Q/(r+2m)))).
-\end{aligned}
+U_{\mathrm{bal}} = (1/2)\,(r\,(1+\log(Q/r)) + (r+2m)\,(1+\log(Q/(r+2m)))).
 ```
 
 After division by $`m`$, it is enough to prove positivity of the
@@ -667,7 +651,7 @@ decreasing function
 g_{\mathrm{half}}(x) = 4\,\log((1+x^3)^2/(4x^3)) - U_{\mathrm{bal}}/m.
 ```
 
-At `x=2/5`, the required exact logarithm bounds are
+At $`x=2/5`$, the required exact logarithm bounds are
 
 ```math
 \begin{aligned}
@@ -726,16 +710,16 @@ U' &= -3r'\,\log(Q/r) - 4/x \\
 \end{aligned}
 ```
 
-On `0<x<=2/5`, one has `q<=1/7`, so
-`log(Q/q)>=log(8)>=56/27`. Also,
+On $`0<x\le 2/5`$, one has $`q\le 1/7`$, so
+$`\log(Q/q)\ge\log(8)\ge 56/27`$. Also,
 
 ```math
 r'\,s/(rs') = 4\,(1+x+x^2)/(3+2x+x^2) \le 56/27.
 ```
 
 These bounds give
-`r'*s/r <= s'*log(Q/q)`. Together with `log(q/r)<=s/r`, they imply
-`U' >= -4/x`.
+$`r'\,s/r \le s'\,\log(Q/q)`$. Together with $`\log(q/r)\le s/r`$, they imply
+$`U' \ge -4/x`$.
 
 The other derivative term satisfies
 
@@ -743,7 +727,7 @@ The other derivative term satisfies
 (5/2)\,(-t')\,\log((t+17/5)/(t+1)) \ge 4/x.
 ```
 
-Indeed, `log(v)>=1-1/v` reduces this inequality to
+Indeed, $`\log(v)\ge 1-1/v`$ reduces this inequality to
 
 ```math
 5 + 3x + x^2 - 51x^3 - 34x^4 - 17x^5 > 0.
@@ -755,24 +739,22 @@ The negative tail is at most
 (1683/25)\,x^3 \le 13464/3125 < 5.
 ```
 
-Thus `(5/2)*Lambda'(t)*t' <= -4/x <= U'`, which proves $`G'\le0`$.
+Thus $`(5/2)\,\Lambda'(t)\,t' \le -4/x \le U'`$, which proves $`G'\le0`$.
 
-At `x=2/5`, a four-panel midpoint bound gives
+At $`x=2/5`$, a four-panel midpoint bound gives
 
-```text
-Lambda(125/39)
-  >= (125/156)*log(
-       1157525834384227/69564432491875),
+```math
+\Lambda(125/39) \ge (125/156)\,\log(1157525834384227/69564432491875),
 ```
 
-and the rational inside the logarithm is greater than `16`. The endpoint
+and the rational inside the logarithm is greater than $`16`$. The endpoint
 comparison is
 
 ```math
 (5/2)\,\Lambda(125/39) - U(2/5) \ge 17500/3159 - 224632/40625 = 101924/9871875 > 0.
 ```
 
-Thus `A_H < (5/2)*F` throughout the positive phase. Therefore
+Thus $`A_H < (5/2)\,F`$ throughout the positive phase. Therefore
 
 ```math
 \begin{aligned}
@@ -821,7 +803,7 @@ This is the form in which the blueprint writes latent decompositions, and
 $`\pi_v`$ below always means such a prior weight. No chart parameter of
 sections 1 to 5 appears in this section.
 
-Since $`Z`$ is nonempty, the uniform law $`u`$ with `u(z) = 1/N` exists. For
+Since $`Z`$ is nonempty, the uniform law $`u`$ with $`u(z) = 1/N`$ exists. For
 $`t`$ in $`[0,1]`$ set
 
 ```math
@@ -848,15 +830,17 @@ positive constant, so the statements are base-independent.
 finite set and let $`\Delta(S)`$ be the closed simplex of laws on $`S`$, viewed
 as a subset of $`R^S`$. Then $`m \to H(m)`$ is continuous on $`\Delta(S)`$,
 including at laws with zero entries. Consequently, for every fixed map
-`f : S -> U` into a finite set, $`m \to H(f_* m)`$ is continuous on
+$`f : S \to U`$ into a finite set, $`m \to H(f_* m)`$ is continuous on
 $`\Delta(S)`$, where $`f_* m`$ is the pushforward
 $`(f_* m)(w) = \sum_{f(s)=w} m(s)`$.
 
 *Proof.* Put
 
-```text
-theta(x) = x*log(x)   for x > 0,
-theta(0) = 0.
+```math
+\begin{aligned}
+\theta(x) &= x \log x \quad \text{for } x > 0, \\
+\theta(0) &= 0.
+\end{aligned}
 ```
 
 Then $`H(m) = -\sum_{s \in S} \theta(m(s))`$ for every $`m`$ in $`\Delta(S)`$,
@@ -867,8 +851,8 @@ $`0`$ is clear. At $`0`$, write $`x = 2^{-r}`$ with $`r \ge 0`$, so that
 \lvert \theta(x) \rvert = r\,2^{-r}.
 ```
 
-From `exp(y) >= y^2/2` for $`y \ge 0`$ one gets
-`2^r = exp(r*log_e 2) >= (r*log_e 2)^2/2`, hence for $`r > 0`$
+From $`\exp(y) \ge y^2/2`$ for $`y \ge 0`$ one gets
+$`2^r = \exp(r\,\log_e 2) \ge (r\,\log_e 2)^2/2`$, hence for $`r > 0`$
 
 ```math
 0 \le r\,2^{-r} \le 2/(r\,(\log_e 2)^2),
@@ -904,7 +888,7 @@ $`L = (I, \pi, q)`$ for $`p`$ satisfies
 \mathrm{score}_p(L) = \Psi(p) - \sum_{v \in I} \pi_v\,\Phi(q_v).
 ```
 
-*Proof.* Let $`J(v,z) = \pi_v q_v(z)`$ be the joint law of $`L`$ and the
+*Proof.* Let $`J(v,z) = \pi_v\,q_v(z)`$ be the joint law of $`L`$ and the
 observations. For a fixed map $`f`$ defined on $`Z`$, the joint law of
 $`(L,f)`$ is $`(v,w) \to \pi_v\,(f_* q_v)(w)`$, so
 
@@ -963,7 +947,7 @@ $`2 + 2 - 3 - 1 = 0`$, so those terms cancel and what remains is
 which is the claimed identity.
 
 **Lemma 6.3 (a zero-weight label is inert).** Let $`L = (I, \pi, q)`$ be a
-finite latent for $`p`$. Adjoin one new label $`\,`$ with prior weight $`0`$
+finite latent for $`p`$. Adjoin one new label $`*`$ with prior weight $`0`$
 and an arbitrary law as its component. The result is again a finite latent for
 $`p`$, and its score equals $`\mathrm{score}_p(L)`$.
 
@@ -973,22 +957,24 @@ $`\Psi(p)`$ is the same. By Lemma 6.2 the only new term in the component sum is
 $`0\,\Phi(q_*) = 0`$. Hence the score is unchanged.
 
 At the level of entropies the same fact reads: the enlarged joint law assigns
-mass $`0`$ to every coordinate containing $`\,`$, so each marginal appearing in
+mass $`0`$ to every coordinate containing $`*`$, so each marginal appearing in
 the score is either unchanged or gains entries equal to zero, and zero entries
 alter neither mass nor entropy.
 
 ### The smoothed latent
 
-Let $`L\,= (I, \pi, q)`$ be a finite latent with
-$`\mathrm{score}_p(L\,) = \tau(p)`$, supplied by the attainment statement
+Let $`L^* = (I, \pi, q)`$ be a finite latent with
+$`\mathrm{score}_p(L^*) = \tau(p)`$, supplied by the attainment statement
 quoted in section 1. For $`t`$ in $`[0,1]`$ define the smoothed latent $`L_t`$
-for $`p_t`$ by adjoining a single new label $`\,`$ that carries all the
+for $`p_t`$ by adjoining a single new label $`*`$ that carries all the
 uniform mass:
 
-```text
-index set   I + {*},
-prior       pi_t(*) = t,   pi_t(v) = (1-t)*pi_v  for v in I,
-components  q_* = u,       q_v unchanged        for v in I.
+```math
+\begin{aligned}
+\text{index set} &\quad I + \{*\}, \\
+\text{prior} &\quad \pi_t(*) = t, \quad \pi_t(v) = (1-t)\,\pi_v \ \text{for } v \in I, \\
+\text{components} &\quad q_* = u, \quad q_v \text{ unchanged for } v \in I.
+\end{aligned}
 ```
 
 The existing components are not smoothed; the adjoined label carries the whole
@@ -1007,8 +993,8 @@ tu + (1-t)\,\sum_v \pi_v q_v = tu + (1-t)\,p = p_t.
 
 Since $`\tau(p_t)`$ is an infimum over finite latents for $`p_t`$,
 
-```text
-tau(p_t) <= score_{p_t}(L_t)   for every t in [0,1].          (6.3)
+```math
+\tau(p_t) \le \mathrm{score}_{p_t}(L_t) \quad \text{for every } t \in [0,1]. \qquad \text{(6.3)}
 ```
 
 **Lemma 6.4 (the smoothed score is continuous, with the right value at
@@ -1022,29 +1008,26 @@ $`[0,1]`$, and
 *Proof.* Lemma 6.2 applied to $`L_t`$ gives the exact expression
 
 ```math
-\begin{aligned}
-&\mathrm{score}_{p_t}(L_t) \\
-&= \Psi(p_t) - t\,\Phi(u) - (1-t)\,\sum_{v \in I} \pi_v\,\Phi(q_v). \qquad \text{(6.4)}
-\end{aligned}
+\mathrm{score}_{p_t}(L_t) = \Psi(p_t) - t\,\Phi(u) - (1-t)\,\sum_{v \in I} \pi_v\,\Phi(q_v). \qquad \text{(6.4)}
 ```
 
 The sum on the right is a constant: it is computed from the fixed components of
-$`L\,`$ and does not depend on $`t`$. The map $`t \to p_t`$ is affine, hence
+$`L^*`$ and does not depend on $`t`$. The map $`t \to p_t`$ is affine, hence
 continuous, and takes values in the closed simplex of laws on $`Z`$. By Lemma
 6.1, $`\Psi`$ is continuous there, being a fixed linear combination of
 entropies of pushforwards along the identity and the two projections. So the
 right-hand side of (6.4) is continuous in $`t`$ on $`[0,1]`$.
 
-At $`t = 0`$ we have $`p_0 = p`$, and `L_0` is exactly $`L\,`$ with one extra
+At $`t = 0`$ we have $`p_0 = p`$, and $`L_0`$ is exactly $`L^*`$ with one extra
 label of prior weight $`0`$. Lemma 6.3 gives
-$`\mathrm{score}_{p_0}(L_0) = \mathrm{score}_p(L\,) = \tau(p)`$.
+$`\mathrm{score}_{p_0}(L_0) = \mathrm{score}_p(L^*) = \tau(p)`$.
 
 ### Continuity of the deterministic optimum
 
 **Lemma 6.5 ($`T`$ is continuous on the closed simplex).** The map
 $`p \to T(p)`$ is continuous on the closed simplex of laws on $`Z`$.
 
-*Proof.* Fix a code `g : Z -> Fin(N)`. Expanding the definition
+*Proof.* Fix a code $`g : Z \to \mathrm{Fin}(N)`$. Expanding the definition
 $`D_p(g) = I(X;Y \mid g) + H(g \mid X) + H(g \mid Y)`$ into entropies gives
 
 ```math
@@ -1056,12 +1039,12 @@ the fixed maps $`(X,g)`$, $`(Y,g)`$, $`(X,Y,g)`$, $`g`$, $`X`$, $`Y`$. By Lemma
 6.1 each term is continuous in $`p`$, so $`p \to D_p(g)`$ is continuous.
 
 There are finitely many codes: $`N^N`$ maps from $`Z`$ to $`\mathrm{Fin}(N)`$,
-so `256` here. By the blueprint, $`T(p)`$ is the minimum of $`D_p(g)`$ over
+so $`256`$ here. By the blueprint, $`T(p)`$ is the minimum of $`D_p(g)`$ over
 that finite set. The minimum of finitely many continuous functions
 $`f_1, ..., f_k`$ is continuous, since
 
 ```math
-\mid \min_i f_i(a) - \min_i f_i(b) \mid \le \max_i \mid f_i(a) - f_i(b) \mid ,
+\lvert \min_i f_i(a) - \min_i f_i(b) \rvert \le \max_i \lvert f_i(a) - f_i(b) \rvert,
 ```
 
 and the right-hand side tends to $`0`$ as $`b \to a`$. Hence $`p \to T(p)`$
@@ -1072,8 +1055,8 @@ real-valued functions on $`(0,1]`$ with $`F(t) \le G(t)`$ for all $`t`$, and
 suppose $`F(t) \to a`$ and $`G(t) \to b`$ as $`t`$ decreases to $`0`$. Then
 $`a \le b`$.
 
-*Proof.* Suppose $`a > b`$ and put `eps = (a-b)/2 > 0`. For all small enough
-$`t`$ we have `F(t) > a - eps = (a+b)/2` and `G(t) < b + eps = (a+b)/2`, so
+*Proof.* Suppose $`a > b`$ and put $`\epsilon = (a-b)/2 > 0`$. For all small enough
+$`t`$ we have $`F(t) > a - \epsilon = (a+b)/2`$ and $`G(t) < b + \epsilon = (a+b)/2`$, so
 $`G(t) < F(t)`$, contradicting the hypothesis.
 
 ### The transfer
@@ -1087,7 +1070,7 @@ T(p) \le c\,\tau(p)
 holds for every full-support law on $`Z`$. Then it holds for every law
 on $`Z`$.
 
-*Proof.* Let $`p`$ be any law on $`Z`$ and build $`p_t`$, $`L\,`$, and $`L_t`$
+*Proof.* Let $`p`$ be any law on $`Z`$ and build $`p_t`$, $`L^*`$, and $`L_t`$
 as above. For $`t`$ in $`(0,1]`$ the law $`p_t`$ has full support, so the
 hypothesis applies:
 
@@ -1098,8 +1081,8 @@ T(p_t) \le c\,\tau(p_t).
 Combining with (6.3), and using $`c \ge 0`$ so that multiplying (6.3) by $`c`$
 preserves its direction,
 
-```text
-T(p_t) <= c * tau(p_t) <= c * score_{p_t}(L_t)   for t in (0,1].  (6.5)
+```math
+T(p_t) \le c\,\tau(p_t) \le c\,\mathrm{score}_{p_t}(L_t) \quad \text{for } t \in (0,1]. \qquad \text{(6.5)}
 ```
 
 Now let $`t`$ decrease to $`0`$. On the left, $`t \to p_t`$ is continuous into
@@ -1117,7 +1100,7 @@ only information used about the perturbed stochastic optimum is the one-sided
 bound (6.3), together with the limit of the explicitly constructed comparison
 score. Second, the latent $`L_t`$ is written down rather than extracted, so no
 compact parameter space, no subsequence, and no limit latent enter. The one
-existence input is the attained optimizer $`L\,`$ for $`p`$ itself.
+existence input is the attained optimizer $`L^*`$ for $`p`$ itself.
 
 Uniformity of $`u`$ is used only to make $`p_t`$ full support for $`t > 0`$.
 Any fixed full-support law would serve, with the adjoined component set equal
