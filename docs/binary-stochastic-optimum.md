@@ -767,7 +767,9 @@ Then `det q != 0`. If `det q > 0`, then `f_q(sqrt(a*d)) = 0`, `a != d`, and
 labels: `b != c` and `r = (a, c, b, d)`.
 
 *Proof.* By step (d) of Theorem 5.1, a second contact requires the two rays
-`1` and `t` to be distinct zeros of `Q_q`, hence `sigma = V_q`, which by the
+`1` and `t` to be distinct zeros of `P_q = (x-1)^2 * Q_q` on the half-line;
+`x = 1` is always one, and `x = t` is one exactly when `Q_q(t) = 0`, that is
+`sigma = V_q`, which by the
 computation in Lemma 4.9 is `V_q^3 = A_q*E_q*M_q`. A product law has
 `V_q = 0` and `A_q, E_q > 0` by step (c), so `sigma > 0 = V_q` and only the
 ray `x = 1` exists; hence `det q != 0`.
