@@ -38,7 +38,7 @@ Every $`\tau`-optimal finite latent of a binary law, on any support, carries at 
 :::
 
 :::proposition "BIN-TAU-EXACT" (parent := "open") (uses := "BIN-CONSTANT-TEST, BIN-TWO-COMPONENTS") (tags := "paper-proof")
-For every binary law, $`\tau(p)` and the unique optimal component measure are explicit. Product laws have $`\tau=T=I=0`. Otherwise, after orienting $`ad-bc>0`, the largest nonnegative root $`u_0` of $`u^3-(b+c)u^2-bc\,u-bc\,(a+d)` decides: the constant latent is optimal when $`\sqrt{ad}\leq u_0`, and otherwise the optimizer is the diagonal-swap pair with product $`u_0^2` and $`\tau(p)=\Psi(p)-\Phi(q_+)`. Paper proof; no public declaration computes $`\tau` from a law.
+For every binary law, $`\tau(p)` and the unique optimal component measure are explicit. Product laws have $`\tau=T=I=0`. Otherwise, after orienting $`ad-bc>0`, the largest nonnegative root $`u_0` of $`u^3-(b+c)u^2-bc\,u-bc\,(a+d)` decides: the constant latent is optimal when $`\sqrt{ad}\leq u_0`, and otherwise the optimizer is the diagonal-swap pair with product $`u_0^2` and $`\tau(p)=\Psi(p)-\Phi(q_+)`. Paper proof; no public declaration computes $`\tau` from a law. The value of $`\tau` in the full-support oriented case, without uniqueness, was kernel-verified in the reviewed source workspace and is not admitted here.
 :::
 
 :::proposition "BIN-DISAGREEMENT-BAND" (parent := "open") (uses := "BIN-TAU-EXACT") (tags := "paper-proof")

@@ -214,7 +214,11 @@ be a "make public" task, not a proof task, and no row asks for it.
 The four rows `BIN-CONSTANT-TEST`, `BIN-TWO-COMPONENTS`, `BIN-TAU-EXACT`,
 and `BIN-DISAGREEMENT-BAND` are `paper proof` in the
 [binary stochastic optimum](binary-stochastic-optimum.md) page. No public
-declaration states any of them.
+declaration states any of them. The full-support oriented case of
+`BIN-TAU-EXACT`, the value of `tau` at the top cubic root in the upstream
+definitions of `tau`, `Psi`, and `Phi`, was `kernel-verified` in the reviewed
+source workspace; uniqueness was not. That proof is not admitted here, and
+the targets below remain unimplemented.
 
 **Existing declarations the proofs rest on.** `latent_score_eq` (the score
 decomposition), `exists_optimalLatent` (attainment), `tau_le_score`, and
