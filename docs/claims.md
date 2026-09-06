@@ -27,7 +27,15 @@ BIN-W3-8 + BIN-CATALOG-RECOVERY + PRICE(8) -------------> D_p(g_p) <= 9*tau(p) o
 PRICE(8) + GEN-W3-8 ---------------------------> GEN-C9
 
 LOWER-1960 ------------------------------------> C_* >= 1.960073002187
+
+BIN-CONSTANT-TEST -----------------------------> BIN-TWO-COMPONENTS
+BIN-TWO-COMPONENTS ----------------------------> BIN-TAU-EXACT
+BIN-TAU-EXACT ---------------------------------> BIN-DISAGREEMENT-BAND
 ```
+
+The binary stochastic-optimum rows are inputs to the formulation of the
+conjecture `BIN-C2`: they make its right-hand side explicit and prove no
+comparison with `T`.
 
 The same dependencies as a diagram, with the ledger tier as node colour;
 regenerate it with `scripts/gen_diagrams.py` whenever the picture above or
@@ -50,6 +58,10 @@ graph TD
   GEN_W3_8["GEN-W3-8"]:::conjecture
   LOWER_1960["LOWER-1960"]:::external
   C_1_960073002187["C_* >= 1.960073002187"]:::aux
+  BIN_CONSTANT_TEST["BIN-CONSTANT-TEST"]:::paper
+  BIN_TWO_COMPONENTS["BIN-TWO-COMPONENTS"]:::paper
+  BIN_TAU_EXACT["BIN-TAU-EXACT"]:::paper
+  BIN_DISAGREEMENT_BAND["BIN-DISAGREEMENT-BAND"]:::paper
   BIN_REDUCE["BIN-REDUCE"]:::kernel
   BIN_C2["BIN-C2"]:::conjecture
   BIN_LAW_SELECTOR["BIN-LAW-SELECTOR"]:::paper
@@ -64,6 +76,9 @@ graph TD
   PRICE_c -- "c=8" --> GEN_C9
   GEN_W3_8 --> GEN_C9
   LOWER_1960 --> C_1_960073002187
+  BIN_CONSTANT_TEST --> BIN_TWO_COMPONENTS
+  BIN_TWO_COMPONENTS --> BIN_TAU_EXACT
+  BIN_TAU_EXACT --> BIN_DISAGREEMENT_BAND
   subgraph LEGEND["Tier (from the ledger)"]
     direction LR
     L_kernel["kernel-verified"]:::kernel
@@ -87,8 +102,10 @@ edge above. Catalog recovery also bounds the mathematical law-only selector
 defines that selector and records the open executable contract; it is a
 definition consumed by the third line, not a numerical claim.
 
-`BIN-C2` is the conjectured sharp binary constant; it has no proved
-dependency and is drawn as an isolated node.
+`BIN-C2` is the conjectured sharp binary constant. It has no proved
+dependency edge and is drawn as an isolated node: the four stochastic-optimum
+rows fix its right-hand side `tau(p)` exactly, but no row compares that
+value with `T`.
 
 `BIN-W3-8` requires full support. The generic theorem
 `T_le_mul_tau_of_forall_fullSupport` transfers a supplied full-support bound
@@ -108,9 +125,13 @@ names below are `StochasticToDeterministicLatents`.
 | `BIN-REDUCE` | On the supplied positive transposed binary chart, every code in the canonical four-label code space `BinaryCode` is dominated in `W3Cost` by the constant or high-singleton code. | `kernel-verified` in this repository (2026-09-03), through the public declaration `StochasticToDeterministicLatents.Binary.TransposeChart.min_chartCodes_le_w3Cost`. The arbitrary-output-alphabet form, `kernel-verified` in the reviewed source workspace, remains qualified as such. | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) audits all three cost-dominance endpoints. The public cost type uses `BinaryCode`; the arbitrary-output reward lemma is private, and no public theorem converts that broader statement to a cost bound. The supplied chart need not attain `tau`. The infimum identity is not a separate declaration. |
 | `BIN-W3-8` | Every full-support binary-observable law has some attained `tau`-optimal latent `L` with `W3(L) <= 8*tau(p)`. | `kernel-verified` in this repository (2026-09-04), certificate-free, through `StochasticToDeterministicLatents.Binary.exists_optimalLatent_w3_le_eight_of_fullSupport`. | [FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) selects an attained optimizer and a catalog code of cost at most `8*tau(p)`; `w3_le_w3Cost` gives the result. The selected-latent conclusion requires full support. |
 | `BIN-C9` | For every binary `2 x 2` law, some deterministic code `g` satisfies `T(p) <= D_p(g) <= 9*tau(p)`. | `kernel-verified` in this repository (2026-09-04), certificate-free, through `StochasticToDeterministicLatents.Binary.exists_code_detScore_le_nine_mul_tau` and `StochasticToDeterministicLatents.Binary.T_le_nine_mul_tau`. | [FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) prices the full-support witness, uses [SparseLimit](../StochasticToDeterministicLatents/SparseLimit.lean), then finite deterministic attainment. Its named selector bound requires full support. The sparse conclusion contains neither a selected-latent `W3` estimate nor a bound for that selector. |
-| `BIN-C2` | For every binary `2 x 2` law, `T(p) <= 2*tau(p)`. | `conjecture`. | No proof. `BIN-C9` is the only proved binary constant here, and the library holds no binary lower bound above `1`. The [open problems](open-problems.md#21-the-binary-constant-2-bin-c2) page records the window and a recipe for a certified binary lower bound. |
+| `BIN-C2` | For every binary `2 x 2` law, `T(p) <= 2*tau(p)`. | `conjecture`. | No proof. `BIN-C9` is the only proved binary constant here, and the library holds no binary lower bound above `1`. `BIN-TAU-EXACT` makes the right-hand side explicit and proves no comparison with `T`. The [open problems](open-problems.md#21-the-binary-constant-2-bin-c2) page records the window and a recipe for a certified binary lower bound. |
 | `BIN-LAW-SELECTOR` | The determinant/mass/two-arm rule defines a law-only `g_p`; on count or rational input it is an exact finite procedure. | `paper proof` for the full mathematical rule. Selected exact count sublemmas were `kernel-verified` in the reviewed source workspace; the full contract was not. | [Selector](../StochasticToDeterministicLatents/Binary/Selector.lean) and [CountSelector](../StochasticToDeterministicLatents/Binary/CountSelector.lean) provide definitions and audited structural lemmas. No refinement connects the count or rational backend to the mathematical real selector. The latter has a verified C9 bound on full support; the full executable contract remains open. |
 | `BIN-CATALOG-RECOVERY` | For a full-support law and a supplied contact or transpose-chart presentation of an optimal latent, the chart-selected constant or high-singleton code has an equal-`W3Cost` representative in the law-defined catalog, including the balanced tie. | `kernel-verified` in this repository (2026-09-03), through `StochasticToDeterministicLatents.Binary.exists_catalogCode_of_contactPresentation` and `StochasticToDeterministicLatents.Binary.exists_catalogCode_of_transposeChartPresentation`. | [CatalogRecovery](../StochasticToDeterministicLatents/Binary/CatalogRecovery.lean) proves the equal-cost recovery at a supplied presentation, including the balanced `W3Cost` tie; the tie is proved for `W3Cost`, not for `D_p`. [NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean) supplies the presentation at the selected optimizer, and [FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) composes them at factor eight; the law-quantified composition with a catalog code is private there, and only its `W3` weakening is public. The row-major representative need not be equivariant. No sparse-law statement about the selector is part of this row. |
+| `BIN-CONSTANT-TEST` | For a binary law with nondegenerate marginals, `tau(p) = I_p(X;Y)` if and only if `A >= 0`, `E >= 0`, and `V^3 <= A*E*M`, with `A, E, V, M` the explicit rational functions of the cells in the stochastic-optimum page; then `T(p) = tau(p) = I_p(X;Y)`. | `paper proof` ([Theorem 4.1](binary-stochastic-optimum.md#4-the-rational-constant-optimality-test)). | Proved through the tangent test on the support face, a Gibbs variational identity, weighted Hoelder duality, and a quartic factorization. No Lean declaration states it; the identities are reproduced by `scripts/check_stochastic_optimum_identities.py`, which is not proof evidence. |
+| `BIN-TWO-COMPONENTS` | Every `tau`-optimal finite latent of a binary law, on any support, carries at most two distinct component laws on its positive-weight labels; merging equal components gives a two-label optimizer. | `paper proof` ([Theorem 5.1](binary-stochastic-optimum.md#5-at-most-two-component-laws)). | Proved by bounding the contact set of one supporting affine majorant of the concave envelope. The proposition `Binary.ContactClassification` in [TransposeNormalForm](../StochasticToDeterministicLatents/Binary/TransposeNormalForm.lean), proved by the kernel-verified `Binary.transposeNormalFormInputs_hold`, covers the full-support, selected-optimizer case in its own dual-kernel formulation; the two contact notions are not identified, so it is corroboration, not an input. |
+| `BIN-TAU-EXACT` | For every binary law, `tau(p)` and the unique optimal component measure are explicit: product laws have `tau = T = I = 0`; otherwise, after orienting `ad - bc > 0`, the cubic `u^3 - (b+c)u^2 - bc*u - bc*(a+d)` with largest nonnegative root `u_0` decides: constant optimality when `sqrt(ad) <= u_0`, and otherwise the diagonal-swap pair with product `u_0^2` and `tau(p) = Psi(p) - Phi(q+)`. | `paper proof` ([Theorems 6.6 and 6.7](binary-stochastic-optimum.md#6-the-cubic)). | Proved from `BIN-CONSTANT-TEST` and `BIN-TWO-COMPONENTS` through a factorization of the norm margin and the diagonal-swap tangent identity. The public `contact_root_identity` in [NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean) is this cubic in chart coordinates on the full-support two-contact chart, after the `Y`-label exchange that orients the chart's determinant; no public declaration computes `tau` from a law. |
+| `BIN-DISAGREEMENT-BAND` | If the disagreement mass `p01 + p10` of a binary law lies in `[1/3, 2/3]`, then `tau(p) = T(p) = I_p(X;Y)`; no larger interval in that statistic alone suffices. | `paper proof` ([Corollary 7.1](binary-stochastic-optimum.md#7-consequences)). | A direct consequence of `BIN-TAU-EXACT`. No Lean declaration states it. |
 | `GEN-W3-8` | Every arbitrary finite law admits a selected attained optimizer with `W3(L) <= 8*tau(p)`. | `conjecture`. | No proof. See the [general construction problem](blueprint.md#6-the-open-arbitrary-alphabet-factor-nine-route). |
 | `GEN-C9` | For arbitrary finite alphabets, `T(p) <= 9*tau(p)`. | `conjecture`; `PRICE(8)` would prove it from `GEN-W3-8`, whose premise remains open. | No proof. The generic sparse transfer still requires a full-support numerical bound for these alphabets. |
 | `LOWER-1960` | There exists a law on `Fin 12 x Fin 12` with `T(p)/tau(p) >= 1.960073002187`; hence the best universal finite-alphabet constant `C_*` is at least `1.960073002187`. | External compiler-backed Lean certificate using `native_decide`; not `kernel-verified` under this repository's terminology. | The external [StochToDet1960.exists_lower_bound_1960073002187](https://github.com/satchlj/stoch-to-det-lower/blob/main/StochToDet1960/Proof.lean) supplies the witness. Its compiler-backed verification is not reproduced here. |

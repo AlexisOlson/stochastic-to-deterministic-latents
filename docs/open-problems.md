@@ -40,6 +40,24 @@ case in their
 [LessWrong post](https://www.lesswrong.com/posts/4q3kMfJHB4rxr3Z8m/small-steps-towards-proving-stochastic-deterministic-natural);
 those are literature claims here, with no tier.
 
+The right-hand side is known exactly, at `paper proof`. The
+[binary stochastic optimum](binary-stochastic-optimum.md) computes `tau(p)`
+for every binary law from one cubic root ([`BIN-TAU-EXACT`](claims.md#ledger)):
+either the constant latent is optimal and `T(p) = tau(p) = I_p(X;Y)`, which
+a rational inequality in the cells decides ([`BIN-CONSTANT-TEST`](claims.md#ledger)),
+or the optimal latent has exactly two components that swap the two diagonal
+cells (after orienting the determinant), with `tau(p) = Psi(p) - Phi(q+)`
+for either component. Whenever the disagreement mass `p01 + p10` lies in
+`[1/3, 2/3]`, the constant latent is optimal ([`BIN-DISAGREEMENT-BAND`](claims.md#ledger)).
+So the conjecture is the inequality
+
+```text
+min_g D_p(g) <= 2*[ Psi(p) - Phi(q+) ]
+```
+
+over the fifteen partitions of four cells, on the laws where the constant
+latent is not optimal. Nothing about that comparison is proved here.
+
 **A public lower bound is cheap to certify.** For any law `p` and any
 explicit latent `L`, `T(p)/tau(p) >= T(p)/score_p(L)`, because
 `tau(p) <= score_p(L)`. On a `2 x 2` law, `T(p)` is a minimum over finitely
@@ -47,13 +65,17 @@ many codes, and both sides are finite sums of rational-logarithm terms, so a
 binary lower bound needs one explicit law, one explicit latent, and exact
 bounds on a handful of logarithms of the kind already proved throughout
 [`ScalarEstimates`](../StochasticToDeterministicLatents/Binary/ScalarEstimates.lean).
-No such certificate is in the library yet. The one-parameter family of
-symmetric laws `p00 = p11`, `p01 = p10` is the natural place to start.
+With the exact optimum, the explicit latent can be the optimal one, and the
+ratio is then exact rather than a lower bound. No such certificate is in the
+library yet. The one-parameter family of symmetric laws `p00 = p11`,
+`p01 = p10` is the natural place to start.
 
 **What would close the upper bound.** Any route that prices a selected
 optimal latent at `W3(L) <= tau(p)`, or a direct argument on the finite code
-space that does not pass through `W3`. Sharper binary constants are in
-progress and are not part of this release.
+space that does not pass through `W3`. With the optimal latent known, the
+second kind of argument compares two explicit deterministic scores with an
+explicit `tau(p)` along each diagonal-swap segment. Sharper binary constants
+are in progress and are not part of this release.
 
 **Tier.** `conjecture`.
 
@@ -121,11 +143,20 @@ score on product and sparse laws; those statements are not in the library.
 **Statement.** Every binary law has a `tau`-optimal latent with at most `k`
 labels, for an explicit `k`.
 
-**What is known.** The normal form bounds the number of distinct active
-component laws (two), not the label count of the ambient optimizer; the
-duplicate quotient is what the library works with.
+**What is known.** `k = 2`, at `paper proof`. Every `tau`-optimal finite
+latent of a binary law carries at most two distinct component laws on its
+positive-weight labels, on every support
+([`BIN-TWO-COMPONENTS`](claims.md#ledger)); merging labels with equal
+component laws preserves the mixture and the score, so a two-label optimizer
+exists. This is a statement about distinct component laws first and about
+labels only after the merge; an optimizer may still carry many labels. The
+kernel-verified normal form proves the full-support case for a selected
+optimizer, in its own dual-kernel formulation.
 
-**Tier.** `conjecture`.
+**What remains.** A Lean proof of the target signature in the
+[Lean contracts](lean-contracts.md#binary-stochastic-optimum).
+
+**Tier.** `paper proof`.
 
 ## 3. Where a contribution lands
 
