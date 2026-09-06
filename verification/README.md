@@ -2,7 +2,9 @@
 
 The public library proves the binary factor-nine theorem. Its root exports 21
 modules, and [Verify.lean](../Verify.lean) audits all 495 public theorem
-endpoints. The [admission record](admissions.md) lists the modules, dates,
+endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
+not pinned separately; they are used only inside audited proofs, where the
+audit covers them transitively, and pinning or privatizing them is pending. The [admission record](admissions.md) lists the modules, dates,
 discovered axiom sets, and exact claim promotions.
 
 ## Build and audit

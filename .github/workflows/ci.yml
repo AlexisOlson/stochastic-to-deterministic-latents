@@ -213,7 +213,7 @@ jobs:
       # (`assert_no_sorry` is not matched because `_` is a word character.)
       - name: Scan for trust shortcuts
         run: |
-          out="$(grep -rn -E '\b(sorry|admit)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || true)"
+          out="$(grep -rn -E '\b(sorry|admit|native_decide|unsafe)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || true)"
           if [ -n "$out" ]; then
             echo "trust-shortcut scan found matches:"
             echo "$out"

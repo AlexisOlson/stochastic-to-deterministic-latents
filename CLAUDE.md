@@ -61,7 +61,8 @@ guarantees for a selected optimal latent or the named selector. Neither scalar
 phase arm alone proves `BIN-W3-8`. The count/rational selector refinement and
 the arbitrary-alphabet conjectures keep their separate scopes and evidence
 tiers. The sharper factor-five route and its interval certificate are held for
-a later release and are not described anywhere in this tree.
+a later release; the transfer manifest records that deferral, and no other
+description of the route appears in this tree.
 
 Use `score_p(L)` / `Latent.score` for a supplied latent, `tau(p)` for the
 stochastic optimum, `D_p(g)` / `detScore` for a supplied code, and `T(p)` for

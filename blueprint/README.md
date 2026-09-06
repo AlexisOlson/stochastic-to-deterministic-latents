@@ -6,7 +6,8 @@ is authoritative for mathematical scope and evidence tiers. The graph links
 existing declarations and introduces no mathematical theorems.
 
 The [published site](https://AlexisOlson.github.io/stochastic-to-deterministic-latents/)
-will be available once GitHub Pages is enabled and the first deployment completes.
+is deployed by the blueprint workflow on every push to `main` that touches
+the blueprint or the Lean sources.
 
 ## Build
 
@@ -49,7 +50,8 @@ Verso's generated-data check verifies preview references, cache coverage,
 group membership, and graph preview keys. It is not the library's theorem
 audit. The root verification remains responsible for the audited proof
 dependencies. The tier checker reads the generated declaration records and
-graph statuses as well as the nine rows in the ledger.
+graph statuses as well as the ledger rows named in its id table, which must
+list every claim row that has a node.
 
 The ledger's `paper proof` spelling maps to the graph tag `paper-proof`.
 Its external-source qualifier maps to `external`; this does not introduce a
@@ -75,7 +77,6 @@ The workflow `blueprint.yml` builds the site, checks its metadata and ledger
 tiers, and uploads a Pages artifact for pull requests targeting `main`
 that change the blueprint, Lean sources, the root manifest or toolchain,
 or the blueprint workflow. New runs cancel older runs for the same ref.
-It also supports manual dispatch. Its deploy job is skipped for both events.
-Once Pages is enabled, enable pushes to `main` in that workflow to activate
-deployment.
+It also supports manual dispatch. The deploy job runs only on pushes to
+`main`; on pull requests it is skipped and the artifact is the validation.
 No package build changes the root toolchain or dependency configuration.
