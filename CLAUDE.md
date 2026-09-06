@@ -88,10 +88,19 @@ no output and exit status 123 is the passing case:
 git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'
 ```
 
-Measured rules, from the rendering tests behind pull request #9:
+Measured rules, from the rendering tests behind pull requests #9 and #10:
 
 - Conditioning bars are `\mid`, never a bare `|`; in a table cell a bare bar
   splits the cell.
+- GitHub pads every math-mode slash, so `1/3` renders as "1 / 3". The tight
+  slash is `\text{/}`; use it inline, in exponents, and for a ratio of single
+  tokens in a display. A compound ratio in a display is `\frac`.
+- Delimiters grow only with `\left` and `\right`; wrap a `\frac`, `\sum`, or
+  tall root in `\left( \right)` or `\left\lvert \right\rvert`. `\bigl` grows a
+  parenthesis but does nothing to a bar. Norms are `\lVert x \rVert`; `\|`
+  and `\left\lVert` render with gaps. An inline root whose radicand carries a
+  subscript or superscript is `\sqrt{\smash[b]{...}}`, or it lifts off the
+  baseline.
 - Operator names use `\mathrm`, as in `\mathrm{score}_p(L)` and
   `\mathrm{W3}(L)`; GitHub forbids `\operatorname` and `\DeclareMathOperator`.
   The Verso blueprint keeps `\operatorname` under KaTeX.

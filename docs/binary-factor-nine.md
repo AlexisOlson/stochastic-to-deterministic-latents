@@ -60,15 +60,15 @@ two-contact chart. It is convenient to display its closed compactification:
 
 ```math
 \begin{aligned}
-q_0 &= (A,1,r,D)/Q, \\
-q_1 &= (A,r,1,D)/Q, \\[1ex]
+q_0 &= (A,1,r,D)\text{/}Q, \\
+q_1 &= (A,r,1,D)\text{/}Q, \\[1ex]
 0 &\le x \le 1, \\
 r &= x^4, \\
-m &= x^3/(1+x+x^2), \\
+m &= \frac{x^3}{1+x+x^2}, \\
 2m &\le s = A+D \le x^2, \\
-AD &= r\,(x^2-s)/(1+x^2+r), \\
+AD &= \frac{r\,(x^2-s)}{1+x^2+r}, \\
 Q &= 1+r+s, \\
-0 &\le \pi \le 1/2.
+0 &\le \pi \le 1\text{/}2.
 \end{aligned}
 ```
 
@@ -78,7 +78,7 @@ The strict realized region has
 \begin{aligned}
 0 &< x < 1, \\
 2m &\le s < x^2, \\
-0 &< \pi \le 1/2.
+0 &< \pi \le 1\text{/}2.
 \end{aligned}
 ```
 
@@ -94,7 +94,7 @@ e &= r + \pi\,(1-r), \\
 \end{aligned}
 ```
 
-The observable law on the chart is $`(A,\ell,e,D)/Q`$.
+The observable law on the chart is $`(A,\ell,e,D)\text{/}Q`$.
 
 The exact binary code reduction applies to the global minimum over all
 deterministic codes. It leaves two candidates: the constant code and the
@@ -200,7 +200,7 @@ Differentiating in $`C`$ and integrating from $`C=0`$ gives
 \begin{aligned}
 \bar K &= \int_0^C \int_0^\infty \frac{1}{U(z)+c}\,dz\,dc, \\[1ex]
 b(z) &= \int_0^C \int_0^z \frac{1}{U(t)+c}\,dt\,dc, \\[1ex]
-b'(z) &= \beta(z) = \log(1+C/U(z)).
+b'(z) &= \beta(z) = \log(1 + C\text{/}U(z)).
 \end{aligned}
 ```
 
@@ -211,12 +211,12 @@ positivity needs extra hypotheses on the chart, and the argument below never
 uses it.
 
 Every fixed logarithm bound below is exact rational arithmetic. For $`u>0`$,
-put $`y=(u-1)/(u+1)`$. Then $`\lvert y \rvert<1`$ and
+put $`y=(u-1)\text{/}(u+1)`$. Then $`\lvert y \rvert<1`$ and
 
 ```math
 \begin{aligned}
-\log(u) &= 2\,\sum_{k=0}^n y^{2k+1}/(2k+1) + R_n, \\[1ex]
-\lvert R_n \rvert &\le 2\,\lvert y \rvert^{2n+3}/((2n+3)\,(1-y^2)).
+\log(u) &= 2\,\sum_{k=0}^n \frac{y^{2k+1}}{2k+1} + R_n, \\[1ex]
+\lvert R_n \rvert &\le \frac{2\,\lvert y \rvert^{2n+3}}{(2n+3)\,(1-y^2)}.
 \end{aligned}
 ```
 
@@ -236,7 +236,7 @@ because $`\bar M \ge 0`$.
 Put
 
 ```math
-\rho = r/(1+x^2+r).
+\rho = \frac{r}{1+x^2+r}.
 ```
 
 The contact equation is equivalent to
@@ -261,7 +261,7 @@ The reward moves in the opposite direction:
 
 ```math
 \begin{aligned}
-d \bar R/ds &= -3\,\log Q - \log(\ell+s) \\
+\frac{d \bar R}{ds} &= -3\,\log Q - \log(\ell+s) \\
 &+4\,(1-\pi)\,\log(1+s) \\
 &+4\,\pi\,\log(r+s) \\
 &< 0.
@@ -272,20 +272,20 @@ It remains to prove $`\bar K \le 16\,b(m)`$.
 
 ### Small `x`
 
-For $`x \le 3/10`$, the condition $`\bar R \le 0`$ forces
+For $`x \le 3\text{/}10`$, the condition $`\bar R \le 0`$ forces
 
 ```math
 \pi < 10r.
 ```
 
 Indeed, at the upper fiber endpoint $`s=x^2`$, exact entropy bounds give
-positive reward at both $`\pi=10r`$ and $`\pi=1/2`$. Put $`q=x^2`$, so
-$`0<q\le 9/100`$, $`r=q^2`$, $`Q=1+q+q^2`$, and at $`\pi=10r`$ put
-$`a=e/r=11-10q^2`$. Cubic lower and upper entropy bounds give
+positive reward at both $`\pi=10r`$ and $`\pi=1\text{/}2`$. Put $`q=x^2`$, so
+$`0<q\le 9\text{/}100`$, $`r=q^2`$, $`Q=1+q+q^2`$, and at $`\pi=10r`$ put
+$`a=e\text{/}r=11-10q^2`$. Cubic lower and upper entropy bounds give
 
 ```math
 \begin{aligned}
-\bar R/r &\ge P(q) \\
+\bar R\text{/}r &\ge P(q) \\
 &+(7-40q-10q^2)\,\log(Q) \\
 &+40q(1+q)\,\log(1+q) \\
 &-2(7-20q+10q^2)\,\log(q) \\
@@ -298,32 +298,32 @@ The first two logarithmic terms are nonnegative. Also
 
 ```math
 \begin{aligned}
-7-20q+10q^2 &\ge 5281/1000, \\
--\log(q) &\ge \log(100/9) > \log(11), \\
+7-20q+10q^2 &\ge 5281\text{/}1000, \\
+-\log(q) &\ge \log(100\text{/}9) > \log(11), \\
 a\,\log(a) &\le 11\,\log(11), \\
-\log(11) &< 12/5.
+\log(11) &< 12\text{/}5.
 \end{aligned}
 ```
 
 Dropping the positive numerator monomials of $`P`$ and maximizing every
-negative monomial and the denominator at $`q=9/100`$ gives
+negative monomial and the denominator at $`q=9\text{/}100`$ gives
 
 ```math
-P(q) \ge 365537402057293/120582361000000.
+P(q) \ge 365537402057293\text{/}120582361000000.
 ```
 
 Consequently
 
 ```math
 \begin{aligned}
-\bar R/r &> 365537402057293/120582361000000 - 657/625 = 238781224174093/120582361000000 \\
-&> 74007309/200000000
+\bar R\text{/}r &> 365537402057293\text{/}120582361000000 - 657\text{/}625 = 238781224174093\text{/}120582361000000 \\
+&> 74007309\text{/}200000000
 \end{aligned}
 ```
 
 at $`\pi=10r`$.
 
-For balance, let $`f(q)`$ be $`\bar R`$ at $`s=x^2`$ and $`\pi=1/2`$.
+For balance, let $`f(q)`$ be $`\bar R`$ at $`s=x^2`$ and $`\pi=1\text{/}2`$.
 Differentiation simplifies to
 
 ```math
@@ -336,33 +336,33 @@ f'(q) &= (2q+1)\,\log(2) \\
 \end{aligned}
 ```
 
-Discarding the last two negative terms and using $`\log(2)<7/10`$, $`\log(q)<-9/4`$,
+Discarding the last two negative terms and using $`\log(2)<7\text{/}10`$, $`\log(q)<-9\text{/}4`$,
 and $`\log(1+q)\le q`$ gives
 
 ```math
-f'(q) < (59/50)\,(7/10) - 2\,(9/4) + (109/50)\,(9/100) = -17389/5000 < 0.
+f'(q) < \tfrac{59}{50}\,(7\text{/}10) - 2\,(9\text{/}4) + \tfrac{109}{50}\,(9\text{/}100) = -17389\text{/}5000 < 0.
 ```
 
-At $`q=9/100`$, the exact logarithm lemma gives
+At $`q=9\text{/}100`$, the exact logarithm lemma gives
 
 ```math
 \begin{aligned}
-\log(2) &> 693147/1000000, \\
-\log(109/100) &> 86177/1000000, \\
-\log(9/100) &> -2407950/1000000, \\
-\log(10981/10000) &< 93582/1000000, \\
-\log(10081/10000) &< 8068/1000000.
+\log(2) &> 693147\text{/}1000000, \\
+\log(109\text{/}100) &> 86177\text{/}1000000, \\
+\log(9\text{/}100) &> -2407950\text{/}1000000, \\
+\log(10981\text{/}10000) &< 93582\text{/}1000000, \\
+\log(10081\text{/}10000) &< 8068\text{/}1000000.
 \end{aligned}
 ```
 
 Substitution yields
 
 ```math
-f(9/100) > 900483/1250000000 > 20241/100000000
+f(9\text{/}100) > 900483\text{/}1250000000 > 20241\text{/}100000000
 ```
 
 at balance. Strict concavity in $`\pi`$ makes the reward positive throughout
-the interval between $`10r`$ and $`1/2`$, contradicting reward monotonicity
+the interval between $`10r`$ and $`1\text{/}2`$, contradicting reward monotonicity
 in $`s`$.
 
 For each $`c`$ in $`[0,C]`$, let $`e_c \le \ell_c`$ have sum $`1+r`$ and
@@ -372,7 +372,7 @@ product $`r+c`$. The inequalities
 \begin{aligned}
 e_c &\le 11r, \\
 \ell_c &\le 1, \\
-1+x+x^2 &\le 7/5
+1+x+x^2 &\le 7\text{/}5
 \end{aligned}
 ```
 
@@ -392,7 +392,7 @@ Integrating in $`c`$ yields $`\bar K \le 16\,b(m)`$.
 
 ### Remaining `x`
 
-For $`x \ge 3/10`$, put
+For $`x \ge 3\text{/}10`$, put
 
 ```math
 G(\pi) = 16\,b(m) - \bar K.
@@ -402,8 +402,8 @@ Then
 
 ```math
 \begin{aligned}
-G'(\pi)/(1-r) &= 15\,\log(\ell/e) \\
-&-16\,\log((\ell+m)/(e+m)).
+\frac{G'(\pi)}{1-r} &= 15\,\log(\ell\text{/}e) \\
+&-16\,\log\left(\frac{\ell+m}{e+m}\right).
 \end{aligned}
 ```
 
@@ -411,9 +411,9 @@ Writing the ratio of the two logarithms as
 
 ```math
 \begin{aligned}
-&\mathrm{atanh}(k\,\zeta)/\mathrm{atanh}(\zeta), \\
-\zeta &= (\ell-e)/(\ell+e), \\
-k &= (1+r)/(1+r+2m),
+&\mathrm{atanh}(k\,\zeta)\text{/}\mathrm{atanh}(\zeta), \\
+\zeta &= \frac{\ell-e}{\ell+e}, \\
+k &= \frac{1+r}{1+r+2m},
 \end{aligned}
 ```
 
@@ -423,10 +423,10 @@ decreases with $`\zeta`$. Since $`\zeta`$ decreases with $`\pi`$, $`G'`$ can cha
 sign only from positive to negative. Thus $`G`$ has no interior minimum. At
 $`\pi=0`$, $`G=0`$.
 
-At $`\pi=1/2`$ and $`3/10 \le x \le 1/2`$,
+At $`\pi=1\text{/}2`$ and $`3\text{/}10 \le x \le 1\text{/}2`$,
 
 ```math
-b(m) \ge m\,\log((1+x^3)^2/(4x^3)).
+b(m) \ge m\,\log\left(\frac{(1+x^3)^2}{4x^3}\right).
 ```
 
 The product on the right has no interior minimum. Its endpoint comparisons
@@ -441,7 +441,7 @@ reduce to the integer inequalities
 
 They imply $`16\,b(m) \ge \log 2 \ge \bar K`$.
 
-For $`1/2 \le x < 1`$, put $`y=(1+r)/2`$. The same rational-kernel comparison used
+For $`1\text{/}2 \le x < 1`$, put $`y=(1+r)\text{/}2`$. The same rational-kernel comparison used
 for small $`x`$ applies whenever
 
 ```math
@@ -455,21 +455,21 @@ $`y^3 \le (9m)^4`$. The factorization
 238x^3 - 16\,(1+x+x^2)\,(1+x^4) = -2\,(x-2)\,(2x-1)\,(4x^4+14x^3+35x^2+14x+4) \ge 0
 ```
 
-gives $`m \ge (16/119)\,y`$. Also $`y \ge 17/32`$ and the exact rational comparison
+gives $`m \ge (16\text{/}119)\,y`$. Also $`y \ge 17\text{/}32`$ and the exact rational comparison
 
 ```math
-(144/119)^4\,(17/32) \ge 1
+(144\text{/}119)^4\,(17\text{/}32) \ge 1
 ```
 
 imply
 
 ```math
-y^3 \le ((144/119)\,y)^4 \le (9m)^4.
+y^3 \le (\tfrac{144}{119}\,y)^4 \le (9m)^4.
 ```
 
 The rational-kernel estimate therefore gives $`\bar K \le 16\,b(m)`$ after
 integration in $`c`$, completing the balanced-prior endpoint. The endpoint
-minimum in $`\pi`$ then gives the same bound for every prior in $`[0,1/2]`$.
+minimum in $`\pi`$ then gives the same bound for every prior in $`[0,1\text{/}2]`$.
 
 
 Consequently
@@ -502,8 +502,8 @@ fixed $`x,s`$, write
 
 ```math
 \begin{aligned}
-c &= r/Q, \\
-b &= 1/Q, \\
+c &= r\text{/}Q, \\
+b &= 1\text{/}Q, \\
 \delta &= b-c, \\
 v &= c+\pi\,\delta, \\
 u &= b-\pi\,\delta.
@@ -513,24 +513,24 @@ u &= b-\pi\,\delta.
 Define the normalized information difference by
 
 ```math
-I_{\mathrm{diff}}(\pi) = (I_H-I_{\mathrm{low}})/Q.
+I_{\mathrm{diff}}(\pi) = \frac{I_H-I_{\mathrm{low}}}{Q}.
 ```
 
 Then
 
 ```math
 \begin{aligned}
-I_{\mathrm{diff}}(0) &= I_{\mathrm{diff}}(1/2) = 0, \\
-I_{\mathrm{diff}}''(\pi) &= \delta^2\,(1/(u\,(1-u)) - 1/(v\,(1-v))) \le 0,
+I_{\mathrm{diff}}(0) &= I_{\mathrm{diff}}(1\text{/}2) = 0, \\
+I_{\mathrm{diff}}''(\pi) &= \delta^2\,\left( \frac{1}{u\,(1-u)} - \frac{1}{v\,(1-v)} \right) \le 0,
 \end{aligned}
 ```
 
-because $`v \le u \le 1-v`$ on $`0 \le \pi \le 1/2`$. Hence
+because $`v \le u \le 1-v`$ on $`0 \le \pi \le 1\text{/}2`$. Hence
 
 ```math
 \begin{aligned}
 I_H &\ge I_{\mathrm{low}}, \\
-N_H &\le F/2.
+N_H &\le F\text{/}2.
 \end{aligned}
 ```
 
@@ -549,28 +549,28 @@ Q\,\log(2)\,\mathrm{W3Cost}_L(g_{\mathrm{chart}}) = \bar K-\bar R = N_H + 3A_H.
 It is therefore enough to prove
 
 ```math
-A_H \le (5/2)\,F.
+A_H \le \tfrac{5}{2}\,F.
 ```
 
 ### Reduction to two seam endpoints
 
 Reward monotonicity in $`s`$ reduces phase exclusion to the seam $`s=2m`$. An
-exact Bernoulli-entropy comparison at $`x=2/5`$ gives $`\bar R<0`$. For larger
-$`x`$, the seam channel is an affine garbling of the $`x=2/5`$ channel. Its
+exact Bernoulli-entropy comparison at $`x=2\text{/}5`$ gives $`\bar R<0`$. For larger
+$`x`$, the seam channel is an affine garbling of the $`x=2\text{/}5`$ channel. Its
 mutual information decreases while its conditional entropy increases. Therefore
 
 ```math
-R_H \ge 0 \implies x < 2/5.
+R_H \ge 0 \implies x < 2\text{/}5.
 ```
 
-For $`x<2/5`$, concavity of $`\bar R`$ in $`\pi`$ bounds it by its tangent at
+For $`x<2\text{/}5`$, concavity of $`\bar R`$ in $`\pi`$ bounds it by its tangent at
 zero. Writing
 
 ```math
 \begin{aligned}
 H_0 &= E(r,1+s), \\
 H_1 &= E(1,r+s), \\
-L &= \log((1+s)/r),
+L &= \log\left(\frac{1+s}{r}\right),
 \end{aligned}
 ```
 
@@ -597,8 +597,8 @@ Set
 
 ```math
 \begin{aligned}
-J &= (5/2)\,F - A_H, \\
-t &= (1+s)/(r+s).
+J &= \tfrac{5}{2}\,F - A_H, \\
+t &= \frac{1+s}{r+s}.
 \end{aligned}
 ```
 
@@ -606,67 +606,67 @@ Direct differentiation gives
 
 ```math
 \begin{aligned}
-J_s &= (5/2)\,\beta(s) \\
+J_s &= \tfrac{5}{2}\,\beta(s) \\
 &- \pi\,\log t \\
-&- \log(1+r/(1+s)).
+&- \log\left(1+\frac{r}{1+s}\right).
 \end{aligned}
 ```
 
-On $`x<2/5`$ and $`\pi\ge3r`$, one has
+On $`x<2\text{/}5`$ and $`\pi\ge3r`$, one has
 
 ```math
 \begin{aligned}
-(3/2)\,\beta(s) &\ge \pi\,\log t, \\
-\beta(s) &\ge \log(1+r/(1+s)).
+\tfrac{3}{2}\,\beta(s) &\ge \pi\,\log t, \\
+\beta(s) &\ge \log\left(1+\frac{r}{1+s}\right).
 \end{aligned}
 ```
 
 Hence $`J_s \ge 0`$. The function $`J`$ is concave in $`\pi`$, so its minimum
-on $`[3r,1/2]`$ occurs at an endpoint. The positive phase is reduced to
+on $`[3r,1\text{/}2]`$ occurs at an endpoint. The positive phase is reduced to
 
 ```math
-s = 2m, \qquad \pi = 3r \ \text{or} \ \pi = 1/2.
+s = 2m, \qquad \pi = 3r \ \text{or} \ \pi = 1\text{/}2.
 ```
 
 ### Balanced endpoint
 
-At $`\pi=1/2`$, put $`y=(1+r)/2`$. Convexity of $`\beta`$ gives
+At $`\pi=1\text{/}2`$, put $`y=(1+r)\text{/}2`$. Convexity of $`\beta`$ gives
 
 ```math
 \begin{aligned}
 F &\ge 2m\,\beta(m), \\
-\beta(m) &= \log((1+x^3)^2/(4x^3)).
+\beta(m) &= \log\left(\frac{(1+x^3)^2}{4x^3}\right).
 \end{aligned}
 ```
 
 An entropy upper bound gives $`A_H \le U_{\mathrm{bal}}`$, where
 
 ```math
-U_{\mathrm{bal}} = (1/2)\,(r\,(1+\log(Q/r)) + (r+2m)\,(1+\log(Q/(r+2m)))).
+U_{\mathrm{bal}} = \tfrac{1}{2}\,\left( r\,(1+\log(Q\text{/}r)) + (r+2m)\,(1+\log\left(\frac{Q}{r+2m}\right)) \right).
 ```
 
 After division by $`m`$, it is enough to prove positivity of the
 decreasing function
 
 ```math
-g_{\mathrm{half}}(x) = 4\,\log((1+x^3)^2/(4x^3)) - U_{\mathrm{bal}}/m.
+g_{\mathrm{half}}(x) = 4\,\log\left(\frac{(1+x^3)^2}{4x^3}\right) - U_{\mathrm{bal}}\text{/}m.
 ```
 
-At $`x=2/5`$, the required exact logarithm bounds are
+At $`x=2\text{/}5`$, the required exact logarithm bounds are
 
 ```math
 \begin{aligned}
-\log(17689/4000) &> 37/25, \\
-\log(812/133) &< 909/500, \\
-\log(78/125) &> -59/125, \\
-\log(328/125) &> 241/250.
+\log(17689\text{/}4000) &> 37\text{/}25, \\
+\log(812\text{/}133) &< 909\text{/}500, \\
+\log(78\text{/}125) &> -59\text{/}125, \\
+\log(328\text{/}125) &> 241\text{/}250.
 \end{aligned}
 ```
 
 The resulting margin is
 
 ```math
-3597/62500 > 0.
+3597\text{/}62500 > 0.
 ```
 
 In fact this proves the stronger estimate $`A_H < 2F`$.
@@ -678,9 +678,9 @@ At $`\pi=3r`$ and $`s=2m`$, put
 ```math
 \begin{aligned}
 q &= r+s, \\
-t &= s/r, \\
-\Lambda(t) &= (t+17/5)\,\log(t+17/5) \\
-&-(17/5)\,\log(17/5) \\
+t &= s\text{/}r, \\
+\Lambda(t) &= (t+17\text{/}5)\,\log(t+17\text{/}5) \\
+&-\tfrac{17}{5}\,\log(17\text{/}5) \\
 &-(t+1)\,\log(t+1).
 \end{aligned}
 ```
@@ -690,8 +690,8 @@ The kernel lower bound and entropy upper bound give
 ```math
 \begin{aligned}
 F &\ge r\,\Lambda(t), \\[1ex]
-A_H/r &\le (1-3r)\,(\log(Q/r)+1) \\
-&+3q\,(\log(Q/q)+1) \\
+A_H\text{/}r &\le (1-3r)\,(\log(Q\text{/}r)+1) \\
+&+3q\,(\log(Q\text{/}q)+1) \\
 &= U(x).
 \end{aligned}
 ```
@@ -699,7 +699,7 @@ A_H/r &\le (1-3r)\,(\log(Q/r)+1) \\
 Set
 
 ```math
-G(x) = (5/2)\,\Lambda(t) - U(x).
+G(x) = \tfrac{5}{2}\,\Lambda(t) - U(x).
 ```
 
 Write $`s=2m`$, $`q=r+s`$, $`Q=1+q`$, and use primes for derivatives in $`x`$.
@@ -707,29 +707,29 @@ Differentiation gives
 
 ```math
 \begin{aligned}
-U' &= -3r'\,\log(Q/r) - 4/x \\
-&+ 3\,(r'+s')\,\log(Q/q) + (1+3s)\,(r'+s')/Q.
+U' &= -3r'\,\log(Q\text{/}r) - 4\text{/}x \\
+&+ 3\,(r'+s')\,\log(Q\text{/}q) + \frac{(1+3s)\,(r'+s')}{Q}.
 \end{aligned}
 ```
 
-On $`0<x\le 2/5`$, one has $`q\le 1/7`$, so
-$`\log(Q/q)\ge\log(8)\ge 56/27`$. Also,
+On $`0<x\le 2\text{/}5`$, one has $`q\le 1\text{/}7`$, so
+$`\log(Q\text{/}q)\ge\log(8)\ge 56\text{/}27`$. Also,
 
 ```math
-r'\,s/(rs') = 4\,(1+x+x^2)/(3+2x+x^2) \le 56/27.
+\frac{r'\,s}{rs'} = \frac{4\,(1+x+x^2)}{3+2x+x^2} \le 56\text{/}27.
 ```
 
 These bounds give
-$`r'\,s/r \le s'\,\log(Q/q)`$. Together with $`\log(q/r)\le s/r`$, they imply
-$`U' \ge -4/x`$.
+$`r'\,s\text{/}r \le s'\,\log(Q\text{/}q)`$. Together with $`\log(q\text{/}r)\le s\text{/}r`$, they imply
+$`U' \ge -4\text{/}x`$.
 
 The other derivative term satisfies
 
 ```math
-(5/2)\,(-t')\,\log((t+17/5)/(t+1)) \ge 4/x.
+\tfrac{5}{2}\,(-t')\,\log\left(\frac{t+17\text{/}5}{t+1}\right) \ge 4\text{/}x.
 ```
 
-Indeed, $`\log(v)\ge 1-1/v`$ reduces this inequality to
+Indeed, $`\log(v)\ge 1-1\text{/}v`$ reduces this inequality to
 
 ```math
 5 + 3x + x^2 - 51x^3 - 34x^4 - 17x^5 > 0.
@@ -738,29 +738,29 @@ Indeed, $`\log(v)\ge 1-1/v`$ reduces this inequality to
 The negative tail is at most
 
 ```math
-(1683/25)\,x^3 \le 13464/3125 < 5.
+\tfrac{1683}{25}\,x^3 \le 13464\text{/}3125 < 5.
 ```
 
-Thus $`(5/2)\,\Lambda'(t)\,t' \le -4/x \le U'`$, which proves $`G'\le0`$.
+Thus $`(5\text{/}2)\,\Lambda'(t)\,t' \le -4\text{/}x \le U'`$, which proves $`G'\le0`$.
 
-At $`x=2/5`$, a four-panel midpoint bound gives
+At $`x=2\text{/}5`$, a four-panel midpoint bound gives
 
 ```math
-\Lambda(125/39) \ge (125/156)\,\log(1157525834384227/69564432491875),
+\Lambda(125\text{/}39) \ge \tfrac{125}{156}\,\log(1157525834384227\text{/}69564432491875),
 ```
 
 and the rational inside the logarithm is greater than $`16`$. The endpoint
 comparison is
 
 ```math
-(5/2)\,\Lambda(125/39) - U(2/5) \ge 17500/3159 - 224632/40625 = 101924/9871875 > 0.
+\tfrac{5}{2}\,\Lambda(125\text{/}39) - U(2\text{/}5) \ge 17500\text{/}3159 - 224632\text{/}40625 = 101924\text{/}9871875 > 0.
 ```
 
-Thus $`A_H < (5/2)\,F`$ throughout the positive phase. Therefore
+Thus $`A_H < (5\text{/}2)\,F`$ throughout the positive phase. Therefore
 
 ```math
 \begin{aligned}
-Q\,\log(2)\,\mathrm{W3Cost}_L(g_{\mathrm{chart}}) &= N_H + 3A_H \le F/2 + (15/2)\,F = 8F \\
+Q\,\log(2)\,\mathrm{W3Cost}_L(g_{\mathrm{chart}}) &= N_H + 3A_H \le F\text{/}2 + \tfrac{15}{2}\,F = 8F \\
 &\le 8\,\bar B \le 8Q\,\log(2)\,\tau(p).
 \end{aligned}
 ```
@@ -805,7 +805,7 @@ This is the form in which the blueprint writes latent decompositions, and
 $`\pi_v`$ below always means such a prior weight. No chart parameter of
 sections 1 to 5 appears in this section.
 
-Since $`Z`$ is nonempty, the uniform law $`u`$ with $`u(z) = 1/N`$ exists. For
+Since $`Z`$ is nonempty, the uniform law $`u`$ with $`u(z) = 1\text{/}N`$ exists. For
 $`t`$ in $`[0,1]`$ set
 
 ```math
@@ -817,7 +817,7 @@ nonnegative with total mass $`(1-t) + t = 1`$. For $`t > 0`$ it has full
 support, because
 
 ```math
-p_t(z) \ge t\,u(z) = t/N > 0
+p_t(z) \ge t\,u(z) = t\text{/}N > 0
 ```
 
 for every cell $`z`$.
@@ -853,11 +853,11 @@ $`0`$ is clear. At $`0`$, write $`x = 2^{-r}`$ with $`r \ge 0`$, so that
 \lvert \theta(x) \rvert = r\,2^{-r}.
 ```
 
-From $`\exp(y) \ge y^2/2`$ for $`y \ge 0`$ one gets
-$`2^r = \exp(r\,\log_e 2) \ge (r\,\log_e 2)^2/2`$, hence for $`r > 0`$
+From $`\exp(y) \ge y^2\text{/}2`$ for $`y \ge 0`$ one gets
+$`2^r = \exp(r\,\log_e 2) \ge (r\,\log_e 2)^2\text{/}2`$, hence for $`r > 0`$
 
 ```math
-0 \le r\,2^{-r} \le 2/(r\,(\log_e 2)^2),
+0 \le r\,2^{-r} \le \frac{2}{r\,(\log_e 2)^2},
 ```
 
 which tends to $`0`$ as $`r \to \infty`$, that is, as $`x`$ decreases to $`0`$.
@@ -1057,8 +1057,8 @@ real-valued functions on $`(0,1]`$ with $`F(t) \le G(t)`$ for all $`t`$, and
 suppose $`F(t) \to a`$ and $`G(t) \to b`$ as $`t`$ decreases to $`0`$. Then
 $`a \le b`$.
 
-*Proof.* Suppose $`a > b`$ and put $`\epsilon = (a-b)/2 > 0`$. For all small enough
-$`t`$ we have $`F(t) > a - \epsilon = (a+b)/2`$ and $`G(t) < b + \epsilon = (a+b)/2`$, so
+*Proof.* Suppose $`a > b`$ and put $`\epsilon = (a-b)\text{/}2 > 0`$. For all small enough
+$`t`$ we have $`F(t) > a - \epsilon = (a+b)\text{/}2`$ and $`G(t) < b + \epsilon = (a+b)\text{/}2`$, so
 $`G(t) < F(t)`$, contradicting the hypothesis.
 
 ### The transfer

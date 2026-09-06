@@ -282,7 +282,7 @@ already carries the cubic. Its `contact_root_identity`,
 ```
 
 is, after the $`Y`$-label exchange that orients the chart's determinant positive,
-the statement $`f_p(u_0) = 0`$ with $`u_0 = x^2 / Q`$ and
+the statement $`f_p(u_0) = 0`$ with $`u_0 = x^2 \text{/} Q`$ and
 $`Q = 1 + x^4 + A_0 + D_0`$: substituting the exchanged chart law into the
 cubic and clearing $`Q^3`$ gives
 $`x^4\,(x^2 - A_0 - D_0) - (1 + x^2 + x^4)\,A_0\,D_0`$, the identity with its

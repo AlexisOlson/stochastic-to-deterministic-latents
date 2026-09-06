@@ -2,7 +2,7 @@
 
 These examples apply the
 [selector recipe](../docs/blueprint.md#5-recover-the-code-from-the-law) to
-natural count tables. Each table $`q`$ defines the probability law $`p = q/N`$,
+natural count tables. Each table $`q`$ defines the probability law $`p = q\text{/}N`$,
 where $`N`$ is its total count. The displayed partitions describe the code on
 positive support; labels on zero-mass cells do not affect the partition.
 
@@ -43,7 +43,7 @@ B &= N^N U^{2U} V^{2V} Q^{3Q}.
 The intended score-key identity is
 
 ```math
-N\,\log(2)\,(D_p(\mathrm{singleton}) - D_p(\mathrm{constant})) = \log(A/B).
+N\,\log(2)\,(D_p(\mathrm{singleton}) - D_p(\mathrm{constant})) = \log(A\text{/}B).
 ```
 
 Since $`N > 0`$, the selector chooses the singleton when $`A < B`$ and the
@@ -56,7 +56,7 @@ refinement endpoints.
 ## Product law
 
 ```math
-q = \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}, \qquad p = q/9.
+q = \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}, \qquad p = q\text{/}9.
 ```
 
 Both checkerboard products equal `4`. The determinant is zero, so the
@@ -66,7 +66,7 @@ a score key. The normalized law is the product of `(1/3, 2/3)` with itself.
 ## Sparse nonproduct law
 
 ```math
-q = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}, \qquad p = q/3.
+q = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}, \qquad p = q\text{/}3.
 ```
 
 The diagonal product is `2` and the off-diagonal product is `0`. The lower
@@ -87,7 +87,7 @@ deterministic score zero. Cells `01` and `10` are off support.
 ### Sparse endpoint tie
 
 ```math
-q = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad p = q/2.
+q = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad p = q\text{/}2.
 ```
 
 The diagonal product is `1` and the off-diagonal product is `0`. The
@@ -108,7 +108,7 @@ singleton wins strictly.
 ## Endpoint-mass tie
 
 ```math
-q = \begin{pmatrix} 9 & 1 \\ 1 & 9 \end{pmatrix}, \qquad p = q/20.
+q = \begin{pmatrix} 9 & 1 \\ 1 & 9 \end{pmatrix}, \qquad p = q\text{/}20.
 ```
 
 The diagonal product is `81` and the off-diagonal product is `1`. The two
@@ -130,7 +130,7 @@ $`\{00\}`$, $`\{01,10,11\}`$.
 ## Final-score tie
 
 ```math
-q = \begin{pmatrix} 14 & 1 \\ 1 & 4 \end{pmatrix}, \qquad p = q/20.
+q = \begin{pmatrix} 14 & 1 \\ 1 & 4 \end{pmatrix}, \qquad p = q\text{/}20.
 ```
 
 The diagonal product is `56` and the off-diagonal product is `1`. The lower
@@ -151,7 +151,7 @@ partition $`\{00,01,10,11\}`$.
 ## Generic full-support selection
 
 ```math
-q = \begin{pmatrix} 14 & 1 \\ 1 & 9 \end{pmatrix}, \qquad p = q/25.
+q = \begin{pmatrix} 14 & 1 \\ 1 & 9 \end{pmatrix}, \qquad p = q\text{/}25.
 ```
 
 The diagonal product is `126` and the off-diagonal product is `1`. Cell `11`
@@ -172,7 +172,7 @@ $`\{11\}`$, $`\{00,01,10\}`$.
 ## Negative determinant
 
 ```math
-q = \begin{pmatrix} 1 & 14 \\ 9 & 1 \end{pmatrix}, \qquad p = q/25.
+q = \begin{pmatrix} 1 & 14 \\ 9 & 1 \end{pmatrix}, \qquad p = q\text{/}25.
 ```
 
 The diagonal product is `1` and the off-diagonal product is `126`. Thus

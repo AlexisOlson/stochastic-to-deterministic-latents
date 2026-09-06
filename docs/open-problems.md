@@ -55,7 +55,7 @@ a rational inequality in the cells decides
 ([`BIN-CONSTANT-TEST`](claims.md#ledger)), or the optimal latent has exactly
 two components that swap the two diagonal cells (after orienting the
 determinant), with $`\tau(p) = \Psi(p) - \Phi(q^+)`$ for either component.
-Whenever the disagreement mass $`p_{01} + p_{10}`$ lies in $`[1/3, 2/3]`$, the
+Whenever the disagreement mass $`p_{01} + p_{10}`$ lies in $`[1\text{/}3, 2\text{/}3]`$, the
 constant latent is optimal ([`BIN-DISAGREEMENT-BAND`](claims.md#ledger)). So
 the conjecture is the inequality
 
@@ -67,7 +67,7 @@ over the fifteen partitions of four cells, on the laws where the constant
 latent is not optimal. Nothing about that comparison is proved here.
 
 **A public lower bound is cheap to certify.** For any law $`p`$ and any
-explicit latent $`L`$, $`T(p)/\tau(p) \ge T(p)/\mathrm{score}_p(L)`$, because
+explicit latent $`L`$, $`T(p)\text{/}\tau(p) \ge T(p)\text{/}\mathrm{score}_p(L)`$, because
 $`\tau(p) \le \mathrm{score}_p(L)`$. On a $`2 \times 2`$ law, $`T(p)`$ is a
 minimum over finitely many codes, and both sides are finite sums of
 rational-logarithm terms, so a binary lower bound needs one explicit law, one
@@ -123,7 +123,7 @@ signatures are `Binary.CountTable.selector_eq_realSelector` and
 [Lean contracts](lean-contracts.md#bin-law-selector).
 
 **What is known.** The score-key identity
-$`N\,\log(2)\,(D_p(\mathrm{singleton}) - D_p(\mathrm{constant})) = \log(A/B)`$ is stated with
+$`N\,\log(2)\,(D_p(\mathrm{singleton}) - D_p(\mathrm{constant})) = \log(A\text{/}B)`$ is stated with
 exact integer keys in the [worked examples](../examples/README.md#exact-score-comparison);
 its Lean proof is missing, as are positive-total normalization and support
 agreement.

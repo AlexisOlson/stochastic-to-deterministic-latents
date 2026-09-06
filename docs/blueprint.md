@@ -76,7 +76,7 @@ Only the partition of the positive support induced by $`g`$ matters: relabeling
 code values changes no information quantity, and distinctions confined to
 zero-mass cells are ignored when codes are canonicalized.
 
-The target statements are inequalities rather than bounds on $`T(p) / \tau(p)`$.
+The target statements are inequalities rather than bounds on $`T(p) \text{/} \tau(p)`$.
 This keeps the product-law boundary $`\tau(p) = 0`$ meaningful. For a binary
 product law, the constant code has score zero, so
 $`D_p(c) = T(p) = \tau(p) = 0`$.
@@ -234,7 +234,7 @@ refinement theorems connecting their outputs to this selector.
 Let $`q`$ be the count table
 
 ```math
-q = \begin{pmatrix} 14 & 1 \\ 1 & 4 \end{pmatrix}, \qquad p = q/20.
+q = \begin{pmatrix} 14 & 1 \\ 1 & 4 \end{pmatrix}, \qquad p = q\text{/}20.
 ```
 
 The checkerboard products are `56` and `1`, so the active pair is
