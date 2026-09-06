@@ -2,7 +2,9 @@
 
 The public library proves the binary factor-nine theorem. Its root exports 21
 modules, and [Verify.lean](../Verify.lean) audits all 495 public theorem
-endpoints. The [admission record](admissions.md) lists the modules, dates,
+endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
+not pinned separately; they are used only inside audited proofs, where the
+audit covers them transitively, and pinning or privatizing them is pending. The [admission record](admissions.md) lists the modules, dates,
 discovered axiom sets, and exact claim promotions.
 
 ## Build and audit
@@ -19,9 +21,11 @@ lake env lean -DrelaxedAutoImplicit=false Verify.lean
 
 The first command obtains the Mathlib cache and is useful when it is absent.
 The root build must finish successfully before running Verify, which reads
-compiled imports. A successful audit exits with code 0 and no output. Builds
-may report linter warnings; these are distinct from elaboration or audit
-failures.
+compiled imports. A successful audit exits with code 0 and no output. The library's own
+modules build without linter warnings; a warning naming one of them is a
+regression to fix, never to suppress. The pinned upstream dependency emits
+about seventy linter warnings of its own, which are distinct from elaboration
+or audit failures and are not changed here.
 
 The root build and audit passed in the prepared local checkout on 2026-09-04.
 A fresh-machine replay has not been performed. Do not change the pinned

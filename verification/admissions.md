@@ -2,7 +2,10 @@
 
 The root imports every module listed below. All of each module's public
 theorems were checked with `assert_no_sorry` and individually discovered axiom
-sets in [Verify.lean](../Verify.lean). The [verification guide](README.md)
+sets in [Verify.lean](../Verify.lean). Thirty public `lemma` declarations in
+TransposeNormalForm are not pinned separately; each is used only inside
+audited proofs, where the audit covers it transitively. Pinning or
+privatizing them is pending. The [verification guide](README.md)
 gives the current procedure; the [claim ledger](../docs/claims.md) states
 exact result scopes.
 

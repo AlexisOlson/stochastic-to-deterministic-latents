@@ -61,7 +61,8 @@ guarantees for a selected optimal latent or the named selector. Neither scalar
 phase arm alone proves `BIN-W3-8`. The count/rational selector refinement and
 the arbitrary-alphabet conjectures keep their separate scopes and evidence
 tiers. The sharper factor-five route and its interval certificate are held for
-a later release and are not described anywhere in this tree.
+a later release; the transfer manifest records that deferral, and no other
+description of the route appears in this tree.
 
 Use `score_p(L)` / `Latent.score` for a supplied latent, `tau(p)` for the
 stochastic optimum, `D_p(g)` / `detScore` for a supplied code, and `T(p)` for
@@ -87,9 +88,17 @@ elsewhere remains qualified as such. The evidence tiers are `kernel-verified`,
 
 Before committing, run the trust scan in the verification guide, inspect the
 complete diff, check local Markdown links, and run `git diff --check`.
+Commit and pull-request subjects are at most 50 characters: squash merge
+appends the pull-request number, and GitHub's file listing truncates subjects
+near 57 characters at common widths. Details belong in the body. The `verify`
+job rejects a pull request whose title, or single commit's subject, is longer.
 Mathematical prose changes require an independent check against the actual
-source artifacts. Back up a new untracked Lean module outside the repository
-before applying validator corrections.
+source artifacts. A page at `paper proof` is admitted only after an
+independent read against its sources and a cold read of the public tree, with
+every display re-derived under the public notation. Scripts under `scripts/`
+replay identities and regenerate diagrams; they are not evidence. Back up a
+new untracked Lean module outside the repository before applying validator
+corrections.
 
 ## Attribution and repository contents
 

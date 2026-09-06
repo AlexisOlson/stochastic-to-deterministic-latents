@@ -15,7 +15,7 @@ law on arbitrary finite alphabets, and `C_2` the same infimum over binary
 | Fact | Status |
 |---|---|
 | `C_* >= 1.960073002187`, witnessed by a `12 x 12` law | external `native_decide` certificate ([`LOWER-1960`](claims.md#ledger)); not reproduced here |
-| `C_* <= 1771` | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision |
+| `C_* <= 1771` | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision, which is its current `main`; open upstream pull requests claim smaller constants, down to `96`, and are not merged or verified here |
 | `C_2 <= 9` | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | `C_* <= 9` | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
 | `C_2 <= 2` | `conjecture` ([`BIN-C2`](claims.md#ledger)) |
@@ -35,10 +35,16 @@ this repository holds no binary lower bound above the trivial `1`.
 repository. The factor-nine route does not approach `2`: its constant is
 `1 + 8` from the pricing rule, where `8` is the ratio between two chart
 quantities in the scalar phases. Harwood and Gillen report numerical
-experiments on binary variables and a partial argument for the equal-marginal
-case in their
-[LessWrong post](https://www.lesswrong.com/posts/4q3kMfJHB4rxr3Z8m/small-steps-towards-proving-stochastic-deterministic-natural);
-those are literature claims here, with no tier.
+experiments on binary variables in their
+[LessWrong post](https://www.lesswrong.com/posts/4q3kMfJHB4rxr3Z8m/small-steps-towards-proving-stochastic-deterministic-natural):
+for the equal-marginal `2 x 2` case they find the best two-label latent
+through a degree-six polynomial root, write that they think it is globally
+minimal but have not shown this, and locate the peak ratio near `1.82`.
+Their error bounds the three conditions separately rather than summing
+them. Those are literature claims here, with no tier. The
+[binary stochastic optimum](binary-stochastic-optimum.md) page covers every
+`2 x 2` law, not only equal marginals, and proves at `paper proof` the
+global optimality they left open, for the summed score.
 
 The right-hand side is known exactly, at `paper proof`. The
 [binary stochastic optimum](binary-stochastic-optimum.md) computes `tau(p)`

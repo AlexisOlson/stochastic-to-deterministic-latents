@@ -1,8 +1,7 @@
 # Lean declaration contracts
 
 The [Verso dependency blueprint](https://AlexisOlson.github.io/stochastic-to-deterministic-latents/)
-will be available once GitHub Pages is enabled and the first deployment
-completes. Its graph links the existing
+is deployed from `main`. Its graph links the existing
 public declarations and checks their generated status against the claim
 ledger; the [nested package](../blueprint/README.md) documents local builds.
 

@@ -8,6 +8,8 @@
 #   3. `lake build`              -- the root library (default target)
 #   4. `lake env lean Verify.lean` -- kernel audit: assert_no_sorry + pinned axiom sets
 #   5. the trust-shortcut grep   -- must print nothing
+# On pull requests it first checks that the squash subject (the title, or the
+# single commit's subject) is at most 50 characters.
 # Nothing here runs `lake update` or touches the pins, so the Mathlib oleans
 # stay valid across runs and no rebuild of Mathlib is triggered by the workflow
 # itself (see "Do not trigger a Mathlib rebuild" in CLAUDE.md).
@@ -29,6 +31,9 @@ on:
   push:
     branches: [main]
   pull_request:
+    # `edited` re-runs the job when a title changes, so the squash-subject
+    # check below reflects the title that will be merged.
+    types: [opened, synchronize, reopened, edited]
 
 permissions:
   contents: read
@@ -55,6 +60,36 @@ jobs:
           # Full history so the change detection below can diff against the
           # pull request base or the previous push.
           fetch-depth: 0
+
+      # Squash merge takes its subject from the pull-request title, or from
+      # the commit's subject when the pull request has exactly one commit
+      # (repository setting: commit or pull-request title). GitHub's file
+      # listing truncates subjects near 57 characters and the squash suffix
+      # " (#N)" needs room, so CLAUDE.md caps subjects at 50.
+      - if: github.event_name == 'pull_request'
+        name: Check the squash subject length
+        shell: bash
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_COMMITS: ${{ github.event.pull_request.commits }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          check() {
+            local label="$1" subject="$2" n
+            n=${#subject}
+            if [ "$n" -gt 50 ]; then
+              echo "::error::$label is $n characters; the cap is 50 because squash merge appends ' (#N)': $subject"
+              return 1
+            fi
+            echo "$label: $n characters"
+          }
+          status=0
+          check "pull-request title" "$PR_TITLE" || status=1
+          if [ "$PR_COMMITS" = "1" ]; then
+            check "single commit subject" "$(git log -1 --format=%s "$PR_HEAD")" || status=1
+          fi
+          exit "$status"
 
       # Decide whether the Lean steps are needed. Outputs `lean=true` unless
       # every changed file is outside the Lean-relevant set. Any doubt (no
@@ -178,7 +213,7 @@ jobs:
       # (`assert_no_sorry` is not matched because `_` is a word character.)
       - name: Scan for trust shortcuts
         run: |
-          out="$(grep -rn -E '\b(sorry|admit)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || true)"
+          out="$(grep -rn -E '\b(sorry|admit|native_decide|unsafe)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || true)"
           if [ -n "$out" ]; then
             echo "trust-shortcut scan found matches:"
             echo "$out"
