@@ -10,11 +10,12 @@ is distributed under the Apache License, Version 2.0; this repository retains
 the attribution and change notices described in [NOTICE](../NOTICE).
 
 The finite-information layer is reused through a Lake dependency pinned to
-`299c75264b07db05eab8e6d232ef88e0988f4790`. The local `Information.lean` and
-`Latent.lean` expose descriptive aliases and theorem wrappers without copying
-the upstream implementations. `Deterministic.lean` rewrites the deterministic
-objective over a canonical code alphabet. `Bridge.lean` is the only public
-import point for the upstream envelope, duality, seed, and quotient machinery.
+`299c75264b07db05eab8e6d232ef88e0988f4790`. The local
+`Information.lean` and `Latent.lean` expose descriptive aliases and theorem
+wrappers without copying the upstream implementations. `Deterministic.lean`
+rewrites the deterministic objective over a canonical code alphabet.
+`Bridge.lean` is the only public import point for the upstream envelope,
+duality, seed, and quotient machinery.
 
 The foundation files map to the pinned upstream source as follows:
 
@@ -77,13 +78,13 @@ treatment by material category.
 
 ## External comparison result
 
-The lower bound `C_* >= 1.960073002187` is credited to
+The lower bound $`C_* \ge 1.960073002187`$ is credited to
 [`satchlj/stoch-to-det-lower`](https://github.com/satchlj/stoch-to-det-lower).
 Its theorem `StochToDet1960.exists_lower_bound_1960073002187` exhibits a
-`12 x 12` witness and is checked there by a compiler-backed Lean certificate
-using `native_decide`. No part of that certificate is transferred here. The
-claim ledger records its external verification model; it is not a locally
-kernel-verified result.
+$`12 \times 12`$ witness and is checked there by a compiler-backed Lean
+certificate using `native_decide`. No part of that certificate is transferred
+here. The claim ledger records its external verification model; it is not a
+locally kernel-verified result.
 
 ## Contribution and evidence
 

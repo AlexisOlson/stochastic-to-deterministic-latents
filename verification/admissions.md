@@ -86,11 +86,11 @@ has one or two classes. NormalForm constructs a contact-chart presentation on
 the two-class branch; the selected latent used downstream is the quotient.
 These results do not assert a bound on the ambient optimizer's label count.
 
-Chart identifies the cost of a supplied code. ContactChart expresses that
-cost and the latent score in the scalar coordinates, with conversions between
-natural-log quantities and bits. CatalogRecovery transports the selected
-chart code to a literal member of the observable law's catalog on full
-support, using equal `W3Cost` at a balanced tie. This does not require the
+Chart identifies the cost of a supplied code. ContactChart expresses that cost
+and the latent score in the scalar coordinates, with conversions between
+natural-log quantities and bits. CatalogRecovery transports the selected chart
+code to a literal member of the observable law's catalog on full support, using
+equal $`\mathrm{W3Cost}`$ at a balanced tie. This does not require the
 row-major representative itself to be equivariant.
 
 ScalarEstimates provides the analytic tools. NonpositivePhase proves one
@@ -103,8 +103,8 @@ FactorNine applies the chart bound to the selected optimizer and uses catalog
 recovery and pricing. SparseLimit is a generic conditional theorem; supplying
 its binary full-support premise at nine extends the `T` bound to all laws.
 Finite deterministic attainment then supplies the existential code. This
-composition gives neither a sparse selected-latent `W3` estimate nor a sparse
-bound for the named selector.
+composition gives neither a sparse selected-latent $`\mathrm{W3}`$ estimate nor
+a sparse bound for the named selector.
 
 ## Factor-nine admission checks
 

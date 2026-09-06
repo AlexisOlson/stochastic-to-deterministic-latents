@@ -88,10 +88,19 @@ no output and exit status 123 is the passing case:
 git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'
 ```
 
-Measured rules, from the rendering tests behind pull request #9:
+Measured rules, from the rendering tests behind pull requests #9 and #10:
 
 - Conditioning bars are `\mid`, never a bare `|`; in a table cell a bare bar
   splits the cell.
+- GitHub pads every math-mode slash, so `1/3` renders as "1 / 3". The tight
+  slash is `\text{/}`; use it inline, in exponents, and for a ratio of single
+  tokens in a display. A compound ratio in a display is `\frac`.
+- Delimiters grow only with `\left` and `\right`; wrap a `\frac`, `\sum`, or
+  tall root in `\left( \right)` or `\left\lvert \right\rvert`. `\bigl` grows a
+  parenthesis but does nothing to a bar. Norms are `\lVert x \rVert`; `\|`
+  and `\left\lVert` render with gaps. An inline root whose radicand carries a
+  subscript or superscript is `\sqrt{\smash[b]{...}}`, or it lifts off the
+  baseline.
 - Operator names use `\mathrm`, as in `\mathrm{score}_p(L)` and
   `\mathrm{W3}(L)`; GitHub forbids `\operatorname` and `\DeclareMathOperator`.
   The Verso blueprint keeps `\operatorname` under KaTeX.
@@ -101,14 +110,18 @@ Measured rules, from the rendering tests behind pull request #9:
   display, and cross-references are prose.
 - A bare `\\` does not break a line; multi-line displays use `aligned` or
   `gathered`.
-- Fences render in list items and blockquotes, not inside `<details>` or
-  table cells. Keep math out of headings, link text, and italics.
+- Fences render in list items and blockquotes, not inside `<details>`, table
+  cells, or a list item inside a blockquote. Keep math out of headings, link
+  text, and italics.
 - Lean names, paths, commands, ledger identifiers, and evidence tiers stay
   in code spans; two scripts parse the ledger table by those exact tokens.
 
-Pages not yet converted keep their code-span notation until their own
-conversion pull request, which passes the same independent read as any
-other prose change to a paper-proof page.
+Every documentation page follows this convention; this file keeps code-span
+notation because it names Lean identifiers alongside notation. A notation
+change to a proof page is a
+prose change and passes the same independent read as any other; a mechanical
+conversion is verified by a round trip to the original notation, and only the
+hand-edited items need the full read.
 
 ## Admission and review
 
