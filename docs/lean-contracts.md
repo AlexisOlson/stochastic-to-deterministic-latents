@@ -15,9 +15,9 @@ evidence tiers.
 
 The contracts use the existing public types:
 
-- $`\mathrm{Latent} p`$, `Latent.score`, and $`\tau p`$;
-- `Code α β`, `detScore p g`, and $`T p`$;
-- `w3Cost L g` and $`w_3 L`$; and
+- `Latent p`, `Latent.score`, and `tau p`;
+- `Code α β`, `detScore p g`, and `T p`;
+- `w3Cost L g` and `w3 L`; and
 - `Binary.RealTable`, `Binary.BinaryCode`, `Binary.catalog`, and
   `Binary.selector`.
 
@@ -93,7 +93,7 @@ not establish executable refinement.
 `Binary.TransposeChart` contains positive component masses $`a,b,c,d`$, their
 normalization, the order $`c \le b`$, and a prior `0 < pi ≤ 1/2`. Its public
 projections include `law` and `latent`. In the oriented chart,
-$`\mathrm{cell10}`$ is the high-likelihood-ratio singleton.
+`cell10` is the high-likelihood-ratio singleton.
 
 ### `BIN-REDUCE`
 
@@ -269,7 +269,7 @@ theorem Binary.tau_eq_mutualInfo_of_disagreementBand
 
 `Binary.swapContact p` denotes the component $`q^+`$ of the page; its
 definition requires `Binary.cubicRoot`, which is the largest nonnegative root
-of $`u^3 - (b+c)u^2 - \mathrm{bc} u - \mathrm{bc}\,(a+d)`$. A definition of the
+of $`u^3 - (b+c)u^2 - bcu - bc(a+d)`$. A definition of the
 root by `Classical.choose` from an existence lemma is acceptable; the theorems
 do not require it to be computable.
 
@@ -281,8 +281,8 @@ already carries the cubic. Its `contact_root_identity`,
 (1 + x^2 + x^4)\,A_0\,D_0 = x^4\,(x^2 - A_0 - D_0),
 ```
 
-is, after the `Y`-label exchange that orients the chart's determinant positive,
-the statement $`f_p(u_0) = 0`$ with `u_0 = x^2 / Q` and
+is, after the $`Y`$-label exchange that orients the chart's determinant positive,
+the statement $`f_p(u_0) = 0`$ with $`u_0 = x^2 / Q`$ and
 $`Q = 1 + x^4 + A_0 + D_0`$: substituting the exchanged chart law into the
 cubic and clearing $`Q^3`$ gives
 $`x^4\,(x^2 - A_0 - D_0) - (1 + x^2 + x^4)\,A_0\,D_0`$, the identity with its
