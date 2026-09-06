@@ -91,7 +91,8 @@ For a new or changed theorem module:
 4. Add the root import, theorem assertions, and discovered pins as needed.
    Update the admission record and the claim ledger in the same change.
 5. Run the full root build and Verify. Check theorem coverage, local links,
-   private paths, generated artifacts, and `git diff --check`.
+   the Markdown math check from CLAUDE.md, private paths, generated
+   artifacts, and `git diff --check`.
 
 Use `lake build <Module.Name>` for the authoritative module check. Direct
 `lake env lean <file>` does not apply the lakefile's Lean options; an external

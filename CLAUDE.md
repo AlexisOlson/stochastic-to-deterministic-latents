@@ -72,26 +72,31 @@ conversions. `Phi(q)` is a component functional, not a latent score.
 
 ## Mathematical notation in Markdown
 
-Mathematics in Markdown is TeX, rendered by GitHub. Inline math uses the
-backtick form, a dollar sign, a backtick, the TeX, a backtick, and a dollar
-sign, as in `` $`\tau(p) \le T(p)`$ ``. Display math uses a ```` ```math ````
+Mathematics in Markdown is written in TeX and rendered by GitHub. Inline
+math uses the backtick form, a dollar sign, a backtick, the TeX, a backtick,
+and a dollar sign, as in `` $`\tau(p) \le T(p)`$ ``. Display math uses a ```` ```math ````
 fence. Plain-dollar math is never used: GitHub applies Markdown escapes and
 emphasis inside it, so braces, thin spaces, and underscores break silently,
 and a `<` before a letter becomes an HTML tag. The `verify` job fails on any
-dollar sign that does not touch a backtick; run the same check locally, from
-Git Bash on Windows, where no output and exit status 123 is the passing case:
+dollar sign that does not touch a backtick. The check is not aware of code
+spans, fences, or prose: a shell variable or a price also fails unless the
+dollar sign touches a backtick, and exempting shell fences is the follow-up if
+that ever bites. Run the same command locally, from Git Bash on Windows, where
+no output and exit status 123 is the passing case:
 
 ```sh
-git ls-files '*.md' | xargs grep -nP '(?<!`)\x24(?!`)'
+git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'
 ```
 
 Measured rules, from the rendering tests behind pull request #9:
 
-- Conditioning bars are `\mid`, never a bare `|`, which splits table cells.
+- Conditioning bars are `\mid`, never a bare `|`; in a table cell a bare bar
+  splits the cell.
 - Operator names use `\mathrm`, as in `\mathrm{score}_p(L)` and
   `\mathrm{W3}(L)`; GitHub forbids `\operatorname` and `\DeclareMathOperator`.
   The Verso blueprint keeps `\operatorname` under KaTeX.
-- No macros: `\newcommand` and `\def` do not work. No `\tag`, `\label`, or
+- No macros: `\newcommand` and `\def` do not work, and GitHub also forbids
+  `\phantom`, `\hphantom`, `\href`, and `\unicode`. No `\tag`, `\label`, or
   `\eqref`. An equation number is `\qquad \text{(6.1)}` at the end of the
   display, and cross-references are prose.
 - A bare `\\` does not break a line; multi-line displays use `aligned` or
@@ -121,8 +126,9 @@ its exact public declaration passes the complete audit. A result verified only
 elsewhere remains qualified as such. The evidence tiers are `kernel-verified`,
 `paper proof`, and `conjecture`; external-source labels are qualifiers.
 
-Before committing, run the trust scan in the verification guide, inspect the
-complete diff, check local Markdown links, and run `git diff --check`.
+Before committing, run the trust scan in the verification guide and the
+Markdown math check above, inspect the complete diff, check local Markdown
+links, and run `git diff --check`.
 Commit and pull-request subjects are at most 50 characters: squash merge
 appends the pull-request number, and GitHub's file listing truncates subjects
 near 57 characters at common widths. Details belong in the body. The `verify`
