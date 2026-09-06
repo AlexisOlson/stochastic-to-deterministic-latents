@@ -10,7 +10,7 @@ is distributed under the Apache License, Version 2.0; this repository retains
 the attribution and change notices described in [NOTICE](../NOTICE).
 
 The finite-information layer is reused through a Lake dependency pinned to
-$`299\mathrm{c75264b07db05eab8e6d232ef88e0988f4790}`$. The local
+`299c75264b07db05eab8e6d232ef88e0988f4790`. The local
 `Information.lean` and `Latent.lean` expose descriptive aliases and theorem
 wrappers without copying the upstream implementations. `Deterministic.lean`
 rewrites the deterministic objective over a canonical code alphabet.
@@ -22,7 +22,7 @@ The foundation files map to the pinned upstream source as follows:
 | Public file | Upstream source at the pinned revision | Treatment |
 |---|---|---|
 | `Information.lean` | `stoch_to_det/Entropy.lean`, including `H`, `Hvar`, `condH`, `MI`, and `condMI` | Reducible public aliases and small theorem wrappers. |
-| `Latent.lean` | `stoch_to_det/Functionals.lean`, including `Latent`, `Latent.score`, and $`\tau`$ | Reducible public aliases and small theorem wrappers. |
+| `Latent.lean` | `stoch_to_det/Functionals.lean`, including `Latent`, `Latent.score`, and `tau` | Reducible public aliases and small theorem wrappers. |
 | `Deterministic.lean` | The deterministic objective `detScore` and `T` in `stoch_to_det/Functionals.lean` | Local code-first rewrite over one canonical finite code alphabet. |
 | `Bridge.lean` | `stoch_to_det/Envelope.lean` (`Latent.score_eq`, `Latent.ofFunction`, `Latent.ofFunction_isDet`, `Latent.ofFunction_score_eq_detScore`, `exists_tau_optimal_latent`, `T_eq_iInf_detScore_codes`, `continuousEntropy`, `H_eq_continuousEntropy`, `continuous_continuousEntropy`, `continuous_push_map`), `stoch_to_det/Duality.lean` (`Lambda`, `Feasible`, `IsContact`, `contact_support_eq`), `stoch_to_det/Seed.lean` (`SeedSetup`, `exists_seedSetup`), `stoch_to_det/Quotient.lean` (`Clustering`, `Clustering.Q`, `Clustering.s`, `Clustering.Q_injective`, `Clustering.Q_isContact`, `exists_clustering`), `stoch_to_det/Functionals.lean` (`support`, `IsConnected`, `Latent.IsDet`, `detScore`, `T`), and `stoch_to_det/Entropy.lean` (`Psi`, `Phi`) | Reducible public aliases and exact restatements; the two bridge theorems identify the local `detScore` with upstream's unconditionally and the local `T` with upstream's on probability laws. This is the only public import point for the upstream `Envelope`, `Duality`, `Seed`, and `Quotient` modules. |
 | `Pricing.lean` | The score, `detScore`, and `tau` foundations of `stoch_to_det/Functionals.lean`; the pinned revision has no `W3` declarations | Cost, rebate identity, and pricing theorem written for this repository. |

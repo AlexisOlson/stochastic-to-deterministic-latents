@@ -106,9 +106,10 @@ Measured rules, from the rendering tests behind pull request #9:
 - Lean names, paths, commands, ledger identifiers, and evidence tiers stay
   in code spans; two scripts parse the ledger table by those exact tokens.
 
-Pages not yet converted keep their code-span notation until their own
-conversion pull request, which passes the same independent read as any
-other prose change to a paper-proof page.
+Every page follows this convention. A notation change to a proof page is a
+prose change and passes the same independent read as any other; a mechanical
+conversion is verified by a round trip to the original notation, and only the
+hand-edited items need the full read.
 
 ## Admission and review
 

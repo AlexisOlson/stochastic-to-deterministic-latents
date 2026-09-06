@@ -33,10 +33,7 @@ where the infimum ranges over finite stochastic latents.
 A canonical deterministic code has type
 
 ```math
-\begin{aligned}
-&\mathrm{Code}(\alpha,\beta) \\
-&= (\alpha \times \beta) \to \mathrm{Fin}(\mathrm{card}(\alpha \times \beta)).
-\end{aligned}
+\mathrm{Code}(\alpha,\beta) = (\alpha \times \beta) \to \mathrm{Fin}(\mathrm{card}(\alpha \times \beta)).
 ```
 
 There is one available label for every observation cell, which is enough to
@@ -79,7 +76,7 @@ Only the partition of the positive support induced by $`g`$ matters: relabeling
 code values changes no information quantity, and distinctions confined to
 zero-mass cells are ignored when codes are canonicalized.
 
-The target statements are inequalities rather than bounds on `T(p) / tau(p)`.
+The target statements are inequalities rather than bounds on $`T(p) / \tau(p)`$.
 This keeps the product-law boundary $`\tau(p) = 0`$ meaningful. For a binary
 product law, the constant code has score zero, so
 $`D_p(c) = T(p) = \tau(p) = 0`$.
@@ -207,9 +204,8 @@ at constant nine. See the [binary factor-nine proof](binary-factor-nine.md).
 Although the proof may select an attained optimal latent, the final deterministic
 code does not receive that latent as input. For a binary table
 
-```text
-p = [[p00, p01],
-     [p10, p11]],
+```math
+p = \begin{pmatrix} p_{00} & p_{01} \\ p_{10} & p_{11} \end{pmatrix},
 ```
 
 define the law-only selector $`g_p`$ as follows:
@@ -237,12 +233,11 @@ refinement theorems connecting their outputs to this selector.
 
 Let $`q`$ be the count table
 
-```text
-q = [[14,1],
-     [ 1,4]],     p = q/20.
+```math
+q = \begin{pmatrix} 14 & 1 \\ 1 & 4 \end{pmatrix}, \qquad p = q/20.
 ```
 
-The checkerboard products are `56` and $`1`$, so the active pair is
+The checkerboard products are `56` and `1`, so the active pair is
 $`\{00,11\}`$. Cell `11` has the lower mass. Its singleton and the constant
 code have equal deterministic scores, so the selector returns the constant
 partition $`\{00,01,10,11\}`$.

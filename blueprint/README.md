@@ -62,7 +62,7 @@ definition is not proof evidence. The refinement claim itself remains
 tagged `paper-proof` and unformalized.
 
 The binary selected-latent and named-selector bounds require full support.
-The all-law result concerns `T` and an existential deterministic code.
+The all-law result concerns $`T`$ and an existential deterministic code.
 The arbitrary-alphabet claims remain conjectures. The external lower bound
 is a citation whose verification is not reproduced here.
 
