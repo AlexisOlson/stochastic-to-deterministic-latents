@@ -263,7 +263,8 @@ The reward moves in the opposite direction:
 \begin{aligned}
 d \bar R/ds &= -3\,\log Q - \log(\ell+s) \\
 &+4\,(1-\pi)\,\log(1+s) \\
-+4\,\pi\,\log(r+s) &< 0.
+&+4\,\pi\,\log(r+s) \\
+&< 0.
 \end{aligned}
 ```
 
@@ -690,7 +691,8 @@ The kernel lower bound and entropy upper bound give
 \begin{aligned}
 F &\ge r\,\Lambda(t), \\[1ex]
 A_H/r &\le (1-3r)\,(\log(Q/r)+1) \\
-+3q\,(\log(Q/q)+1) &= U(x).
+&+3q\,(\log(Q/q)+1) \\
+&= U(x).
 \end{aligned}
 ```
 
