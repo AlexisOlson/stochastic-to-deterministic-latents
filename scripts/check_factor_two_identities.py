@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Replay the identities and fixed constants used in docs/binary-factor-two.md.
 
-Requires sympy (and its bundled mpmath). Every symbolic check is an exact
-expansion; every scalar comparison is exact rational arithmetic on the
-displayed series bounds. The high-precision evaluations are spot checks of
-derivative formulas at a few laws and are labelled as such. Nothing here is a
+Requires sympy (and its bundled mpmath). Every identity check is exact: a
+symbolic expansion, or a collection of logarithm coefficients that fails
+closed when it cannot decide, and every scalar comparison is exact rational
+arithmetic on the displayed series bounds. Three evaluations at one sample law
+are spot checks, printed as `spot` and counted separately. Nothing here is a
 proof step. Run from anywhere:
 
     python scripts/check_factor_two_identities.py
@@ -13,12 +14,14 @@ proof step. Run from anywhere:
 from __future__ import annotations
 
 import sys
+from collections import defaultdict
 from fractions import Fraction as Fr
 
 try:
     import mpmath
-    from sympy import (Rational, Symbol, cancel, diff, expand, factor, log,
-                       simplify, sqrt, symbols, together)
+    from sympy import (Add, Integer, Mul, Poly, Rational, Symbol, cancel, diff,
+                       expand, expand_log, factor, factor_list, factorint,
+                       fraction, log, rem, simplify, sqrt, symbols, together)
 except ImportError:  # pragma: no cover
     sys.exit("sympy is required: pip install sympy")
 
@@ -28,8 +31,20 @@ mpmath.mp.dps = 60
 def main() -> int:
     failures = []
 
+    performed = []
+    spots = []
+
     def check(label, ok):
         print(f"{'ok  ' if ok else 'FAIL'} {label}")
+        performed.append(label)
+        if not ok:
+            failures.append(label)
+
+    def spot(label, ok):
+        """A numerical evaluation at one sample law, not an identity check."""
+        print(f"{'spot' if ok else 'FAIL'} {label}")
+        performed.append(label)
+        spots.append(label)
         if not ok:
             failures.append(label)
 
@@ -44,30 +59,112 @@ def main() -> int:
 
     a, b, c, d, t, u, x, y, z, v, D, w = symbols("a b c d t u x y z v D w", positive=True)
 
-    POINTS = [
-        {"a": Rational(1, 2), "b": Rational(1, 5), "c": Rational(1, 10), "d": Rational(1, 5), "s": Rational(7, 10),
-         "k": Rational(1, 3), "t": Rational(1, 7), "u": Rational(1, 5), "v": Rational(3, 10), "D": Rational(1, 20), "delta": Rational(1, 10)},
-        {"a": Rational(3, 7), "b": Rational(1, 9), "c": Rational(1, 11), "d": Rational(2, 9), "s": Rational(79, 99),
-         "k": Rational(2, 5), "t": Rational(2, 9), "u": Rational(1, 6), "v": Rational(20, 99), "D": Rational(1, 30), "delta": Rational(1, 50)},
-        {"a": Rational(9, 20), "b": Rational(3, 50), "c": Rational(1, 25), "d": Rational(9, 20), "s": Rational(9, 10),
-         "k": Rational(-1, 4), "t": Rational(1, 13), "u": Rational(3, 10), "v": Rational(1, 10), "D": Rational(1, 40), "delta": Rational(1, 30)},
-    ]
+    # A reference law interior to the chord domain. It fixes the sign of each
+    # irreducible factor of a logarithm argument, so the factors of a positive
+    # argument multiply to a positive number and the rewriting below stays on
+    # the real branch.
+    REF = {"a": Rational(1, 2), "b": Rational(1, 5), "c": Rational(1, 10),
+           "d": Rational(1, 5), "s": Rational(7, 10), "k": Rational(1, 3),
+           "t": Rational(1, 7), "u": Rational(1, 5), "v": Rational(3, 10),
+           "D": Rational(1, 20), "delta": Rational(1, 10)}
 
-    def zero(expr):
-        """Exact zero test. Symbolic simplification first; if sympy cannot
-        finish, evaluate the difference to 60 digits at three rational points
-        (a sufficient test for the finite log-linear combinations used here)."""
+    def _primes(r):
+        """Factor a nonzero rational into (base, exponent) pairs. A negative
+        rational contributes the formal base -1, whose coefficient then has to
+        vanish like any other, so a surviving sign is rejected."""
+        r = Rational(r)
+        if r == 0:
+            return None
+        out = []
+        if r < 0:
+            out.append((Integer(-1), 1))
+            r = -r
+        for pr, ex in factorint(r.p).items():
+            out.append((Integer(pr), ex))
+        for pr, ex in factorint(r.q).items():
+            out.append((Integer(pr), -ex))
+        return out
+
+    def _normalise(f):
+        """Unit content, and the sign making the factor positive at REF."""
+        syms = sorted(f.free_symbols, key=str)
+        if not syms:
+            return None
         try:
-            if simplify(expr) == 0:
-                return True
-        except Exception:  # pragma: no cover
-            pass
-        for pt in POINTS:
-            sub = {sym: pt[str(sym)] for sym in expr.free_symbols if str(sym) in pt}
-            val = expr.subs(sub).evalf(60)
-            if val.free_symbols or abs(val) > 10 ** -50:
+            poly = Poly(f, *syms)
+        except Exception:
+            return None
+        cont, pp = poly.primitive()
+        flip = pp.LC() < 0
+        sub = {sym: REF[str(sym)] for sym in f.free_symbols if str(sym) in REF}
+        if len(sub) == len(f.free_symbols):
+            val = pp.as_expr().subs(sub)
+            if val.is_number and val != 0:
+                flip = val < 0
+        if flip:
+            cont, pp = -cont, -pp
+        return pp.as_expr(), Rational(cont)
+
+    def _split_log(arg):
+        """Decompose log(arg) into (base, exponent) pairs, each base an
+        irreducible polynomial or a prime; None if arg is not rational."""
+        num, den = fraction(cancel(together(arg)))
+        out = []
+        for part, sign in ((num, 1), (den, -1)):
+            try:
+                const, facs = factor_list(part)
+            except Exception:
+                return None
+            const = Rational(const)
+            for f, ex in facs:
+                nf = _normalise(f)
+                if nf is None:
+                    return None
+                pp, cont = nf
+                const *= cont ** ex
+                out.append((pp, sign * ex))
+            pr = _primes(const)
+            if pr is None:
+                return None
+            out.extend((base, sign * ex) for base, ex in pr)
+        return out
+
+    def zero(expr, constraints=None):
+        """Exact zero test, symbolic only, failing closed.
+
+        After the optional constraint substitution sympy is tried directly.
+        Otherwise the expression is put in the form sum_j c_j(x) log(q_j(x))
+        + r(x), the q_j distinct irreducible polynomials and primes. The
+        logarithms of distinct irreducibles are linearly independent over the
+        rational functions, so the expression vanishes identically on the
+        domain component containing REF when every c_j and r vanish
+        identically. Anything not reducible to that form is rejected; there is
+        no numerical acceptance path.
+        """
+        if constraints:
+            expr = expr.subs(constraints)
+        if simplify(expr) == 0:
+            return True
+        coeffs = defaultdict(lambda: Rational(0))
+        remainder = Rational(0)
+        for term in Add.make_args(expand(expand_log(expr, force=True))):
+            logs = [f for f in Mul.make_args(term) if f.has(log)]
+            if not logs:
+                remainder += term
+                continue
+            if len(logs) != 1 or not isinstance(logs[0], log):
                 return False
-        return True
+            coeff = cancel(term / logs[0])
+            if coeff.has(log):
+                return False
+            parts = _split_log(logs[0].args[0])
+            if parts is None:
+                return False
+            for base, ex in parts:
+                coeffs[base] += coeff * ex
+        if cancel(simplify(remainder)) != 0:
+            return False
+        return all(cancel(simplify(cf)) == 0 for cf in coeffs.values())
 
     # ---------------------------------------------------------------- section 1
     # Entropies of a four-cell law p = (a, b, c, d) in natural logarithms.
@@ -123,11 +220,11 @@ def main() -> int:
     MD = 2 * (Psi(a, b, c, s - a) + k) - (I4(a, b, c, s - a) + 2 * F(s - a, b) + 2 * F(s - a, c) - h(s - a))
     Q = 3 * e(a) - 2 * e(a + b) - 2 * e(a + c) + e(a + b + c) + e(b) + e(c)
     check("(2.4) M0 = 5J - 3R - 3C + 2k", simplify(M0 - (5 * J - 3 * R - 3 * C + 2 * k)) == 0)
-    check("(2.5) MD = 2J - R - C + 2k - Q(a), the Q form of the center", zero(MD - (2 * J - R - C + 2 * k - Q)))
+    check("(2.5) MD = 2J - R - C + 2k - Q(a), the Q form of the center", zero(MD - (2 * J - R - C + 2 * k - Q), {s: 1 - b - c}))
     # (2.6): MD'' formula, with d = s - a.
     MDpp = diff(MD, a, 2)
     MDpp_claim = (-5 / a - 2 / (s - a) + 3 / (a + b) + 3 / (a + c) + 1 / (s - a + b) + 1 / (s - a + c) - 1 / (a + b + c))
-    check("(2.6) MD'' formula", zero(MDpp - MDpp_claim))
+    check("(2.6) MD'' formula", zero(MDpp - MDpp_claim, {s: 1 - b - c}))
     # K_x(b, c) = -5/x + 3/(x+b) + 3/(x+c) - 1/(x+b+c): partial derivatives.
     Kx = -5 / x + 3 / (x + b) + 3 / (x + c) - 1 / (x + b + c)
     check("K_x(0,0) = 0", simplify(Kx.subs({b: 0, c: 0})) == 0)
@@ -138,7 +235,7 @@ def main() -> int:
     pb = b * (s + b)
     pc = c * (s + c)
     M0pp_claim = -5 * s / tt + 3 * (s + 2 * b) / (tt + pb) + 3 * (s + 2 * c) / (tt + pc)
-    check("(2.8) M0'' = -5s/t + 3(s+2b)/(t+p_b) + 3(s+2c)/(t+p_c)", zero(M0pp - M0pp_claim))
+    check("(2.8) M0'' = -5s/t + 3(s+2b)/(t+p_b) + 3(s+2c)/(t+p_c)", zero(M0pp - M0pp_claim, {s: 1 - b - c}))
     check("t + p_b = (a+b)(b+d)", expand(tt + pb - (a + b) * (b + s - a)) == 0)
     N = expand(-5 * s * (t + pb) * (t + pc) + 3 * (s + 2 * b) * t * (t + pc) + 3 * (s + 2 * c) * t * (t + pb))
     check("N(t) leading coefficient 1 + 5v", simplify(N.coeff(t, 2).subs(s, 1 - b - c) - (1 + 5 * (b + c))) == 0)
@@ -380,15 +477,21 @@ def main() -> int:
           expand((1 - 10 * v + 22 * v ** 2 - 14 * v ** 3).subs(v, Rational(1, 8) - zz8) - (Rational(17, 256) + Rational(165, 32) * zz8 + Rational(67, 4) * zz8 ** 2 + 14 * zz8 ** 3)) == 0)
     check("(5.1) f'(t) >= 3v^2 - 2v^2 - v^2/4 = 3v^2/4 for t >= v", 3 - 2 - Fr(1, 4) == Fr(3, 4))
     check("(5.1) s - v/2 = 1 - 3v/2", simplify((1 - v) - v / 2 - (1 - 3 * v / 2)) == 0)
-    # Contact logarithm identity (5.3), checked at the reference contact.
-    Aref, Dref, bref, cref = Fr(112, 135), Fr(7, 135), Fr(8, 135), Fr(8, 135)
-    xr, yr = bref / Dref, cref / Dref
-    lhs52 = -mpmath.log(mpmath.mpf(Dref.numerator) / Dref.denominator)
-    rhs52 = (2 * mpmath.log(1 + mpmath.mpf(xr.numerator) / xr.denominator) + 2 * mpmath.log(1 + mpmath.mpf(yr.numerator) / yr.denominator)
-             - mpmath.log(mpmath.mpf(Aref.numerator) / Aref.denominator)
-             - 2 * mpmath.log(1 + mpmath.mpf((bref / Aref).numerator) / (bref / Aref).denominator)
-             - 2 * mpmath.log(1 + mpmath.mpf((cref / Aref).numerator) / (cref / Aref).denominator))
-    check("(5.3) contact logarithm identity at the reference contact (60 digits)", abs(lhs52 - rhs52) < mpmath.mpf(10) ** -50)
+    # Contact logarithm identity (5.3). What underlies it is algebraic:
+    # A^3 (D+b)^2 (D+c)^2 = D^3 (A+b)^2 (A+c)^2 at the contact, where
+    # A + D = s and A D = u^2 with u the positive cubic root. Squaring the
+    # root relation u (u^2 - w) = v u^2 + w s turns the cubic into a
+    # polynomial constraint in A alone, and the identity is exact as a
+    # remainder modulo that constraint.
+    Ac = Symbol("Ac", positive=True)
+    s_c = 1 - b - c
+    D_c = s_c - Ac
+    P_c = Ac * D_c
+    G_c = expand(P_c * (P_c - b * c) ** 2 - ((b + c) * P_c + b * c * s_c) ** 2)
+    T_c = expand(Ac ** 3 * (D_c + b) ** 2 * (D_c + c) ** 2
+                 - D_c ** 3 * (Ac + b) ** 2 * (Ac + c) ** 2)
+    check("(5.3) A^3 (D+b)^2 (D+c)^2 = D^3 (A+b)^2 (A+c)^2, exact modulo the contact relation",
+          simplify(rem(Poly(T_c, Ac), Poly(G_c, Ac)).as_expr()) == 0)
     # P''(t) for P(t) = -Phi(p_t), p_t = (s - t, b, c, t).
     Pt = -Phi(s - t, b, c, t)
     alpha = s - t
@@ -520,21 +623,22 @@ def main() -> int:
     sq = 1 - bq - cq
     Aq_ = (sq + mpmath.sqrt(sq ** 2 - 4 * uq ** 2)) / 2
     Dq_ = sq - Aq_
-    check("k = -Phi(q+) at (b, c) = (0.05, 0.03) (60 digits)", abs(k_num(bq, cq) + phi_num(Aq_, bq, cq, Dq_)) < mpmath.mpf(10) ** -50)
+    spot("k = -Phi(q+) at (b, c) = (0.05, 0.03) (60 digits)", abs(k_num(bq, cq) + phi_num(Aq_, bq, cq, Dq_)) < mpmath.mpf(10) ** -50)
     eps = mpmath.mpf(10) ** -20
     kb_num = (k_num(bq + eps, cq) - k_num(bq - eps, cq)) / (2 * eps)
     Kq = (sq + 2 * uq) / (sq + uq) ** 2
     Pbq = uq ** 2 + bq * (1 - cq)
-    check("Lemma 3.2: k_b = ln K + 3 ln b - 2 ln P_b (finite difference, 20 digits)",
+    spot("Lemma 3.2: k_b = ln K + 3 ln b - 2 ln P_b (finite difference, 20 digits)",
           abs(kb_num - (mpmath.log(Kq) + 3 * mpmath.log(bq) - 2 * mpmath.log(Pbq))) < mpmath.mpf(10) ** -15)
     jfun = lambda zq: mpmath.log((1 + zq) / (1 - zq))
     zq, cq_ = mpmath.mpf("0.7"), mpmath.mpf("0.8")
-    check("(4.18) j(cz) - 2cz <= c^3 [j(z) - 2z] at z = 0.7, c = 0.8", jfun(cq_ * zq) - 2 * cq_ * zq <= cq_ ** 3 * (jfun(zq) - 2 * zq))
+    spot("(4.18) j(cz) - 2cz <= c^3 [j(z) - 2z] at z = 0.7, c = 0.8", jfun(cq_ * zq) - 2 * cq_ * zq <= cq_ ** 3 * (jfun(zq) - 2 * zq))
 
     if failures:
         print(f"\n{len(failures)} check(s) failed")
         return 1
-    print("\nall checks passed")
+    print(f"\nall checks passed ({len(performed) - len(spots)} exact, "
+          f"{len(spots)} numerical spot checks)")
     return 0
 
 

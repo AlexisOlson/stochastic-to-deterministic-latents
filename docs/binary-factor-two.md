@@ -181,7 +181,7 @@ and summing the geometric series gives the upper bound.
 Every scalar comparison on this page is a finite combination of logarithms of
 small rationals with rational coefficients, decided by these enclosures with
 $`N \le 8`$; `scripts/check_factor_two_identities.py` replays each of them in
-exact rational arithmetic, together with the algebraic identities of the page.
+exact rational arithmetic, alongside exact checks of the algebraic identities.
 The script is a convenience for the reader and is not proof evidence.
 
 ## 2. The contact chord
@@ -795,8 +795,10 @@ q_{\mathrm{r}} = \frac{(112, 8, 8, 7)}{135}.
 ```
 
 Its cubic has $`v = 16\text/135`$, $`w = 64\text/135^2`$, $`s = 119\text/135`$, and
-$`u = 28\text/135`$ is a root: $`135^3 f(u) = 28^3 - 16 \cdot 28^2 - 64 \cdot 28 - 64 \cdot 119 = 0`$.
-Since $`\sqrt{112 \cdot 7}\text/135 = 28\text/135`$, the law $`q_{\mathrm{r}}`$ has
+$`u = 28\text/135`$ is a root: $`135^3 f(u) = 28^3 - 16 \cdot 28^2 - 64 \cdot 28 - 64 \cdot 119 = 0`$,
+and by [Lemma 6.1](binary-stochastic-optimum.md#6-the-cubic) it is the only
+positive root, so $`u_0 = 28\text/135`$. Since
+$`\sqrt{112 \cdot 7}\text/135 = 28\text/135`$, the law $`q_{\mathrm{r}}`$ has
 $`\sqrt{ad} = u_0`$ and is constant-optimal by
 [Theorem 6.6](binary-stochastic-optimum.md#6-the-cubic). By
 [Theorem 3.2](binary-stochastic-optimum.md#3-the-deficit-and-the-tangent-test)
@@ -1255,8 +1257,11 @@ stochastic-optimum targets first (the cubic and the formula for $`\tau`$),
 then the chord calculus, then the two seam and two cut estimates, then the
 assembly.
 
-`scripts/check_factor_two_identities.py` expands every algebraic identity
-displayed on this page with sympy and replays every fixed logarithm comparison
-in exact rational arithmetic from the series of Lemma 1.3; a few derivative
-formulas are additionally evaluated at sample laws to sixty digits as a spot
-check. It is a reading aid, not proof evidence.
+`scripts/check_factor_two_identities.py` performs 127 checks over the
+identities and constants of this page. Of these, 124 are exact: a symbolic
+expansion, a collection of logarithm coefficients that rejects whatever it
+cannot decide, or a comparison in exact rational arithmetic from the series of
+Lemma 1.3. The remaining three evaluate a value, a derivative, and one
+instance of (4.18) at a single sample, and are printed as spot checks. The
+script covers identities and constants, not the argument that joins them: it
+is a reading aid, not proof evidence.

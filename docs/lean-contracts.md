@@ -299,9 +299,12 @@ The rows `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER`, and `BIN-FIXED-CUT` are
 `paper proof` in the [binary factor two](binary-factor-two.md) page. No public
 declaration states any of them.
 
-**Existing declarations the proof rests on.** The stochastic-optimum targets
-above (`Binary.cubicRoot`, `Binary.swapContact`, and
-`Binary.tau_eq_of_mixedBranch`) supply the right-hand side. `T_le_detScore`
+**Prerequisite targets.** The stochastic-optimum targets above
+(`Binary.cubicRoot`, `Binary.swapContact`, and
+`Binary.tau_eq_of_mixedBranch`) are unimplemented; once formalized they supply
+the right-hand side.
+
+**Existing declarations the proof rests on.** `T_le_detScore`
 and `exists_optimalCode` in
 [`Deterministic.lean`](../StochasticToDeterministicLatents/Deterministic.lean)
 bound and attain $`T`$; `Binary.constantCode` and `Binary.singletonCode` in
