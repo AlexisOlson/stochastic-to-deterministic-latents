@@ -101,12 +101,15 @@ Measured rules, from the rendering tests behind pull request #9:
   display, and cross-references are prose.
 - A bare `\\` does not break a line; multi-line displays use `aligned` or
   `gathered`.
-- Fences render in list items and blockquotes, not inside `<details>` or
-  table cells. Keep math out of headings, link text, and italics.
+- Fences render in list items and blockquotes, not inside `<details>`, table
+  cells, or a list item inside a blockquote. Keep math out of headings, link
+  text, and italics.
 - Lean names, paths, commands, ledger identifiers, and evidence tiers stay
   in code spans; two scripts parse the ledger table by those exact tokens.
 
-Every page follows this convention. A notation change to a proof page is a
+Every documentation page follows this convention; this file keeps code-span
+notation because it names Lean identifiers alongside notation. A notation
+change to a proof page is a
 prose change and passes the same independent read as any other; a mechanical
 conversion is verified by a round trip to the original notation, and only the
 hand-edited items need the full read.
