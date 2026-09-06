@@ -34,6 +34,7 @@ the finitely many codes. Both are in bits. The blueprint fixes the notation.
 | Scope | Bound | Construction | Current evidence |
 |---|---:|---|---|
 | Binary `2 x 2` | `T(p) <= 9*tau(p)` | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
+| Binary `2 x 2` | `tau(p)` exactly, from one cubic root; every optimal latent has at most two component laws | [Binary stochastic optimum](docs/binary-stochastic-optimum.md) | `paper proof` |
 | Binary `2 x 2` | `T(p) <= 2*tau(p)` | Open | `conjecture` |
 | Arbitrary finite alphabets | `T(p) <= 9*tau(p)` | Open | `conjecture` |
 
@@ -114,6 +115,7 @@ scan, the single-module check, and the admission procedure.
 
 - [Blueprint](docs/blueprint.md): notation, pricing, and the selector recipe.
 - [Binary factor nine](docs/binary-factor-nine.md): the complete proof, with every analytic step an exact rational-logarithm bound.
+- [Binary stochastic optimum](docs/binary-stochastic-optimum.md): `tau(p)` in closed form for every binary law, at `paper proof`.
 - [Claim ledger](docs/claims.md) and [Lean contracts](docs/lean-contracts.md): statements, scope, and existing or proposed signatures.
 - [Verification](verification/README.md): commands, trust model, and admission requirements.
 - [Examples](examples/README.md): exact inputs, branch calculations, and selected partitions.

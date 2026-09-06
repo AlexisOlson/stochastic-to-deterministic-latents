@@ -63,7 +63,9 @@ Phi(q) = 3 H(q) - 2 H(q_X) - 2 H(q_Y).
 ```
 
 `Phi(q)` is not a latent score. A latent decomposition uses the prior-weighted
-sum `sum_l pi_l*Phi(q_l)`, with the weights always written explicitly.
+sum `sum_l pi_l*Phi(q_l)`, with the weights always written explicitly. For
+binary laws the stochastic optimum is computed exactly in the
+[binary stochastic optimum](binary-stochastic-optimum.md) page, at `paper proof`.
 
 The deterministic optimum is the attained finite minimum
 

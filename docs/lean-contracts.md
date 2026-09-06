@@ -210,6 +210,90 @@ to `FactorNine`, and the public headline
 through `w3_le_w3Cost`. A public theorem restating the private witness would
 be a "make public" task, not a proof task, and no row asks for it.
 
+## Binary stochastic optimum
+
+The four rows `BIN-CONSTANT-TEST`, `BIN-TWO-COMPONENTS`, `BIN-TAU-EXACT`,
+and `BIN-DISAGREEMENT-BAND` are `paper proof` in the
+[binary stochastic optimum](binary-stochastic-optimum.md) page. No public
+declaration states any of them.
+
+**Existing declarations the proofs rest on.** `latent_score_eq` (the score
+decomposition), `exists_optimalLatent` (attainment), `tau_le_score`, and
+`Latent.ofFunction_score_eq_detScore`, all in
+[`Bridge.lean`](../StochasticToDeterministicLatents/Bridge.lean) and
+[`Latent.lean`](../StochasticToDeterministicLatents/Latent.lean). The
+binary marginals `Binary.rowMarginal` and `Binary.columnMarginal` are defined
+in [`Binary/TransposeNormalForm.lean`](../StochasticToDeterministicLatents/Binary/TransposeNormalForm.lean).
+
+**Unimplemented targets.** The quantities `A, E, V, M` and the cubic are
+new definitions; the signatures below name them without fixing their
+placement.
+
+```lean
+noncomputable def Binary.normA (p : Binary.RealTable) : ℝ
+noncomputable def Binary.normE (p : Binary.RealTable) : ℝ
+noncomputable def Binary.normV (p : Binary.RealTable) : ℝ
+noncomputable def Binary.normM (p : Binary.RealTable) : ℝ
+
+theorem Binary.tau_eq_mutualInfo_iff_constantTest
+    (p : Binary.RealTable) (hp : IsPMF p)
+    (hrow : ∀ i, 0 < Binary.rowMarginal p i)
+    (hcol : ∀ j, 0 < Binary.columnMarginal p j) :
+    tau p = mutualInfo Prod.fst Prod.snd p ↔
+      0 ≤ Binary.normA p ∧ 0 ≤ Binary.normE p ∧
+        Binary.normV p ^ 3 ≤ Binary.normA p * Binary.normE p * Binary.normM p
+
+theorem Binary.optimalLatent_two_components
+    {p : Binary.RealTable} (hp : IsPMF p) (L : Latent p)
+    (hL : L.score = tau p) :
+    ∃ q₁ q₂ : Binary.RealTable,
+      ∀ v, L.prior v ≠ 0 → L.comp v = q₁ ∨ L.comp v = q₂
+
+noncomputable def Binary.cubicRoot (p : Binary.RealTable) : ℝ
+
+theorem Binary.tau_eq_of_constantBranch
+    (p : Binary.RealTable) (hp : IsPMF p)
+    (hdet : 0 < p (0, 0) * p (1, 1) - p (0, 1) * p (1, 0))
+    (hle : Real.sqrt (p (0, 0) * p (1, 1)) ≤ Binary.cubicRoot p) :
+    tau p = mutualInfo Prod.fst Prod.snd p
+
+theorem Binary.tau_eq_of_mixedBranch
+    (p : Binary.RealTable) (hp : IsPMF p)
+    (hdet : 0 < p (0, 0) * p (1, 1) - p (0, 1) * p (1, 0))
+    (hlt : Binary.cubicRoot p < Real.sqrt (p (0, 0) * p (1, 1))) :
+    tau p = Psi p - Phi (Binary.swapContact p)
+
+theorem Binary.tau_eq_mutualInfo_of_disagreementBand
+    (p : Binary.RealTable) (hp : IsPMF p)
+    (h1 : 1 / 3 ≤ p (0, 1) + p (1, 0)) (h2 : p (0, 1) + p (1, 0) ≤ 2 / 3) :
+    tau p = mutualInfo Prod.fst Prod.snd p
+```
+
+`Binary.swapContact p` denotes the component `q+` of the page; its definition
+requires `Binary.cubicRoot`, which is the largest nonnegative root of
+`u^3 - (b+c)u^2 - bc*u - bc*(a+d)`. A definition of the root by
+`Classical.choose` from an existence lemma is acceptable; the theorems do
+not require it to be computable.
+
+**A formalization route.** The two-contact chart of
+[`Binary/NormalForm.lean`](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
+already carries the cubic. Its `contact_root_identity`,
+
+```text
+(1 + x^2 + x^4) * A0 * D0 = x^4 * (x^2 - A0 - D0),
+```
+
+is, after the `Y`-label exchange that orients the chart's determinant
+positive, the statement `f_p(u_0) = 0` with `u_0 = x^2 / Q` and
+`Q = 1 + x^4 + A0 + D0`: substituting the exchanged chart law into the cubic
+and clearing `Q^3` gives `x^4*(x^2 - A0 - D0) - (1 + x^2 + x^4)*A0*D0`, the
+identity with its two sides subtracted. This is an identity check, not a
+theorem of the library. It suggests proving `Binary.tau_eq_of_mixedBranch`
+on full support by identifying the selected optimizer's chart with the
+diagonal-swap pair, and proving the constant branch through the rational
+test. The sparse cases need the support-face argument of the page, which
+the library's full-support seed setup does not supply.
+
 ## Arbitrary finite alphabets
 
 These declarations remain conjectural.
