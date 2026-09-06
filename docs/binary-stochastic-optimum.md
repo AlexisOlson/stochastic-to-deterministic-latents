@@ -130,8 +130,7 @@ probability law there is a latent with $`\mathrm{score}_p(L) = \tau(p)`$
 $`\tau(p) \le T(p) \le I_p(X;Y)`$: every code defines a latent of equal score
 (`ofFunction_score_eq_detScore`), $`\tau(p)`$ is at most every latent score
 (`tau_le_score`), and the constant code has score
-$`I(X;Y \mid \mathrm{const}) + H(\mathrm{const} \mid X) + H(\mathrm{const} \mid Y) =
-I_p(X;Y)`$. Hence
+$`I(X;Y \mid \mathrm{const}) + H(\mathrm{const} \mid X) + H(\mathrm{const} \mid Y) = I_p(X;Y)`$. Hence
 
 ```math
 \tau(p) = I_p(X;Y) \implies \tau(p) = T(p) = I_p(X;Y). \qquad \text{(1.2)}
@@ -736,8 +735,7 @@ an input.
 
 ## 6. The cubic
 
-For a binary law $`p = (a,b,c,d)`$ put $`s = a+d`$, $`v = b+c`$, $`w =
-bc`$, and
+For a binary law $`p = (a,b,c,d)`$ put $`s = a+d`$, $`v = b+c`$, $`w = bc`$, and
 
 ```math
 f_p(u) = u^3 - vu^2 - wu - ws. \qquad \text{(6.1)}
