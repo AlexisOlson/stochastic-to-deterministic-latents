@@ -93,8 +93,10 @@ Measured rules, from the rendering tests behind pull requests #9 and #10:
 - Conditioning bars are `\mid`, never a bare `|`; in a table cell a bare bar
   splits the cell.
 - GitHub pads every math-mode slash, so `1/3` renders as "1 / 3". The tight
-  slash is `\text{/}`; use it inline, in exponents, and for a ratio of single
-  tokens in a display. A compound ratio in a display is `\frac`.
+  slash is `\text{/}`, or the brace-free `\text/`, which renders identically
+  and is what a long page uses (see the budget below); use it inline, in
+  exponents, and for a ratio of single tokens in a display. A compound ratio
+  in a display is `\frac`.
 - Delimiters grow only with `\left` and `\right`; wrap a `\frac`, `\sum`, or
   tall root in `\left( \right)` or `\left\lvert \right\rvert`. `\bigl` grows a
   parenthesis but does nothing to a bar. Norms are `\lVert x \rVert`; `\|`
@@ -115,6 +117,12 @@ Measured rules, from the rendering tests behind pull requests #9 and #10:
   text, and italics.
 - Lean names, paths, commands, ledger identifiers, and evidence tiers stay
   in code spans; two scripts parse the ledger table by those exact tokens.
+- GitHub renders math within a page budget: every expression costs one plus
+  the number of `{` characters in its TeX, the costs accumulate down the page,
+  and each expression after the running total passes 2000 shows "Unable to
+  render expression" instead. The factor-two page hit this at 938 expressions.
+  Count braces before adding math to a long page, prefer `\text/` there, and
+  keep a page's total under about 1900.
 
 Every documentation page follows this convention; this file keeps code-span
 notation because it names Lean identifiers alongside notation. A notation

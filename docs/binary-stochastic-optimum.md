@@ -59,11 +59,12 @@ on every support ([section 5](#5-at-most-two-component-laws)); and the band
 $`1\text{/}3 \le b+c \le 2\text{/}3`$ on which the constant latent is always optimal
 ([section 7](#7-consequences)).
 
-None of this proves an inequality between $`T(p)`$ and $`\tau(p)`$. What it
-does is make the right-hand side of the conjecture [`BIN-C2`](claims.md#ledger)
-explicit: $`T(p) \le 2\,\tau(p)`$ becomes a comparison between the minimum over
-the fifteen partitions of four cells and an explicit function of $`(a,b,c,d)`$
-and one cubic root. See [section 8](#8-scope-and-formalization).
+None of this compares $`T(p)`$ with $`\tau(p)`$. What it does is make the
+right-hand side of [`BIN-C2`](claims.md#ledger) explicit: $`T(p) \le 2\,\tau(p)`$
+becomes a comparison between the minimum over the fifteen partitions of four
+cells and an explicit function of $`(a,b,c,d)`$ and one cubic root. The
+[binary factor two](binary-factor-two.md) page proves that comparison. See
+[section 8](#8-scope-and-formalization).
 
 | Step | Sections |
 |---|---|
@@ -1038,12 +1039,13 @@ ledger's sense. The ledger rows are `BIN-CONSTANT-TEST` (Theorem 4.1),
 and `BIN-DISAGREEMENT-BAND` (Corollary 7.1).
 
 **What is not proved here.** No inequality between $`T(p)`$ and $`\tau(p)`$
-beyond $`\tau(p) \le T(p)`$ is stated. `BIN-C2` remains a conjecture. Nothing
+beyond $`\tau(p) \le T(p)`$ is stated on this page; `BIN-C2` is proved on the
+[binary factor two](binary-factor-two.md) page from the results here. Nothing
 is claimed about which laws maximize $`T(p)\text{/}\tau(p)`$, about alphabets larger than
 $`2 \times 2`$, or about latents that are not finite mixtures.
 
-**What changes for `BIN-C2`.** The conjecture $`T(p) \le 2\,\tau(p)`$ now
-reads, for a full-support law with $`\Delta > 0`$ and $`\sqrt{ad} > u_0`$,
+**What the factor-two page uses.** The inequality $`T(p) \le 2\,\tau(p)`$ reads,
+for a full-support law with $`\Delta > 0`$ and $`\sqrt{ad} > u_0`$,
 
 ```math
 \min_g D_p(g) \le 2\,[ \Psi(p) - \Phi(q^+) ],
@@ -1051,8 +1053,11 @@ reads, for a full-support law with $`\Delta > 0`$ and $`\sqrt{ad} > u_0`$,
 
 with the minimum over the fifteen partitions of four cells and $`q^+`$ given by
 one cubic root. The constant-optimal region needs nothing: there
-$`T(p) = \tau(p)`$. Zero-cell laws reduce, by Theorem 6.6 on a three-cell
-support, to the same comparison with $`w = 0`$. The
+$`T(p) = \tau(p)`$. The [binary factor two](binary-factor-two.md) page proves
+the comparison with two of the fifteen partitions along each contact chord and
+reaches zero-cell laws through the kernel-verified transfer theorem of
+[`SparseLimit`](../StochasticToDeterministicLatents/SparseLimit.lean) rather
+than through Theorem 6.6 on a three-cell support. The
 [open-problems page](open-problems.md#21-the-binary-constant-2-bin-c2) records
 this standing.
 

@@ -18,12 +18,13 @@ $`2 \times 2`$ laws only, so $`C_2 \le C_*`$.
 | $`C_* \le 1771`$ | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision, which is its current `main`; open upstream pull requests claim smaller constants, down to `96`, and are not merged or verified here |
 | $`C_2 \le 9`$ | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | $`C_* \le 9`$ | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
-| $`C_2 \le 2`$ | `conjecture` ([`BIN-C2`](claims.md#ledger)) |
+| $`C_2 \le 2`$ | `paper proof` here ([`BIN-C2`](claims.md#ledger)); not formalized |
 
 Two constants are interesting. A universal constant of $`2`$ would sit within
-two percent of the general lower bound. For binary laws the conjectured
-constant is also $`2`$; the $`12 \times 12`$ witness says nothing about $`C_2`$,
-and this repository holds no binary lower bound above the trivial $`1`$.
+two percent of the general lower bound. For binary laws the constant $`2`$ is
+proved at `paper proof`; whether it is sharp is open, since the $`12 \times 12`$
+witness says nothing about $`C_2`$ and this repository holds no binary lower
+bound above the trivial $`1`$.
 
 ## 2. Problems with a precise statement
 
@@ -32,39 +33,32 @@ and this repository holds no binary lower bound above the trivial $`1`$.
 **Statement.** $`T(p) \le 2\,\tau(p)`$ for every binary $`2 \times 2`$
 law $`p`$.
 
-**What is known.** $`C_2 \le 9`$ by the certificate-free proof in this
-repository. The factor-nine route does not approach $`2`$: its constant is
-$`1 + 8`$ from the pricing rule, where $`8`$ is the ratio between two chart
-quantities in the scalar phases. Harwood and Gillen report numerical
-experiments on binary variables in their
-[LessWrong post](https://www.lesswrong.com/posts/4q3kMfJHB4rxr3Z8m/small-steps-towards-proving-stochastic-deterministic-natural):
-for the equal-marginal $`2 \times 2`$ case they find the best two-label latent
-through a degree-six polynomial root, write that they think it is globally
-minimal but have not shown this, and locate the peak ratio near $`1.82`$. Their
-error bounds the three conditions separately rather than summing them. Those
-are literature claims here, with no tier. The
-[binary stochastic optimum](binary-stochastic-optimum.md) page covers every
-$`2 \times 2`$ law, not only equal marginals, and proves at `paper proof` the
-global optimality they left open, for the summed score.
-
-The right-hand side is known exactly, at `paper proof`. The
-[binary stochastic optimum](binary-stochastic-optimum.md) computes $`\tau(p)`$
-for every binary law from one cubic root ([`BIN-TAU-EXACT`](claims.md#ledger)):
-either the constant latent is optimal and $`T(p) = \tau(p) = I_p(X;Y)`$, which
-a rational inequality in the cells decides
-([`BIN-CONSTANT-TEST`](claims.md#ledger)), or the optimal latent has exactly
-two components that swap the two diagonal cells (after orienting the
-determinant), with $`\tau(p) = \Psi(p) - \Phi(q^+)`$ for either component.
-Whenever the disagreement mass $`p_{01} + p_{10}`$ lies in $`[1\text{/}3, 2\text{/}3]`$, the
-constant latent is optimal ([`BIN-DISAGREEMENT-BAND`](claims.md#ledger)). So
-the conjecture is the inequality
-
-```math
-\min_g D_p(g) \le 2\,[ \Psi(p) - \Phi(q^+) ]
-```
-
-over the fifteen partitions of four cells, on the laws where the constant
-latent is not optimal. Nothing about that comparison is proved here.
+**What is known.** Proved at `paper proof` on the
+[binary factor two](binary-factor-two.md) page ([`BIN-C2`](claims.md#ledger)).
+The right-hand side is the exact optimum of the
+[binary stochastic optimum](binary-stochastic-optimum.md) page
+([`BIN-TAU-EXACT`](claims.md#ledger)): either the constant latent is optimal
+and $`T(p) = \tau(p)`$, or $`\tau(p) = \Psi(p) - \Phi(q^+)`$ for the
+diagonal-swap contact $`q^+`$ located by one cubic root. On the chord of laws
+that share the off-diagonal cells and the contact pair, the proof compares two
+deterministic scores, the constant code and the singleton at the lighter
+diagonal cell, with $`2\,\tau`$: the singleton margin is concave and the
+constant margin has no interior minimum on any subinterval
+([`BIN-CHORD-CUT`](claims.md#ledger)), so one point with both margins
+nonnegative, together with a nonnegative singleton margin at the center,
+settles the chord. That point is the chord center when the
+disagreement mass $`p_{01} + p_{10}`$ is at least $`1\text{/}8`$
+([`BIN-CENTER`](claims.md#ledger)), and otherwise the chord point whose
+smaller diagonal cell is three times the smaller contact mass
+([`BIN-FIXED-CUT`](claims.md#ledger)). Laws with a zero cell inherit the bound
+from the kernel-verified transfer theorem `T_le_mul_tau_of_forall_fullSupport`.
+The factor-nine route does not approach $`2`$: its constant is $`1 + 8`$ from
+the pricing rule. Harwood and Gillen report numerical experiments on binary
+variables in their
+[LessWrong post](https://www.lesswrong.com/posts/4q3kMfJHB4rxr3Z8m/small-steps-towards-proving-stochastic-deterministic-natural),
+locating the peak ratio for equal-marginal laws near $`1.82`$; that is a
+literature claim here, with no tier, and it concerns the value of $`C_2`$
+rather than the bound.
 
 **A public lower bound is cheap to certify.** For any law $`p`$ and any
 explicit latent $`L`$, $`T(p)\text{/}\tau(p) \ge T(p)\text{/}\mathrm{score}_p(L)`$, because
@@ -79,14 +73,12 @@ ratio is then exact rather than a lower bound. No such certificate is in the
 library yet. The one-parameter family of symmetric laws $`p_{00} = p_{11}`$,
 $`p_{01} = p_{10}`$ is the natural place to start.
 
-**What would close the upper bound.** Any route that prices a selected optimal
-latent at $`\mathrm{W3}(L) \le \tau(p)`$, or a direct argument on the finite
-code space that does not pass through $`\mathrm{W3}`$. With the optimal latent
-known, the second kind of argument compares two explicit deterministic scores
-with an explicit $`\tau(p)`$ along each diagonal-swap segment. Sharper binary
-constants are in progress and are not part of this release.
+**What remains.** A Lean proof of the target signatures in the
+[Lean contracts](lean-contracts.md#binary-factor-two); the sharpness of the
+constant, that is, a binary lower bound above the trivial $`1`$; and the
+equality cases.
 
-**Tier.** `conjecture`.
+**Tier.** `paper proof`.
 
 ### 2.2 The general factor-eight estimate (`GEN-W3-8`)
 

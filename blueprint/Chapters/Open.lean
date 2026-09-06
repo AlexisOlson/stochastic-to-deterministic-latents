@@ -45,8 +45,8 @@ For every binary law, $`\tau(p)` and the unique optimal component measure are ex
 If the disagreement mass $`p_{01}+p_{10}` lies in $`[1/3,2/3]`, the constant latent is $`\tau`-optimal and $`\tau(p)=T(p)=I_p(X;Y)`; no larger interval in that statistic alone suffices. Paper proof.
 :::
 
-:::proposition "BIN-C2" (parent := "open") (uses := "DEF-TAU, DEF-DETSCORE") (tags := "conjecture")
-For every binary $`2\times2` law, $`T(p)\leq2\tau(p)`. This remains a conjecture: the only proved binary constant here is $`9`, and the library holds no binary lower bound above $`1`. The stochastic-optimum nodes make its right-hand side explicit and prove no comparison with $`T`.
+:::proposition "BIN-C2" (parent := "open") (uses := "BIN-TAU-EXACT, DEF-DETSCORE") (tags := "paper-proof")
+For every binary $`2\times2` law, $`T(p)\leq2\tau(p)`; on full support the constant code or one of the four singleton codes attains $`D_p(g)\leq2\tau(p)`. Paper proof, by comparing the two deterministic scores with the exact stochastic optimum along each contact chord and transferring to zero-cell laws through the kernel-verified sparse limit. The constant is not claimed to be sharp; the only kernel-verified binary constant here is $`9`, and the library holds no binary lower bound above $`1`.
 :::
 
 :::proposition "GEN-W3-8" (parent := "open") (uses := "DEF-LAW, DEF-TAU, DEF-W3") (tags := "conjecture")
