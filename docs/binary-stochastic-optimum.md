@@ -29,8 +29,8 @@ $`\Delta = ad - bc`$.
 >
 > ```math
 > \begin{aligned}
-> q^+ &= \left( \frac{s+\rho}{2}, b, c, \frac{s-\rho}{2} \right), \\
-> q^- &= \left( \frac{s-\rho}{2}, b, c, \frac{s+\rho}{2} \right), \\
+> q^+ &= \bigl( \tfrac{s+\rho}{2}, b, c, \tfrac{s-\rho}{2} \bigr), \\
+> q^- &= \bigl( \tfrac{s-\rho}{2}, b, c, \tfrac{s+\rho}{2} \bigr), \\
 > \lambda &= \frac{a - (s-\rho)\text{/}2}{\rho}.
 > \end{aligned}
 > ```
@@ -335,8 +335,8 @@ nonnegative function $`f`$ on $`\{0,1\}`$ and a positive law $`m`$ there,
 
 ```math
 \begin{aligned}
-\lVert f \rVert_{3\text{/}2,m} &= ( m_0\,f_0^{3\text{/}2} + m_1\,f_1^{3\text{/}2} )^{2\text{/}3}, \\
-\lVert f \rVert_{3,m} &= ( m_0\,f_0^3 + m_1\,f_1^3 )^{1\text{/}3}.
+\lVert f \rVert_{3\text{/}2,m} &= \bigl( m_0\,f_0^{3\text{/}2} + m_1\,f_1^{3\text{/}2} \bigr)^{2\text{/}3}, \\
+\lVert f \rVert_{3,m} &= \bigl( m_0\,f_0^3 + m_1\,f_1^3 \bigr)^{1\text{/}3}.
 \end{aligned}
 ```
 
@@ -346,7 +346,7 @@ nonnegative function $`f`$ on $`\{0,1\}`$ and a positive law $`m`$ there,
 real function on $`J`$. Then
 
 ```math
-\log_2( \sum_j \pi_j\,2^{h_j} ) = \max_u \{ E_u[h] - D(u \| \pi) \}, \qquad \text{(4.2)}
+\log_2\left( \sum_j \pi_j\,2^{h_j} \right) = \max_u \{ E_u[h] - D(u \| \pi) \}, \qquad \text{(4.2)}
 ```
 
 the maximum over laws $`u`$ on $`J`$, attained at $`u_j = \pi_j\,2^{h_j}\text{/}Z`$ with
@@ -379,8 +379,8 @@ each bracket is at most
 
 ```math
 \begin{aligned}
-&(2/3)\,\{ E_{q_X}[\log_2 f^{3\text{/}2}] - D(q_X \| \mu) \} \\
-&+ (2/3)\,\{ E_{q_Y}[\log_2 g^{3\text{/}2}] - D(q_Y \| \nu) \}.
+&\tfrac{2}{3}\,\{ E_{q_X}[\log_2 f^{3\text{/}2}] - D(q_X \| \mu) \} \\
+&+ \tfrac{2}{3}\,\{ E_{q_Y}[\log_2 g^{3\text{/}2}] - D(q_Y \| \nu) \}.
 \end{aligned}
 ```
 
@@ -394,7 +394,7 @@ are continuous.
 ((B) implies 2.) Fix $`q \in \Delta_S`$ and set
 
 ```math
-f_x = ( q_X(x)/\mu_x )^{2\text{/}3}, g_y = ( q_Y(y)/\nu_y )^{2\text{/}3}.
+f_x = ( q_X(x)\text{/}\mu_x )^{2\text{/}3}, g_y = ( q_Y(y)\text{/}\nu_y )^{2\text{/}3}.
 ```
 
 Then $`\lVert f \rVert_{3\text{/}2,\mu}^{3\text{/}2} = \sum_x \mu_x\,(q_X(x)\text{/}\mu_x) = 1`$, and likewise for
@@ -405,8 +405,8 @@ wherever $`q`$ is. On the cells with $`q_z > 0`$,
 
 ```math
 \begin{aligned}
-\log_2(q_z\text{/}w_z) &= \log_2(q_z\text{/}p_z) - \frac{2}{3}\,\log_2(q_X(x)\text{/}\mu_x) \\
-&- \frac{2}{3}\,\log_2(q_Y(y)\text{/}\nu_y) + \log_2 W,
+\log_2(q_z\text{/}w_z) &= \log_2(q_z\text{/}p_z) - \tfrac{2}{3}\,\log_2(q_X(x)\text{/}\mu_x) \\
+&- \tfrac{2}{3}\,\log_2(q_Y(y)\text{/}\nu_y) + \log_2 W,
 \end{aligned}
 ```
 
@@ -1013,7 +1013,7 @@ $`p = (3\text{/}5, 1\text{/}20, 1\text{/}20, 3\text{/}10)`$, $`\Delta = 71\text{
 $`w = 1\text{/}400`$, and $`ad = 9\text{/}50`$. Then
 
 ```math
-f_p(\sqrt{9\text{/}50}) = \frac{71}{400}\,\sqrt{9\text{/}50} - \frac{81}{4000} > 0,
+f_p(\sqrt{9\text{/}50}) = \tfrac{71}{400}\,\sqrt{9\text{/}50} - \tfrac{81}{4000} > 0,
 ```
 
 since $`\sqrt{9\text{/}50} > 81\text{/}710`$. So $`\sqrt{ad} > u_0`$, the constant latent is not

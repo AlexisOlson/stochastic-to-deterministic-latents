@@ -340,7 +340,7 @@ Discarding the last two negative terms and using $`\log(2)<7\text{/}10`$, $`\log
 and $`\log(1+q)\le q`$ gives
 
 ```math
-f'(q) < \tfrac{59}{50}\,(7\text{/}10) - 2\,(9\text{/}4) + \tfrac{109}{50}\,(9\text{/}100) = -17389\text{/}5000 < 0.
+f'(q) < \tfrac{59}{50}\,\tfrac{7}{10} - 2\,(\tfrac{9}{4}) + \tfrac{109}{50}\,\tfrac{9}{100} = -\tfrac{17389}{5000} < 0.
 ```
 
 At $`q=9\text{/}100`$, the exact logarithm lemma gives
@@ -716,7 +716,7 @@ On $`0<x\le 2\text{/}5`$, one has $`q\le 1\text{/}7`$, so
 $`\log(Q\text{/}q)\ge\log(8)\ge 56\text{/}27`$. Also,
 
 ```math
-\frac{r'\,s}{rs'} = \frac{4\,(1+x+x^2)}{3+2x+x^2} \le 56\text{/}27.
+\frac{r'\,s}{rs'} = \frac{4\,(1+x+x^2)}{3+2x+x^2} \le \tfrac{56}{27}.
 ```
 
 These bounds give
@@ -738,7 +738,7 @@ Indeed, $`\log(v)\ge 1-1\text{/}v`$ reduces this inequality to
 The negative tail is at most
 
 ```math
-\tfrac{1683}{25}\,x^3 \le 13464\text{/}3125 < 5.
+\tfrac{1683}{25}\,x^3 \le \tfrac{13464}{3125} < 5.
 ```
 
 Thus $`(5\text{/}2)\,\Lambda'(t)\,t' \le -4\text{/}x \le U'`$, which proves $`G'\le0`$.
@@ -753,7 +753,7 @@ and the rational inside the logarithm is greater than $`16`$. The endpoint
 comparison is
 
 ```math
-\tfrac{5}{2}\,\Lambda(125\text{/}39) - U(2\text{/}5) \ge 17500\text{/}3159 - 224632\text{/}40625 = 101924\text{/}9871875 > 0.
+\tfrac{5}{2}\,\Lambda(125\text{/}39) - U(2\text{/}5) \ge \tfrac{17500}{3159} - \tfrac{224632}{40625} = \tfrac{101924}{9871875} > 0.
 ```
 
 Thus $`A_H < (5\text{/}2)\,F`$ throughout the positive phase. Therefore
