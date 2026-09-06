@@ -8,8 +8,10 @@
 #   3. `lake build`              -- the root library (default target)
 #   4. `lake env lean Verify.lean` -- kernel audit: assert_no_sorry + pinned axiom sets
 #   5. the trust-shortcut grep   -- must print nothing
-# On pull requests it first checks that the squash subject (the title, or the
-# single commit's subject) is at most 50 characters.
+# Before those, on pull requests it checks that the squash subject (the title,
+# or the single commit's subject) is at most 50 characters, and on every event
+# it checks that Markdown math uses only the backtick inline form and math
+# fences (CLAUDE.md, Mathematical notation in Markdown).
 # Nothing here runs `lake update` or touches the pins, so the Mathlib oleans
 # stay valid across runs and no rebuild of Mathlib is triggered by the workflow
 # itself (see "Do not trigger a Mathlib rebuild" in CLAUDE.md).
@@ -18,10 +20,11 @@
 # reads: a `.lean` file outside `blueprint/`, the toolchain, the lakefile,
 # the manifest, or this workflow. The blueprint workflow handles its own
 # root build. A change confined to Markdown, scripts, licence, or git metadata
-# skips them and the job still succeeds, so the `verify` check required by
-# the branch ruleset is satisfied without a ten-minute build. Whenever the
-# comparison base is unavailable the job builds; skipping is never the
-# fallback. The trust-shortcut scan runs on every change.
+# skips them and the job succeeds if the subject, math-syntax, and
+# trust-shortcut checks pass, so the `verify` check required by the branch
+# ruleset is satisfied without a ten-minute build. Whenever the comparison
+# base is unavailable the job builds; skipping is never the fallback. The
+# math-syntax and trust-shortcut checks run on every change.
 
 name: verify
 
@@ -90,6 +93,19 @@ jobs:
             check "single commit subject" "$(git log -1 --format=%s "$PR_HEAD")" || status=1
           fi
           exit "$status"
+
+      # Plain-dollar math is Markdown-processed before GitHub renders it and
+      # breaks silently, so CLAUDE.md allows only the backtick inline form and
+      # math fences: every dollar sign in Markdown must touch a backtick.
+      - name: Check Markdown math syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'; then
+            echo "::error::Plain-dollar math or a bare dollar sign in Markdown; use the backtick inline form or a math fence (CLAUDE.md, Mathematical notation in Markdown)."
+            exit 1
+          fi
+          echo "Markdown math syntax: clean"
 
       # Decide whether the Lean steps are needed. Outputs `lean=true` unless
       # every changed file is outside the Lean-relevant set. Any doubt (no
