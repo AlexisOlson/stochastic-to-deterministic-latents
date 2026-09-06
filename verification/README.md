@@ -19,9 +19,11 @@ lake env lean -DrelaxedAutoImplicit=false Verify.lean
 
 The first command obtains the Mathlib cache and is useful when it is absent.
 The root build must finish successfully before running Verify, which reads
-compiled imports. A successful audit exits with code 0 and no output. Builds
-may report linter warnings; these are distinct from elaboration or audit
-failures.
+compiled imports. A successful audit exits with code 0 and no output. The library's own
+modules build without linter warnings; a warning naming one of them is a
+regression to fix, never to suppress. The pinned upstream dependency emits
+about seventy linter warnings of its own, which are distinct from elaboration
+or audit failures and are not changed here.
 
 The root build and audit passed in the prepared local checkout on 2026-09-04.
 A fresh-machine replay has not been performed. Do not change the pinned

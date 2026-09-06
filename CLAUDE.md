@@ -88,8 +88,12 @@ elsewhere remains qualified as such. The evidence tiers are `kernel-verified`,
 Before committing, run the trust scan in the verification guide, inspect the
 complete diff, check local Markdown links, and run `git diff --check`.
 Mathematical prose changes require an independent check against the actual
-source artifacts. Back up a new untracked Lean module outside the repository
-before applying validator corrections.
+source artifacts. A page at `paper proof` is admitted only after an
+independent read against its sources and a cold read of the public tree, with
+every display re-derived under the public notation. Scripts under `scripts/`
+replay identities and regenerate diagrams; they are not evidence. Back up a
+new untracked Lean module outside the repository before applying validator
+corrections.
 
 ## Attribution and repository contents
 
