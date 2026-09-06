@@ -340,7 +340,7 @@ Discarding the last two negative terms and using $`\log(2)<7\text{/}10`$, $`\log
 and $`\log(1+q)\le q`$ gives
 
 ```math
-f'(q) < \tfrac{59}{50}\,\tfrac{7}{10} - 2\,(\tfrac{9}{4}) + \tfrac{109}{50}\,\tfrac{9}{100} = -\tfrac{17389}{5000} < 0.
+f'(q) < \tfrac{59}{50}\,\tfrac{7}{10} - 2\,\left(\tfrac{9}{4}\right) + \tfrac{109}{50}\,\tfrac{9}{100} = -\tfrac{17389}{5000} < 0.
 ```
 
 At $`q=9\text{/}100`$, the exact logarithm lemma gives
@@ -464,7 +464,7 @@ gives $`m \ge (16\text{/}119)\,y`$. Also $`y \ge 17\text{/}32`$ and the exact ra
 imply
 
 ```math
-y^3 \le (\tfrac{144}{119}\,y)^4 \le (9m)^4.
+y^3 \le \left(\tfrac{144}{119}\,y\right)^4 \le (9m)^4.
 ```
 
 The rational-kernel estimate therefore gives $`\bar K \le 16\,b(m)`$ after
@@ -642,7 +642,7 @@ F &\ge 2m\,\beta(m), \\
 An entropy upper bound gives $`A_H \le U_{\mathrm{bal}}`$, where
 
 ```math
-U_{\mathrm{bal}} = \tfrac{1}{2}\,\left( r\,(1+\log(Q\text{/}r)) + (r+2m)\,(1+\log\left(\frac{Q}{r+2m}\right)) \right).
+U_{\mathrm{bal}} = \tfrac{1}{2}\,\left( r\,(1+\log(Q\text{/}r)) + (r+2m)\,\left(1+\log\left(\frac{Q}{r+2m}\right)\right) \right).
 ```
 
 After division by $`m`$, it is enough to prove positivity of the
@@ -1046,7 +1046,7 @@ that finite set. The minimum of finitely many continuous functions
 $`f_1, ..., f_k`$ is continuous, since
 
 ```math
-\lvert \min_i f_i(a) - \min_i f_i(b) \rvert \le \max_i \lvert f_i(a) - f_i(b) \rvert,
+\left\lvert \min_i f_i(a) - \min_i f_i(b) \right\rvert \le \max_i \lvert f_i(a) - f_i(b) \rvert,
 ```
 
 and the right-hand side tends to $`0`$ as $`b \to a`$. Hence $`p \to T(p)`$

@@ -158,7 +158,7 @@ sum of nonnegative terms, so $`q_v(z) = 0`$ whenever $`\pi_v > 0`$.
 Define the concave envelope of $`\Phi`$ on the face as
 
 ```math
-(\mathrm{conc}_S \Phi)(m) = \sup\{ \sum_v \pi_v\,\Phi(q_v) : \text{finite decompositions } m = \sum_v \pi_v\,q_v,\ q_v \in \Delta_S \}. \qquad \text{(2.1)}
+(\mathrm{conc}_S \Phi)(m) = \sup\left\{ \sum_v \pi_v\,\Phi(q_v) : \text{finite decompositions } m = \sum_v \pi_v\,q_v,\ q_v \in \Delta_S \right\}. \qquad \text{(2.1)}
 ```
 
 $`\Phi`$ is bounded on the simplex, so this is finite. The trivial
