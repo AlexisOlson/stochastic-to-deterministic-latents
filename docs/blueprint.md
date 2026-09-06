@@ -1,8 +1,9 @@
 # Constructive blueprint
 
 This is the canonical notation and mechanism guide. The certificate-free binary
-factor-nine theorem is kernel-verified in this repository. The
-arbitrary-alphabet factor-nine statement remains open.
+factor-nine theorem is kernel-verified in this repository, and the binary
+constant two is proved at `paper proof`. The arbitrary-alphabet factor-nine
+statement remains open.
 
 The [claim ledger](claims.md) records exact evidence status. Start with the
 [definitions](#1-laws-entropy-and-codes) and [pricing rule](#2-price-the-act-of-determinizing),
@@ -63,8 +64,9 @@ The optimizer normal form also uses the component functional
 $`\Phi(q)`$ is not a latent score. A latent decomposition uses the
 prior-weighted sum $`\sum_l \pi_l\,\Phi(q_l)`$, with the weights always written
 explicitly. For binary laws the stochastic optimum is computed exactly in the
-[binary stochastic optimum](binary-stochastic-optimum.md) page, at
-`paper proof`.
+[binary stochastic optimum](binary-stochastic-optimum.md) page, and the
+[binary factor two](binary-factor-two.md) page proves $`T(p) \le 2\,\tau(p)`$
+for every binary law; both are at `paper proof`.
 
 The deterministic optimum is the attained finite minimum
 

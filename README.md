@@ -26,6 +26,7 @@ the notation.
 |---|---|
 | Understand the construction | [Constructive blueprint](docs/blueprint.md), including the [selector recipe](docs/blueprint.md#5-recover-the-code-from-the-law) |
 | Follow the complete proof | [Binary factor nine](docs/binary-factor-nine.md) |
+| Follow the factor-two proof | [Binary factor two](docs/binary-factor-two.md) |
 | Inspect the Lean statements | [Existing endpoints and target contracts](docs/lean-contracts.md) |
 | Check the verification | [Verification procedure](verification/README.md) |
 | Pick a problem | [Open problems](docs/open-problems.md), with the standing of each target and where a contribution lands |
@@ -37,7 +38,7 @@ the notation.
 |---|---:|---|---|
 | Binary $`2 \times 2`$ | $`T(p) \le 9\,\tau(p)`$ | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
 | Binary $`2 \times 2`$ | $`\tau(p)`$ exactly, from one cubic root; every optimal latent has at most two component laws | [Binary stochastic optimum](docs/binary-stochastic-optimum.md) | `paper proof` |
-| Binary $`2 \times 2`$ | $`T(p) \le 2\,\tau(p)`$ | Open | `conjecture` |
+| Binary $`2 \times 2`$ | $`T(p) \le 2\,\tau(p)`$ | [Binary factor two](docs/binary-factor-two.md): on full support, the constant code or a singleton code, compared with the exact optimum along each contact chord; sparse laws by the kernel-verified transfer | `paper proof` |
 | Arbitrary finite alphabets | $`T(p) \le 9\,\tau(p)`$ | Open | `conjecture` |
 
 For a full-support binary law, the deterministic witness can be chosen from the
@@ -122,6 +123,7 @@ naming the problem before starting anything large.
 - [Blueprint](docs/blueprint.md): notation, pricing, and the selector recipe.
 - [Binary factor nine](docs/binary-factor-nine.md): the complete proof, with every analytic step an exact rational-logarithm bound.
 - [Binary stochastic optimum](docs/binary-stochastic-optimum.md): $`\tau(p)`$ in closed form for every binary law, at `paper proof`.
+- [Binary factor two](docs/binary-factor-two.md): the binary constant two, at `paper proof`, from two deterministic scores compared with the exact stochastic optimum along each contact chord.
 - [Claim ledger](docs/claims.md) and [Lean contracts](docs/lean-contracts.md): statements, scope, and existing or proposed signatures.
 - [Verification](verification/README.md): commands, trust model, and admission requirements.
 - [Examples](examples/README.md): exact inputs, branch calculations, and selected partitions.

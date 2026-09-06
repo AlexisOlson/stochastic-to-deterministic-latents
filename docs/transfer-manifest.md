@@ -57,6 +57,7 @@ sharper route. Local audits are in the
 |---|---|---|
 | `docs/blueprint.md`, `docs/binary-factor-nine.md` | Construction and complete certificate-free C9 proof | Keep the full-support selector and selected-latent guarantees distinct from the all-law bound on `T`. |
 | `docs/binary-stochastic-optimum.md`, `scripts/check_stochastic_optimum_identities.py` | Paper-proof exposition of the exact binary stochastic optimum, with a sympy replay of its identities | Blueprint nodes for its four rows; Lean proofs of the target signatures in the contracts page. |
+| `docs/binary-factor-two.md`, `scripts/check_factor_two_identities.py` | Paper-proof exposition of the binary factor-two theorem, with a sympy replay of its identities and fixed logarithm comparisons | Blueprint nodes for its three component rows; Lean proofs of the target signatures in the contracts page. |
 | `Pricing.lean` | Audited pricing identity, rebate, minimizer, and conditional theorem | Supplies the factor $`1+c`$ when an optimal latent's cost bound is given. |
 | `Binary/Table.lean`, `Binary/Selector.lean` | Audited table, support, catalog, and mathematical-selector interfaces | General support-partition canonicalization and executable refinement remain target contracts. |
 | `Binary/CountSelector.lean` | Executable count/rational definitions and audited structural lemmas | Prove normalization, score-key, support, and count/rational-to-real refinement. |

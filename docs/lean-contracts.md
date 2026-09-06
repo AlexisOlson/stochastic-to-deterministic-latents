@@ -293,6 +293,107 @@ proving the constant branch through the rational test. The sparse cases need
 the support-face argument of the page, which the library's full-support seed
 setup does not supply.
 
+## Binary factor two
+
+The rows `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER`, and `BIN-FIXED-CUT` are
+`paper proof` in the [binary factor two](binary-factor-two.md) page. No public
+declaration states any of them.
+
+**Prerequisite targets.** The stochastic-optimum targets above
+(`Binary.cubicRoot`, `Binary.swapContact`, and
+`Binary.tau_eq_of_mixedBranch`) are unimplemented; once formalized they supply
+the right-hand side.
+
+**Existing declarations the proof rests on.** `T_le_detScore`
+and `exists_optimalCode` in
+[`Deterministic.lean`](../StochasticToDeterministicLatents/Deterministic.lean)
+bound and attain $`T`$; `Binary.constantCode` and `Binary.singletonCode` in
+[`Binary/Table.lean`](../StochasticToDeterministicLatents/Binary/Table.lean)
+name the two kinds of witness; the cell symmetries of
+[`Binary/Symmetry.lean`](../StochasticToDeterministicLatents/Binary/Symmetry.lean)
+transport codes and their scores; and `T_le_mul_tau_of_forall_fullSupport` in
+[`SparseLimit.lean`](../StochasticToDeterministicLatents/SparseLimit.lean)
+extends a full-support bound to every law.
+
+**Unimplemented targets.** The margins below are the entropy expressions of
+the page, in bits, so every quantitative bound of the page is divided by
+$`\ln 2`$; only positivity is consumed downstream. `Binary.chordLaw p a`
+denotes the chord law $`(a, b, c, s - a)`$, `Binary.contactMass p` the smaller
+diagonal cell of `Binary.swapContact p`, `Binary.constantMargin p a` the value
+$`2\,\tau - I`$ and `Binary.singletonMargin p a` the value $`2\,\tau - S_{11}`$
+at `Binary.chordLaw p a`; the hypotheses `Binary.Oriented p` collect
+`IsPMF p`, full support, $`ad - bc > 0`$, $`a \ge d`$, $`b \ge c`$, and
+$`\sqrt{ad} > u_0`$. The signatures name these without fixing their placement.
+
+```lean
+theorem Binary.T_le_two_mul_tau (p : Binary.RealTable) (hp : IsPMF p) :
+    T p ≤ 2 * tau p
+
+theorem Binary.exists_witness_detScore_le_two_mul_tau
+    (p : Binary.RealTable) (hp : IsPMF p) (hpos : ∀ z, 0 < p z) :
+    ∃ g : BinaryCode, (g = Binary.constantCode ∨ ∃ z, g = Binary.singletonCode z) ∧
+      detScore p g ≤ 2 * tau p
+
+theorem Binary.singletonMargin_concaveOn (p : Binary.RealTable) (hp : Binary.Oriented p) :
+    ConcaveOn ℝ (Set.Icc ((p (0, 0) + p (1, 1)) / 2) (Binary.swapContact p (0, 0)))
+      (Binary.singletonMargin p)
+
+theorem Binary.constantMargin_ge_min_endpoints
+    (p : Binary.RealTable) (hp : Binary.Oriented p) {x y z : ℝ}
+    (hx : (p (0, 0) + p (1, 1)) / 2 ≤ x) (hxy : x ≤ y) (hyz : y ≤ z)
+    (hz : z ≤ Binary.swapContact p (0, 0)) :
+    min (Binary.constantMargin p x) (Binary.constantMargin p z) ≤ Binary.constantMargin p y
+
+theorem Binary.constantMargin_contactEnd_pos
+    (p : Binary.RealTable) (hp : Binary.Oriented p) :
+    0 < Binary.constantMargin p (Binary.swapContact p (0, 0))
+
+theorem Binary.T_le_two_mul_tau_of_centerGate
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (h0 : 0 ≤ Binary.constantMargin p ((p (0, 0) + p (1, 1)) / 2)) :
+    T p ≤ 2 * tau p
+
+theorem Binary.T_le_two_mul_tau_of_cutGates
+    (p : Binary.RealTable) (hp : Binary.Oriented p) {t : ℝ}
+    (ht : (p (0, 0) + p (1, 1)) / 2 ≤ t ∧ t ≤ Binary.swapContact p (0, 0))
+    (h0 : 0 ≤ Binary.singletonMargin p ((p (0, 0) + p (1, 1)) / 2))
+    (h1 : 0 ≤ Binary.singletonMargin p t) (h2 : 0 ≤ Binary.constantMargin p t) :
+    T p ≤ 2 * tau p
+
+theorem Binary.centerSingletonMargin_ge
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (hv : p (0, 1) + p (1, 0) ≤ 1 / 8) :
+    4 * (p (0, 1) + p (1, 0)) / (125 * Real.log 2) ≤
+      Binary.singletonMargin p ((p (0, 0) + p (1, 1)) / 2)
+
+theorem Binary.centerConstantMargin_pos
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (hv : 1 / 8 ≤ p (0, 1) + p (1, 0)) :
+    0 < Binary.constantMargin p ((p (0, 0) + p (1, 1)) / 2)
+
+theorem Binary.contactMass_lt_half_disagreement
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (hv : p (0, 1) + p (1, 0) ≤ 1 / 8) :
+    Binary.contactMass p < (p (0, 1) + p (1, 0)) / 2
+
+theorem Binary.fixedCut_constantMargin_gt
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (hv : p (0, 1) + p (1, 0) ≤ 1 / 8) :
+    3 * Binary.contactMass p / (208 * Real.log 2) <
+      Binary.constantMargin p (p (0, 0) + p (1, 1) - 3 * Binary.contactMass p)
+
+theorem Binary.fixedCut_singletonMargin_gt
+    (p : Binary.RealTable) (hp : Binary.Oriented p)
+    (hv : p (0, 1) + p (1, 0) ≤ 1 / 8) :
+    Binary.contactMass p / (100 * Real.log 2) <
+      Binary.singletonMargin p (p (0, 0) + p (1, 1) - 3 * Binary.contactMass p)
+```
+
+The page also uses the closed form of the contact potential $`-\Phi(q^+)`$
+and its gradient (Lemmas 3.1 and 3.2), which a formalization would state about
+`Binary.swapContact p`; they are consequences of the tangent identity behind
+`Binary.tau_eq_of_mixedBranch` and need no separate row.
+
 ## Arbitrary finite alphabets
 
 These declarations remain conjectural.
