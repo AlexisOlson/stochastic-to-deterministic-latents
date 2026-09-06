@@ -103,13 +103,16 @@ root build takes about eleven minutes with a warm cache, and the audit can
 exceed ten. The [verification guide](verification/README.md) gives the trust
 scan, the single-module check, and the admission procedure.
 
-## Ways to contribute
+## Contributing
 
-- Prove that the count and rational backends agree with the mathematical
-  selector, including support canonicalization and exact score ties.
-- Produce an independent exact checker for the rational-log ledgers.
-- Prove the arbitrary-finite `W3 <= 8*tau` estimate, or develop deterministic
-  constructions beyond the binary case.
+The [open problems](docs/open-problems.md) page is the priority list. Each
+problem there has a fixed statement, its current evidence tier, and what would
+close it. A contribution takes one of three shapes: a Lean proof of a target
+signature in the [contracts](docs/lean-contracts.md), admitted through the
+[verification procedure](verification/README.md#admitting-a-change); a paper
+proof with a fixed statement, which enters the ledger at that tier; or an
+explicit witness with exact arithmetic the library can replay. Open an issue
+naming the problem before starting anything large.
 
 ## Reference
 

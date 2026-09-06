@@ -87,6 +87,9 @@ elsewhere remains qualified as such. The evidence tiers are `kernel-verified`,
 
 Before committing, run the trust scan in the verification guide, inspect the
 complete diff, check local Markdown links, and run `git diff --check`.
+Commit and pull-request subjects are at most 50 characters: squash merge
+appends the pull-request number, and GitHub's file listing truncates subjects
+near 57 characters at common widths. Details belong in the body.
 Mathematical prose changes require an independent check against the actual
 source artifacts. A page at `paper proof` is admitted only after an
 independent read against its sources and a cold read of the public tree, with
