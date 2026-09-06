@@ -32,12 +32,12 @@ concave and the constant margin has no interior minimum on any subinterval, so
 one point at which both margins are nonnegative, together with a nonnegative
 singleton margin at the chord center, settles the whole chord. That
 point is the chord center when the disagreement mass $`b + c`$ is at least
-$`1\text{/}8`$, and a fixed cut at three times the smaller contact mass when it is
+$`1\text/8`$, and a fixed cut at three times the smaller contact mass when it is
 smaller. Laws with a zero cell inherit the bound from the kernel-verified
 transfer theorem of [`SparseLimit`](../StochasticToDeterministicLatents/SparseLimit.lean).
 
 The constant is not claimed to be sharp, and nothing here identifies the laws
-that maximize $`T(p)\text{/}\tau(p)`$. See [section 7](#7-scope-and-formalization).
+that maximize $`T(p)\text/\tau(p)`$. See [section 7](#7-scope-and-formalization).
 
 | Step | Sections |
 |---|---|
@@ -59,8 +59,8 @@ mutual information $`I_p(X;Y)`$, the scores $`D_p(g)`$, and the optima
 $`\tau(p)`$ and $`T(p)`$ all denote $`\ln 2`$ times the bit-valued quantities
 used elsewhere in this repository. Every statement compared below is
 homogeneous of degree one in this factor, so each inequality proved here holds
-verbatim in bits; a numerical margin such as $`1\text{/}200`$ is a margin in nats and
-becomes $`1\text{/}(200 \ln 2)`$ in bits. Write
+verbatim in bits; a numerical margin such as $`1\text/200`$ is a margin in nats and
+becomes $`1\text/(200 \ln 2)`$ in bits. Write
 
 ```math
 \eta(t) = t \ln t, \qquad h(t) = -\eta(t) - \eta(1-t), \qquad
@@ -138,8 +138,8 @@ D_p(g) - I_p(X;Y) = 2\,H(g \mid X) + 2\,H(g \mid Y) - H(g). \qquad \text{(1.4)}
 For the constant code every term on the right vanishes. For $`g_z`$, the
 indicator of the cell has $`H(g_z) = h(x)`$; conditional on the row of $`z`$,
 which has mass $`x + y`$, it is a Bernoulli variable of parameter
-$`x\text{/}(x+y)`$, and it is constant on the other row, so
-$`H(g_z \mid X) = (x+y)\,h(x\text{/}(x+y)) = F(x,y)`$; likewise
+$`x\text/(x+y)`$, and it is constant on the other row, so
+$`H(g_z \mid X) = (x+y)\,h(x\text/(x+y)) = F(x,y)`$; likewise
 $`H(g_z \mid Y) = F(x,y')`$.
 
 **Lemma 1.2 (symmetries).** Let $`\sigma`$ be a bijection of the four cells
@@ -170,9 +170,9 @@ U_N(\zeta) = S_N(\zeta) + \frac{2\,\zeta^{2N+1}}{(2N+1)(1-\zeta^2)}.
 ```
 
 Then $`S_N(\zeta) \le \ln \frac{1+\zeta}{1-\zeta} \le U_N(\zeta)`$. For a rational
-$`Y > 1`$, $`\ln Y = \ln \frac{1+\zeta}{1-\zeta}`$ with $`\zeta = (Y-1)\text{/}(Y+1) \in (0,1)`$;
+$`Y > 1`$, $`\ln Y = \ln \frac{1+\zeta}{1-\zeta}`$ with $`\zeta = (Y-1)\text/(Y+1) \in (0,1)`$;
 for a large $`Y`$ one may instead write $`Y = 2^j Y'`$ with $`Y' \in [1,2)`$ and
-$`\ln Y = j \ln 2 + \ln Y'`$, with $`\ln 2`$ enclosed at $`\zeta = 1\text{/}3`$.
+$`\ln Y = j \ln 2 + \ln Y'`$, with $`\ln 2`$ enclosed at $`\zeta = 1\text/3`$.
 
 *Proof.* $`\ln \frac{1+\zeta}{1-\zeta} = 2 \int_0^\zeta \frac{dr}{1-r^2} = 2 \sum_{j \ge 0} \frac{\zeta^{2j+1}}{2j+1}`$
 with all terms positive; replacing every denominator of the tail by $`2N+1`$
@@ -193,7 +193,7 @@ symmetries of Lemma 1.2,
 \Delta > 0, \qquad a \ge d, \qquad b \ge c > 0. \qquad \text{(2.1)}
 ```
 
-Put $`s = a + d`$, $`v = b + c`$, $`w = bc`$, $`m = s\text{/}2`$, and let $`u_0`$ be the
+Put $`s = a + d`$, $`v = b + c`$, $`w = bc`$, $`m = s\text/2`$, and let $`u_0`$ be the
 positive root of
 
 ```math
@@ -219,7 +219,7 @@ p_{a'} = (a', b, c, s - a').
 
 **Lemma 2.1 (the chord).** Under (2.1) with $`p`$ nonconstant:
 
-1. $`v < u_0 < m`$, $`u_0 > \sqrt{w}`$, $`0 < D < m < A`$, and $`v < 1\text{/}3`$.
+1. $`v < u_0 < m`$, $`u_0 > \sqrt{w}`$, $`0 < D < m < A`$, and $`v < 1\text/3`$.
 2. $`p = p_a`$ with $`m \le a < A`$.
 3. Every $`p_{a'}`$ with $`m \le a' \le A`$ has full support and
    $`\det p_{a'} \ge u_0^2 - w > 0`$; for $`m \le a' < A`$ it is nonconstant, and
@@ -231,11 +231,11 @@ p_{a'} = (a', b, c, s - a').
    ```
 
 *Proof.* (1) [Lemma 6.1](binary-stochastic-optimum.md#6-the-cubic) gives
-$`u_0 > v`$, and $`u_0 < \sqrt{ad} \le (a+d)\text{/}2 = m`$. Also
-$`f(\sqrt{w}) = w^{3\text{/}2} - vw - w^{3\text{/}2} - ws = -w\,(v + s) = -w < 0`$, so
+$`u_0 > v`$, and $`u_0 < \sqrt{ad} \le (a+d)\text/2 = m`$. Also
+$`f(\sqrt{w}) = w^{3\text/2} - vw - w^{3\text/2} - ws = -w\,(v + s) = -w < 0`$, so
 $`u_0 > \sqrt{w}`$ by the sign pattern of Lemma 6.1. Since $`u_0 < m`$, $`\rho > 0`$ and
-$`D < m < A`$, with $`D > 0`$ because $`AD = u_0^2 > 0`$. Finally $`v < u_0 < m = (1-v)\text{/}2`$
-gives $`v < 1\text{/}3`$.
+$`D < m < A`$, with $`D > 0`$ because $`AD = u_0^2 > 0`$. Finally $`v < u_0 < m = (1-v)\text/2`$
+gives $`v < 1\text/3`$.
 
 (2) $`a \ge d`$ gives $`a \ge m`$. On $`[m, s]`$ the function $`x \to x(s-x)`$ is
 strictly decreasing, and $`a(s-a) = ad > u_0^2 = A(s-A)`$, so $`a < A`$.
@@ -294,16 +294,16 @@ $`q^+`$ is not one: $`AD = u_0^2 > w = bc`$ by Lemma 2.1.
 on $`[m, A]`$.
 
 *Proof.* Differentiate (2.5) twice along $`d' = s - a'`$, using
-$`\eta''(t) = 1\text{/}t`$ and $`(d')' = -1`$:
+$`\eta''(t) = 1\text/t`$ and $`(d')' = -1`$:
 
 ```math
 M_1''(a') = -\frac{5}{a'} - \frac{2}{d'} + \frac{3}{a'+b} + \frac{3}{a'+c} + \frac{1}{d'+b} + \frac{1}{d'+c} - \frac{1}{a'+b+c}. \qquad \text{(2.6)}
 ```
 
-The $`d'`$ terms are negative: $`1\text{/}(d'+b) + 1\text{/}(d'+c) < 2\text{/}d'`$. For the $`a'`$
-terms put $`K_x(b,c) = -5\text{/}x + 3\text{/}(x+b) + 3\text{/}(x+c) - 1\text{/}(x+b+c)`$ for fixed
+The $`d'`$ terms are negative: $`1\text/(d'+b) + 1\text/(d'+c) < 2\text/d'`$. For the $`a'`$
+terms put $`K_x(b,c) = -5\text/x + 3\text/(x+b) + 3\text/(x+c) - 1\text/(x+b+c)`$ for fixed
 $`x > 0`$. Then $`K_x(0,0) = 0`$ and
-$`\partial_b K_x = -3\text{/}(x+b)^2 + 1\text{/}(x+b+c)^2 < 0`$, symmetrically in $`c`$, so
+$`\partial_b K_x = -3\text/(x+b)^2 + 1\text/(x+b+c)^2 < 0`$, symmetrically in $`c`$, so
 $`K_x(b,c) < 0`$ whenever $`b + c > 0`$. Hence $`M_1'' < 0`$.
 
 **Lemma 2.4 (the constant margin has no interior minimum).** $`M_0`$ is
@@ -315,7 +315,7 @@ M_0(y) \ge \min\{ M_0(x), M_0(z) \}. \qquad \text{(2.7)}
 ```
 
 *Proof.* Differentiating (2.4) twice, and grouping the marginal terms by
-pairs of complementary masses ($`1\text{/}(a'+b) + 1\text{/}(b+d') = (s + 2b)\text{/}((a'+b)(b+d'))`$
+pairs of complementary masses ($`1\text/(a'+b) + 1\text/(b+d') = (s + 2b)\text/((a'+b)(b+d'))`$
 and $`(a'+b)(b+d') = a'd' + b(s+b)`$),
 
 ```math
@@ -373,16 +373,16 @@ k = -s \ln K + b \ln \frac{b^3}{P_b^2} + c \ln \frac{c^3}{P_c^2}. \qquad \text{(
 
 *Proof.* $`\Phi(q^+) = \ell_{q^+}(q^+)`$ by display (1.2). The rows of $`q^+`$ are
 $`(A+b, c+D)`$ and its columns $`(A+c, b+D)`$. At the cell $`(0,1)`$ the
-coefficient is $`\ln\left( (A+b)^2 (b+D)^2 \text{/} b^3 \right)`$, and
+coefficient is $`\ln\left( (A+b)^2 (b+D)^2 \text/ b^3 \right)`$, and
 $`(A+b)(D+b) = AD + b\,(A+D) + b^2 = u_0^2 + b\,(s+b) = P_b`$ because $`s + b = 1 - c`$.
-Likewise the coefficient at $`(1,0)`$ is $`\ln (P_c^2 \text{/} c^3)`$. At the two
-diagonal cells the coefficients are $`\ln\left( (A+b)^2(A+c)^2 \text{/} A^3 \right)`$ and
-$`\ln\left( (D+b)^2(D+c)^2 \text{/} D^3 \right)`$, and they are equal: the computation in
+Likewise the coefficient at $`(1,0)`$ is $`\ln (P_c^2 \text/ c^3)`$. At the two
+diagonal cells the coefficients are $`\ln\left( (A+b)^2(A+c)^2 \text/ A^3 \right)`$ and
+$`\ln\left( (D+b)^2(D+c)^2 \text/ D^3 \right)`$, and they are equal: the computation in
 [Lemma 6.4](binary-stochastic-optimum.md#6-the-cubic) shows that
-$`A^{3\text{/}2}(D+b)(D+c) - D^{3\text{/}2}(A+b)(A+c)`$ is a multiple of $`f(\sqrt{AD}) = f(u_0) = 0`$.
+$`A^{3\text/2}(D+b)(D+c) - D^{3\text/2}(A+b)(A+c)`$ is a multiple of $`f(\sqrt{AD}) = f(u_0) = 0`$.
 Their common value is half the logarithm of the product,
-$`(A+b)^2(A+c)^2(D+b)^2(D+c)^2 \text{/} (AD)^3 = P_b^2 P_c^2 \text{/} u_0^6`$, that is
-$`\ln (P_b P_c \text{/} u_0^3)`$. To evaluate this, rewrite the cubic
+$`(A+b)^2(A+c)^2(D+b)^2(D+c)^2 \text/ (AD)^3 = P_b^2 P_c^2 \text/ u_0^6`$, that is
+$`\ln (P_b P_c \text/ u_0^3)`$. To evaluate this, rewrite the cubic
 $`u_0^2 (u_0 - v) = w\,(u_0 + s)`$ as
 
 ```math
@@ -397,8 +397,8 @@ $`g`$,
 P_b P_c = \frac{u_0^2\,[\,u_0^2 - s(u_0 + s) + (u_0 + s)^2\,]}{(u_0+s)^2} = \frac{u_0^3\,(2u_0 + s)}{(u_0 + s)^2},
 ```
 
-so $`P_b P_c \text{/} u_0^3 = K`$. Summing the coefficients against the cells of
-$`q^+`$, $`\Phi(q^+) = (A + D) \ln K + b \ln (P_b^2\text{/}b^3) + c \ln (P_c^2 \text{/} c^3)`$,
+so $`P_b P_c \text/ u_0^3 = K`$. Summing the coefficients against the cells of
+$`q^+`$, $`\Phi(q^+) = (A + D) \ln K + b \ln (P_b^2\text/b^3) + c \ln (P_c^2 \text/ c^3)`$,
 and $`A + D = s`$.
 
 **Lemma 3.2 (gradient).** On the open set of $`(b,c)`$ with $`b, c > 0`$ and
@@ -450,11 +450,11 @@ $`u_0\,(1 - r - \omega + r\omega) = \omega`$, which is $`u_0 n = \omega`$. Since
 $`u_0 > v = r u_0`$, $`r < 1`$; since $`u_0 n = \omega > 0`$, $`n > 0`$ and so
 $`\omega < 1`$. The remaining formulas in (3.4) follow, and $`u_0 < m`$ is
 $`1 - r - 3\omega > 0`$. Conversely, $`x, y > 0`$ with $`r + 3\omega < 1`$ give
-$`r < 1`$, $`\omega < 1\text{/}3`$, positive $`b = x u_0`$, $`c = y u_0`$, $`s`$, and a
+$`r < 1`$, $`\omega < 1\text/3`$, positive $`b = x u_0`$, $`c = y u_0`$, $`s`$, and a
 positive $`u_0`$ satisfying the cubic with $`u_0 > v`$ and $`u_0 < m`$; by Lemma 6.1
-it is the positive root. For (3.5): $`s + 2u_0 = (1 - r + \omega)\text{/}n`$,
-$`s + u_0 = (1 - r)\text{/}n`$, and $`1 - r + \omega = (1-x)(1-y)`$; and
-$`P_b = u_0\,[u_0 + x - xy\,u_0] = u_0\,[x + u_0 (1 - \omega)] = u_0\,[x + \omega\text{/}(1-r)] = b\,(1 - r + y)\text{/}(1-r)`$.
+it is the positive root. For (3.5): $`s + 2u_0 = (1 - r + \omega)\text/n`$,
+$`s + u_0 = (1 - r)\text/n`$, and $`1 - r + \omega = (1-x)(1-y)`$; and
+$`P_b = u_0\,[u_0 + x - xy\,u_0] = u_0\,[x + u_0 (1 - \omega)] = u_0\,[x + \omega\text/(1-r)] = b\,(1 - r + y)\text/(1-r)`$.
 
 **Radial derivatives.** Fix $`z \in [0, 1)`$ and move along the ray
 
@@ -492,7 +492,7 @@ $`\mathcal{D} w = 2w`$: differentiating $`f(u_0) = 0`$,
 \mathcal{D} P_b = 2u_0\,\mathcal{D}u_0 + b - 2w, \qquad \mathcal{D} P_c = 2u_0\,\mathcal{D}u_0 + c - 2w,
 ```
 
-and $`\mathcal{D} \ln K = (2\,\mathcal{D}u_0 - v)\text{/}(s + 2u_0) - 2\,(\mathcal{D}u_0 - v)\text{/}(s + u_0)`$.
+and $`\mathcal{D} \ln K = (2\,\mathcal{D}u_0 - v)\text/(s + 2u_0) - 2\,(\mathcal{D}u_0 - v)\text/(s + u_0)`$.
 In the chart these become
 
 ```math
@@ -501,19 +501,19 @@ s\,\mathcal{D} \ln K = 3v - 2b\,\frac{\mathcal{D} P_b}{P_b} - 2c\,\frac{\mathcal
 ```
 
 the first from the displayed $`\mathcal{D} u_0`$ and (3.4), and the second by
-applying $`\mathcal{D} = (1 - \mathcal{D}u_0\text{/}u_0)\,(x\,\partial_x + y\,\partial_y)`$ to
-(3.5), since $`\mathcal{D} x = x\,(1 - \mathcal{D}u_0\text{/}u_0)`$ for $`x = b\text{/}u_0`$ and
-likewise for $`y`$, with $`1 - \mathcal{D}u_0\text{/}u_0 = (1-r)(1-\omega)\text{/}(3 - 2r - \omega)`$;
+applying $`\mathcal{D} = (1 - \mathcal{D}u_0\text/u_0)\,(x\,\partial_x + y\,\partial_y)`$ to
+(3.5), since $`\mathcal{D} x = x\,(1 - \mathcal{D}u_0\text/u_0)`$ for $`x = b\text/u_0`$ and
+likewise for $`y`$, with $`1 - \mathcal{D}u_0\text/u_0 = (1-r)(1-\omega)\text/(3 - 2r - \omega)`$;
 so (3.9) reads $`L_k = (v + s)\,\mathcal{D} \ln K = \mathcal{D} \ln K`$, and
 $`\mathcal{D} \ln K`$ in the chart is the right side of (3.7). The check script
-replays both identities. For (3.8), $`v\text{/}s = r\omega\text{/}(1 - r - \omega)`$
+replays both identities. For (3.8), $`v\text/s = r\omega\text/(1 - r - \omega)`$
 by (3.4), and the difference has the displayed denominator and numerator
 $`\omega\,[\,r\,(1 + \omega - r)(3 - 2r - \omega) - (1 - r - \omega)(3\omega r - 4\omega - 2r^2 + 3r)\,]`$,
 where the bracket expands to $`2\omega\,(1 - \omega)(2 - r)`$. Every factor is
 positive: $`1 - r - \omega > 0`$ and $`1 + \omega - r > 0`$ from $`r + 3\omega < 1`$,
 $`3 - 2r - \omega > 0`$ from $`r, \omega < 1`$.
 
-The meaning of (3.8): $`-h''(v) = 1\text{/}(v(1-v))`$, so $`v^2 (-h''(v)) = v\text{/}s`$; the
+The meaning of (3.8): $`-h''(v) = 1\text/(v(1-v))`$, so $`v^2 (-h''(v)) = v\text/s`$; the
 convex contact correction $`k`$ curves less than the concave entropy of
 mixing agreement with disagreement. That comparison is what makes both center
 margins concave along rays.
@@ -521,17 +521,17 @@ margins concave along rays.
 ## 4. The center
 
 The center of the chord of section 2 is the law
-$`p^\circ = (m, b, c, m)`$, $`m = (1-v)\text{/}2`$. This section proves:
+$`p^\circ = (m, b, c, m)`$, $`m = (1-v)\text/2`$. This section proves:
 
 **Theorem 4.1 (center theorem).** Under (2.1) with $`p`$ nonconstant:
 
-1. if $`0 < v \le 1\text{/}8`$, then $`M_1(m) \ge 4v\text{/}125`$;
-2. if $`v \ge 1\text{/}8`$, then $`M_0(m) > 0`$.
+1. if $`0 < v \le 1\text/8`$, then $`M_1(m) \ge 4v\text/125`$;
+2. if $`v \ge 1\text/8`$, then $`M_0(m) > 0`$.
 
 The margins at the center are functions of $`(b,c)`$ alone. Fix the imbalance
-$`z = (b-c)\text{/}v \in [0,1)`$ and use the ray (3.6). The plan is: both margins
+$`z = (b-c)\text/v \in [0,1)`$ and use the ray (3.6). The plan is: both margins
 are concave in $`v`$ along the ray (Lemma 4.3); their values at the ends of the
-ray are known (Lemma 4.4); their values on the seam $`v = 1\text{/}8`$ are positive
+ray are known (Lemma 4.4); their values on the seam $`v = 1\text/8`$ are positive
 (Propositions 4.5 and 4.6); concavity propagates positivity from the seam to
 the rest of the ray.
 
@@ -551,13 +551,13 @@ f(m) = m^2 (m - v) - 3m\,bc = \frac{m}{4}\,\left[ (1-v)(1-3v) - 3v^2(1 - z^2) \r
 ```
 
 The quadratic $`1 - 4v + 3v^2z^2`$ is positive at $`v = 0`$ and decreasing on
-$`[0, 1\text{/}3]`$, an interval that contains every $`v`$ under (2.1) by Lemma 2.1,
-so there it is positive exactly on $`[0, v_c)`$ with $`v_c`$ its smaller root, $`v_c = (4 - \sqrt{16 - 12z^2})\text{/}(6z^2) = 1\text{/}(2 + \sqrt{4 - 3z^2})`$, which
+$`[0, 1\text/3]`$, an interval that contains every $`v`$ under (2.1) by Lemma 2.1,
+so there it is positive exactly on $`[0, v_c)`$ with $`v_c`$ its smaller root, $`v_c = (4 - \sqrt{16 - 12z^2})\text/(6z^2) = 1\text/(2 + \sqrt{4 - 3z^2})`$, which
 also covers $`z = 0`$; the bounds follow from $`1 < \sqrt{4 - 3z^2} \le 2`$. The last
 sentence: $`m^2 \ge ad > u_0^2`$.
 
 **The margins at the center.** At $`a' = m`$ the marginals are $`(m+b, m+c)`$ and
-$`(m+c, m+b)`$, so $`R_X = R_Y = h((1+\delta)\text{/}2) =: R`$, and
+$`(m+c, m+b)`$, so $`R_X = R_Y = h((1+\delta)\text/2) =: R`$, and
 $`J = -2\eta(m) - \eta(b) - \eta(c)`$. From (2.4) and (2.5),
 
 ```math
@@ -570,7 +570,7 @@ M_1(m) &= 3J - 3R + 2k - \gamma(v) + \gamma(\delta), \qquad \gamma(t) = \ln 2 - 
 For the second line, (2.5) at $`a' = m`$ reads
 $`M_1(m) = 2J - 2R + 2k - Q`$ with
 $`Q = 3\eta(m) - 2\eta(m+b) - 2\eta(m+c) + \eta(m+v) + \eta(b) + \eta(c)`$; here
-$`-2\eta(m+b) - 2\eta(m+c) = 2R`$ and $`\eta(m) + \eta(m+v) = -h((1-v)\text{/}2) = \gamma(v) - \ln 2`$,
+$`-2\eta(m+b) - 2\eta(m+c) = 2R`$ and $`\eta(m) + \eta(m+v) = -h((1-v)\text/2) = \gamma(v) - \ln 2`$,
 so $`Q = -J + 2R + \gamma(v) - \ln 2`$, and $`\ln 2 - R = \gamma(\delta)`$.
 
 **Lemma 4.3 (radial concavity).** Along the ray (3.6), for $`0 < v < v_c(z)`$,
@@ -582,23 +582,23 @@ v^2\,\partial_v^2 M_1(m) &= -\frac{3v}{s} + \frac{4\delta^2}{1 - \delta^2} - \fr
 \end{aligned}
 ```
 
-*Proof.* On the ray, $`m = (1-v)\text{/}2`$ and $`b, c`$ are linear in $`v`$, and
-$`\partial_v^2 J = -1\text{/}(v(1-v))`$: indeed
+*Proof.* On the ray, $`m = (1-v)\text/2`$ and $`b, c`$ are linear in $`v`$, and
+$`\partial_v^2 J = -1\text/(v(1-v))`$: indeed
 $`\partial_v J = \ln m - \frac{1+z}{2} \ln b - \frac{1-z}{2} \ln c`$ and
 $`\partial_v^2 J = -\frac{1}{2m} - \frac{(1+z)^2}{4b} - \frac{(1-z)^2}{4c} = -\frac{1}{1-v} - \frac{1}{v}`$.
-Next $`R = h((1 + vz)\text{/}2)`$ and $`h''(t) = -1\text{/}(t(1-t))`$ give
-$`\partial_v^2 R = -z^2\text{/}(1 - \delta^2)`$; and $`\gamma''(t) = 1\text{/}(1 - t^2)`$ gives
-$`\partial_v^2 \gamma(v) = 1\text{/}(1 - v^2)`$, $`\partial_v^2 \gamma(vz) = z^2\text{/}(1 - \delta^2)`$.
+Next $`R = h((1 + vz)\text/2)`$ and $`h''(t) = -1\text/(t(1-t))`$ give
+$`\partial_v^2 R = -z^2\text/(1 - \delta^2)`$; and $`\gamma''(t) = 1\text/(1 - t^2)`$ gives
+$`\partial_v^2 \gamma(v) = 1\text/(1 - v^2)`$, $`\partial_v^2 \gamma(vz) = z^2\text/(1 - \delta^2)`$.
 With $`L_k = v^2 \partial_v^2 k`$ this proves the two equalities. For the
-inequalities, (3.8) gives $`2L_k < 2v\text{/}s`$, and $`\delta \le v`$ with
-$`t \to t\text{/}(1-t)`$ increasing gives $`\delta^2\text{/}(1-\delta^2) \le v^2\text{/}(1-v^2)`$; then
+inequalities, (3.8) gives $`2L_k < 2v\text/s`$, and $`\delta \le v`$ with
+$`t \to t\text/(1-t)`$ increasing gives $`\delta^2\text/(1-\delta^2) \le v^2\text/(1-v^2)`$; then
 
 ```math
 -\frac{3v}{1-v} + \frac{6v^2}{1-v^2} = -\frac{3v}{1+v}, \qquad
 -\frac{v}{1-v} + \frac{3v^2}{1-v^2} = -\frac{v\,(1-2v)}{1-v^2},
 ```
 
-both negative because $`v < v_c < 1\text{/}3`$. The formulas apply on the open ray
+both negative because $`v < v_c < 1\text/3`$. The formulas apply on the open ray
 because it lies inside the set of Lemma 3.2 by Lemma 4.2.
 
 **Lemma 4.4 (the ends of the ray).** Along the ray (3.6):
@@ -607,8 +607,8 @@ because it lies inside the set of Lemma 3.2 by Lemma 4.2.
 2. the closed forms (4.2) extend continuously to $`v = v_c(z)`$, where
    $`M_0(m) = I_{p^\circ}(X;Y) > 0`$.
 
-*Proof.* (1) From the cubic, $`u_0 < m < 1\text{/}2`$, $`bc \le v^2\text{/}4`$ and $`u_0 + s < 3\text{/}2`$
-give $`u_0^3 = v u_0^2 + bc\,(u_0 + s) \le v\text{/}4 + 3v^2\text{/}8`$, so $`u_0 \to 0`$. Then
+*Proof.* (1) From the cubic, $`u_0 < m < 1\text/2`$, $`bc \le v^2\text/4`$ and $`u_0 + s < 3\text/2`$
+give $`u_0^3 = v u_0^2 + bc\,(u_0 + s) \le v\text/4 + 3v^2\text/8`$, so $`u_0 \to 0`$. Then
 $`K \to 1`$, $`\eta(b), \eta(c) \to 0`$, and $`b(1-c) \le P_b \le u_0^2 + b`$ gives
 $`b \ln P_b \to 0`$, likewise for $`c`$; so $`k \to 0`$ in (3.1). Also
 $`J \to \ln 2`$, $`R \to \ln 2`$, $`\gamma(v), \gamma(\delta) \to 0`$, and (4.2)
@@ -621,13 +621,13 @@ $`M_0(m) = 2\,[\Psi(p^\circ) - \Phi(p^\circ)] - I_{p^\circ}(X;Y) = I_{p^\circ}(X
 (1.1), and $`p^\circ`$ is not a product law: $`m^2 = u_0^2 > bc`$, since
 $`f(\sqrt{w}) = -w < 0`$ places $`\sqrt{w}`$ below the root (Lemma 6.1).
 
-**The seam.** The rest of the section works at $`v = 1\text{/}8`$, $`s = 7\text{/}8`$,
-$`m = 7\text{/}16`$, with $`\delta = b - c \in [0, 1\text{/}8)`$ and $`w = bc \in (0, 1\text{/}256]`$.
-Since $`1\text{/}8 < 1\text{/}4 \le v_c(z)`$, the seam lies inside every ray. Two facts hold on
-the seam. First, $`u_0 < 1\text{/}4`$: with $`w \le 1\text{/}256`$,
+**The seam.** The rest of the section works at $`v = 1\text/8`$, $`s = 7\text/8`$,
+$`m = 7\text/16`$, with $`\delta = b - c \in [0, 1\text/8)`$ and $`w = bc \in (0, 1\text/256]`$.
+Since $`1\text/8 < 1\text/4 \le v_c(z)`$, the seam lies inside every ray. Two facts hold on
+the seam. First, $`u_0 < 1\text/4`$: with $`w \le 1\text/256`$,
 
 ```math
-f(1\text{/}4) = \frac{1}{64} - \frac{1}{128} - w\left( \frac14 + \frac78 \right) = \frac{1}{128} - \frac{9w}{8} \ge \frac{7}{2048} > 0. \qquad \text{(4.4)}
+f(1\text/4) = \frac{1}{64} - \frac{1}{128} - w\left( \frac14 + \frac78 \right) = \frac{1}{128} - \frac{9w}{8} \ge \frac{7}{2048} > 0. \qquad \text{(4.4)}
 ```
 
 Second, put
@@ -637,17 +637,17 @@ t_P = v + \frac{2u_0^2}{u_0 + s}, \qquad \text{so that} \qquad P_b = \frac{t_P +
 ```
 
 because $`P_b - P_c = b - c`$ and $`P_b + P_c = v + 2\,(u_0^2 - w) = v + 2g`$ by
-(3.2). The function $`u \to u^2\text{/}(u+s)`$ is increasing on $`u > 0`$, and
-$`v < u_0 < 1\text{/}4`$, so
+(3.2). The function $`u \to u^2\text/(u+s)`$ is increasing on $`u > 0`$, and
+$`v < u_0 < 1\text/4`$, so
 
 ```math
-\frac{5}{32} = v + 2v^2 < t_P < \frac18 + \frac{2 \cdot (1\text{/}16)}{1\text{/}4 + 7\text{/}8} = \frac{17}{72}. \qquad \text{(4.6)}
+\frac{5}{32} = v + 2v^2 < t_P < \frac18 + \frac{2 \cdot (1\text/16)}{1\text/4 + 7\text/8} = \frac{17}{72}. \qquad \text{(4.6)}
 ```
 
 The seam derivatives of the two margins follow from (4.2) and (3.3). At fixed
-$`v`$, $`b = (v + \delta)\text{/}2`$, $`c = (v - \delta)\text{/}2`$, and $`d\text{/}d\delta = (\partial_b - \partial_c)\text{/}2`$;
-so $`dJ\text{/}d\delta = -\frac12 \ln(b\text{/}c)`$, $`dR\text{/}d\delta = \frac12 \ln \frac{1-\delta}{1+\delta}`$
-(from $`h'(x) = \ln((1-x)\text{/}x)`$), $`dk\text{/}d\delta = \frac32 \ln(b\text{/}c) - \ln(P_b\text{/}P_c)`$
+$`v`$, $`b = (v + \delta)\text/2`$, $`c = (v - \delta)\text/2`$, and $`d\text/d\delta = (\partial_b - \partial_c)\text/2`$;
+so $`dJ\text/d\delta = -\frac12 \ln(b\text/c)`$, $`dR\text/d\delta = \frac12 \ln \frac{1-\delta}{1+\delta}`$
+(from $`h'(x) = \ln((1-x)\text/x)`$), $`dk\text/d\delta = \frac32 \ln(b\text/c) - \ln(P_b\text/P_c)`$
 (the $`\ln K`$ terms cancel), and $`\gamma'(t) = \frac12 \ln \frac{1+t}{1-t}`$. Hence, for
 $`0 < \delta < v`$,
 
@@ -658,8 +658,8 @@ $`0 < \delta < v`$,
 \end{aligned}
 ```
 
-**Proposition 4.5 (the constant seam).** If $`b \ge c > 0`$ and $`b + c = 1\text{/}8`$,
-then $`M_0(m) > 1\text{/}200`$.
+**Proposition 4.5 (the constant seam).** If $`b \ge c > 0`$ and $`b + c = 1\text/8`$,
+then $`M_0(m) > 1\text/200`$.
 
 *Proof.* Separate the entropy of the two off-diagonal cells from the rest:
 $`M_0(m) = F_{\mathrm{sm}} + \eta(b) + \eta(c)`$ with, by (4.2) and (3.1),
@@ -669,68 +669,68 @@ F_{\mathrm{sm}} = -10\,\eta(m) - 6R - 2s \ln K - 4b \ln P_b - 4c \ln P_c. \qquad
 ```
 
 (The coefficient of $`\eta(b)`$ in $`5J + 2k`$ is $`-5 + 6 = 1`$.) Regard
-$`F_{\mathrm{sm}}`$ as a function of $`w = bc = (v^2 - \delta^2)\text{/}4 \in [0, 1\text{/}256]`$,
+$`F_{\mathrm{sm}}`$ as a function of $`w = bc = (v^2 - \delta^2)\text/4 \in [0, 1\text/256]`$,
 with $`\delta = \sqrt{v^2 - 4w}`$. It extends continuously to $`w = 0`$, where
 $`\delta = v`$, $`c = 0`$, $`u_0 = v`$ (the root is continuous, and $`f(u) = u^2(u - v)`$
-at $`w = 0`$), $`K = 9\text{/}8`$, $`P_b = 9\text{/}64`$, $`P_c = 1\text{/}64`$, all logarithms finite;
-and it is differentiable for $`0 < w < 1\text{/}256`$, where $`\delta > 0`$. Since
-$`d(\eta(b) + \eta(c))\text{/}d\delta = \frac12 \ln(b\text{/}c)`$, the first line of (4.7) gives
-$`dF_{\mathrm{sm}}\text{/}d\delta = 3 \ln \frac{1+\delta}{1-\delta} - 2 \ln \frac{P_b}{P_c}`$, and
-$`dw\text{/}d\delta = -\delta\text{/}2`$, so by (4.5)
+at $`w = 0`$), $`K = 9\text/8`$, $`P_b = 9\text/64`$, $`P_c = 1\text/64`$, all logarithms finite;
+and it is differentiable for $`0 < w < 1\text/256`$, where $`\delta > 0`$. Since
+$`d(\eta(b) + \eta(c))\text/d\delta = \frac12 \ln(b\text/c)`$, the first line of (4.7) gives
+$`dF_{\mathrm{sm}}\text/d\delta = 3 \ln \frac{1+\delta}{1-\delta} - 2 \ln \frac{P_b}{P_c}`$, and
+$`dw\text/d\delta = -\delta\text/2`$, so by (4.5)
 
 ```math
 F_{\mathrm{sm}}'(w) = \frac{1}{\delta}\left[ 4 \ln \frac{t_P + \delta}{t_P - \delta} - 6 \ln \frac{1+\delta}{1-\delta} \right]. \qquad \text{(4.9)}
 ```
 
-This cancellation of the $`\ln(b\text{/}c)`$ term is the reason for separating
+This cancellation of the $`\ln(b\text/c)`$ term is the reason for separating
 $`\eta(b) + \eta(c)`$. For $`0 < \delta < \theta`$,
 $`\ln \frac{\theta+\delta}{\theta-\delta} = 2\int_0^\delta \frac{\theta\,dr}{\theta^2 - r^2} \ge \frac{2\delta}{\theta}`$,
-and for $`\theta = 1`$ the same integral is at most $`2\delta\text{/}(1 - \delta^2)`$. With
-(4.6) and $`\delta \le 1\text{/}8`$,
+and for $`\theta = 1`$ the same integral is at most $`2\delta\text/(1 - \delta^2)`$. With
+(4.6) and $`\delta \le 1\text/8`$,
 
 ```math
 F_{\mathrm{sm}}'(w) \ge \frac{8}{t_P} - \frac{12}{1 - \delta^2} > \frac{576}{17} - \frac{256}{21} = \frac{7744}{357} > \frac{64}{3}. \qquad \text{(4.10)}
 ```
 
-So $`F_{\mathrm{sm}}(w) - (64\text{/}3)\,w`$ is nondecreasing on $`[0, 1\text{/}256]`$ (mean value
+So $`F_{\mathrm{sm}}(w) - (64\text/3)\,w`$ is nondecreasing on $`[0, 1\text/256]`$ (mean value
 theorem inside, continuity at the ends), and
 
 ```math
 F_{\mathrm{sm}}(w) \ge F_{\mathrm{sm}}(0) + \frac{64}{3}\,w. \qquad \text{(4.11)}
 ```
 
-Now write $`q = c\text{/}v \in (0, 1\text{/}2]`$ (a number, not a law), so $`w = v^2 q(1-q)`$ and
+Now write $`q = c\text/v \in (0, 1\text/2]`$ (a number, not a law), so $`w = v^2 q(1-q)`$ and
 $`\eta(b) + \eta(c) = v \ln v - v\,h(q)`$. With $`M_{\mathrm{face}} := F_{\mathrm{sm}}(0) + v \ln v`$
-and $`(64\text{/}3)\,v = 8\text{/}3`$,
+and $`(64\text/3)\,v = 8\text/3`$,
 
 ```math
 M_0(m) \ge M_{\mathrm{face}} + v\,\left[ \frac83\,q(1-q) - h(q) \right]. \qquad \text{(4.12)}
 ```
 
 To bound the bracket, put $`\zeta = 1 - 2q \in [0, 1)`$, so that, with $`\gamma`$ as
-in (4.2), $`\gamma(\zeta) = \ln 2 - h((1 - \zeta)\text{/}2) = \ln 2 - h(q)`$. Then
+in (4.2), $`\gamma(\zeta) = \ln 2 - h((1 - \zeta)\text/2) = \ln 2 - h(q)`$. Then
 $`\gamma(0) = \gamma'(0) = 0`$ and
-$`\gamma''(\zeta) = 1\text{/}(1 - \zeta^2) \ge 1 + \zeta^2`$, so integrating twice,
-$`\gamma(\zeta) \ge \zeta^2\text{/}2 + \zeta^4\text{/}12`$. With $`\alpha = q(1-q)`$ and
+$`\gamma''(\zeta) = 1\text/(1 - \zeta^2) \ge 1 + \zeta^2`$, so integrating twice,
+$`\gamma(\zeta) \ge \zeta^2\text/2 + \zeta^4\text/12`$. With $`\alpha = q(1-q)`$ and
 $`\zeta^2 = 1 - 4\alpha`$ this reads
 
 ```math
 h(q) \le \ln 2 - \frac{7}{12} + \frac83\,\alpha - \frac43\,\alpha^2, \qquad \text{(4.13)}
 ```
 
-so the bracket in (4.12) is at least $`7\text{/}12 - \ln 2 + (4\text{/}3)\alpha^2 \ge 7\text{/}12 - \ln 2`$,
+so the bracket in (4.12) is at least $`7\text/12 - \ln 2 + (4\text/3)\alpha^2 \ge 7\text/12 - \ln 2`$,
 and
 
 ```math
-M_0(m) \ge M_{\mathrm{face}} + \frac{7\text{/}12 - \ln 2}{8}. \qquad \text{(4.14)}
+M_0(m) \ge M_{\mathrm{face}} + \frac{7\text/12 - \ln 2}{8}. \qquad \text{(4.14)}
 ```
 
 It remains to evaluate $`M_{\mathrm{face}}`$, the limit of the closed form at
-$`b = 1\text{/}8`$, $`c = 0`$, $`u_0 = 1\text{/}8`$. There $`K = 9\text{/}8`$, $`P_b = 9\text{/}64`$, and
+$`b = 1\text/8`$, $`c = 0`$, $`u_0 = 1\text/8`$. There $`K = 9\text/8`$, $`P_b = 9\text/64`$, and
 
 ```math
 \begin{aligned}
-k &= -\frac78 \ln \frac98 + \frac18 \ln \frac{(1\text{/}8)^3}{(9\text{/}64)^2} = 3 \ln 2 - \frac94 \ln 3, \\
+k &= -\frac78 \ln \frac98 + \frac18 \ln \frac{(1\text/8)^3}{(9\text/64)^2} = 3 \ln 2 - \frac94 \ln 3, \\
 J &= -2\eta\left( \frac{7}{16} \right) - \eta\left( \frac18 \right) = \frac{31}{8} \ln 2 - \frac78 \ln 7, \\
 R &= h\left( \frac{9}{16} \right) = 4 \ln 2 - \frac98 \ln 3 - \frac{7}{16} \ln 7, \\
 M_{\mathrm{face}} &= 5J - 6R + 2k = \frac{11}{8} \ln 2 + \frac94 \ln 3 - \frac74 \ln 7. \qquad \text{(4.15)}
@@ -744,10 +744,10 @@ claimed about the boundary law itself.) Therefore
 M_0(m) \ge \frac54 \ln 2 + \frac94 \ln 3 - \frac74 \ln 7 + \frac{7}{96} > \frac{677}{120000} > \frac{1}{200}, \qquad \text{(4.16)}
 ```
 
-where the middle inequality uses $`\ln 2 > 6931\text{/}10000`$, $`\ln 3 > 10986\text{/}10000`$,
-and $`\ln 7 < 19460\text{/}10000`$, all from Lemma 1.3.
+where the middle inequality uses $`\ln 2 > 6931\text/10000`$, $`\ln 3 > 10986\text/10000`$,
+and $`\ln 7 < 19460\text/10000`$, all from Lemma 1.3.
 
-**Proposition 4.6 (the singleton seam).** If $`b \ge c > 0`$ and $`b + c = 1\text{/}8`$,
+**Proposition 4.6 (the singleton seam).** If $`b \ge c > 0`$ and $`b + c = 1\text/8`$,
 then, writing $`M_1(m)`$ as a function of $`\delta`$,
 
 ```math
@@ -762,8 +762,8 @@ function with $`j(\zeta) \ge 2\zeta`$. By (4.7) and (4.5), for $`0 < \delta < v`
 \frac{dM_1(m)}{d\delta} = \frac32\,j\left( \frac{\delta}{v} \right) + 2\,j(\delta) - 2\,j\left( \frac{\delta}{t_P} \right).
 ```
 
-By (4.6), $`t_P > 5v\text{/}4`$, so $`j(\delta\text{/}t_P) \le j(4\delta\text{/}(5v))`$. With
-$`\zeta = \delta\text{/}v = 8\delta \in (0,1)`$,
+By (4.6), $`t_P > 5v\text/4`$, so $`j(\delta\text/t_P) \le j(4\delta\text/(5v))`$. With
+$`\zeta = \delta\text/v = 8\delta \in (0,1)`$,
 
 ```math
 \frac{dM_1(m)}{d\delta} \ge \frac32\,j(\zeta) + 2\,j\left( \frac{\zeta}{8} \right) - 2\,j\left( \frac{4\zeta}{5} \right).
@@ -777,7 +777,7 @@ j(\kappa\zeta) - 2\kappa\zeta \le \kappa^3\,[\,j(\zeta) - 2\zeta\,]. \qquad \tex
 
 Indeed $`j(\zeta) - 2\zeta = 2 \int_0^\zeta \frac{r^2\,dr}{1 - r^2}`$, and substituting
 $`r = \kappa u`$, $`j(\kappa\zeta) - 2\kappa\zeta = 2\kappa^3 \int_0^\zeta \frac{u^2\,du}{1 - \kappa^2u^2} \le 2\kappa^3 \int_0^\zeta \frac{u^2\,du}{1 - u^2}`$.
-Apply (4.18) at $`\kappa = 4\text{/}5`$ and $`j(\zeta\text{/}8) \ge \zeta\text{/}4`$:
+Apply (4.18) at $`\kappa = 4\text/5`$ and $`j(\zeta\text/8) \ge \zeta\text/4`$:
 
 ```math
 \frac{dM_1(m)}{d\delta} \ge \frac32\,j(\zeta) + \frac{\zeta}{2} - \frac{16}{5}\,\zeta - \frac{128}{125}\,[\,j(\zeta) - 2\zeta\,]
@@ -787,42 +787,42 @@ Apply (4.18) at $`\kappa = 4\text{/}5`$ and $`j(\zeta\text{/}8) \ge \zeta\text{/
 The closed form (4.2) is continuous at $`\delta = 0`$, so integrating (4.19)
 from $`0`$ gives the first inequality of (4.17).
 
-For the balanced value, $`b = c = 1\text{/}16`$ and $`p^\circ = (7\text{/}16, 1\text{/}16, 1\text{/}16, 7\text{/}16)`$.
+For the balanced value, $`b = c = 1\text/16`$ and $`p^\circ = (7\text/16, 1\text/16, 1\text/16, 7\text/16)`$.
 The contact potential is bounded below through one reference law,
 
 ```math
 q_{\mathrm{r}} = \frac{(112, 8, 8, 7)}{135}.
 ```
 
-Its cubic has $`v = 16\text{/}135`$, $`w = 64\text{/}135^2`$, $`s = 119\text{/}135`$, and
-$`u = 28\text{/}135`$ is a root: $`135^3 f(u) = 28^3 - 16 \cdot 28^2 - 64 \cdot 28 - 64 \cdot 119 = 0`$.
-Since $`\sqrt{112 \cdot 7}\text{/}135 = 28\text{/}135`$, the law $`q_{\mathrm{r}}`$ has
+Its cubic has $`v = 16\text/135`$, $`w = 64\text/135^2`$, $`s = 119\text/135`$, and
+$`u = 28\text/135`$ is a root: $`135^3 f(u) = 28^3 - 16 \cdot 28^2 - 64 \cdot 28 - 64 \cdot 119 = 0`$.
+Since $`\sqrt{112 \cdot 7}\text/135 = 28\text/135`$, the law $`q_{\mathrm{r}}`$ has
 $`\sqrt{ad} = u_0`$ and is constant-optimal by
 [Theorem 6.6](binary-stochastic-optimum.md#6-the-cubic). By
 [Theorem 3.2](binary-stochastic-optimum.md#3-the-deficit-and-the-tangent-test)
 (items 1 and 3, on the full support), $`\Phi \le \ell_{q_{\mathrm{r}}}`$ on the
 whole simplex. The rows and columns of $`q_{\mathrm{r}}`$ are both
-$`(8\text{/}9, 1\text{/}9)`$, and its tangent coefficients, from display (1.2), are
+$`(8\text/9, 1\text/9)`$, and its tangent coefficients, from display (1.2), are
 
 ```math
-\ln \frac{(8\text{/}9)^4}{(112\text{/}135)^3} = \ln \frac{375}{343} \ \text{at } (0,0), \qquad
-\ln \frac{(1\text{/}9)^4}{(7\text{/}135)^3} = \ln \frac{375}{343} \ \text{at } (1,1), \qquad
-\ln \frac{(8\text{/}9)^2 (1\text{/}9)^2}{(8\text{/}135)^3} = \ln \frac{375}{8} \ \text{at } (0,1), (1,0).
+\ln \frac{(8\text/9)^4}{(112\text/135)^3} = \ln \frac{375}{343} \ \text{at } (0,0), \qquad
+\ln \frac{(1\text/9)^4}{(7\text/135)^3} = \ln \frac{375}{343} \ \text{at } (1,1), \qquad
+\ln \frac{(8\text/9)^2 (1\text/9)^2}{(8\text/135)^3} = \ln \frac{375}{8} \ \text{at } (0,1), (1,0).
 ```
 
 The two diagonal coefficients agree, as Lemma 6.4 requires of a contact, so
 $`\ell_{q_{\mathrm{r}}}(q)`$ depends on a law $`q`$ only through its diagonal sum
 and its off-diagonal sum. For the contact $`q^+`$ of $`p^\circ`$ these are
-$`s = 7\text{/}8`$ and $`v = 1\text{/}8`$, hence
+$`s = 7\text/8`$ and $`v = 1\text/8`$, hence
 
 ```math
 k = -\Phi(q^+) \ge -\ell_{q_{\mathrm{r}}}(q^+) = -\frac78 \ln \frac{375}{343} - \frac18 \ln \frac{375}{8}
 = \frac38 \ln 2 - \ln 3 - 3 \ln 5 + \frac{21}{8} \ln 7. \qquad \text{(4.20)}
 ```
 
-At balance, $`J = -2\eta(7\text{/}16) - 2\eta(1\text{/}16) = 4 \ln 2 - \frac78 \ln 7`$,
-$`R = h(1\text{/}2) = \ln 2`$, $`\gamma(0) = 0`$, and
-$`\gamma(1\text{/}8) = \ln 2 - h(7\text{/}16) = -3 \ln 2 + \frac98 \ln 3 + \frac{7}{16} \ln 7`$. By (4.2),
+At balance, $`J = -2\eta(7\text/16) - 2\eta(1\text/16) = 4 \ln 2 - \frac78 \ln 7`$,
+$`R = h(1\text/2) = \ln 2`$, $`\gamma(0) = 0`$, and
+$`\gamma(1\text/8) = \ln 2 - h(7\text/16) = -3 \ln 2 + \frac98 \ln 3 + \frac{7}{16} \ln 7`$. By (4.2),
 
 ```math
 M_1(m)(0) = 12 \ln 2 - \frac98 \ln 3 - \frac{49}{16} \ln 7 + 2k
@@ -830,17 +830,17 @@ M_1(m)(0) = 12 \ln 2 - \frac98 \ln 3 - \frac{49}{16} \ln 7 + 2k
 ```
 
 which is the displayed combination. Lemma 1.3 with $`N = 8`$ encloses the four
-logarithms and shows that the combination exceeds $`1\text{/}250`$; its value is
+logarithms and shows that the combination exceeds $`1\text/250`$; its value is
 about $`0.0045`$.
 
-*Proof of Theorem 4.1.* Fix $`z = (b-c)\text{/}v`$ and use the ray (3.6); by Lemma 4.2
-the ray's nonconstant part is $`0 < v < v_c(z)`$, which contains $`1\text{/}8`$.
+*Proof of Theorem 4.1.* Fix $`z = (b-c)\text/v`$ and use the ray (3.6); by Lemma 4.2
+the ray's nonconstant part is $`0 < v < v_c(z)`$, which contains $`1\text/8`$.
 
-(1) On $`(0, 1\text{/}8]`$, $`M_1(m)`$ is concave (Lemma 4.3) with continuous extension
-$`0`$ at $`v = 0`$ (Lemma 4.4) and value above $`1\text{/}250`$ at $`v = 1\text{/}8`$ (Proposition
-4.6). Concavity gives $`M_1(m)(v) \ge (1 - 8v) \cdot 0 + 8v \cdot M_1(m)(1\text{/}8) \ge 8v\text{/}250 = 4v\text{/}125`$.
+(1) On $`(0, 1\text/8]`$, $`M_1(m)`$ is concave (Lemma 4.3) with continuous extension
+$`0`$ at $`v = 0`$ (Lemma 4.4) and value above $`1\text/250`$ at $`v = 1\text/8`$ (Proposition
+4.6). Concavity gives $`M_1(m)(v) \ge (1 - 8v) \cdot 0 + 8v \cdot M_1(m)(1\text/8) \ge 8v\text/250 = 4v\text/125`$.
 
-(2) On $`[1\text{/}8, v_c(z))`$, $`M_0(m)`$ is concave, positive at $`v = 1\text{/}8`$
+(2) On $`[1\text/8, v_c(z))`$, $`M_0(m)`$ is concave, positive at $`v = 1\text/8`$
 (Proposition 4.5), and extends continuously to $`v_c(z)`$ with a positive value
 there (Lemma 4.4). A concave function on a closed interval with positive values
 at both ends is positive throughout.
@@ -856,7 +856,7 @@ Under (2.1) with $`p`$ nonconstant, assume in this section
 0 < v \le \frac18.
 ```
 
-**Lemma 5.1 (the smaller contact mass).** $`D < v\text{/}2`$. Consequently
+**Lemma 5.1 (the smaller contact mass).** $`D < v\text/2`$. Consequently
 
 ```math
 D < \frac{1}{16}, \qquad A > \frac{13}{16}, \qquad 3D < \frac{3}{16} < \frac{7}{16} \le m, \qquad A - 2D > \frac{11}{16}, \qquad A > 4D, \qquad \text{(5.1)}
@@ -865,27 +865,27 @@ D < \frac{1}{16}, \qquad A > \frac{13}{16}, \qquad 3D < \frac{3}{16} < \frac{7}{
 and the cut law $`p_{\mathrm{cut}} = p_{s - 3D} = (A - 2D, b, c, 3D)`$ lies on the open
 chord $`(m, A)`$.
 
-*Proof.* Put $`q^2 = (v\text{/}2)(1 - 3v\text{/}2)`$ with $`q > 0`$ (a number, not a law). Then $`q > v`$ (as $`1\text{/}2 - 3v\text{/}4 > v`$) and
-$`q < m`$. With $`w \le v^2\text{/}4`$ and $`q^3 - vq^2 = q\,(q^2 - vq)`$,
+*Proof.* Put $`q^2 = (v\text/2)(1 - 3v\text/2)`$ with $`q > 0`$ (a number, not a law). Then $`q > v`$ (as $`1\text/2 - 3v\text/4 > v`$) and
+$`q < m`$. With $`w \le v^2\text/4`$ and $`q^3 - vq^2 = q\,(q^2 - vq)`$,
 
 ```math
 f(q) \ge q^3 - v q^2 - \frac{v^2}{4}\,(q + s) = \frac{q\,v\,(1 - 2v)}{2} - v^2\left( \frac34 - v \right).
 ```
 
-The right side is positive if and only if $`q\,(1 - 2v) > v\,(3\text{/}2 - 2v)`$, both sides
+The right side is positive if and only if $`q\,(1 - 2v) > v\,(3\text/2 - 2v)`$, both sides
 positive, and squaring,
 
 ```math
 q^2 (1-2v)^2 - v^2 \left( \tfrac32 - 2v \right)^2 = \frac{v}{2}\,\left( 1 - 10v + 22v^2 - 14v^3 \right),
 ```
 
-where, with $`\epsilon = 1\text{/}8 - v \ge 0`$,
-$`1 - 10v + 22v^2 - 14v^3 = 17\text{/}256 + 165\epsilon\text{/}32 + 67\epsilon^2\text{/}4 + 14\epsilon^3 > 0`$.
-So $`f(q) > 0`$. On $`[v, \infty)`$, $`f'(u) = 3u^2 - 2vu - w \ge v^2 - v^2\text{/}4 > 0`$, and
+where, with $`\epsilon = 1\text/8 - v \ge 0`$,
+$`1 - 10v + 22v^2 - 14v^3 = 17\text/256 + 165\epsilon\text/32 + 67\epsilon^2\text/4 + 14\epsilon^3 > 0`$.
+So $`f(q) > 0`$. On $`[v, \infty)`$, $`f'(u) = 3u^2 - 2vu - w \ge v^2 - v^2\text/4 > 0`$, and
 $`f(u_0) = 0 < f(q)`$ with $`q > v`$ forces $`u_0 < q`$. Finally
-$`D\,(s - D) = u_0^2 < q^2 = (v\text{/}2)(s - v\text{/}2)`$, and since $`x \to x(s-x)`$ is
-increasing on $`[0, m]`$ and both $`D`$ and $`v\text{/}2`$ lie there, $`D < v\text{/}2`$. The
-numbers (5.1) follow from $`v \le 1\text{/}8`$ and $`s = 1 - v \ge 7\text{/}8`$; and
+$`D\,(s - D) = u_0^2 < q^2 = (v\text/2)(s - v\text/2)`$, and since $`x \to x(s-x)`$ is
+increasing on $`[0, m]`$ and both $`D`$ and $`v\text/2`$ lie there, $`D < v\text/2`$. The
+numbers (5.1) follow from $`v \le 1\text/8`$ and $`s = 1 - v \ge 7\text/8`$; and
 $`D < 3D < m`$ gives $`m < s - 3D < s - D = A`$.
 
 **Theorem 5.2 (the constant margin at the cut).**
@@ -894,13 +894,13 @@ $`D < 3D < m`$ gives $`m < s - 3D < s - D = A`$.
 M_0(s - 3D) > \frac{3D}{208}. \qquad \text{(5.2)}
 ```
 
-*Proof.* In this section write $`x = b\text{/}D`$ and $`y = c\text{/}D`$ (the chart of
+*Proof.* In this section write $`x = b\text/D`$ and $`y = c\text/D`$ (the chart of
 section 3 is not used here).
 
 *Step 1: the contact logarithm identity.* The identity
-$`A^{3\text{/}2}(D+b)(D+c) = D^{3\text{/}2}(A+b)(A+c)`$ at $`q^+`$ (the computation in the proof
+$`A^{3\text/2}(D+b)(D+c) = D^{3\text/2}(A+b)(A+c)`$ at $`q^+`$ (the computation in the proof
 of Lemma 6.4, with $`f(u_0) = 0`$) becomes after taking logarithms and
-writing $`D + b = D\,(1 + x)`$, $`A + b = A\,(1 + b\text{/}A)`$,
+writing $`D + b = D\,(1 + x)`$, $`A + b = A\,(1 + b\text/A)`$,
 
 ```math
 -\ln D = 2 \ln(1+x) + 2 \ln(1+y) - \ln A - 2 \ln\left( 1 + \frac{b}{A} \right) - 2 \ln\left( 1 + \frac{c}{A} \right). \qquad \text{(5.3)}
@@ -919,17 +919,17 @@ Lemma 3.1 of the stochastic-optimum page; at $`t = D`$ this is the difference of
 the two diagonal tangent coefficients of $`q^+`$, which vanishes by the identity of
 step 1. So
 $`P'(D) = 0`$. Differentiating $`-\Phi(p_t)`$ twice, with $`\alpha = s - t`$ and
-$`h''(x) = -1\text{/}(x(1-x))`$,
+$`h''(x) = -1\text/(x(1-x))`$,
 
 ```math
 P''(t) = \frac{3}{t} + \frac{3}{\alpha} - \frac{2}{t+b} - \frac{2}{t+c} - \frac{2}{\alpha+b} - \frac{2}{\alpha+c}. \qquad \text{(5.5)}
 ```
 
-Since $`\alpha \ge m \ge 3v\text{/}2`$,
+Since $`\alpha \ge m \ge 3v\text/2`$,
 
 ```math
-\frac{2}{\alpha+b} + \frac{2}{\alpha+c} - \frac{4}{\alpha + v\text{/}2} = \frac{2\,(b-c)^2}{(\alpha+b)(\alpha+c)(2\alpha+v)} \ge 0, \qquad
-\frac{4}{\alpha + v\text{/}2} - \frac{3}{\alpha} = \frac{2\alpha - 3v}{\alpha\,(2\alpha + v)} \ge 0,
+\frac{2}{\alpha+b} + \frac{2}{\alpha+c} - \frac{4}{\alpha + v\text/2} = \frac{2\,(b-c)^2}{(\alpha+b)(\alpha+c)(2\alpha+v)} \ge 0, \qquad
+\frac{4}{\alpha + v\text/2} - \frac{3}{\alpha} = \frac{2\alpha - 3v}{\alpha\,(2\alpha + v)} \ge 0,
 ```
 
 and therefore
@@ -956,7 +956,7 @@ J_3(t) = \eta(\alpha) + \eta(1-t) - \eta(\alpha+b) - \eta(\alpha+c) = \int_0^b \
 
 (The eight $`\eta`$ terms of $`I`$ match those of the right side; the integral
 representation is the inclusion-exclusion of $`\eta(\alpha + r + r')`$ over
-the rectangle, whose mixed second derivative is $`1\text{/}(\alpha + r + r')`$.)
+the rectangle, whose mixed second derivative is $`1\text/(\alpha + r + r')`$.)
 By (5.4), (5.7), and (5.8), dropping $`J_3 > 0`$,
 
 ```math
@@ -973,7 +973,7 @@ V(x) = 3\,(3+x) \ln(3+x) - (6 + 4x) \ln(1+x) + x \ln x, \qquad x > 0.
 
 Collecting the terms of (5.9) divided by $`D`$: the $`F`$ and $`Q`$ terms give
 $`V(x) + V(y) - 6 \ln(1+x) - 6 \ln(1+y) - 12 \ln 3 - 4`$ (a check against lost
-constants: every affine term is accounted for here), and $`h(3D)\text{/}D`$ gives at
+constants: every affine term is accounted for here), and $`h(3D)\text/D`$ gives at
 least $`-3 \ln 3 - 3 \ln D + 3 - 9D`$. Substituting (5.3) for $`-3 \ln D`$ cancels
 the $`\ln(1+x)`$ and $`\ln(1+y)`$ terms:
 
@@ -981,7 +981,7 @@ the $`\ln(1+x)`$ and $`\ln(1+y)`$ terms:
 \frac{M_0(s - 3D)}{D} > V(x) + V(y) - 15 \ln 3 - 1 - 9D - 3 \ln A - 6 \ln\left( 1 + \frac{b}{A} \right) - 6 \ln\left( 1 + \frac{c}{A} \right). \qquad \text{(5.10)}
 ```
 
-*Step 6: the scalar lemma.* $`V(x) > 19\text{/}2`$ for every $`x > 0`$. Differentiating,
+*Step 6: the scalar lemma.* $`V(x) > 19\text/2`$ for every $`x > 0`$. Differentiating,
 
 ```math
 V'(x) = 3 \ln \frac{x+3}{x+1} + \ln \frac{x}{x+1} - \frac{2}{x+1}, \qquad
@@ -989,31 +989,31 @@ V''(x) = \frac{-3x^2 + 4x + 3}{x\,(x+1)^2\,(x+3)}. \qquad \text{(5.11)}
 ```
 
 On $`0 < x \le 1`$ the numerator is at least $`x + 3 > 0`$, so $`V`$ is convex there
-and lies above its tangent at $`x = 1\text{/}2`$, whose slope and intercept are
+and lies above its tangent at $`x = 1\text/2`$, whose slope and intercept are
 
 ```math
 \sigma = 3 \ln \frac73 - \ln 3 - \frac43, \qquad \beta = 9 \ln \frac72 - 6 \ln \frac32 + \frac23. \qquad \text{(5.12)}
 ```
 
-With Lemma 1.3, $`\ln \frac73 \ge S_3(2\text{/}5)`$, $`\ln 3 \le U_3(1\text{/}2)`$,
-$`\ln \frac72 \ge S_5(5\text{/}9)`$, $`\ln \frac32 \le U_3(1\text{/}5)`$, and exact arithmetic gives
+With Lemma 1.3, $`\ln \frac73 \ge S_3(2\text/5)`$, $`\ln 3 \le U_3(1\text/2)`$,
+$`\ln \frac72 \ge S_5(5\text/9)`$, $`\ln \frac32 \le U_3(1\text/5)`$, and exact arithmetic gives
 
 ```math
-3\,S_3(2\text{/}5) - U_3(1\text{/}2) - \frac43 = \frac{94627}{875000} > 0, \qquad
-9\,S_5(5\text{/}9) - 6\,U_3(1\text{/}5) + \frac23 - \frac{19}{2} = \frac{224012952139}{42374115984375} > 0,
+3\,S_3(2\text/5) - U_3(1\text/2) - \frac43 = \frac{94627}{875000} > 0, \qquad
+9\,S_5(5\text/9) - 6\,U_3(1\text/5) + \frac23 - \frac{19}{2} = \frac{224012952139}{42374115984375} > 0,
 ```
 
-so $`\sigma > 0`$, $`\beta > 19\text{/}2`$, and $`V(x) \ge \beta + \sigma x > 19\text{/}2`$ on
-$`(0, 1]`$. For $`x \ge 1`$ put $`\theta = 1\text{/}(x+1) \in (0, 1\text{/}2]`$; then
+so $`\sigma > 0`$, $`\beta > 19\text/2`$, and $`V(x) \ge \beta + \sigma x > 19\text/2`$ on
+$`(0, 1]`$. For $`x \ge 1`$ put $`\theta = 1\text/(x+1) \in (0, 1\text/2]`$; then
 $`V'(x) = \Theta(\theta) := 3 \ln(1 + 2\theta) + \ln(1 - \theta) - 2\theta`$, with
-$`\Theta'' = -12\text{/}(1+2\theta)^2 - 1\text{/}(1-\theta)^2 < 0`$, $`\Theta(0) = 0`$, and
-$`\Theta(1\text{/}2) = 2 \ln 2 - 1 > 0`$ (from $`\ln 2 \ge S_1(1\text{/}3) = 2\text{/}3`$). A concave
-function above its chord on $`[0, 1\text{/}2]`$ is positive on $`(0, 1\text{/}2]`$, so $`V`$
-increases on $`[1, \infty)`$ and stays above $`V(1) > 19\text{/}2`$.
+$`\Theta'' = -12\text/(1+2\theta)^2 - 1\text/(1-\theta)^2 < 0`$, $`\Theta(0) = 0`$, and
+$`\Theta(1\text/2) = 2 \ln 2 - 1 > 0`$ (from $`\ln 2 \ge S_1(1\text/3) = 2\text/3`$). A concave
+function above its chord on $`[0, 1\text/2]`$ is positive on $`(0, 1\text/2]`$, so $`V`$
+increases on $`[1, \infty)`$ and stays above $`V(1) > 19\text/2`$.
 
 *Step 7: the finish.* In (5.10) use $`V(x) + V(y) > 19`$,
-$`\ln 3 \le U_3(1\text{/}2) = 923\text{/}840 < 11\text{/}10`$, $`D < 1\text{/}16`$, $`-3 \ln A > 0`$, and
-$`\ln(1 + r) \le r`$ with $`6\,(b + c)\text{/}A < 6 \cdot (1\text{/}8) \text{/} (13\text{/}16) = 12\text{/}13`$:
+$`\ln 3 \le U_3(1\text/2) = 923\text/840 < 11\text/10`$, $`D < 1\text/16`$, $`-3 \ln A > 0`$, and
+$`\ln(1 + r) \le r`$ with $`6\,(b + c)\text/A < 6 \cdot (1\text/8) \text/ (13\text/16) = 12\text/13`$:
 
 ```math
 \frac{M_0(s - 3D)}{D} > 19 - \frac{33}{2} - 1 - \frac{9}{16} - \frac{12}{13} = \frac{3}{208}.
@@ -1025,7 +1025,7 @@ $`\ln(1 + r) \le r`$ with $`6\,(b + c)\text{/}A < 6 \cdot (1\text{/}8) \text{/} 
 M_1(s - 3D) > \frac{D}{100}. \qquad \text{(5.13)}
 ```
 
-*Proof.* Keep $`x = b\text{/}D`$, $`y = c\text{/}D`$, so $`x, y > 0`$ and $`x + y = v\text{/}D > 2`$ by
+*Proof.* Keep $`x = b\text/D`$, $`y = c\text/D`$, so $`x, y > 0`$ and $`x + y = v\text/D > 2`$ by
 Lemma 5.1; write $`a = A - 2D = s - 3D`$ for the large diagonal cell of the cut.
 
 *Step 1: exact expansion.* For $`p_t = (s - t, b, c, t)`$ put
@@ -1071,13 +1071,13 @@ E = 6 \ln A - 4 \ln(A+b) - 4 \ln(A+c) - \frac{2\,(1-D) \ln(1-D)}{D}
 \psi(x) + \psi(y) \ge 2\,\psi(1) = 8 \ln 2 - 6 \ln 3. \qquad \text{(5.17)}
 ```
 
-First, $`\psi`$ is increasing on $`[1, \infty)`$: $`\psi'(\xi) = \Xi(1\text{/}\xi)`$ with
-$`\Xi(\theta) = \ln(1 + 3\theta) - 4 \ln(1 + \theta) + 4\theta\text{/}(1 + \theta)`$, and
-$`\Xi'(\theta) = (3 + 2\theta - 9\theta^2)\text{/}((1+3\theta)(1+\theta)^2)`$ changes sign once on
+First, $`\psi`$ is increasing on $`[1, \infty)`$: $`\psi'(\xi) = \Xi(1\text/\xi)`$ with
+$`\Xi(\theta) = \ln(1 + 3\theta) - 4 \ln(1 + \theta) + 4\theta\text/(1 + \theta)`$, and
+$`\Xi'(\theta) = (3 + 2\theta - 9\theta^2)\text/((1+3\theta)(1+\theta)^2)`$ changes sign once on
 $`[0,1]`$, from positive to negative, while $`\Xi(0) = 0`$ and
 $`\Xi(1) = 2 - 2 \ln 2 > 0`$; so $`\Xi > 0`$ on $`(0, 1]`$. Second, the symmetric sum
 $`\Pi(\xi) = \psi(\xi) + \psi(2 - \xi)`$ on $`(0, 2)`$ is convex with $`\Pi'(1) = 0`$:
-from $`\psi''(\xi) = -(3\xi^2 + 2\xi - 9)\text{/}(\xi (\xi+1)^2 (\xi+3))`$, with $`\theta = \xi - 1`$,
+from $`\psi''(\xi) = -(3\xi^2 + 2\xi - 9)\text/(\xi (\xi+1)^2 (\xi+3))`$, with $`\theta = \xi - 1`$,
 
 ```math
 \Pi''(1 + \theta) = \frac{2\,(64 + 352\theta^2 - 8\theta^4 - 3\theta^6)}{(1 - \theta^2)(16 - \theta^2)(4 - \theta^2)^2} > 0 \quad (\lvert \theta \rvert < 1),
@@ -1091,46 +1091,46 @@ $`\psi(1) = 4 \ln 4 - 4 \ln 2 - 3 \ln 3 = 4 \ln 2 - 3 \ln 3`$.
 
 *Step 4: the correction.* Each piece of $`E`$ is bounded below by an
 elementary estimate. From (5.8) and $`A \ge 4D`$,
-$`1\text{/}(a + r + r') \le 2\text{/}(A + r + r')`$, so
+$`1\text/(a + r + r') \le 2\text/(A + r + r')`$, so
 $`J_3(3D) \le 2 J_3(D)`$ and the last term is nonnegative. From
-$`-\ln(1 - D) \ge D + D^2\text{/}2`$, $`-2(1-D)\ln(1-D)\text{/}D \ge 2 - D - D^2`$. From
-$`\partial_\theta F(\theta, j) = \ln(1 + j\text{/}\theta)`$, decreasing in $`\theta`$,
-$`F(a, j) - F(A, j) = -\int_a^A \ln(1 + j\text{/}\theta)\,d\theta \ge -2D \ln(1 + j\text{/}a)`$. And by
-concavity of the logarithm, $`\ln(1 + b\text{/}\theta) + \ln(1 + c\text{/}\theta) \le 2 \ln(1 + v\text{/}(2\theta))`$
+$`-\ln(1 - D) \ge D + D^2\text/2`$, $`-2(1-D)\ln(1-D)\text/D \ge 2 - D - D^2`$. From
+$`\partial_\theta F(\theta, j) = \ln(1 + j\text/\theta)`$, decreasing in $`\theta`$,
+$`F(a, j) - F(A, j) = -\int_a^A \ln(1 + j\text/\theta)\,d\theta \ge -2D \ln(1 + j\text/a)`$. And by
+concavity of the logarithm, $`\ln(1 + b\text/\theta) + \ln(1 + c\text/\theta) \le 2 \ln(1 + v\text/(2\theta))`$
 for $`\theta > 0`$, applied at $`\theta = a`$ and, after writing
-$`6 \ln A - 4 \ln(A+b) - 4 \ln(A+c) = -2 \ln A - 4 \ln(1 + b\text{/}A) - 4 \ln(1 + c\text{/}A)`$, at
+$`6 \ln A - 4 \ln(A+b) - 4 \ln(A+c) = -2 \ln A - 4 \ln(1 + b\text/A) - 4 \ln(1 + c\text/A)`$, at
 $`\theta = A`$. Altogether
 
 ```math
 E \ge E_0(v, D) := 2 - D - D^2 - 2 \ln A - 8 \ln\left( 1 + \frac{v}{2A} \right) - 8 \ln\left( 1 + \frac{v}{2a} \right), \qquad A = 1 - v - D, \quad a = 1 - v - 3D. \qquad \text{(5.18)}
 ```
 
-*Step 5: two endpoints.* For fixed $`v \in (0, 1\text{/}8]`$, $`E_0`$ is concave in
-$`D \in [0, v\text{/}2]`$:
+*Step 5: two endpoints.* For fixed $`v \in (0, 1\text/8]`$, $`E_0`$ is concave in
+$`D \in [0, v\text/2]`$:
 
 ```math
 \partial_D^2 E_0 = -2 + \frac{2}{A^2} - \frac{8v\,(4A + v)}{A^2 (2A + v)^2} - \frac{72v\,(4a + v)}{a^2 (2a + v)^2}. \qquad \text{(5.19)}
 ```
 
-Here $`2\text{/}A^2 - 2 = 2(1-A)(1+A)\text{/}A^2 \le 4(1-A)\text{/}A^2 \le 1536v\text{/}169`$, using
-$`1 - A = v + D \le 3v\text{/}2`$ and $`A \ge 13\text{/}16`$; and for $`\theta \in \{A, a\}`$,
-$`0 < \theta \le 1`$ and $`v \le 1\text{/}8`$ give
-$`(4\theta + v)\text{/}(\theta^2 (2\theta + v)^2) \ge 1\text{/}(\theta^2 (2\theta + v)) > 1\text{/}3`$. So
-$`\partial_D^2 E_0 < v\,(1536\text{/}169 - 80\text{/}3) < 0`$, and
-$`E_0(v, D) \ge \min\{ E_0(v, 0), E_0(v, v\text{/}2) \}`$. Both endpoint functions
+Here $`2\text/A^2 - 2 = 2(1-A)(1+A)\text/A^2 \le 4(1-A)\text/A^2 \le 1536v\text/169`$, using
+$`1 - A = v + D \le 3v\text/2`$ and $`A \ge 13\text/16`$; and for $`\theta \in \{A, a\}`$,
+$`0 < \theta \le 1`$ and $`v \le 1\text/8`$ give
+$`(4\theta + v)\text/(\theta^2 (2\theta + v)^2) \ge 1\text/(\theta^2 (2\theta + v)) > 1\text/3`$. So
+$`\partial_D^2 E_0 < v\,(1536\text/169 - 80\text/3) < 0`$, and
+$`E_0(v, D) \ge \min\{ E_0(v, 0), E_0(v, v\text/2) \}`$. Both endpoint functions
 decrease in $`v`$:
 
 ```math
 \begin{aligned}
 E_0(v, 0) &= 2 + 14 \ln(1-v) - 16 \ln\left( 1 - \frac{v}{2} \right), \\
-E_0(v, v\text{/}2) &= 2 - \frac{v}{2} - \frac{v^2}{4} + 6 \ln\left( 1 - \frac{3v}{2} \right) - 8 \ln(1-v) + 8 \ln\left( 1 - \frac{5v}{2} \right) - 8 \ln(1-2v),
+E_0(v, v\text/2) &= 2 - \frac{v}{2} - \frac{v^2}{4} + 6 \ln\left( 1 - \frac{3v}{2} \right) - 8 \ln(1-v) + 8 \ln\left( 1 - \frac{5v}{2} \right) - 8 \ln(1-2v),
 \end{aligned}
 ```
 
-with derivatives $`-14\text{/}(1-v) + 8\text{/}(1 - v\text{/}2) < 0`$ and
-$`-\frac12 - \frac{v}{2} - \frac{9}{1 - 3v\text{/}2} + \frac{8}{1-v} - \frac{20}{1 - 5v\text{/}2} + \frac{16}{1-2v} < 0`$,
-the latter because $`9\text{/}(1 - 3v\text{/}2) > 8\text{/}(1-v)`$ and $`20\text{/}(1 - 5v\text{/}2) > 16\text{/}(1 - 2v)`$.
-Hence $`E_0(v, D) \ge \min\{E_0(1\text{/}8, 0), E_0(1\text{/}8, 1\text{/}16)\}`$, and with (5.16),
+with derivatives $`-14\text/(1-v) + 8\text/(1 - v\text/2) < 0`$ and
+$`-\frac12 - \frac{v}{2} - \frac{9}{1 - 3v\text/2} + \frac{8}{1-v} - \frac{20}{1 - 5v\text/2} + \frac{16}{1-2v} < 0`$,
+the latter because $`9\text/(1 - 3v\text/2) > 8\text/(1-v)`$ and $`20\text/(1 - 5v\text/2) > 16\text/(1 - 2v)`$.
+Hence $`E_0(v, D) \ge \min\{E_0(1\text/8, 0), E_0(1\text/8, 1\text/16)\}`$, and with (5.16),
 (5.17),
 
 ```math
@@ -1142,7 +1142,7 @@ C_1 &= \frac{495}{256} - 8 \ln 2 - 14 \ln 3 - 8 \ln 7 + 8 \ln 11 + 6 \ln 13.
 ```
 
 *Step 6: two scalar comparisons.* Lemma 1.3 with $`N = 8`$ at the primes
-$`2, 3, 5, 7, 11, 13`$ gives $`C_0 > 1\text{/}100`$ and $`C_1 > 1\text{/}100`$; their values are
+$`2, 3, 5, 7, 11, 13`$ gives $`C_0 > 1\text/100`$ and $`C_1 > 1\text/100`$; their values are
 about $`0.1167`$ and $`0.0134`$. The check script replays both enclosures.
 
 ## 6. Assembly
@@ -1164,14 +1164,14 @@ $`T(p) = \tau(p)`$ by display (1.2) of the stochastic-optimum page, and the
 constant code is a witness. Otherwise $`p`$ is nonconstant, $`p = p_a`$ on the
 chord of section 2 by Lemma 2.1, and Theorem 2.5 applies:
 
-- if $`v \ge 1\text{/}8`$, Theorem 4.1(2) gives $`M_0(m) > 0`$, which is (G0);
-- if $`v \le 1\text{/}8`$, take $`a_{\mathrm{cut}} = s - 3D`$, which lies in $`(m, A)`$ by
-  Lemma 5.1; Theorem 4.1(1) gives $`M_1(m) \ge 4v\text{/}125 > 0`$, Theorem 5.3 gives
-  $`M_1(a_{\mathrm{cut}}) > D\text{/}100 > 0`$, and Theorem 5.2 gives
-  $`M_0(a_{\mathrm{cut}}) > 3D\text{/}208 > 0`$, which is (GC).
+- if $`v \ge 1\text/8`$, Theorem 4.1(2) gives $`M_0(m) > 0`$, which is (G0);
+- if $`v \le 1\text/8`$, take $`a_{\mathrm{cut}} = s - 3D`$, which lies in $`(m, A)`$ by
+  Lemma 5.1; Theorem 4.1(1) gives $`M_1(m) \ge 4v\text/125 > 0`$, Theorem 5.3 gives
+  $`M_1(a_{\mathrm{cut}}) > D\text/100 > 0`$, and Theorem 5.2 gives
+  $`M_0(a_{\mathrm{cut}}) > 3D\text/208 > 0`$, which is (GC).
 
 Theorem 2.5 names the witness: the constant code, or the singleton at the cell
-$`(1,1)`$, which under (2.1) is a lightest diagonal cell. At $`v = 1\text{/}8`$ both
+$`(1,1)`$, which under (2.1) is a lightest diagonal cell. At $`v = 1\text/8`$ both
 cases apply and agree.
 
 **Theorem 6.2 (every law).** $`T(p) \le 2\,\tau(p)`$ for every binary $`2 \times 2`$ law.
@@ -1207,12 +1207,12 @@ functions), and finitely many rational-logarithm comparisons decided by the
 series of Lemma 1.3. It is `paper proof` in the ledger's sense. The ledger rows
 are `BIN-C2` (Theorems 6.1 and 6.2), `BIN-CHORD-CUT` (Theorem 2.5 with Lemmas
 2.2 to 2.4), `BIN-CENTER` (Theorem 4.1), and `BIN-FIXED-CUT` (Lemma 5.1 with
-Theorems 5.2 and 5.3). The quantitative margins $`1\text{/}200`$, $`1\text{/}250`$,
-$`4v\text{/}125`$, $`3D\text{/}208`$, and $`D\text{/}100`$ are in nats; only their positivity is
+Theorems 5.2 and 5.3). The quantitative margins $`1\text/200`$, $`1\text/250`$,
+$`4v\text/125`$, $`3D\text/208`$, and $`D\text/100`$ are in nats; only their positivity is
 used downstream.
 
 **What is not proved here.** Nothing is claimed about the sharpness of the
-constant $`2`$, about the laws that maximize $`T(p)\text{/}\tau(p)`$, or about the
+constant $`2`$, about the laws that maximize $`T(p)\text/\tau(p)`$, or about the
 equality cases. The five-code witness is stated for full support only. Nothing
 is claimed for alphabets larger than $`2 \times 2`$ or for latents that are not
 finite mixtures; the general problem keeps its standing on the
