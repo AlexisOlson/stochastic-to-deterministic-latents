@@ -19,31 +19,31 @@ $`\Delta = ad - bc`$.
 > 3. If $`\Delta > 0`$, put $`s = a+d`$, $`v = b+c`$, $`w = bc`$, and let $`u_0`$ be the
 >    largest nonnegative root of
 >
->    ```math
->    f_p(u) = u^3 - vu^2 - wu - ws.
->    ```
+> ```math
+> f_p(u) = u^3 - vu^2 - wu - ws.
+> ```
 >
->    If $`\sqrt{ad} \le u_0`$, the constant latent is optimal:
->    $`\tau(p) = T(p) = I_p(X;Y)`$. If $`\sqrt{ad} > u_0`$, put
->    $`\rho = \sqrt{s^2 - 4u_0^2} > 0`$ and
+> If $`\sqrt{ad} \le u_0`$, the constant latent is optimal:
+> $`\tau(p) = T(p) = I_p(X;Y)`$. If $`\sqrt{ad} > u_0`$, put
+> $`\rho = \sqrt{s^2 - 4u_0^2} > 0`$ and
 >
->    ```math
->    \begin{aligned}
->    q^+ &= ((s+\rho)/2, b, c, (s-\rho)/2), \\
->    q^- &= ((s-\rho)/2, b, c, (s+\rho)/2), \\
->    \lambda &= (a - (s-\rho)/2) / \rho.
->    \end{aligned}
->    ```
+> ```math
+> \begin{aligned}
+> q^+ &= ((s+\rho)/2, b, c, (s-\rho)/2), \\
+> q^- &= ((s-\rho)/2, b, c, (s+\rho)/2), \\
+> \lambda &= (a - (s-\rho)/2) / \rho.
+> \end{aligned}
+> ```
 >
->    Then $`0 < \lambda < 1`$, $`p = \lambda q^+ + (1-\lambda)\,q^-`$, and
+> Then $`0 < \lambda < 1`$, $`p = \lambda q^+ + (1-\lambda)\,q^-`$, and
 >
->    ```math
->    \tau(p) = \Psi(p) - \Phi(q^+) = \Psi(p) - \Phi(q^-),
->    ```
+> ```math
+> \tau(p) = \Psi(p) - \Phi(q^+) = \Psi(p) - \Phi(q^-),
+> ```
 >
->    with $`\Phi`$ as in the [blueprint](blueprint.md#1-laws-entropy-and-codes) and
->    $`\Psi`$ as in the [score decomposition](binary-factor-nine.md#the-score-decomposition)
->    of the factor-nine proof.
+> with $`\Phi`$ as in the [blueprint](blueprint.md#1-laws-entropy-and-codes) and
+> $`\Psi`$ as in the [score decomposition](binary-factor-nine.md#the-score-decomposition)
+> of the factor-nine proof.
 >
 > In every case the optimal component measure is unique: every $`\tau`$-optimal
 > finite latent has, after merging labels with equal component laws and
