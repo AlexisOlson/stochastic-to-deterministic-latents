@@ -91,6 +91,19 @@ jobs:
           fi
           exit "$status"
 
+      # Plain-dollar math is Markdown-processed before GitHub renders it and
+      # breaks silently, so CLAUDE.md allows only the backtick inline form and
+      # math fences: every dollar sign in Markdown must touch a backtick.
+      - name: Check Markdown math syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'; then
+            echo "::error::Plain-dollar math or a bare dollar sign in Markdown; use the backtick inline form or a math fence (CLAUDE.md, Mathematical notation in Markdown)."
+            exit 1
+          fi
+          echo "Markdown math syntax: clean"
+
       # Decide whether the Lean steps are needed. Outputs `lean=true` unless
       # every changed file is outside the Lean-relevant set. Any doubt (no
       # base commit, unknown event) resolves to building.

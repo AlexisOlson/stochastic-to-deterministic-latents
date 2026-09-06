@@ -70,6 +70,40 @@ the deterministic optimum. All information quantities are in bits, with
 `0 log 0 = 0`; scalar natural-log ledgers must retain their explicit bit
 conversions. `Phi(q)` is a component functional, not a latent score.
 
+## Mathematical notation in Markdown
+
+Mathematics in Markdown is TeX, rendered by GitHub. Inline math uses the
+backtick form, a dollar sign, a backtick, the TeX, a backtick, and a dollar
+sign, as in `` $`\tau(p) \le T(p)`$ ``. Display math uses a ```` ```math ````
+fence. Plain-dollar math is never used: GitHub applies Markdown escapes and
+emphasis inside it, so braces, thin spaces, and underscores break silently,
+and a `<` before a letter becomes an HTML tag. The `verify` job fails on any
+dollar sign that does not touch a backtick; run the same check locally:
+
+```sh
+git ls-files '*.md' | xargs grep -nP '(?<!`)\x24(?!`)'
+```
+
+Measured rules, from the rendering tests behind pull request #9:
+
+- Conditioning bars are `\mid`, never a bare `|`, which splits table cells.
+- Operator names use `\mathrm`, as in `\mathrm{score}_p(L)` and
+  `\mathrm{W3}(L)`; GitHub forbids `\operatorname` and `\DeclareMathOperator`.
+  The Verso blueprint keeps `\operatorname` under KaTeX.
+- No macros: `\newcommand` and `\def` do not work. No `\tag`, `\label`, or
+  `\eqref`. An equation number is `\qquad \text{(6.1)}` at the end of the
+  display, and cross-references are prose.
+- A bare `\\` does not break a line; multi-line displays use `aligned` or
+  `gathered`.
+- Fences render in list items and blockquotes, not inside `<details>` or
+  table cells. Keep math out of headings, link text, and italics.
+- Lean names, paths, commands, ledger identifiers, and evidence tiers stay
+  in code spans; two scripts parse the ledger table by those exact tokens.
+
+Pages not yet converted keep their code-span notation until their own
+conversion pull request, which passes the same independent read as any
+other prose change to a paper-proof page.
+
 ## Admission and review
 
 Follow the [verification procedure](verification/README.md#admitting-a-change).
