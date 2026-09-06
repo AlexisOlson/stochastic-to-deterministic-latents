@@ -35,6 +35,7 @@ private abbrev AmbientCode (α β : Type*) [Fintype α] [Fintype β] :=
 private def baseCode : AmbientCode α β :=
   constantCode
 
+omit [Nonempty α] [Nonempty β] in
 private theorem code_univ_nonempty :
     (Finset.univ : Finset (AmbientCode α β)).Nonempty :=
   ⟨baseCode, Finset.mem_univ _⟩
@@ -52,6 +53,7 @@ private noncomputable def extendedDetScore
     (continuousEntropy (pushforward (fun z => (g z, z.2)) p) -
       continuousEntropy (pushforward (fun z => z.2) p))
 
+omit [Nonempty α] [Nonempty β] in
 private theorem continuous_extendedDetScore (g : AmbientCode α β) :
     Continuous (fun p : α × β → ℝ => extendedDetScore p g) := by
   unfold extendedDetScore
@@ -89,6 +91,7 @@ private theorem continuous_extendedDetScore (g : AmbientCode α β) :
   exact ((((hXg.add hYg).sub hXYg).sub hg).add
     (hgX.sub hX)).add (hgY.sub hY)
 
+omit [Nonempty α] [Nonempty β] in
 private theorem extendedDetScore_eq_detScore
     {p : α × β → ℝ} (hp : IsPMF p) (g : AmbientCode α β) :
     extendedDetScore p g = detScore p g := by
@@ -139,6 +142,7 @@ private noncomputable def extendedT (p : α × β → ℝ) : ℝ :=
   (Finset.univ : Finset (AmbientCode α β)).inf' code_univ_nonempty
     (fun g => extendedDetScore p g)
 
+omit [Nonempty α] [Nonempty β] in
 private theorem continuous_extendedT :
     Continuous (extendedT : (α × β → ℝ) → ℝ) := by
   unfold extendedT
@@ -146,6 +150,7 @@ private theorem continuous_extendedT :
   intro g _hg
   exact continuous_extendedDetScore g
 
+omit [Nonempty α] [Nonempty β] in
 private theorem extendedT_eq_T {p : α × β → ℝ} (hp : IsPMF p) :
     extendedT p = T p := by
   obtain ⟨g₀, hg₀⟩ := exists_optimalCode p
@@ -167,6 +172,7 @@ private theorem extendedT_eq_T {p : α × β → ℝ} (hp : IsPMF p) :
 private noncomputable def uniformProductLaw : α × β → ℝ :=
   fun _ => (Fintype.card (α × β) : ℝ)⁻¹
 
+omit [DecidableEq α] [DecidableEq β] in
 private theorem uniformProductLaw_isPMF :
     IsPMF (uniformProductLaw : α × β → ℝ) := by
   have hcard : (Fintype.card (α × β) : ℝ) ≠ 0 := by
@@ -178,6 +184,7 @@ private theorem uniformProductLaw_isPMF :
     rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
     exact mul_inv_cancel₀ hcard
 
+omit [DecidableEq α] [DecidableEq β] in
 private theorem uniformProductLaw_pos (z : α × β) :
     0 < (uniformProductLaw : α × β → ℝ) z := by
   unfold uniformProductLaw
@@ -186,6 +193,7 @@ private theorem uniformProductLaw_pos (z : α × β) :
 private def smoothedLaw (p u : α × β → ℝ) (t : ℝ) : α × β → ℝ :=
   fun z => (1 - t) * p z + t * u z
 
+omit [DecidableEq α] [DecidableEq β] [Nonempty α] [Nonempty β] in
 private theorem smoothedLaw_isPMF
     {p u : α × β → ℝ} (hp : IsPMF p) (hu : IsPMF u)
     {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
@@ -204,6 +212,7 @@ private theorem smoothedLaw_isPMF
       hp_sum, hu_sum]
     ring
 
+omit [DecidableEq α] [DecidableEq β] [Nonempty α] [Nonempty β] in
 private theorem smoothedLaw_pos
     {p u : α × β → ℝ} (hp : IsPMF p)
     (hu_pos : ∀ z, 0 < u z) {t : ℝ} (ht0 : 0 < t) (ht1 : t ≤ 1)
@@ -272,6 +281,7 @@ private noncomputable def extendedPsi (q : α × β → ℝ) : ℝ :=
     continuousEntropy (pushforward Prod.fst q) -
     continuousEntropy (pushforward Prod.snd q)
 
+omit [Nonempty α] [Nonempty β] in
 private theorem continuous_extendedPsi :
     Continuous (extendedPsi : (α × β → ℝ) → ℝ) := by
   unfold extendedPsi
@@ -285,6 +295,7 @@ private theorem continuous_extendedPsi :
     continuous_continuousEntropy.comp (continuous_pushforward Prod.snd)
   exact ((continuous_const.mul hq).sub hqX).sub hqY
 
+omit [Nonempty α] [Nonempty β] in
 private theorem extendedPsi_eq_Psi {q : α × β → ℝ} (hq : IsPMF q) :
     extendedPsi q = Psi q := by
   have hqX : IsPMF (pushforward Prod.fst q) := pushforward_isPMF hq
@@ -305,6 +316,7 @@ private noncomputable def smoothedScore
   extendedPsi (smoothedLaw p u t) -
     (t * Phi u + (1 - t) * (∑ v, V.prior v * Phi (V.comp v)))
 
+omit [Fintype α] [Fintype β] [DecidableEq α] [DecidableEq β] [Nonempty α] [Nonempty β] in
 private theorem continuous_smoothedLaw (p u : α × β → ℝ) :
     Continuous (smoothedLaw p u) := by
   unfold smoothedLaw
@@ -312,6 +324,7 @@ private theorem continuous_smoothedLaw (p u : α × β → ℝ) :
   intro z
   fun_prop
 
+omit [Nonempty α] [Nonempty β] in
 private theorem continuous_smoothedScore
     {p : α × β → ℝ} (V : Latent p) (u : α × β → ℝ) :
     Continuous (smoothedScore V u) := by
@@ -321,6 +334,7 @@ private theorem continuous_smoothedScore
     continuous_extendedPsi.comp (continuous_smoothedLaw p u)
   fun_prop
 
+omit [Nonempty α] [Nonempty β] in
 private theorem smoothedLatent_score_eq
     {p u : α × β → ℝ} (V : Latent p)
     (hp : IsPMF p) (hu : IsPMF u) {t : ℝ}
@@ -343,6 +357,7 @@ private theorem smoothedLatent_score_eq
   unfold smoothedScore
   exact congrArg (fun x : ℝ => extendedPsi (smoothedLaw p u t) - x) hsum
 
+omit [Nonempty α] [Nonempty β] in
 private theorem smoothedScore_zero
     {p : α × β → ℝ} (V : Latent p) (hp : IsPMF p)
     (u : α × β → ℝ) :

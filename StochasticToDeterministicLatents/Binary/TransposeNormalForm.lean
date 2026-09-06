@@ -116,7 +116,7 @@ private lemma mutualInfo_prior_lift {r : α × β → ℝ} (V : Latent r)
     funext v
     unfold stoch_to_det.push Latent.joint stoch_to_det.Latent.joint
     rw [Finset.sum_filter, Fintype.sum_prod_type]
-    simp only [Prod.fst]
+    simp only
     calc
       (∑ x, ∑ y, if x = v then V.prior x * V.comp x y else 0) =
           ∑ x, if x = v then V.prior x * (∑ y, V.comp x y) else 0 := by
@@ -148,7 +148,7 @@ private lemma mutualInfo_prior_lift {r : α × β → ℝ} (V : Latent r)
           V.prior v * stoch_to_det.push f (V.comp v) g
         unfold stoch_to_det.push Latent.joint stoch_to_det.Latent.joint
         rw [Finset.sum_filter, Fintype.sum_prod_type, Finset.sum_comm]
-        simp only [Prod.fst, Prod.snd]
+        simp only
         rw [Finset.mul_sum, Finset.sum_filter]
         apply Finset.sum_congr rfl
         intro z _
@@ -1114,7 +1114,7 @@ theorem nested_twoThirds_endpoint_strict {A B C D : ℝ}
   have hAB : 0 ≤ A ^ 3 + B ^ 3 := by positivity
   have hR3 : R ^ 3 = A ^ 3 + B ^ 3 := by
     rw [hR]
-    convert oneThird_rpow_cube hAB using 1 <;> norm_num
+    convert oneThird_rpow_cube hAB using 1
   have hS3 : 0 < S ^ 3 := by positivity
   nlinarith
 
@@ -1432,7 +1432,9 @@ theorem threePositiveDoubleRoots_impossible : ThreePositiveDoubleRootsImpossible
   let g : Polynomial ℝ := (X - C x) * (X - C y) * (X - C z)
   have hd : g ^ 2 ∣ P := by
     have h := three_root_squares_product_dvd P x y z hxy hxz hyz hdx hdy hdz
-    convert h using 1 <;> simp only [g] <;> ring
+    convert h using 1
+    simp only [g]
+    ring
   obtain ⟨Q, hPQ⟩ := hd
   have hgmonic : g.Monic := by
     dsimp [g]
@@ -1444,7 +1446,7 @@ theorem threePositiveDoubleRoots_impossible : ThreePositiveDoubleRootsImpossible
   have hQ : Q ≠ 0 := by
     intro h
     apply hP
-    simpa [h, hPQ]
+    simp [h, hPQ]
   have hmuldeg := natDegree_mul hg2monic.ne_zero hQ
   have hQdeg : Q.natDegree = 0 := by
     rw [natDegree_pow, hgdeg] at hmuldeg
@@ -1471,7 +1473,7 @@ private def explicitFeasibilityPolynomial (w : Cell → ℝ) : Polynomial ℝ :=
 
 private lemma explicitFeasibilityPolynomial_eval (w : Cell → ℝ) (u : ℝ) :
     (explicitFeasibilityPolynomial w).eval u = feasibilityExpression w u := by
-  simp [explicitFeasibilityPolynomial, feasibilityExpression] <;> ring
+  simp [explicitFeasibilityPolynomial, feasibilityExpression]
 
 private lemma explicitFeasibilityPolynomial_coeffs (w : Cell → ℝ) :
     (explicitFeasibilityPolynomial w).coeff 5 = 0 ∧
@@ -1491,7 +1493,7 @@ private lemma explicitFeasibilityPolynomial_coeffs (w : Cell → ℝ) :
     dsimp [a, b, c, d]
     ring
   rw [hsparse]
-  simp only [coeff_add, coeff_C_mul, coeff_X_pow, coeff_X, coeff_C,
+  simp only [coeff_add, coeff_C_mul, coeff_X_pow, coeff_C,
     if_false, if_true, Nat.reduceEqDiff]
   norm_num
 
@@ -1588,7 +1590,7 @@ theorem twoContactPolynomial_factorization : TwoContactPolynomialFactorization :
     have hn : 2 < n := by omega
     have hzero : Q.coeff n = 0 := coeff_eq_zero_of_natDegree_lt (lt_of_le_of_lt hQdeg hn)
     rw [hzero]
-    simp [coeff_X, coeff_C, hn0, Ne.symm hn0, hn1, Ne.symm hn1, hn2, Ne.symm hn2]
+    simp [coeff_X, coeff_C, hn0, Ne.symm hn1, hn2]
   have hF : F = X ^ 4 - C (2 * R) * X ^ 3 + C (R ^ 2 + 2 * T) * X ^ 2 -
       C (2 * R * T) * X + C (T ^ 2) := by
     dsimp [F, R, T]

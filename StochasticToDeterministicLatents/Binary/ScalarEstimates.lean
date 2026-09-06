@@ -199,7 +199,7 @@ theorem hasDerivAt_remainingLogFactor {x : ℝ} (hx : 0 < x) :
     (fun y : ℝ => Real.log ((1 + y ^ 3) ^ 2 / (4 * y ^ 3)))
     (-3 * (1 - x ^ 3) / (x * (1 + x ^ 3))) x
   apply hlog.congr_deriv
-  simp only [Pi.pow_apply, Function.comp_apply]
+  simp only [Pi.pow_apply]
   field_simp
   ring
 
@@ -258,7 +258,7 @@ theorem remainingRangeDerivativeLedger {x : ℝ} (hx0 : 0 < x) :
   · have hdifference := hL.sub hT
     apply hdifference.congr_deriv
     simp only [remainingDerivativeNumerator, remainingDerivativeDenominator,
-      contactDenominator, Pi.mul_apply, Pi.div_apply]
+      contactDenominator, Pi.mul_apply]
     field_simp
     ring
 
@@ -1620,7 +1620,7 @@ theorem smallPriorCubicEnvelope {q : ℝ}
     _ = edgeReward q (10 * q ^ 2) := by
       unfold edgeReward pairEntropy xLogX
       dsimp [Q, r, a, e, y]
-      ring
+      ring_nf
 
 /-- Exact rational lower bound for the quotient in the small-prior
 expression. -/
@@ -1753,10 +1753,10 @@ theorem smallPriorExactLedger {q : ℝ}
         q ^ 2 * smallPriorEnvelopeExpression q := by nlinarith
     _ ≤ edgeReward q (10 * q ^ 2) := henvelope
 
-private lemma quarticKernel_nonnegative {a : ℝ} (ha : 1 ≤ a) :
+private lemma quarticKernel_nonnegative {a : ℝ} :
     0 ≤ 15 * a ^ 4 - 108 * a + 99 := by
   nlinarith [sq_nonneg (a - 11 / 9), sq_nonneg (a ^ 2 - 121 / 81),
-    sq_nonneg (a - 1), sq_nonneg (a * a - a), ha]
+    sq_nonneg (a - 1), sq_nonneg (a * a - a)]
 
 /-- Nine copies of the eleventh power fit under the first fifteen powers on
 `[1, ∞)`. -/
@@ -1779,9 +1779,8 @@ theorem nine_mul_pow_eleven_le_sum_range_fifteen {a : ℝ} (ha : 1 ≤ a) :
     · intro x hx
       exact (hderiv x).hasDerivWithinAt
     · intro x hx
-      have hx1 : 1 ≤ x := le_of_lt (by simpa using hx)
       dsimp [f']
-      exact mul_nonneg (by positivity) (quarticKernel_nonnegative hx1)
+      exact mul_nonneg (by positivity) quarticKernel_nonnegative
   have hf : 0 ≤ f a := by
     have h := hmono (by simp) ha.le ha.le
     norm_num [f] at h ⊢

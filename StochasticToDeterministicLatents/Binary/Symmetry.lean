@@ -250,11 +250,11 @@ theorem transportCode_singletonCode (e : Cell ≃ Cell) (cell : Cell) :
   · have hz : z = e cell := by
       apply e.symm.injective
       simpa using h
-    simp [transportCode, singletonCode, h, hz]
+    simp [transportCode, singletonCode, hz]
   · have hz : z ≠ e cell := by
       intro hz
       apply h
-      simpa [hz]
+      simp [hz]
     simp [transportCode, singletonCode, h, hz]
 
 /-! ## Information transport -/
@@ -523,8 +523,8 @@ private theorem condMutualInfo_comm
 private theorem score_relabel_product
     (ex ey : Bit ≃ Bit) {p : Cell → ℝ} (L : Latent p) :
     (relabel (Equiv.prodCongr ex ey) L).score = L.score := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold Latent.score stoch_to_det.Latent.score
   rw [show stoch_to_det.Latent.joint (relabel (Equiv.prodCongr ex ey) L) =
     pushforward ((Equiv.refl L.ι).prodCongr (Equiv.prodCongr ex ey)) L.joint from
@@ -590,8 +590,8 @@ private theorem score_relabel_product
 private theorem score_relabel_transposedProduct
     (ex ey : Bit ≃ Bit) {p : Cell → ℝ} (L : Latent p) :
     (relabel (transposeCell.trans (Equiv.prodCongr ex ey)) L).score = L.score := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold Latent.score stoch_to_det.Latent.score
   rw [show stoch_to_det.Latent.joint
       (relabel (transposeCell.trans (Equiv.prodCongr ex ey)) L) =
@@ -705,8 +705,8 @@ theorem score_pullback (r : TableSymmetry) {p : Cell → ℝ}
 theorem score_reindex {p : Cell → ℝ} (L : Latent p)
     {κ : Type} [Fintype κ] [DecidableEq κ] (u : κ ≃ L.ι) :
     (reindex L u).score = L.score := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold Latent.score stoch_to_det.Latent.score
   rw [show stoch_to_det.Latent.joint (reindex L u) =
     pushforward (u.symm.prodCongr (Equiv.refl Cell)) L.joint from
@@ -844,8 +844,8 @@ namespace Binary
 theorem w3Cost_relabel
     (e : Cell ≃ Cell) {p : Cell → ℝ} (L : Latent p) (g : BinaryCode) :
     w3Cost (Latent.relabel e L) (transportCode e g) = w3Cost L g := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold w3Cost
   rw [Latent.relabel_joint]
   change
@@ -860,26 +860,23 @@ theorem w3Cost_relabel
   have hMI := Binary.condMutualInfo_congr_equiv L.joint_isPMF
     (Equiv.refl L.ι) e eid
     (fun w : L.ι × Cell => w.1) (fun w => w.2) (fun w => g w.2)
-  have hH := Binary.condEntropy_congr_equiv L.joint_isPMF
-    eid (Equiv.refl L.ι) (fun w : L.ι × Cell => g w.2) (fun w => w.1)
   rw [Binary.condMutualInfo_pushforward, Binary.condEntropy_pushforward]
   apply congrArg₂ (fun x y : ℝ => x + 3 * y)
   · convert hMI using 1
-    all_goals congr 1 <;> try rfl <;> try exact Subsingleton.elim _ _
+    all_goals congr 1
     funext w
     rcases w with ⟨i, z⟩
     simp only [eid, Function.comp_def, Equiv.prodCongr_apply,
       Prod.map_apply, Equiv.refl_apply, Equiv.symm_apply_apply]
-  · simpa [eid, Function.comp_def, Equiv.prodCongr_apply,
-      transportCode] using hH
+  · simp [Function.comp_def, Equiv.prodCongr_apply]
 
 /-- Pullback has the corresponding contravariant fixed-code cost formula. -/
 theorem w3Cost_pullback
     (e : Cell ≃ Cell) {p : Cell → ℝ}
     (L : Latent (pushforward e p)) (g : BinaryCode) :
     w3Cost (Latent.pullback e L) g = w3Cost L (transportCode e g) := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold w3Cost
   rw [Latent.pullback_joint]
   change
@@ -915,8 +912,8 @@ theorem w3Cost_reindex
     {κ : Type} [Fintype κ] [DecidableEq κ]
     (u : κ ≃ L.ι) (g : BinaryCode) :
     w3Cost (Latent.reindex L u) g = w3Cost L g := by
-  letI : Fintype L.ι := L.fin
-  letI : DecidableEq L.ι := L.dec
+  let : Fintype L.ι := L.fin
+  let : DecidableEq L.ι := L.dec
   unfold w3Cost
   rw [Latent.reindex_joint]
   change
@@ -934,8 +931,10 @@ theorem w3Cost_reindex
     (fun w : L.ι × Cell => g w.2) (fun w => w.1)
   rw [Binary.condMutualInfo_pushforward, Binary.condEntropy_pushforward]
   apply congrArg₂ (fun x y : ℝ => x + 3 * y)
-  · convert hMI using 1 <;> rfl
-  · convert hH using 1 <;> rfl
+  · convert hMI using 1
+    rfl
+  · convert hH using 1
+    rfl
 
 /-- Whole-latent observable relabeling preserves the best determinization cost. -/
 theorem w3_relabel (e : Cell ≃ Cell) {p : Cell → ℝ} (L : Latent p) :

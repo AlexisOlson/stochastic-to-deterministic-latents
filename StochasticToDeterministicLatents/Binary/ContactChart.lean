@@ -341,8 +341,7 @@ theorem hasDerivAt_pairEntropy_right {u v : ℝ} (hu : 0 < u) (hv : 0 < v) :
   rw [hder]
   apply hraw'.congr_of_eventuallyEq
   filter_upwards [] with z
-  simp only [pairEntropy, xLogX, Function.comp_apply, id_eq, Pi.sub_apply,
-    Pi.add_apply, zero_add, mul_one, add_sub_add_right_eq_sub]
+  simp only [Pi.sub_apply]
 
 /-! ## Scalar entropy ledger -/
 
@@ -376,7 +375,7 @@ def phaseReward (C : ScalarContactChart) : ℝ :=
 theorem observableInfo_expand (C : ScalarContactChart) :
     C.observableInfo = xLogX C.r - xLogX C.e - xLogX C.ell := by
   simp [observableInfo, pairEntropy, C.e_add_ell]
-  ring
+  ring_nf
 
 theorem contactEntropyGap_expand (C : ScalarContactChart) :
     C.contactEntropyGap =
@@ -439,7 +438,7 @@ def ContactEquation (C : ContactChart) (x : ℝ) : Prop :=
 /-- The contact equation forces the three nontrivial strict-domain gates. -/
 theorem strictInterior_gates_of_contactEquation
     (C : ContactChart) (x : ℝ) (hx0 : 0 < x) (hx1 : x < 1)
-    (hratio : C.ratio = x ^ 4) (h : C.ContactEquation x) :
+    (h : C.ContactEquation x) :
     C.lowMass + C.highMass < x ^ 2 ∧
       2 * (x ^ 3 / (1 + x + x ^ 2)) ≤ C.lowMass + C.highMass ∧
       C.lowMass * C.highMass < x ^ 4 := by
@@ -482,7 +481,7 @@ theorem strictInterior_gates_of_contactEquation
     by_contra hn
     have hdiff :
         C.lowMass + C.highMass - 2 * x ^ 3 / (1 + x + x ^ 2) < 0 := by
-      push_neg at hn
+      push Not at hn
       apply sub_neg.mpr
       simpa [mul_div_assoc] using hn
     exact (not_lt_of_ge hf)
@@ -539,13 +538,12 @@ theorem toScalarChart_coordinates
 theorem toScalarChart_strictInterior
     (C : ContactChart) (x : ℝ)
     (hx0 : 0 < x) (hx1 : x < 1)
-    (hratio : C.ratio = x ^ 4)
     (hmass : C.lowMass ≤ C.highMass)
     (heq : C.ContactEquation x) :
     let S := C.toScalarChart x hx0 hx1 hmass heq
     S.StrictInterior := by
   let S := C.toScalarChart x hx0 hx1 hmass heq
-  have hgates := C.strictInterior_gates_of_contactEquation x hx0 hx1 hratio heq
+  have hgates := C.strictInterior_gates_of_contactEquation x hx0 hx1 heq
   change S.StrictInterior
   unfold ScalarContactChart.StrictInterior
   refine ⟨hx1, C.toTransposeChart.pi_pos, ?_, ?_, ?_⟩
@@ -577,8 +575,8 @@ theorem toScalarChart_law
   rw [hnorm] at ha hb hc hd ⊢
   simp [TransposeChart.law, transposeMixtureLaw, tableOfEntries,
     transposeTableOfEntries, ScalarContactChart.e, ScalarContactChart.ell,
-    toScalarChart, ha, hb, hc, hd, hnorm0, cell00, cell01, cell10, cell11]
-  all_goals field_simp <;> ring_nf <;> simp
+    toScalarChart, ha, hb, hc, hd, cell00, cell01, cell10, cell11]
+  all_goals (field_simp; ring_nf; simp)
 
 /-- The proposition that the strict factor-eight inequality holds at every
 scalar presentation of a bundled contact chart.
@@ -653,7 +651,7 @@ theorem offDiagonalLoss_eq_highInformationLoss_add_lowInformationLoss
   unfold pairEntropy
   rw [add_comm C.s C.e, add_comm C.s C.ell, add_comm C.s C.r,
     her, heTotal, hellTotal]
-  ring
+  ring_nf
 
 theorem two_mul_highInformationLoss_le_offDiagonalLoss_of_orientation
     (C : ScalarContactChart) (horient : C.lowInformation ≤ C.highInformation) :
@@ -954,14 +952,7 @@ private lemma condEntropy_observable_eq_weighted_components
         intro z _
         by_cases hz : g z = label
         · simp only [hz, if_true]
-          have hisum :
-              (∑ j, if j = i then L.prior j * L.comp j z else 0) =
-                (if i = i then L.prior i * L.comp i z else 0) := by
-            apply Finset.sum_eq_single i
-            · intro j _ hji
-              simp [hji]
-            · simp
-          simpa using hisum
+          simp
         · simp [hz]
       rw [hfiber]
       by_cases hi : L.prior i = 0
@@ -1085,7 +1076,7 @@ private theorem w3Cost_constantCode_eq_zero_of_subsingleton
     by_contra h
     let _ : IsEmpty L.ι := not_nonempty_iff.mp h
     have htotal := L.prior_isPMF.total
-    simp [mass, stoch_to_det.mass] at htotal
+    simp [stoch_to_det.mass] at htotal
   let i0 : L.ι := Classical.choice hlabel
   let g0 : Fin (Fintype.card Cell) := ⟨0, by decide⟩
   have hcode : constantCode = fun _ => g0 := by rfl
@@ -1120,7 +1111,7 @@ private theorem w3Cost_constantCode_eq_zero_of_subsingleton
   have hsum : ∑ w, L.joint w = 1 := by
     simpa [mass, stoch_to_det.mass] using L.joint_isPMF.total
   have hunit : entropyOf (fun _ : L.ι × Cell => ()) L.joint = 0 := by
-    simp [entropyOf, entropy, pushforward, stoch_to_det.Hvar, stoch_to_det.H,
+    simp [entropyOf, stoch_to_det.Hvar, stoch_to_det.H,
       stoch_to_det.push, stoch_to_det.mass, hsum]
   have hconstL : entropyOf (fun _ : L.ι × Cell => i0) L.joint = 0 := by
     apply le_antisymm
@@ -1231,6 +1222,7 @@ private lemma latent_push_observable_joint (L : Latent p) :
   rw [Finset.sum_filter, Fintype.sum_prod_type]
   simpa [Latent.joint, stoch_to_det.Latent.joint] using L.mixture z
 
+omit [DecidableEq α] [DecidableEq β] in
 private lemma latent_push_prior_joint (L : Latent p) :
     stoch_to_det.push (fun w : L.ι × (α × β) => w.1) L.joint = L.prior := by
   funext v
@@ -1265,12 +1257,14 @@ private lemma entropyOf_observable_lift
         (stoch_to_det.push_push (fun w : L.ι × (α × β) => w.2) f L.joint)
     _ = stoch_to_det.push f p := by rw [latent_push_observable_joint L]
 
+omit [DecidableEq α] [DecidableEq β] in
 private lemma entropyOf_prior_joint (L : Latent p) :
     stoch_to_det.Hvar (fun w : L.ι × (α × β) => w.1) L.joint =
       stoch_to_det.H L.prior := by
   unfold stoch_to_det.Hvar
   rw [latent_push_prior_joint L]
 
+omit [DecidableEq α] [DecidableEq β] in
 private lemma entropyOf_lift_pair_prior
     {γ : Type*} [Fintype γ] [DecidableEq γ]
     (L : Latent p) (f : α × β → γ) :
@@ -1298,14 +1292,7 @@ private lemma entropyOf_lift_pair_prior
     intro z _
     by_cases hz : f z = c
     · simp only [hz, if_true]
-      have hvsum :
-          (∑ x, if x = v then L.prior x * L.comp x z else 0) =
-            (if v = v then L.prior v * L.comp v z else 0) := by
-        apply Finset.sum_eq_single v
-        · intro u _ huv
-          simp [huv]
-        · simp
-      simpa using hvsum
+      simp
     · simp [hz]
   rw [hfiber]
   by_cases hv : L.prior v = 0
@@ -1466,7 +1453,7 @@ theorem norm_mul_log_two_mul_observableInfo_eq
   rw [hlaw, hdist, hfirst, hsecond]
   unfold observableInfo pairEntropy
   rw [S.e_add_ell, xLogX_one]
-  ring
+  ring_nf
 
 end ScalarContactChart
 
@@ -1615,7 +1602,7 @@ theorem norm_mul_log_two_mul_score_eq_contactEntropyGap_add_mixingSum
       firstMarginal_table, secondMarginal_table]
     unfold stoch_to_det.H stoch_to_det.mass
     simp [tableOfEntries, twoPointMass, Fintype.sum_prod_type, Fin.sum_univ_two]
-    ring
+    ring_nf
   change S.norm * Real.log 2 * C.toTransposeChart.latent.score =
     S.contactEntropyGap + S.mixingSum
   rw [latent_score_eq C.toTransposeChart.law_isPMF]
@@ -1654,7 +1641,7 @@ theorem norm_mul_log_two_mul_score_eq_contactEntropyGap_add_mixingSum
   rw [hlaw, hrowLawScale, hcolumnLawScale, hfirst,
     hrowFirstScale, hcolumnFirstScale]
   rw [contactEntropyGap_expand, mixingSum_expand, xLogX_one]
-  ring
+  ring_nf
 
 end ScalarContactChart
 

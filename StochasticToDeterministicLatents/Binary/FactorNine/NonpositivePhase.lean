@@ -52,8 +52,7 @@ theorem integral_Ioi_equal_pole_formula {e : ℝ} (he : 0 < e) :
       (f₁ := fun s : ℝ => -(s + e)⁻¹) (Filter.Eventually.of_forall (fun _ => rfl))
     exact hshape.congr_deriv (by
       simp only [id_eq]
-      field_simp [hne]
-      <;> ring)
+      field_simp [hne])
   have hlim : Tendsto F atTop (nhds 0) := tendsto_neg_reciprocal_add_atTop e
   have hnonneg : ∀ t ∈ Ioi (0 : ℝ), 0 ≤ 1 / ((t + e) * (t + e)) := by
     intro t ht
@@ -212,7 +211,7 @@ theorem integral_Ioc_strict_poles_formula {e ell m : ℝ} (he : 0 < e)
   have hme : 0 < m + e := by positivity
   have hml : 0 < m + ell := by positivity
   rw [Real.log_div hell0.ne' he.ne', Real.log_div hml.ne' hme.ne']
-  ring
+  ring_nf
 
 /-- Sixteen-fold capture of a positive two-pole rational kernel. -/
 theorem integral_rationalKernel_le_sixteen_mul_integral {e ell m : ℝ}
@@ -1305,10 +1304,10 @@ theorem hasDerivAt_sixteenFoldCaptureGap {x pi : ℝ}
   have hphiE := (hasDerivAt_xLogX he0.ne').comp pi haffE
   have hphiL := (hasDerivAt_xLogX hell0.ne').comp pi haffL
   have hME : HasDerivAt (fun p : ℝ => m + freeLowerMixtureMass x p) (1 - r) pi := by
-    convert haffE.const_add m using 1 <;> ring
+    convert haffE.const_add m using 1
   have hML : HasDerivAt (fun p : ℝ => m + freeUpperMixtureMass x p)
       (-(1 - r)) pi := by
-    convert haffL.const_add m using 1 <;> ring
+    convert haffL.const_add m using 1
   have hphiME := (hasDerivAt_xLogX (add_pos hm0 he0).ne').comp pi hME
   have hphiML := (hasDerivAt_xLogX (add_pos hm0 hell0).ne').comp pi hML
   have hraw := (((hphiME.sub hphiE).add (hphiML.sub hphiL)).const_mul 16).sub
@@ -1330,10 +1329,10 @@ theorem hasDerivAt_sixteenFoldCaptureGap {x pi : ℝ}
       apply hrawFull.congr_of_eventuallyEq
       filter_upwards with p
       simp only [sixteenFoldCaptureGap, captureObservableInfo, freeMixingTerm,
-        pairEntropy, Function.comp_apply, e, ell, m, r, c, Pi.sub_apply,
-        Pi.add_apply, Pi.mul_apply, Pi.neg_apply, freeLowerMixtureMass,
+        pairEntropy, Function.comp_apply, m, r, c, Pi.sub_apply,
+        Pi.add_apply, Pi.neg_apply, freeLowerMixtureMass,
         freeUpperMixtureMass]
-      ring
+      ring_nf
     exact hfun.congr_deriv (by dsimp [draw]; ring)
   apply hgapRaw.congr_deriv
   have hq0 : 0 < priorOddLogCoordinate x pi := by
