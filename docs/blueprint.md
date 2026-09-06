@@ -12,86 +12,87 @@ argument.
 
 ## 1. Laws, entropy, and codes
 
-Let `X` and `Y` take values in finite alphabets `alpha` and `beta`, and let `p` be
-their joint law. All entropies and information quantities are measured in bits. A
-zero-probability event contributes zero to entropy.
+Let $`X`$ and $`Y`$ take values in finite alphabets $`\alpha`$ and $`\beta`$,
+and let $`p`$ be their joint law. All entropies and information quantities are
+measured in bits. A zero-probability event contributes zero to entropy.
 
-A finite stochastic latent `L`, coupled to `(X,Y)`, has score
+A finite stochastic latent $`L`$, coupled to $`(X,Y)`$, has score
 
-```text
-score_p(L) = I(X;Y | L) + I(L;X | Y) + I(L;Y | X).
+```math
+\mathrm{score}_p(L) = I(X;Y \mid L) + I(L;X \mid Y) + I(L;Y \mid X).
 ```
 
 The stochastic optimum is
 
-```text
-tau(p) = inf_L score_p(L),
+```math
+\tau(p) = \inf_L \mathrm{score}_p(L),
 ```
 
 where the infimum ranges over finite stochastic latents.
 
 A canonical deterministic code has type
 
-```text
-Code(alpha,beta)
-  = (alpha x beta) -> Fin(card(alpha x beta)).
+```math
+\begin{aligned}
+&\mathrm{Code}(\alpha,\beta) \\
+&= (\alpha \times \beta) \to \mathrm{Fin}(\mathrm{card}(\alpha \times \beta)).
+\end{aligned}
 ```
 
-There is one available label for every observation cell, which is enough to encode
-every partition of the finite observation space. Any finite-valued deterministic
-code can therefore be relabeled into this canonical alphabet without changing its
-partition. The score of a canonical code `g` is
+There is one available label for every observation cell, which is enough to
+encode every partition of the finite observation space. Any finite-valued
+deterministic code can therefore be relabeled into this canonical alphabet
+without changing its partition. The score of a canonical code $`g`$ is
 
-```text
-D_p(g)
-  = I(X;Y | g) + H(g | X) + H(g | Y).
+```math
+D_p(g) = I(X;Y \mid g) + H(g \mid X) + H(g \mid Y).
 ```
 
-The Lean definition of this score is named `detScore`; `D_p(g)` is the
+The Lean definition of this score is named `detScore`; $`D_p(g)`$ is the
 reader-facing notation used throughout the exposition.
 
-Notation is deliberately typed by role. `score_p(L)` always means the score of a
-supplied stochastic latent, `tau(p)` only the stochastic optimum, `D_p(g)` the
-score of a supplied deterministic code, and `T(p)` only the deterministic
-optimum. A proof may select a latent attaining `tau(p)`, but it never renames that
-latent's score as a new objective.
+Notation is deliberately typed by role. $`\mathrm{score}_p(L)`$ always means
+the score of a supplied stochastic latent, $`\tau(p)`$ only the stochastic
+optimum, $`D_p(g)`$ the score of a supplied deterministic code, and $`T(p)`$
+only the deterministic optimum. A proof may select a latent attaining
+$`\tau(p)`$, but it never renames that latent's score as a new objective.
 
 The optimizer normal form also uses the component functional
 
-```text
-Phi(q) = 3 H(q) - 2 H(q_X) - 2 H(q_Y).
+```math
+\Phi(q) = 3 H(q) - 2 H(q_X) - 2 H(q_Y).
 ```
 
-`Phi(q)` is not a latent score. A latent decomposition uses the prior-weighted
-sum `sum_l pi_l*Phi(q_l)`, with the weights always written explicitly. For
-binary laws the stochastic optimum is computed exactly in the
-[binary stochastic optimum](binary-stochastic-optimum.md) page, at `paper proof`.
+$`\Phi(q)`$ is not a latent score. A latent decomposition uses the
+prior-weighted sum $`\sum_l \pi_l\,\Phi(q_l)`$, with the weights always written
+explicitly. For binary laws the stochastic optimum is computed exactly in the
+[binary stochastic optimum](binary-stochastic-optimum.md) page, at
+`paper proof`.
 
 The deterministic optimum is the attained finite minimum
 
-```text
-T(p) = min_{g : Code(alpha,beta)} D_p(g).
+```math
+T(p) = \min_{g : \mathrm{Code}(\alpha,\beta)} D_p(g).
 ```
 
-Only the partition of the positive support induced by `g` matters: relabeling
+Only the partition of the positive support induced by $`g`$ matters: relabeling
 code values changes no information quantity, and distinctions confined to
 zero-mass cells are ignored when codes are canonicalized.
 
 The target statements are inequalities rather than bounds on `T(p) / tau(p)`.
-This keeps the product-law boundary `tau(p) = 0` meaningful.
-For a binary product law, the constant code has score zero, so
-`D_p(c) = T(p) = tau(p) = 0`.
+This keeps the product-law boundary $`\tau(p) = 0`$ meaningful. For a binary
+product law, the constant code has score zero, so
+$`D_p(c) = T(p) = \tau(p) = 0`$.
 
 ## 2. Price the act of determinizing
 
-For a supplied stochastic latent `L` and deterministic code `g`, define
+For a supplied stochastic latent $`L`$ and deterministic code $`g`$, define
 
-```text
-W3Cost_L(g)
-  = I(L;(X,Y) | g) + 3 H(g | L),
-
-W3(L)
-  = min_{g : Code(alpha,beta)} W3Cost_L(g).
+```math
+\begin{aligned}
+\mathrm{W3Cost}_L(g) &= I(L;(X,Y) \mid g) + 3 H(g \mid L), \\[1ex]
+\mathrm{W3}(L) &= \min_{g : \mathrm{Code}(\alpha,\beta)} \mathrm{W3Cost}_L(g).
+\end{aligned}
 ```
 
 Lean names these definitions `w3Cost` and `w3`; the exposition keeps the
@@ -99,23 +100,22 @@ mathematical capitalization.
 
 There is an exact score identity
 
-```text
-D_p(g)
-  = score_p(L) + W3Cost_L(g) - 2 R_L(g),
+```math
+D_p(g) = \mathrm{score}_p(L) + \mathrm{W3Cost}_L(g) - 2 R_L(g),
 ```
 
-where `R_L(g)` is an explicit sum of four conditional mutual informations and
+where $`R_L(g)`$ is an explicit sum of four conditional mutual informations and
 is therefore nonnegative. Dropping this rebate gives
 
-```text
-D_p(g) <= score_p(L) + W3Cost_L(g).
+```math
+D_p(g) \le \mathrm{score}_p(L) + \mathrm{W3Cost}_L(g).
 ```
 
-When `L` attains `tau(p)`, minimizing over `g` yields the reusable pricing
-rule
+When $`L`$ attains $`\tau(p)`$, minimizing over $`g`$ yields the reusable
+pricing rule
 
-```text
-W3(L) <= c * tau(p)  ==>  T(p) <= (1+c) * tau(p).
+```math
+\mathrm{W3}(L) \le c\,\tau(p) \implies T(p) \le (1+c)\,\tau(p).
 ```
 
 This is the common seam between the binary bound and the open
@@ -123,21 +123,21 @@ arbitrary-alphabet factor-nine conjecture.
 
 ## 3. Why the binary search collapses
 
-On the positive, full-support `2 x 2` two-contact chart, relabeling puts the two
-conditional laws into a transposed form. Their likelihood ratios take three
-levels: neutral on the diagonal, low on one off-diagonal cell, and high on the
-other.
+On the positive, full-support $`2 \times 2`$ two-contact chart, relabeling puts
+the two conditional laws into a transposed form. Their likelihood ratios take
+three levels: neutral on the diagonal, low on one off-diagonal cell, and high
+on the other.
 
 Writing
 
-```text
-reward_L(g) = H(g) - 4 H(g | L),
+```math
+\mathrm{reward}_L(g) = H(g) - 4 H(g \mid L),
 ```
 
 gives
 
-```text
-W3Cost_L(g) = I(L;(X,Y)) - reward_L(g).
+```math
+\mathrm{W3Cost}_L(g) = I(L;(X,Y)) - \mathrm{reward}_L(g).
 ```
 
 The finite-code geometry shows that no deterministic partition beats both of the
@@ -158,40 +158,43 @@ For a full-support binary law, choose the attained optimizer from the
 normal-form argument. In the two-contact case, orient its chart so that the
 high likelihood-ratio cell is fixed. Write
 
-```text
-K   = I(L;(X,Y)),
-R_H = H(high) - 4 H(high | L).
+```math
+\begin{aligned}
+K &= I(L;(X,Y)), \\
+R_H &= H(\mathrm{high}) - 4 H(\mathrm{high} \mid L).
+\end{aligned}
 ```
 
-Choose `g_chart` to be the high singleton when `R_H >= 0`, and the constant
-otherwise. The exact fixed-code identity gives
+Choose $`g_{\mathrm{chart}}`$ to be the high singleton when $`R_H \ge 0`$, and
+the constant otherwise. The exact fixed-code identity gives
 
-```text
-W3Cost_L(g_chart) = K - max(0,R_H).
+```math
+\mathrm{W3Cost}_L(g_{\mathrm{chart}}) = K - \max(0,R_H).
 ```
 
 The analytic proof separates the two signs of `R_H`. In the nonpositive phase,
-integral comparisons bound `K` by eight times the between-component part of the
-latent score. In the positive phase, an exact loss split and two seam endpoint
-estimates give the corresponding bound for `K-R_H`. Both phases yield
+integral comparisons bound $`K`$ by eight times the between-component part of
+the latent score. In the positive phase, an exact loss split and two seam
+endpoint estimates give the corresponding bound for $`K-R_H`$. Both
+phases yield
 
-```text
-W3(L) <= W3Cost_L(g_chart) <= 8 * tau(p).
+```math
+\mathrm{W3}(L) \le \mathrm{W3Cost}_L(g_{\mathrm{chart}}) \le 8\,\tau(p).
 ```
 
 The one-component case has zero cost. In the two-contact case, catalog recovery
-transports the selected chart code to a member of the catalog defined from `p`.
-Pricing gives that member deterministic score at most `9*tau(p)`, and the
-law-only selector minimizes deterministic score over the catalog. Thus
+transports the selected chart code to a member of the catalog defined from
+$`p`$. Pricing gives that member deterministic score at most $`9\,\tau(p)`$,
+and the law-only selector minimizes deterministic score over the catalog. Thus
 
-```text
-T(p) <= D_p(g_p) <= 9*tau(p)
+```math
+T(p) \le D_p(g_p) \le 9\,\tau(p)
 ```
 
-for every full-support binary law. Explicit smoothing extends the bound on `T`
-to every binary law, and finite attainment supplies a deterministic witness.
-The sparse transfer provides neither a selected-latent `W3` bound nor a bound
-for `g_p` at the boundary.
+for every full-support binary law. Explicit smoothing extends the bound on
+$`T`$ to every binary law, and finite attainment supplies a deterministic
+witness. The sparse transfer provides neither a selected-latent $`\mathrm{W3}`$
+bound nor a bound for $`g_p`$ at the boundary.
 
 These conclusions are kernel-verified in
 [`Binary/FactorNine.lean`](../StochasticToDeterministicLatents/Binary/FactorNine.lean).
@@ -209,16 +212,16 @@ p = [[p00, p01],
      [p10, p11]],
 ```
 
-define the law-only selector `g_p` as follows:
+define the law-only selector $`g_p`$ as follows:
 
-1. Compute `Delta = p00*p11 - p01*p10`. If it is zero, return the constant code.
-2. If `Delta > 0`, use the diagonal pair `{00,11}`. If `Delta < 0`, use the
-   off-diagonal pair `{01,10}`.
+1. Compute $`\Delta = p_{00}\,p_{11} - p_{01}\,p_{10}`$. If it is zero, return the constant code.
+2. If $`\Delta > 0`$, use the diagonal pair $`\{00,11\}`$. If $`\Delta < 0`$, use the
+off-diagonal pair $`\{01,10\}`$.
 3. Choose the lower-mass cell in that pair. On an exact mass tie, use the first
-   cell in row-major order `00 < 01 < 10 < 11`.
+cell in row-major order $`00 < 01 < 10 < 11`$.
 4. Form the singleton code separating that cell from the other cells, and
    canonicalize its labels on positive support.
-5. Compare its exact `D_p` score with the constant code's. Return the singleton
+5. Compare its exact $`D_p`$ score with the constant code's. Return the singleton
    only when its score is strictly smaller; the constant wins a final score tie.
 
 Codes are canonicalized on positive support so that zero-mass cells do not create
@@ -232,17 +235,17 @@ refinement theorems connecting their outputs to this selector.
 
 ### A final-score tie
 
-Let `q` be the count table
+Let $`q`$ be the count table
 
 ```text
 q = [[14,1],
      [ 1,4]],     p = q/20.
 ```
 
-The checkerboard products are `56` and `1`, so the active pair is `{00,11}`.
-Cell `11` has the lower mass. Its singleton and the constant code have equal
-deterministic scores, so the selector returns the constant partition
-`{00,01,10,11}`.
+The checkerboard products are `56` and $`1`$, so the active pair is
+$`\{00,11\}`$. Cell `11` has the lower mass. Its singleton and the constant
+code have equal deterministic scores, so the selector returns the constant
+partition $`\{00,01,10,11\}`$.
 
 The [exact calculation](../examples/README.md#final-score-tie) gives the two
 identical integer score keys. The examples page also covers a product law,
@@ -260,8 +263,8 @@ for every finite law p,
 select an attained tau-optimal L with W3(L) <= 8 * tau(p).
 ```
 
-Unlike the binary estimate proved above, this arbitrary-alphabet estimate remains
-a `conjecture`. Hence `T(p) <= 9*tau(p)` for arbitrary finite alphabets also
-remains a conjecture. The goal is a deterministic construction whose low cost
-follows from a readable structural argument and whose behavior at exact ties and
-zero-mass boundaries is explicit.
+Unlike the binary estimate proved above, this arbitrary-alphabet estimate
+remains a `conjecture`. Hence $`T(p) \le 9\,\tau(p)`$ for arbitrary finite
+alphabets also remains a conjecture. The goal is a deterministic construction
+whose low cost follows from a readable structural argument and whose behavior
+at exact ties and zero-mass boundaries is explicit.

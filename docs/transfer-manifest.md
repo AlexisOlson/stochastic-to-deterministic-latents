@@ -30,7 +30,7 @@ The decision words are normative:
 | **rewrite** | Small exact worked cases | Add an example only when it exercises a public definition or theorem boundary. | Include exact input, selected code, and intended comparison. |
 | **cite** | [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) | Credit the primary mathematical and Lean ancestor in the README, NOTICE, and adapted files. | Do not mirror its historical module layout. |
 | **cite** | [`satchlj/stoch-to-det-lower`](https://github.com/satchlj/stoch-to-det-lower) | Cite the exact `1.960073002187` lower-bound theorem as external context for the universal constant. | State its compiler-backed `native_decide` verification model; do not vendor its certificate or call it locally kernel-verified. |
-| **defer** | Local `5 x 5` lower-bound witness and support-subset certificate | Reconsider as a standalone public lower-bound artifact after the theorem-facing upper-bound release. | Require a clean verifier, exact witness data, provenance, and an independent replay before stating its numerical bound publicly. |
+| **defer** | Local $`5 \times 5`$ lower-bound witness and support-subset certificate | Reconsider as a standalone public lower-bound artifact after the theorem-facing upper-bound release. | Require a clean verifier, exact witness data, provenance, and an independent replay before stating its numerical bound publicly. |
 | **defer** | General-alphabet proof routes and large regression families | Add only a stable route or witness that clarifies a live public claim. | `GEN-W3-8` remains a conjecture. |
 | **exclude** | Raw reports, transcripts, review conversations, orchestration records, abandoned branches, bulk exploratory output, and machine metadata | Do not transfer these artifacts. Rewrite only the mathematical fact that survives review. | Relevant facts must enter through a claim, proof, example, or provenance note. |
 
@@ -57,7 +57,7 @@ sharper route. Local audits are in the
 |---|---|---|
 | `docs/blueprint.md`, `docs/binary-factor-nine.md` | Construction and complete certificate-free C9 proof | Keep the full-support selector and selected-latent guarantees distinct from the all-law bound on `T`. |
 | `docs/binary-stochastic-optimum.md`, `scripts/check_stochastic_optimum_identities.py` | Paper-proof exposition of the exact binary stochastic optimum, with a sympy replay of its identities | Blueprint nodes for its four rows; Lean proofs of the target signatures in the contracts page. |
-| `Pricing.lean` | Audited pricing identity, rebate, minimizer, and conditional theorem | Supplies the factor `1+c` when an optimal latent's cost bound is given. |
+| `Pricing.lean` | Audited pricing identity, rebate, minimizer, and conditional theorem | Supplies the factor $`1+c`$ when an optimal latent's cost bound is given. |
 | `Binary/Table.lean`, `Binary/Selector.lean` | Audited table, support, catalog, and mathematical-selector interfaces | General support-partition canonicalization and executable refinement remain target contracts. |
 | `Binary/CountSelector.lean` | Executable count/rational definitions and audited structural lemmas | Prove normalization, score-key, support, and count/rational-to-real refinement. |
 | `Binary/Reduction.lean` | Audited cost dominance over canonical `BinaryCode` | Preserve its supplied-chart and output-alphabet scope. |
