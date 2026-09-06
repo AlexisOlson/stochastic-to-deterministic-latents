@@ -1002,4 +1002,7 @@ the `Y`-label exchange that orients the chart's determinant. The
 target declarations for the four rows are listed in the
 [Lean contracts](lean-contracts.md#binary-stochastic-optimum). The natural
 order is the rational test (a finite algebraic statement once Theorem 3.2
-is formalized), then the two-component bound, then the cubic.
+is formalized), then the two-component bound, then the cubic. The value of
+`tau` in the full-support oriented case of Theorem 6.7, without uniqueness,
+was kernel-verified in the reviewed source workspace in the upstream
+definitions of `tau`, `Psi`, and `Phi`; that proof is not admitted here.
