@@ -51,7 +51,7 @@ $x$ first on its line.
 
 3b. Tight: $x<y$ and $y>x$.
 
-3c. Tag-like: $a<b>c$ and $x<y>z$.
+3c. Tag-like shapes moved to section 11: they swallow the rest of the page.
 
 3d. Angle brackets: $\langle c, x \rangle$.
 
@@ -279,3 +279,9 @@ b$ end.
 10g. Trailing backslash-space: $a\ b$.
 
 10h. Double dollar inline on one line: $$e = mc^2$$ mid sentence.
+
+## 11. Destructive case, kept last
+
+11a. Tag-like inside math, first render showed the unclosed HTML tag swallowing every later case: $a<b>c$ and $x<y>z$.
+
+11b. Text after it, to see whether it survives.
