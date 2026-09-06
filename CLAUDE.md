@@ -78,7 +78,8 @@ sign, as in `` $`\tau(p) \le T(p)`$ ``. Display math uses a ```` ```math ````
 fence. Plain-dollar math is never used: GitHub applies Markdown escapes and
 emphasis inside it, so braces, thin spaces, and underscores break silently,
 and a `<` before a letter becomes an HTML tag. The `verify` job fails on any
-dollar sign that does not touch a backtick; run the same check locally:
+dollar sign that does not touch a backtick; run the same check locally, from
+Git Bash on Windows, where no output and exit status 123 is the passing case:
 
 ```sh
 git ls-files '*.md' | xargs grep -nP '(?<!`)\x24(?!`)'
