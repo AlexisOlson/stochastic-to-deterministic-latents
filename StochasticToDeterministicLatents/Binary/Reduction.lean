@@ -102,36 +102,39 @@ private lemma concaveOn_scalarSingletonReward_difference
     have hv : HasDerivAt (fun t : Real => c + t * delta) delta pi := by
       have h := (hasDerivAt_const (x := pi) (c := c)).add
         ((hasDerivAt_id' (x := pi)).mul_const delta)
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
     have hu : HasDerivAt (fun t : Real => b - t * delta) (-delta) pi := by
       have h := (hasDerivAt_const (x := pi) (c := b)).sub
         ((hasDerivAt_id' (x := pi)).mul_const delta)
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
     have hhv : HasDerivAt
         (fun t : Real => Real.binEntropy (c + t * delta))
         ((Real.log (1 - (c + pi * delta)) - Real.log (c + pi * delta)) * delta) pi := by
-      convert! (Real.hasDerivAt_binEntropy hvpos.ne' hvlt.ne).comp pi hv using 1 <;>
-        simp [Function.comp_def]
+      convert! (Real.hasDerivAt_binEntropy hvpos.ne' hvlt.ne).comp pi hv using 1
     have hhu : HasDerivAt
         (fun t : Real => Real.binEntropy (b - t * delta))
         ((Real.log (1 - (b - pi * delta)) - Real.log (b - pi * delta)) *
           (-delta)) pi := by
-      convert! (Real.hasDerivAt_binEntropy hupos.ne' hult.ne).comp pi hu using 1 <;>
-        simp [Function.comp_def]
+      convert! (Real.hasDerivAt_binEntropy hupos.ne' hult.ne).comp pi hu using 1
     have hlinear : HasDerivAt
         (fun t : Real => 4 * (1 - 2 * t) * entropyGap)
         (-8 * entropyGap) pi := by
       have haff : HasDerivAt (fun t : Real => 1 - 2 * t) (-2) pi := by
         have h := (hasDerivAt_const (x := pi) (c := (1 : Real))).sub
           ((hasDerivAt_id' (x := pi)).const_mul 2)
-        convert! h using 1 <;> simp <;> ring
+        convert! h using 1
+        simp
       have h := (haff.const_mul 4).mul_const entropyGap
       have heq : (-8 : Real) * entropyGap = 4 * (-2) * entropyGap := by ring
       rw [heq]
       exact h
     have hder : HasDerivAt f (f' pi) pi := by
       dsimp [f, f']
-      convert! (hhv.sub hhu).add hlinear using 1 <;> simp <;> ring
+      convert! (hhv.sub hhu).add hlinear using 1
+      simp
+      ring
     exact hder.hasDerivWithinAt
   · intro pi hpi
     simp only [interior_Icc, mem_Ioo] at hpi
@@ -151,25 +154,30 @@ private lemma concaveOn_scalarSingletonReward_difference
     have hv : HasDerivAt (fun t : Real => c + t * delta) delta pi := by
       have h := (hasDerivAt_const (x := pi) (c := c)).add
         ((hasDerivAt_id' (x := pi)).mul_const delta)
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
     have hu : HasDerivAt (fun t : Real => b - t * delta) (-delta) pi := by
       have h := (hasDerivAt_const (x := pi) (c := b)).sub
         ((hasDerivAt_id' (x := pi)).mul_const delta)
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
     have hvlog : HasDerivAt
         (fun t : Real => Real.log (1 - (c + t * delta)) -
           Real.log (c + t * delta))
         ((-delta) / (1 - (c + pi * delta)) - delta / (c + pi * delta)) pi := by
       have h := (((hasDerivAt_const pi 1).sub hv).log
         (sub_pos.mpr hvlt).ne').sub (hv.log hvpos.ne')
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
     have hulog : HasDerivAt
         (fun t : Real => Real.log (1 - (b - t * delta)) -
           Real.log (b - t * delta))
         (delta / (1 - (b - pi * delta)) + delta / (b - pi * delta)) pi := by
       have h := (((hasDerivAt_const pi 1).sub hu).log
         (sub_pos.mpr hult).ne').sub (hu.log hupos.ne')
-      convert! h using 1 <;> simp <;> ring
+      convert! h using 1
+      simp
+      ring
     have hder : HasDerivAt f' (f'' pi) pi := by
       have hraw : HasDerivAt f'
           (delta * ((-delta) / (1 - (c + pi * delta)) -
@@ -178,8 +186,7 @@ private lemma concaveOn_scalarSingletonReward_difference
             delta / (b - pi * delta))) pi := by
         dsimp [f']
         convert! ((hvlog.const_mul delta).add
-          (hulog.const_mul delta)).sub_const (8 * entropyGap) using 1 <;>
-            simp <;> ring
+          (hulog.const_mul delta)).sub_const (8 * entropyGap) using 1
       simpa [f''] using hraw
     exact hder.hasDerivWithinAt
   · intro pi hpi
@@ -323,8 +330,9 @@ private lemma convexOn_scalarBlockReward_add_equalMass
     have hder : HasDerivAt f (f' t) t := by
       have hraw := hM.sub (((hX.const_mul (1 - pi)).add
         (hY.const_mul pi)).const_mul 4)
-      convert! hraw using 1 <;>
-        simp only [f, f', Function.comp_apply, Pi.sub_apply, Pi.add_apply] <;> ring
+      convert! hraw using 1
+      simp only [f']
+      ring
     exact hder.hasDerivWithinAt
   · intro t ht
     simp only [interior_Icc, mem_Ioo] at ht
@@ -356,8 +364,9 @@ private lemma convexOn_scalarBlockReward_add_equalMass
       have hraw := hM'.sub
         (((hX'.const_mul (1 - pi)).add
           (hY'.const_mul pi)).const_mul 4)
-      convert! hraw using 1 <;>
-        simp only [f', f'', Pi.sub_apply, Pi.add_apply] <;> ring
+      convert! hraw using 1
+      simp only [f'']
+      ring
     exact hder.hasDerivWithinAt
   · intro t ht
     simp only [interior_Icc, mem_Ioo] at ht
@@ -512,10 +521,12 @@ private lemma scalarBlockReward_add_equalMass_le_merge
         refine hraw.congr_of_eventuallyEq
           (Filter.Eventually.of_forall fun _ => ?_)
         rfl
-      convert hraw' using 1 <;> ring
+      convert hraw' using 1
+      ring
     have hraw := (hfirst.sub hequal).sub_const (scalarBlockReward pi b c)
-    convert! hraw using 1 <;>
-      simp only [f, f', Pi.sub_apply, Pi.add_apply] <;> ring
+    convert! hraw using 1
+    simp only [f']
+    ring
   have hderiv_nonneg : ∀ t ∈ interior (Icc (0 : Real) n), 0 ≤ deriv f t := by
     intro t ht
     rw [(hderiv t ht).deriv]
@@ -653,18 +664,11 @@ private lemma log_two_mul_finiteCodeReward_eq_sum_scalarBlockRewards
           intro z _
           by_cases hz : g z = label
           · simp only [hz, if_true]
-            have hisum :
-                (∑ j, if j = i then D.latent.prior j * D.latent.comp j z else 0) =
-                  (if i = i then D.latent.prior i * D.latent.comp i z else 0) := by
-              apply Finset.sum_eq_single i
-              · intro j _ hji
-                simp [hji]
-              · simp
-            simpa using hisum
+            simp
           · simp [hz]
         rw [hfiber]
         by_cases hi : D.latent.prior i = 0
-        · simp [hi, entropyOf, stoch_to_det.H, mass]
+        · simp [hi, entropyOf, stoch_to_det.H]
         · have hipos : 0 < D.latent.prior i :=
             lt_of_le_of_ne (D.latent.prior_isPMF.nonneg i) (Ne.symm hi)
           simpa [entropyOf, stoch_to_det.Hvar] using stoch_to_det.H_smul
@@ -861,7 +865,7 @@ private lemma finiteCodeReward_le_max_equalMassCoalescings
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
       simp only [if_neg hg1_ne_g0, if_pos hg0, sub_zero]
       simp [TransposeChart.firstComponent, TransposeChart.secondComponent,
-        transposeTableOfEntries, tableOfEntries, cell00, cell11, x0, y0, n]
+        transposeTableOfEntries, tableOfEntries, cell11, x0, y0, n]
       congr 1 <;> ring
     have h00g1 : F (coalesceEqualMassAt00 g) g1 =
         scalarBlockReward D.pi x1 y1 := by
@@ -869,21 +873,21 @@ private lemma finiteCodeReward_le_max_equalMassCoalescings
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
       simp only [if_pos hg1, if_neg hg0_ne_g1, add_zero]
       simp [TransposeChart.firstComponent, TransposeChart.secondComponent,
-        transposeTableOfEntries, tableOfEntries, cell00, cell11, x1, y1]
+        transposeTableOfEntries, tableOfEntries, cell11, x1, y1]
     have h11g0 : F (coalesceEqualMassAt11 g) g0 =
         scalarBlockReward D.pi x0 y0 := by
       dsimp [F, coalesceEqualMassAt11]
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
       simp only [if_pos hg0, if_neg hg1_ne_g0, add_zero]
       simp [TransposeChart.firstComponent, TransposeChart.secondComponent,
-        transposeTableOfEntries, tableOfEntries, cell00, cell11, x0, y0]
+        transposeTableOfEntries, tableOfEntries, cell00, x0, y0]
     have h11g1 : F (coalesceEqualMassAt11 g) g1 =
         scalarBlockReward D.pi (x1 + n) (y1 + n) := by
       dsimp [F, coalesceEqualMassAt11]
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
       simp only [if_neg hg0_ne_g1, if_pos hg1, sub_zero]
       simp [TransposeChart.firstComponent, TransposeChart.secondComponent,
-        transposeTableOfEntries, tableOfEntries, cell00, cell11, x1, y1, n]
+        transposeTableOfEntries, tableOfEntries, cell00, x1, y1, n]
     have hrest00 : ∀ label ∈ ((Finset.univ.erase g0).erase g1),
         F (coalesceEqualMassAt00 g) label = F g label := by
       intro label hlabel
@@ -894,8 +898,7 @@ private lemma finiteCodeReward_le_max_equalMassCoalescings
       have hc00 : g cell00 ≠ label := by simpa [g0] using Ne.symm hlabel0
       dsimp [F, coalesceEqualMassAt00]
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
-      simp [g0, g1, hlabel0, hlabel1, hc00, hc11,
-        Ne.symm hlabel0, Ne.symm hlabel1]
+      simp [hc00, hc11]
     have hrest11 : ∀ label ∈ ((Finset.univ.erase g0).erase g1),
         F (coalesceEqualMassAt11 g) label = F g label := by
       intro label hlabel
@@ -906,8 +909,7 @@ private lemma finiteCodeReward_le_max_equalMassCoalescings
       have hc00 : g cell00 ≠ label := by simpa [g0] using Ne.symm hlabel0
       dsimp [F, coalesceEqualMassAt11]
       rw [pushforward_replaceCellLabel, pushforward_replaceCellLabel]
-      simp [g0, g1, hlabel0, hlabel1, hc00, hc11,
-        Ne.symm hlabel0, Ne.symm hlabel1]
+      simp [hc00, hc11]
     have hsumg := sum_univ_eq_two_terms_add_erase (F g) hsame
     have hsum00 :=
       sum_univ_eq_two_terms_add_erase (F (coalesceEqualMassAt00 g)) hsame
@@ -1041,7 +1043,7 @@ private lemma finiteCodeReward_of_equalMassCells_le_max
     intro z
     rcases z with ⟨i, j⟩
     fin_cases i <;> fin_cases j <;>
-      simp [gn, gl, gh, cell00, cell01, cell10, cell11, hequal, hequal']
+      simp [gn, gl, gh, cell01, cell10, cell11, hequal, hequal']
   have hF : ∀ label, F label = scalarBlockReward D.pi
       ((if gn = label then n else 0) +
         (if gl = label then D.b else 0) +
@@ -1058,8 +1060,10 @@ private lemma finiteCodeReward_of_equalMassCells_le_max
       simpa [gn, cell00, cell11] using hequal.symm
     simp only [show g (0, 0) = gn by rfl,
       show g (0, 1) = gl by rfl, show g (1, 0) = gh by rfl, h11]
-    by_cases hng : gn = label <;> simp [hng] <;>
+    by_cases hng : gn = label
+    · simp [hng]
       congr 1 <;> dsimp [n] <;> ring
+    · simp [hng]
   have hsum : Real.log 2 * finiteCodeReward D.latent g =
       ∑ label ∈ ({gn, gl, gh} : Finset γ), F label := by
     rw [log_two_mul_finiteCodeReward_eq_sum_scalarBlockRewards]
@@ -1105,22 +1109,22 @@ private lemma finiteCodeReward_of_equalMassCells_le_max
       · have hcase : (∑ label ∈ ({gn, gl, gh} : Finset γ), F label) =
             scalarBlockReward D.pi D.c D.b +
               scalarBlockReward D.pi (D.b + n) (D.c + n) := by
-          simp [hln, hhn, Ne.symm hhn, hF, add_comm, add_left_comm, add_assoc]
+          simp [hln, hhn, Ne.symm hhn, hF, add_comm, add_left_comm]
         rw [hcase]
         exact le_max_right _ _
     · by_cases hhn : gh = gn
       · have hcase : (∑ label ∈ ({gn, gl, gh} : Finset γ), F label) =
             scalarBlockReward D.pi D.b D.c +
               scalarBlockReward D.pi (D.c + n) (D.b + n) := by
-          simp [hln, hhn, Ne.symm hln, hF, add_comm, add_left_comm, add_assoc]
+          simp [hln, hhn, Ne.symm hln, hF, add_comm]
         rw [hcase]
         exact hlowHigh.trans (le_max_right _ _)
       · by_cases hhl : gh = gl
         · have hcase : (∑ label ∈ ({gn, gl, gh} : Finset γ), F label) =
               scalarBlockReward D.pi n n +
                 scalarBlockReward D.pi (D.b + D.c) (D.b + D.c) := by
-            simp [hln, hhn, hhl, Ne.symm hln, Ne.symm hhn, hF,
-              add_comm, add_left_comm, add_assoc]
+            simp [hln, hhl, Ne.symm hln, hF,
+              add_comm, add_left_comm]
           rw [hcase]
           have hnneg := scalarBlockReward_equal_nonpos
             (pi := D.pi) (x := n) hn.le hnle

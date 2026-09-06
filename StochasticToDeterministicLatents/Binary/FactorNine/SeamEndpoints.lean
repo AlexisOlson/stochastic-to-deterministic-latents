@@ -107,14 +107,14 @@ theorem bridge_ge_midpoint_payment_at_balancedSeam {x : ℝ} (hx0 : 0 < x) (hx1 
   have hm : 0 < contactMidpoint x := by unfold contactMidpoint contactDenominator; positivity
   have hs : 0 < s := by dsimp [s]; positivity
   have hμ : μ (Set.univ) = ENNReal.ofReal s := by
-    simp [μ, Real.volume_Ioc, hs.le]
-  letI : MeasureTheory.IsFiniteMeasure μ := MeasureTheory.IsFiniteMeasure.mk (by rw [hμ]; exact ENNReal.ofReal_lt_top)
+    simp [μ, Real.volume_Ioc]
+  let : MeasureTheory.IsFiniteMeasure μ := MeasureTheory.IsFiniteMeasure.mk (by rw [hμ]; exact ENNReal.ofReal_lt_top)
   have hμ0 : μ ≠ 0 := by
     intro hz
     have := congrArg (fun ν : Measure ℝ => ν Set.univ) hz
     rw [hμ] at this
     exact (not_le_of_gt hs) (by simpa [ENNReal.ofReal_eq_zero] using this)
-  letI : NeZero μ := ⟨hμ0⟩
+  let : NeZero μ := ⟨hμ0⟩
   let k : ℝ → ℝ := fun z => Real.log (1 + mixingGap C / ((z + C.r) * (z + 1)))
   have hconv : ConvexOn ℝ (Ici 0) k := mixingSlopeKernel_convex C
   have hcont : ContinuousOn k (Ici 0) := by
@@ -210,7 +210,7 @@ def balancedSeamEntropyEnvelope (x : ℝ) : ℝ :=
   (1 / 2) * (1 + Real.log (Q / r)) +
     ((1 + seamWidthRatio x) / 2) * (1 + Real.log (Q / (r + s)))
 
-theorem highArmEntropy_le_at_balancedSeam {x : ℝ} (hx0 : 0 < x) (hx1 : x ≤ 2 / 5) :
+theorem highArmEntropy_le_at_balancedSeam {x : ℝ} (hx0 : 0 < x) :
     highArmEntropy x (1 / 2) (2 * contactMidpoint x) ≤ x ^ 4 * balancedSeamEntropyEnvelope x := by
   let r : ℝ := x ^ 4
   let s : ℝ := 2 * contactMidpoint x
@@ -238,7 +238,7 @@ theorem highArmEntropy_le_at_balancedSeam {x : ℝ} (hx0 : 0 < x) (hx1 : x ≤ 2
         (1 / 2) * pairEntropy (x ^ 4 + 2 * contactMidpoint x) 1 ≤
         (1 / 2) * (r * (1 + Real.log (Q / r))) +
           (1 / 2) * (q * (1 + Real.log (Q / q))) := by
-      convert add_le_add hleft' hright' using 1 <;> dsimp [r, s, q, Q] <;> norm_num
+      convert add_le_add hleft' hright' using 1
     _ = x ^ 4 * balancedSeamEntropyEnvelope x := by
       unfold balancedSeamEntropyEnvelope
       dsimp [r, s, q, Q] at ht ⊢
@@ -306,7 +306,7 @@ theorem proxy_ge_at_balancedSeam {x : ℝ} (hx0 : 0 < x) (hx1 : x ≤ 2 / 5) :
     strictProxy x (1 / 2) (2 * contactMidpoint x) ≥ contactMidpoint x * (balancedSeamScalar x + remainingLogFactor x) := by
   have hp := bridge_ge_midpoint_payment_at_balancedSeam hx0 hx1
   rw [bridgeDerivative_at_balancedMidpoint hx0] at hp
-  have hA := highArmEntropy_le_at_balancedSeam hx0 hx1
+  have hA := highArmEntropy_le_at_balancedSeam hx0
   have hid := balancedSeamEntropyEnvelope_identity hx0
   unfold strictProxy
   nlinarith
@@ -344,7 +344,8 @@ theorem hasDerivAt_balancedSeamScalar {x : ℝ} (hx : 0 < x) :
   have hx3d : HasDerivAt (fun y : ℝ => y^3) (3*x^2) x := by simpa using hasDerivAt_pow 3 x
   have haRaw := (hid.add hx2).add hx3d
   have ha : HasDerivAt (fun y : ℝ => y+y^2+y^3) (1+2*x+3*x^2) x := by
-    apply haRaw.congr_deriv <;> ring
+    apply haRaw.congr_deriv
+    ring
   have hL := hasDerivAt_remainingLogFactor hx
   have hn1 := (hid.const_add 1).mul (hx2.const_add 1)
   have hn := hn1.const_mul 4
@@ -583,7 +584,8 @@ theorem lowPriorSeamMixingMargin_antitoneOn : AntitoneOn lowPriorSeamMixingMargi
     convert (show
       3 * (-(3 * (4 * x ^ 3))) * (1 - x ^ 4) ^ 2 +
           3 * (1 - 3 * x ^ 4) * (2 * (1 - x ^ 4) * (-(4 * x ^ 3))) -
-          (12 / 5) * (2 * contactMidpointDerivative x) ≤ 0 by linarith) using 1 <;> ring
+          (12 / 5) * (2 * contactMidpointDerivative x) ≤ 0 by linarith) using 1
+    ring
 
 theorem lowPriorSeamMixingMargin_pos {x : ℝ} (hx0 : 0 < x) (hx1 : x ≤ 2 / 5) :
     0 < lowPriorSeamMixingMargin x := by
@@ -817,7 +819,7 @@ theorem lowPriorSeamEntropyEnvelope_eq (x : ℝ) : lowPriorSeamEntropyEnvelope x
       3 * (x ^ 4 + 2 * contactMidpoint x) *
         (Real.log ((1 + x ^ 4 + 2 * contactMidpoint x) / (x ^ 4 + 2 * contactMidpoint x)) + 1) := by
   unfold lowPriorSeamEntropyEnvelope
-  congr 3 <;> ring
+  ring_nf
 
 theorem hasDerivAt_lowPriorSeamIntegral {u : ℝ} (hu : 0 < u + 1) :
     HasDerivAt lowPriorSeamIntegral (Real.log ((u + 17 / 5) / (u + 1))) u := by
@@ -1209,7 +1211,7 @@ theorem lowPriorSeamIntegral_panel_lower {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤
       have hd := (hdplus.sub hdminus).sub hdlog
       change HasDerivAt h _ c at hd
       rw [hd.deriv]
-      simp only [zero_add, one_mul, zero_sub, sub_neg_eq_add]
+      simp only [zero_add, zero_sub]
       rw [Real.log_div hp17.ne' hpc.ne', Real.log_div hn17.ne' hmc.ne',
         Real.log_div hm17.ne' hm1.ne']
       ring_nf
@@ -1232,13 +1234,15 @@ theorem lowPriorSeamIntegral_panel_lower {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤
       ring_nf at hPpair hQpair hPsq hQsq hlog
       have hPpair' : Real.log (P - c ^ 2) =
           Real.log (17 / 5 + m + c) + Real.log (17 / 5 + m - c) := by
-        convert hPpair using 1 <;> ring
+        convert hPpair using 1
+        ring_nf
       have hQpair' : Real.log (Q - c ^ 2) =
           Real.log (1 + m + c) + Real.log (1 + m - c) := by
-        convert hQpair using 1 <;> ring
+        convert hQpair using 1 <;> ring_nf
       have hQpair'' : Real.log (-c ^ 2 + Q) =
           Real.log (1 + m + c) + Real.log (1 + m - c) := by
-        convert hQpair' using 1 <;> ring
+        convert hQpair' using 1
+        ring_nf
       have hlog' :
           2 * Real.log (17 / 5 + m) - 2 * Real.log (1 + m) ≤
             (Real.log (17 / 5 + m + c) + Real.log (17 / 5 + m - c)) -
@@ -1250,7 +1254,7 @@ theorem lowPriorSeamIntegral_panel_lower {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤
       linarith [hlog']
   have hh := hmono (show (0 : ℝ) ∈ Set.Icc 0 c₀ by exact ⟨le_rfl, hc₀⟩)
     (show c₀ ∈ Set.Icc 0 c₀ by exact ⟨hc₀, le_rfl⟩) hc₀
-  have hz : h 0 = 0 := by dsimp [h]; ring
+  have hz : h 0 = 0 := by dsimp [h]; ring_nf
   rw [hz] at hh
   dsimp [h, m, c₀] at hh
   have hplus : (a + b) / 2 + (b - a) / 2 = b := by ring
@@ -1267,7 +1271,7 @@ theorem lowPriorSeamIntegral_twoFifths_lower :
   have he0 : lowPriorSeamIntegral 0 = 0 := by
     unfold lowPriorSeamIntegral
     rw [show (0 : ℝ) + 1 = 1 by norm_num, Real.log_one]
-    ring
+    ring_nf
   have h1 := lowPriorSeamIntegral_panel_lower (a := (0 : ℝ)) (b := 125 / 156)
     (by norm_num) (by norm_num)
   have h2 := lowPriorSeamIntegral_panel_lower (a := (125 : ℝ) / 156) (b := 125 / 78)

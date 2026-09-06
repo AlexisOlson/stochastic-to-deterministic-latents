@@ -116,7 +116,7 @@ private theorem detScore_pickLowerScore_le_right
     detScore p (pickLowerScore p g h) ≤ detScore p h := by
   by_cases hscore : detScore p g ≤ detScore p h
   · simp [pickLowerScore, hscore]
-  · simp [pickLowerScore, hscore, (lt_of_not_ge hscore).le]
+  · simp [pickLowerScore, hscore]
 
 /-- The real selector returns one of the explicitly listed catalog codes. -/
 theorem selector_mem_catalog (p : RealTable) : selector p ∈ catalog p := by
@@ -136,7 +136,7 @@ theorem detScore_selector_le_of_mem
   cases hactive : activeCell? p with
   | none =>
       simp [selector, catalog, hactive] at hg ⊢
-      simpa [hg]
+      simp [hg]
   | some z =>
       simp [catalog, hactive] at hg
       rcases hg with hg | hg

@@ -423,7 +423,8 @@ theorem priorLog_le_three_halves_mul_bridgeDerivative {x pi s : ℝ} (hx : 0 < x
       Real.log (1 + pi * (1 - pi) * (1 - x ^ 4) ^ 2 /
         ((s + x ^ 4) * (s + 1))) -
       pi * Real.log ((1 + s) / (x ^ 4 + s)) := by
-    convert hphi using 1 <;> ring
+    convert hphi using 1
+    ring_nf
   linarith
 
 theorem strictProxy_monotoneInContactMass : StrictProxyMonotoneInContactMass := by
@@ -730,7 +731,7 @@ private theorem pairEntropy_four_cells (x00 x01 x10 x11 : ℝ) :
       pairEntropy (x00 + x10) (x01 + x11) +
         pairEntropy x00 x10 + pairEntropy x01 x11 := by
   unfold pairEntropy
-  ring
+  ring_nf
 
 theorem binaryEntropyJensenGap_eq_pairEntropy
     {pi u v : ℝ} (hpi : pi ∈ Set.Icc 0 1) (hu : u ∈ Set.Icc 0 1)
@@ -923,7 +924,7 @@ theorem exposedPhaseReward_at_equalMass_eq_scaled_reward
   simp only [exposedPhaseReward, splitEntropy, pairEntropy, ScalarContactChart.equalMassChart,
     ScalarContactChart.norm, ScalarContactChart.r, ScalarContactChart.s,
     ScalarContactChart.e, ScalarContactChart.ell]
-  ring
+  ring_nf
 
 /-- The lower posterior at the equal-mass contact seam. -/
 def seamLowerPosterior (x : ℝ) : ℝ := x ^ 4 / (1 + x ^ 4 + 2 * contactMidpoint x)
@@ -1340,7 +1341,7 @@ theorem singletonReward_twoFifthsSeam_neg
 theorem seamReward_neg :
     ∀ pi : ℝ, pi ∈ Set.Icc 0 (1 / 2) →
       scalarSingletonReward pi (624 / 26999 : ℝ) (24375 / 26999 : ℝ) < 0 :=
-  fun pi hpi => singletonReward_twoFifthsSeam_neg hpi
+  @singletonReward_twoFifthsSeam_neg
 
 theorem ScalarContactChart.x_lt_two_fifths_of_phaseReward_nonneg :
     ∀ C : ScalarContactChart,
@@ -1357,14 +1358,14 @@ theorem ScalarContactChart.x_lt_two_fifths_of_phaseReward_nonneg :
       seamLowerPosterior C.x := by
     simp [ScalarContactChart.equalMassChart, ScalarContactChart.r, ScalarContactChart.norm,
       ScalarContactChart.s, seamLowerPosterior,
-      contactMidpoint, contactDenominator,
+      contactMidpoint,
       ScalarContactChart.contactMidpoint]
     ring
   have hhigh : 1 / (ScalarContactChart.equalMassChart C).norm =
       seamUpperPosterior C.x := by
     simp [ScalarContactChart.equalMassChart, ScalarContactChart.r, ScalarContactChart.norm,
       ScalarContactChart.s, seamUpperPosterior,
-      contactMidpoint, contactDenominator,
+      contactMidpoint,
       ScalarContactChart.contactMidpoint]
     ring
   rw [hlow, hhigh] at hbalanced
@@ -1608,7 +1609,7 @@ theorem freePriorPhaseReward_le_tangent (C : ScalarContactChart) {s pi : ℝ}
   have hzero : freePriorPhaseReward C s 0 = -3 * pairEntropy C.r (1 + s) := by
     unfold freePriorPhaseReward
     dsimp only
-    ring
+    ring_nf
   unfold phaseRewardPriorTangent
   dsimp only
   rw [hzero] at hslope
@@ -1641,7 +1642,7 @@ theorem r_mul_log_le_pairEntropy_high (C : ScalarContactChart) {s : ℝ} (hs : 0
   have hsuper := pairEntropy_superadditive
     (show (0 : ℝ) ≤ 1 by norm_num) C.r_pos.le (show (0 : ℝ) ≤ 0 by norm_num) hs
   have hzero : pairEntropy 0 s = 0 := by simp [pairEntropy, xLogX]
-  simp only [hzero, add_zero, zero_add] at hsuper
+  simp only [hzero, add_zero] at hsuper
   have hr1 : 0 < 1 + C.r := by linarith [C.r_pos]
   have hlogLower : C.r ≤ (1 + C.r) * Real.log (1 + C.r) := by
     have h := Real.one_sub_inv_le_log_of_pos hr1
@@ -1780,7 +1781,7 @@ theorem ContactChart.strictFactorEight_of_seam_pos
   intro C x hx0 hx1 hratio hmass heq
   let S := C.toScalarChart x hx0 hx1 hmass heq
   have hdomain : S.StrictInterior :=
-    C.toScalarChart_strictInterior x hx0 hx1 hratio hmass heq
+    C.toScalarChart_strictInterior x hx0 hx1 hmass heq
   have hscaledInfo := ScalarContactChart.norm_mul_log_two_mul_observableInfo_eq
     C x hx0 hx1 hratio hmass heq
   have hscaledCost := norm_mul_log_two_mul_w3Cost_phaseSelector_eq_of_observableInfo

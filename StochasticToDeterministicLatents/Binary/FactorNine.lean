@@ -38,7 +38,7 @@ private theorem w3Cost_constantCode_eq_zero_of_subsingleton
     by_contra h
     let _ : IsEmpty L.ι := not_nonempty_iff.mp h
     have htotal := L.prior_isPMF.total
-    simp [mass, stoch_to_det.mass] at htotal
+    simp [stoch_to_det.mass] at htotal
   let i0 : L.ι := Classical.choice hlabel
   let g0 : Fin (Fintype.card Cell) := ⟨0, by decide⟩
   have hcode : constantCode = fun _ => g0 := by rfl
@@ -73,7 +73,7 @@ private theorem w3Cost_constantCode_eq_zero_of_subsingleton
   have hsum : ∑ w, L.joint w = 1 := by
     simpa [mass, stoch_to_det.mass] using L.joint_isPMF.total
   have hunit : entropyOf (fun _ : L.ι × Cell => ()) L.joint = 0 := by
-    simp [entropyOf, entropy, pushforward, stoch_to_det.Hvar, stoch_to_det.H,
+    simp [entropyOf, stoch_to_det.Hvar, stoch_to_det.H,
       stoch_to_det.push, stoch_to_det.mass, hsum]
   have hconstL : entropyOf (fun _ : L.ι × Cell => i0) L.joint = 0 := by
     apply le_antisymm

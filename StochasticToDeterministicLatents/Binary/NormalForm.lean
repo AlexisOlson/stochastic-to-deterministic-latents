@@ -70,7 +70,7 @@ theorem chartTableSymmetry_agreesWithCellEquiv :
     ext z <;> rcases z with ⟨x, y⟩ <;>
     fin_cases x <;> fin_cases y <;>
     simp [chartTableSymmetry, chartCellEquiv, TableSymmetry.equiv,
-      antiDiagonalSymmetry, bitFlip, swapRowsCell, swapColumnsCell, transposeCell]
+      bitFlip, swapRowsCell, swapColumnsCell, transposeCell]
 
 /-- Anti-diagonal reflection commutes with transposition. -/
 theorem antiDiagonalSymmetry_commutes_transpose :
@@ -423,10 +423,11 @@ theorem contact_eq_rootLaw
     apply (eq_div_iff hdpos.ne').2
     nlinarith [hsum, hpoly]
   apply binary_matrix_ext
-  all_goals simp [rootLaw, h00, h01, h10, h11, hscale] <;>
+  all_goals
+    simp [rootLaw, h00, h01, h10, h11, hscale]
     field_simp [(ne_of_gt (show 0 < s + t by positivity)),
       (ne_of_gt (show 0 < 1 + s ^ 3 by positivity)),
-      (ne_of_gt (show 0 < 1 + t ^ 3 by positivity))] <;> ring
+      (ne_of_gt (show 0 < 1 + t ^ 3 by positivity))]
 
 /-- The explicit root law is the normalized table of contact coordinates. -/
 theorem rootLaw_eq_normalizedContactTable
@@ -462,7 +463,7 @@ theorem rootLaw_eq_normalizedContactTable
     simp [rootLaw, tableOfEntries, contactA0, contactD0, contactNA, contactND, hx4]
     field_simp [hmu0, hK0, hR0]
     simp only [contactR, contactK0]
-    <;> ring
+    ring
 
 /-- A chart candidate's two contacts are the root law and its parameter transpose,
 possibly after a column reflection. -/
@@ -521,9 +522,11 @@ theorem chartCandidate_rootLaw
   obtain ⟨s, t, hs, ht, hst, h, hh, _hhcube, hNA, hND, hmodel⟩ :=
     exists_twoContactRootKernelModel wR q0R q1R hwR hq0R hq1R hqRne
   have hNA' : 0 < s + t - s ^ 2 * t ^ 2 := by
-    convert hNA using 1 <;> ring
+    convert hNA using 1
+    ring
   have hND' : 0 < s * t * (s + t) - 1 := by
-    convert hND using 1 <;> ring
+    convert hND using 1
+    ring
   rcases hmodel with hmodel | hmodel
   · have he0 := contact_eq_rootLaw wR q0R s t h hwR hq0R hs ht.1 hh hmodel
     have he1 := contact_eq_rootLaw wR q1R t s h hwR hq1R ht hs.1 hh (by
@@ -550,7 +553,7 @@ theorem chartCandidate_rootLaw
           pushforward swapColumnsCell (rootLaw s t) by
         funext z
         rw [pushforward_apply_equiv, pushforward_apply_equiv]
-        simp [swapColumnsCell, bitFlip, Equiv.swap_apply_def]] at hb
+        simp [swapColumnsCell, bitFlip]] at hb
       simpa [q0C, pushforward_symm_pushforward] using hb
     have back1 : q1R = pushforward swapColumnsCell (rootLaw t s) := by
       have hb := congrArg (pushforward swapColumnsCell.symm) he1
@@ -558,7 +561,7 @@ theorem chartCandidate_rootLaw
           pushforward swapColumnsCell (rootLaw t s) by
         funext z
         rw [pushforward_apply_equiv, pushforward_apply_equiv]
-        simp [swapColumnsCell, bitFlip, Equiv.swap_apply_def]] at hb
+        simp [swapColumnsCell, bitFlip]] at hb
       simpa [q1C, pushforward_symm_pushforward] using hb
     refine ⟨s, t, hs.1, ht.1, hst, hNA', hND', ?_, ?_, Or.inr ⟨?_, ?_⟩⟩
     · have he0' : pushforward swapColumnsCell q0R = rootLaw s t := by
@@ -667,35 +670,39 @@ theorem exists_orientedChartChoice
       simp only [pushforward_apply_equiv] at h00 h01 h10 h11 hstrict <;>
       simp [chartTableSymmetry, TableSymmetry.equiv, bitFlip,
         swapRowsCell, swapColumnsCell, transposeCell] at h00 h01 h10 h11 hstrict <;>
-      first
-      | (refine ⟨⟨false, false, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
+      solve
+      | (refine ⟨⟨false, false, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
+          rw [pushforward_apply_equiv] <;>
+          simp [chartTableSymmetry, TableSymmetry.equiv,
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell])
+      | (refine ⟨⟨true, true, ?_⟩⟩;
+          simp only [if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
           rw [pushforward_apply_equiv] <;>
           simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨true, true, ?_⟩⟩ <;>
-          simp only [if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell])
+      | (refine ⟨⟨false, true, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false, if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
+          rw [pushforward_apply_equiv] <;>
+          simp [chartTableSymmetry, TableSymmetry.equiv,
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell])
+      | (refine ⟨⟨true, false, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false, if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
           rw [pushforward_apply_equiv] <;>
           simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨false, true, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false, if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
-          rw [pushforward_apply_equiv] <;>
-          simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨true, false, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false, if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
-          rw [pushforward_apply_equiv] <;>
-          simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell] <;>
-            first | assumption | (symm; assumption))
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell])
       | linarith
   · subst qT
     have hq0_00 := congrFun hq0 (0, 0)
@@ -718,39 +725,43 @@ theorem exists_orientedChartChoice
         swapRowsCell, swapColumnsCell, transposeCell,
         hq0_00, hq0_01, hq0_10, hq0_11,
         hq1_00, hq1_01, hq1_10, hq1_11] at h00 h01 h10 h11 hstrict <;>
-      first
-      | (refine ⟨⟨false, false, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
+      solve
+      | (refine ⟨⟨false, false, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
+          rw [pushforward_apply_equiv] <;>
+          simp [chartTableSymmetry, TableSymmetry.equiv,
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
+            hq0_00, hq0_01, hq0_10, hq0_11])
+      | (refine ⟨⟨true, true, ?_⟩⟩;
+          simp only [if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
           rw [pushforward_apply_equiv] <;>
           simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
             bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
-            hq0_00, hq0_01, hq0_10, hq0_11] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨true, true, ?_⟩⟩ <;>
-          simp only [if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
+            hq0_00, hq0_01, hq0_10, hq0_11])
+      | (refine ⟨⟨false, true, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false, if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
+          rw [pushforward_apply_equiv] <;>
+          simp [chartTableSymmetry, TableSymmetry.equiv,
+            bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
+            hq0_00, hq0_01, hq0_10, hq0_11])
+      | (refine ⟨⟨true, false, ?_⟩⟩;
+          simp only [Bool.false_eq_true, if_false, if_true];
+          funext z;
+          rcases z with ⟨x, y⟩;
+          fin_cases x <;> fin_cases y <;>
           rw [pushforward_apply_equiv] <;>
           simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
             bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
-            hq0_00, hq0_01, hq0_10, hq0_11] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨false, true, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false, if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
-          rw [pushforward_apply_equiv] <;>
-          simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
-            hq0_00, hq0_01, hq0_10, hq0_11] <;>
-            first | assumption | (symm; assumption))
-      | (refine ⟨⟨true, false, ?_⟩⟩ <;>
-          simp only [Bool.false_eq_true, if_false, if_true] <;>
-          funext z <;> rcases z with ⟨x, y⟩ <;> fin_cases x <;> fin_cases y <;>
-          rw [pushforward_apply_equiv] <;>
-          simp [chartTableSymmetry, antiDiagonalSymmetry, TableSymmetry.equiv,
-            bitFlip, swapRowsCell, swapColumnsCell, transposeCell,
-            hq0_00, hq0_01, hq0_10, hq0_11] <;>
-            first | assumption | (symm; assumption))
+            hq0_00, hq0_01, hq0_10, hq0_11])
       | linarith
 
 /-- Every chart candidate supplies the contact roots in `ChartCandidateHasContactRoots`. -/
@@ -792,10 +803,10 @@ theorem chartCandidate_hasContactRoots : ChartCandidateHasContactRoots := by
         (if O.contactSwapped then rootLaw t s else rootLaw s t) (0, 1) := by
     rw [← O.firstContact_eq]
     cases hroot : O.rootReflected
-    · simp only [hroot, Bool.false_eq_true, if_false]
+    · simp only [Bool.false_eq_true, if_false]
       rw [pushforward_apply_equiv, pushforward_apply_equiv]
       simpa [chartTableSymmetry, TableSymmetry.equiv] using hstrict
-    · simp only [hroot, if_true]
+    · simp only [if_true]
       rw [TableSymmetry.equiv, pushforward_trans,
         pushforward_chartTableSymmetry_zero]
       rw [pushforward_apply_equiv, pushforward_apply_equiv]
@@ -824,7 +835,7 @@ theorem chartCandidate_hasContactRoots : ChartCandidateHasContactRoots := by
         _ = _ := by
           funext z
           rcases z with ⟨x, y⟩
-          fin_cases x <;> fin_cases y <;> simp [rootLaw] <;> ring
+          fin_cases x <;> fin_cases y <;> simp [rootLaw]
   | true =>
       have hlt : t < s :=
         rowCubeParameter_lt_of_transpose_strictOffDiagonal
@@ -849,14 +860,13 @@ theorem chartCandidate_hasContactRoots : ChartCandidateHasContactRoots := by
           _ = _ := by
             funext z
             rcases z with ⟨x, y⟩
-            fin_cases x <;> fin_cases y <;> simp [rootLaw] <;> ring
+            fin_cases x <;> fin_cases y <;> simp [rootLaw]
 
 /-! ## Oriented contact presentations -/
 
 /-- A two-class chart candidate has an oriented transpose chart with ordered contact roots. -/
 theorem exists_orientedTransposeChartWithRoots
-    {p : RealTable} (_hp : IsPMF p) (_hfull : ∀ z, 0 < p z)
-    (D : SeedSetup p) (K : Clustering D) (hcard : Fintype.card K.κ = 2)
+    {p : RealTable} (D : SeedSetup p) (K : Clustering D)
     (j : Fin 8) (A : ChartCandidate K j) :
     ∃ (r : TableSymmetry) (B : TransposeChart) (x low ratio high norm : ℝ),
       B.pi = K.s (A.classEquiv.symm 1) ∧
@@ -921,7 +931,6 @@ theorem exists_orientedTransposeChartWithRoots
       c_pos := div_pos (pow_pos hx.1 4) hnorm
       d_pos := div_pos hhigh hnorm
       total := by
-        change low / norm + 1 / norm + ratio / norm + high / norm = 1
         rw [← add_div, ← add_div, ← add_div]
         exact div_self (ne_of_gt hnorm)
       order := by
@@ -966,7 +975,6 @@ theorem exists_orientedTransposeChartWithRoots
       c_pos := div_pos (pow_pos hx.1 4) hnorm
       d_pos := div_pos hlow hnorm
       total := by
-        change low / norm + 1 / norm + ratio / norm + high / norm = 1
         rw [← add_div, ← add_div, ← add_div]
         exact div_self (ne_of_gt hnorm)
       order := by
@@ -1003,8 +1011,7 @@ theorem exists_orientedTransposeChartWithRoots
 
 /-- The oriented root packet also identifies the mixture and joint laws. -/
 theorem exists_orientedTransposeChartWithRootsAndJoint
-    {p : RealTable} (hp : IsPMF p) (hfull : ∀ z, 0 < p z)
-    (D : SeedSetup p) (K : Clustering D) (hcard : Fintype.card K.κ = 2)
+    {p : RealTable} (D : SeedSetup p) (K : Clustering D)
     (j : Fin 8) (A : ChartCandidate K j) :
     ∃ (r : TableSymmetry) (B : TransposeChart) (x low ratio high norm : ℝ),
       B.pi = K.s (A.classEquiv.symm 1) ∧
@@ -1020,7 +1027,7 @@ theorem exists_orientedTransposeChartWithRootsAndJoint
         (Latent.reindex B.latent A.classEquiv).joint := by
   obtain ⟨r, B, x, low, ratio, high, norm, hpi, ha, hb, hc, hd, hnorm,
       hx0, hx1, hratio, hlow, hhigh, horder, heq, hpior, hfirst, hsecond⟩ :=
-    exists_orientedTransposeChartWithRoots hp hfull D K hcard j A
+    exists_orientedTransposeChartWithRoots D K j A
   have hprior0 : K.s (A.classEquiv.symm 0) = 1 - B.pi := by
     have hsumAll := K.quotientLatent.prior_isPMF.total
     change (∑ v : K.κ, K.s v) = 1 at hsumAll
@@ -1081,7 +1088,6 @@ theorem exists_contactPresentation_of_orientedPacket
     {p : RealTable} (hp : IsPMF p) (hfull : ∀ z, 0 < p z)
     (D : SeedSetup p) (K : Clustering D) {j : Fin 8} (A : ChartCandidate K j)
     (r : TableSymmetry) (B : TransposeChart) (x low ratio high norm : ℝ)
-    (hpi : B.pi = K.s (A.classEquiv.symm 1))
     (ha : B.a = low / norm) (hb : B.b = 1 / norm)
     (hc : B.c = ratio / norm) (hd : B.d = high / norm)
     (hnorm : norm = low + 1 + ratio + high)
@@ -1194,10 +1200,9 @@ theorem exists_contactPresentation_of_orientedPacket
 
 /-- The complete contact presentation attached to an oriented two-class candidate. -/
 def CandidatePresentation : Prop :=
-  ∀ {p : RealTable} (hp : IsPMF p) (hfull : ∀ z, 0 < p z)
-    (D : SeedSetup p) (K : Clustering D)
-    (hcard : Fintype.card K.κ = 2)
-    (j : Fin 8) (A : ChartCandidate K j),
+  ∀ {p : RealTable}, IsPMF p → ∀ (hfull : ∀ z, 0 < p z)
+    (D : SeedSetup p) (K : Clustering D),
+    Fintype.card K.κ = 2 → ∀ (j : Fin 8) (A : ChartCandidate K j),
   ∃ M : ContactPresentation p,
     ∃ P : QuotientPresentation hfull D K M,
     P.labelEquiv = A.classEquiv ∧
@@ -1220,11 +1225,11 @@ theorem candidatePresentation : CandidatePresentation := by
   obtain ⟨r, B, x, low, ratio, high, norm, hpi, ha, hb, hc, hd, hnorm,
       hx0, hx1, hratio, hlow, hhigh, horder, heq, hpior, hlaw, hfirst,
       hsecond, hjoint⟩ :=
-    exists_orientedTransposeChartWithRootsAndJoint hp hfull D K hcard j A
+    exists_orientedTransposeChartWithRootsAndJoint D K j A
   obtain ⟨M, hMr, hMB, hMlow, hMratio, hMhigh, hMnorm, hkernel,
       hcontact, hscore, hcost, hw3⟩ :=
     exists_contactPresentation_of_orientedPacket hp hfull D K A r B x low ratio high norm
-      hpi ha hb hc hd hnorm hx0 hx1 hratio hlow hhigh horder heq hlaw hfirst
+      ha hb hc hd hnorm hx0 hx1 hratio hlow hhigh horder heq hlaw hfirst
       hsecond hjoint
   have hprior0 : K.s (A.classEquiv.symm 0) = 1 - B.pi := by
     have hsumAll := K.quotientLatent.prior_isPMF.total
@@ -1286,13 +1291,13 @@ theorem w3_eq_zero_of_subsingleton
     by_contra h
     let _ : IsEmpty L.ι := not_nonempty_iff.mp h
     have htotal := L.prior_isPMF.total
-    simp [mass, stoch_to_det.mass] at htotal
+    simp [stoch_to_det.mass] at htotal
   let i0 : L.ι := Classical.choice hlabel
   have hobs : Nonempty (α × β) := by
     by_contra h
     let _ : IsEmpty (α × β) := not_nonempty_iff.mp h
     have htotal := (L.comp_isPMF i0).total
-    simp [mass, stoch_to_det.mass] at htotal
+    simp [stoch_to_det.mass] at htotal
   let g0 : Fin (Fintype.card (α × β)) :=
     ⟨0, Fintype.card_pos_iff.mpr hobs⟩
   let g : Code α β := fun _ => g0
@@ -1337,7 +1342,7 @@ theorem w3_eq_zero_of_subsingleton
     have hunit : entropyOf (fun _ : L.ι × (α × β) => ()) L.joint = 0 := by
       have hsum : ∑ w, L.joint w = 1 := by
         simpa [mass, stoch_to_det.mass] using L.joint_isPMF.total
-      simp [entropyOf, entropy, pushforward, stoch_to_det.Hvar, stoch_to_det.H,
+      simp [entropyOf, stoch_to_det.Hvar, stoch_to_det.H,
         stoch_to_det.push, stoch_to_det.mass, hsum]
     have hconstL : entropyOf (fun _ : L.ι × (α × β) => i0) L.joint = 0 := by
       apply le_antisymm
@@ -1383,8 +1388,8 @@ theorem quotientSeedSetup_optimal_and_w3_eq_zero_of_card_eq_one
     (hcard : Fintype.card K.κ = 1) :
     K.quotientSeedSetup.L.score = tau p ∧ w3 K.quotientSeedSetup.L = 0 := by
   have hle : Fintype.card K.κ ≤ 1 := by omega
-  letI : Subsingleton K.κ := Fintype.card_le_one_iff_subsingleton.mp hle
-  letI : Subsingleton K.quotientSeedSetup.L.ι := by
+  let : Subsingleton K.κ := Fintype.card_le_one_iff_subsingleton.mp hle
+  let : Subsingleton K.quotientSeedSetup.L.ι := by
     change Subsingleton K.κ
     infer_instance
   exact ⟨K.quotientSeedSetup.optimal,
@@ -1395,7 +1400,7 @@ theorem quotientSeedSetup_optimal_and_w3_eq_zero_of_card_eq_one
 /-- A selected full-support binary optimizer either has zero determinization cost or is
 presented by an oriented contact chart with its positive contact root. -/
 def SelectedOptimizerIsPresented : Prop :=
-  ∀ (p : RealTable) (hp : IsPMF p) (hfull : ∀ z, 0 < p z),
+  ∀ (p : RealTable), IsPMF p → ∀ (hfull : ∀ z, 0 < p z),
   ∃ (D : SeedSetup p) (K : Clustering D),
     Function.Injective K.Q ∧
     K.quotientSeedSetup.L.score = tau p ∧
@@ -1406,7 +1411,7 @@ def SelectedOptimizerIsPresented : Prop :=
       ∨
       (Fintype.card K.κ = 2 ∧
        ∃ M : ContactPresentation p,
-         ∃ P : QuotientPresentation hfull D K M,
+         ∃ _ : QuotientPresentation hfull D K M,
          M.chart.kernel = pushforward M.relabel.equiv D.w ∧
          M.chart.toTransposeChart.latent.score = K.quotientSeedSetup.L.score ∧
          (∀ g : BinaryCode,
