@@ -56,7 +56,7 @@ rational test deciding whether the constant latent is optimal
 ([section 4](#4-the-rational-constant-optimality-test)); the fact that every
 optimal finite latent of a binary law has at most two distinct component laws,
 on every support ([section 5](#5-at-most-two-component-laws)); and the band
-`1/3 <= b+c <= 2/3` on which the constant latent is always optimal
+$`1/3 \le b+c \le 2/3`$ on which the constant latent is always optimal
 ([section 7](#7-consequences)).
 
 None of this proves an inequality between $`T(p)`$ and $`\tau(p)`$. What it
@@ -80,7 +80,7 @@ and one cubic root. See [section 8](#8-scope-and-formalization).
 Entropies, divergences, and information quantities are in bits, with
 $`0 \log 0 = 0`$. For laws $`q`$ and $`r`$ on a finite set with
 $`\mathrm{supp} q`$ contained in $`\mathrm{supp} r`$,
-`D(q || r) = sum_z q_z log2(q_z / r_z)` is the relative entropy; it is
+$`D(q \| r) = \sum_z q_z \log_2(q_z / r_z)`$ is the relative entropy; it is
 nonnegative and vanishes only at $`q = r`$.
 
 For a binary law $`p = (a,b,c,d)`$ write its marginals
@@ -158,10 +158,8 @@ sum of nonnegative terms, so $`q_v(z) = 0`$ whenever $`\pi_v > 0`$.
 
 Define the concave envelope of $`\Phi`$ on the face as
 
-```text
-(conc_S Phi)(m) = sup { sum_v pi_v * Phi(q_v) :
-                        finite decompositions m = sum_v pi_v * q_v,
-                        q_v in Delta_S }.                          (2.1)
+```math
+(\mathrm{conc}_S \Phi)(m) = \sup\{ \sum_v \pi_v\,\Phi(q_v) : m = \sum_v \pi_v\,q_v \text{ is a finite decomposition}, \ q_v \in \Delta_S \}. \qquad \text{(2.1)}
 ```
 
 $`\Phi`$ is bounded on the simplex, so this is finite. The trivial
@@ -188,7 +186,7 @@ $`\ell(p) = (\mathrm{conc}_S \Phi)(p)`$.
 set $`\Delta_S`$, and $`p`$ is in its relative interior. A finite concave
 function on a convex set has a supergradient at every relative-interior point
 (Rockafellar, *Convex Analysis*, Theorem 23.4, applied to the convex function
-`-conc_S Phi`). The affine function through $`(p, (\mathrm{conc}_S \Phi)(p))`$
+$`-\mathrm{conc}_S \Phi`$). The affine function through $`(p, (\mathrm{conc}_S \Phi)(p))`$
 with that slope is $`\ell`$.
 
 Fix one such $`\ell`$ for the rest of the argument, and call
@@ -252,12 +250,12 @@ relative-interior point $`p`$ of $`\Delta_S`$, and for every tangent vector
 $`h`$ (supported in $`S`$, with $`\sum_z h_z = 0`$) its derivative
 is $`\ell_p(h)`$.
 
-*Proof.* Each entropy in $`\Phi`$ is a finite sum of `-t*log2(t)`, which is
+*Proof.* Each entropy in $`\Phi`$ is a finite sum of $`-t\log_2(t)`$, which is
 smooth on $`t > 0`$; at $`p`$ every cell of $`S`$ is positive, hence so is
 every marginal that meets $`S`$, and a marginal that misses $`S`$ vanishes at
 every law in $`\Delta_S`$, so its entropy term is constant along every tangent
-vector and contributes nothing. The derivative of `-t*log2(t)` is
-`-log2(t) - 1/ln(2)`, and the constant `-1/ln(2)` cancels against
+vector and contributes nothing. The derivative of $`-t\log_2(t)`$ is
+$`-\log_2(t) - 1/\ln(2)`$, and the constant $`-1/\ln(2)`$ cancels against
 $`\sum_z h_z = 0`$, and likewise against $`\sum_x h_X(x) = 0`$ and
 $`\sum_y h_Y(y) = 0`$ in the marginal terms. What remains is
 $`-3\,\sum_z h_z\,\log_2(p_z) + 2\,\sum_x h_X(x)\,\log_2(\mu_x) + 2\,\sum_y h_Y(y)\,\log_2(\nu_y) = \ell_p(h)`$.
@@ -289,7 +287,7 @@ r = (p - \epsilon q) / (1 - \epsilon)
 
 is in $`\Delta_S`$ (every cell of $`p`$ in $`S`$ is positive, and $`q`$
 vanishes off $`S`$), and $`p = \epsilon q + (1-\epsilon)\,r`$ is a two-label
-latent for $`p`$. Since `r - p = epsilon*(p - q)/(1-epsilon)` is a tangent
+latent for $`p`$. Since $`r - p = \epsilon\,(p - q)/(1-\epsilon)`$ is a tangent
 vector of size $`O(\epsilon)`$, Lemma 3.1 gives
 $`\Phi(r) = \Phi(p) + \ell_p(r - p) + o(\epsilon)`$, hence
 
@@ -336,9 +334,11 @@ constant, and the constant latent has score $`I_p(X;Y) = 0`$.
 The proof passes through five equivalent conditions. Norms are weighted: for a
 nonnegative function $`f`$ on $`\{0,1\}`$ and a positive law $`m`$ there,
 
-```text
-||f||_{3/2,m} = ( m_0*f_0^{3/2} + m_1*f_1^{3/2} )^{2/3},
-||f||_{3,m}   = ( m_0*f_0^3 + m_1*f_1^3 )^{1/3}.
+```math
+\begin{aligned}
+\|f\|_{3/2,m} &= ( m_0\,f_0^{3/2} + m_1\,f_1^{3/2} )^{2/3}, \\
+\|f\|_{3,m} &= ( m_0\,f_0^3 + m_1\,f_1^3 )^{1/3}.
+\end{aligned}
 ```
 
 ### Step 1: a finite Gibbs identity
@@ -350,7 +350,7 @@ real function on $`J`$. Then
 \log_2( \sum_j \pi_j\,2^{h_j} ) = \max_u \{ E_u[h] - D(u \| \pi) \}, \qquad \text{(4.2)}
 ```
 
-the maximum over laws $`u`$ on $`J`$, attained at `u_j = pi_j*2^{h_j}/Z` with
+the maximum over laws $`u`$ on $`J`$, attained at $`u_j = \pi_j\,2^{h_j}/Z`$ with
 $`Z`$ the sum on the left.
 
 *Proof.* With that $`u^h`$, direct expansion gives
@@ -361,8 +361,8 @@ $`J`$. The left side is nonnegative and vanishes at $`u = u^h`$.
 
 **Lemma 4.3.** Condition 2 of Theorem 3.2 holds for $`p`$ if and only if
 
-```text
-E_p[ f(X)*g(Y) ] <= ||f||_{3/2,mu} * ||g||_{3/2,nu}                 (B)
+```math
+E_p[ f(X)\,g(Y) ] \le \|f\|_{3/2,\mu} \cdot \|g\|_{3/2,\nu} \qquad \text{(B)}
 ```
 
 for all nonnegative $`f`$ and $`g`$ on $`\{0,1\}`$.
@@ -375,7 +375,7 @@ $`z = (x,y)`$:
 \log_2 E_p[fg] = \max_{q \in \Delta_S} \{ E_{q_X}[\log_2 f] + E_{q_Y}[\log_2 g] - D(q \| p) \}.
 ```
 
-By condition 2, `D(q || p) >= (2/3)*D(q_X || mu) + (2/3)*D(q_Y || nu)`, so
+By condition 2, $`D(q \| p) \ge (2/3)\,D(q_X \| \mu) + (2/3)\,D(q_Y \| \nu)`$, so
 each bracket is at most
 
 ```math
@@ -387,7 +387,7 @@ each bracket is at most
 
 Relaxing the marginal pair $`(q_X, q_Y)`$ to arbitrary laws on $`\{0,1\}`$ and
 applying (4.2) once on each factor bounds this by
-`(2/3)*log2 E_mu[f^{3/2}] + (2/3)*log2 E_nu[g^{3/2}] = log2( ||f||_{3/2,mu} * ||g||_{3/2,nu} )`.
+$`(2/3)\,\log_2 E_\mu[f^{3/2}] + (2/3)\,\log_2 E_\nu[g^{3/2}] = \log_2( \|f\|_{3/2,\mu} \cdot \|g\|_{3/2,\nu} )`$.
 Exponentiate. For nonnegative $`f, g`$, apply this to $`f + \epsilon`$,
 $`g + \epsilon`$ and let $`\epsilon`$ decrease to zero; both sides
 are continuous.
@@ -398,10 +398,10 @@ are continuous.
 f_x = ( q_X(x)/\mu_x )^{2/3}, g_y = ( q_Y(y)/\nu_y )^{2/3}.
 ```
 
-Then `||f||_{3/2,mu}^{3/2} = sum_x mu_x*(q_X(x)/mu_x) = 1`, and likewise for
+Then $`\|f\|_{3/2,\mu}^{3/2} = \sum_x \mu_x\,(q_X(x)/\mu_x) = 1`$, and likewise for
 $`g`$, so (B) gives $`W = E_p[fg] \le 1`$. Also $`W > 0`$: some cell
 $`z = (x,y)`$ has $`q_z > 0`$, hence $`p_z > 0`$, $`q_X(x) > 0`$,
-$`q_Y(y) > 0`$. Define on $`S`$ the law `w_z = p_z*f_x*g_y / W`; it is positive
+$`q_Y(y) > 0`$. Define on $`S`$ the law $`w_z = p_z\,f_x\,g_y / W`$; it is positive
 wherever $`q`$ is. On the cells with $`q_z > 0`$,
 
 ```math
@@ -421,39 +421,41 @@ Both terms in the bracket are nonnegative, so $`\delta_p(q) \ge 0`$.
 
 ### Step 3: the conditional kernel
 
-Let $`K`$ be the kernel of $`Y`$ given $`X`$, `K_{xy} = p_{xy}/mu_x`; its rows
-sum to one, and $`E_p[f(X)\,g(Y)] = E_{\mathrm{mu}}[ f\,(K g) ]`$ with
+Let $`K`$ be the kernel of $`Y`$ given $`X`$, $`K_{xy} = p_{xy}/\mu_x`$; its rows
+sum to one, and $`E_p[f(X)\,g(Y)] = E_\mu[ f\,(K g) ]`$ with
 $`(K g)_x = \sum_y K_{xy}\,g_y`$.
 
 **Lemma 4.4 (weighted Hoelder with equality case).** For nonnegative $`f, h`$
 on $`\{0,1\}`$ and a positive law $`m`$,
-`E_m[f*h] <= ||f||_{3/2,m} * ||h||_{3,m}`. If $`f`$ and $`h`$ are nonzero,
+$`E_m[f\,h] \le \|f\|_{3/2,m} \cdot \|h\|_{3,m}`$. If $`f`$ and $`h`$ are nonzero,
 equality holds exactly when $`f`$ is proportional to $`h^2`$ pointwise.
 
 *Proof.* Normalize both norms to one. Young's inequality
-`u*v <= (2/3)*u^{3/2} + (1/3)*v^3` for $`u, v \ge 0`$, with equality exactly
-when $`u = v^2`$, averages under $`m`$ to `E_m[f*h] <= 2/3 + 1/3 = 1`, with
+$`uv \le (2/3)\,u^{3/2} + (1/3)\,v^3`$ for $`u, v \ge 0`$, with equality exactly
+when $`u = v^2`$, averages under $`m`$ to $`E_m[f\,h] \le 2/3 + 1/3 = 1`$, with
 equality exactly when $`f_x = h_x^2`$ at both points (both have
 positive weight).
 
 **Lemma 4.5.** (B) holds if and only if
 
-```text
-||K g||_{3,mu} <= ||g||_{3/2,nu}   for every nonnegative g.          (N)
+```math
+\|K g\|_{3,\mu} \le \|g\|_{3/2,\nu} \qquad \text{for every nonnegative } g. \qquad \text{(N)}
 ```
 
 *Proof.* (N) implies (B) by Lemma 4.4 applied to $`f`$ and $`h = K g`$. For the
-converse, given $`g`$ with $`h = K g`$ nonzero, take `f = h^2/||h||_{3,mu}^2`;
-then `||f||_{3/2,mu} = 1` and `E_mu[f*h] = ||h||_{3,mu}`, so (B) gives (N). If
+converse, given $`g`$ with $`h = K g`$ nonzero, take $`f = h^2/\|h\|_{3,\mu}^2`$;
+then $`\|f\|_{3/2,\mu} = 1`$ and $`E_\mu[f\,h] = \|h\|_{3,\mu}`$, so (B) gives (N). If
 $`K g = 0`$ there is nothing to prove.
 
 ### Step 4: a polynomial on a half-line
 
 For $`x \ge 0`$ put $`g = (x^2, 1)`$. Then
 
-```text
-||g||_{3/2,nu}^3 = (nu0*x^3 + nu1)^2,
-||K g||_{3,mu}^3 = (a*x^2 + b)^3/mu0^2 + (c*x^2 + d)^3/mu1^2,
+```math
+\begin{aligned}
+\|g\|_{3/2,\nu}^3 &= (\nu_0 x^3 + \nu_1)^2, \\
+\|K g\|_{3,\mu}^3 &= (ax^2 + b)^3/\mu_0^2 + (cx^2 + d)^3/\mu_1^2,
+\end{aligned}
 ```
 
 and their difference is
@@ -466,7 +468,7 @@ P(x) = (\nu_0 x^3 + \nu_1)^2 - (ax^2 + b)^3/\mu_0^2 - (cx^2 + d)^3/\mu_1^2. \qqu
 
 *Proof.* Both sides of (N) are positively homogeneous in $`g`$. A nonnegative
 $`g`$ with $`g_1 > 0`$ is a positive multiple of $`(x^2, 1)`$ with
-`x = sqrt(g_0/g_1) >= 0`, and its cubed slack is a positive multiple of
+$`x = \sqrt{g_0/g_1} \ge 0`$, and its cubed slack is a positive multiple of
 $`P(x)`$. The ray $`g = (g_0, 0)`$ has cubed slack $`g_0^3 A`$, and $`A`$ is
 the leading coefficient of $`P`$, which is the limit of $`x^{-6}\,P(x)`$; so
 $`P \ge 0`$ on the half-line forces $`A \ge 0`$ and covers this ray. The zero
@@ -490,10 +492,10 @@ A + E = M - 3V. \qquad \text{(4.6)}
 ```
 
 *Proof.* Let $`k`$ be the two-valued random variable $`P(Y=0 \mid X)`$, taking
-the values `a/mu0` and `c/mu1` with weights $`\mu_0, \mu_1`$, and write
-$`m_j = E_{\mathrm{mu}}[k^j]`$. Then `m_1 = nu0`, and the variance identity
-gives `m_2 - nu0^2 = mu0*mu1*(a/mu0 - c/mu1)^2 = V`. Expanding (4.4) row by
-row, `(a*x^2+b)^3/mu0^2 = mu0*(k_0*x^2 + (1-k_0))^3` with `k_0 = a/mu0`, and
+the values $`a/\mu_0`$ and $`c/\mu_1`$ with weights $`\mu_0, \mu_1`$, and write
+$`m_j = E_\mu[k^j]`$. Then $`m_1 = \nu_0`$, and the variance identity
+gives $`m_2 - \nu_0^2 = \mu_0\,\mu_1\,(a/\mu_0 - c/\mu_1)^2 = V`$. Expanding (4.4) row by
+row, $`(ax^2+b)^3/\mu_0^2 = \mu_0\,(k_0 x^2 + (1-k_0))^3`$ with $`k_0 = a/\mu_0`$, and
 similarly for the second row, so
 
 ```math
@@ -503,14 +505,15 @@ P(x) &= Ax^6 - 3\,(m_2 - m_3)\,x^4 + 2\,\nu_0\,\nu_1 x^3 \\
 \end{aligned}
 ```
 
-with `A = nu0^2 - m_3` and `E = nu1^2 - E_mu[(1-k)^3] = nu1^2 - (1 - 3*nu0
-+ 3*m_2 - m_3)`. Expanding `(x-1)^2*Q(x)` gives the coefficients
+with $`A = \nu_0^2 - m_3`$ and
+$`E = \nu_1^2 - E_\mu[(1-k)^3] = \nu_1^2 - (1 - 3\,\nu_0 + 3m_2 - m_3)`$.
+Expanding $`(x-1)^2\,Q(x)`$ gives the coefficients
 $`A, 0, -3A - 3V, 2A + 2E + 6V, -3E - 3V, 0, E`$ in decreasing degree. These
 agree with the expansion of $`P`$: for $`x^4`$, $`-3A - 3V = -3\,(m_2 - m_3)`$;
-for $`x^2`$, `-3*E - 3*V = -3*(nu0 - 2*m_2 + m_3)` after substituting
+for $`x^2`$, $`-3E - 3V = -3\,(\nu_0 - 2m_2 + m_3)`$ after substituting
 $`\nu_1 = 1 - \nu_0`$; for $`x^3`$, $`2A + 2E + 6V = 2\,\nu_0\,\nu_1`$, which
 is (4.6). The identity (4.6) itself is
-`A + E = nu0^2 + nu1^2 - E_mu[k^3 + (1-k)^3] = nu0^2 + nu1^2 - 1 + 3*nu0 - 3*m_2 = nu0 - nu0^2 - 3*V = M - 3*V`.
+$`A + E = \nu_0^2 + \nu_1^2 - E_\mu[k^3 + (1-k)^3] = \nu_0^2 + \nu_1^2 - 1 + 3\,\nu_0 - 3m_2 = \nu_0 - \nu_0^2 - 3V = M - 3V`$.
 
 **Lemma 4.8.** $`P \ge 0`$ on $`[0, \infty)`$ if and only if $`Q \ge 0`$ there.
 
@@ -535,7 +538,7 @@ G'(x) &= 2\,(x+1)\,(A - E/x^3).
 ```
 
 So $`G`$ decreases on $`(0, t]`$ and increases on $`[t, \infty)`$ with
-`t = (E/A)^{1/3}`, and its minimum is
+$`t = (E/A)^{1/3}`$, and its minimum is
 
 ```math
 \begin{aligned}
@@ -565,7 +568,7 @@ This covers $`A = E = 0`$ as well.
 statement is (1.2).
 
 **Example 4.10 (uniform marginals).** For
-`p = ((1+r)/4, (1-r)/4, (1-r)/4, (1+r)/4)` with $`-1 < r < 1`$,
+$`p = ((1+r)/4, (1-r)/4, (1-r)/4, (1+r)/4)`$ with $`-1 < r < 1`$,
 
 ```math
 \begin{aligned}
@@ -574,16 +577,16 @@ AEM - V^3 &= (1 - r^2)^2\,(1 - 4r^2) / 256.
 \end{aligned}
 ```
 
-The condition $`V^3 \le AEM`$ is `|r| <= 1/2`, and it implies $`A = E \ge 0`$.
-So the constant latent is optimal exactly when `|r| <= 1/2`.
+The condition $`V^3 \le AEM`$ is $`\lvert r \rvert \le 1/2`$, and it implies $`A = E \ge 0`$.
+So the constant latent is optimal exactly when $`\lvert r \rvert \le 1/2`$.
 
-**Example 4.11 (a law with a zero cell).** For `p = (1/3, 1/3, 1/3, 0)`,
-`A = E = 1/36`, `V = 1/18`, `M = 2/9`, and `A*E*M = V^3 = 1/5832`. (C)
-holds with equality, so `tau(p) = T(p) = I_p(X;Y) = log2(3) - 4/3`.
+**Example 4.11 (a law with a zero cell).** For $`p = (1/3, 1/3, 1/3, 0)`$,
+$`A = E = 1/36`$, $`V = 1/18`$, $`M = 2/9`$, and $`AEM = V^3 = 1/5832`$. (C)
+holds with equality, so $`\tau(p) = T(p) = I_p(X;Y) = \log_2(3) - 4/3`$.
 
-**Example 4.12 (a full-support law).** For `p = (1/2, 1/5, 1/10, 1/5)`,
-`A = 1034/11025`, `E = 604/11025`, `V = 16/525`, `M = 6/25`, and
-`A*E*M - V^3 = 1808/1500625 > 0`. The constant latent is optimal, and it
+**Example 4.12 (a full-support law).** For $`p = (1/2, 1/5, 1/10, 1/5)`$,
+$`A = 1034/11025`$, $`E = 604/11025`$, $`V = 16/525`$, $`M = 6/25`$, and
+$`AEM - V^3 = 1808/1500625 > 0`$. The constant latent is optimal, and it
 stays optimal on an open neighbourhood, since all three inequalities are
 strict and the quantities are continuous.
 
@@ -626,22 +629,22 @@ column meets $`S`$.
 *(a) Contacts are positive on `S`.* Let $`q \in \Delta_S`$ have a zero cell in
 $`S`$ and a positive cell. Walking along a chain from a positive cell to a zero
 cell, the first zero cell $`z'`$ is adjacent to a positive cell $`z`$. For
-$`0 < \epsilon < q_z`$ put `q^eps = q + epsilon*(delta_{z'} - delta_z)`, which
+$`0 < \epsilon < q_z`$ put $`q^\epsilon = q + \epsilon\,(\delta_{z'} - \delta_z)`$, which
 is in $`\Delta_S`$. Say $`z`$ and $`z'`$ share a row (the other case swaps rows
 and columns). Then every row marginal is unchanged. The cell $`z'`$ acquires
-mass $`\epsilon`$, contributing `epsilon*log2(1/epsilon)` to `H(q^eps) - H(q)`;
+mass $`\epsilon`$, contributing $`\epsilon\,\log_2(1/\epsilon)`$ to $`H(q^\epsilon) - H(q)`$;
 the cell $`z`$ and the column of $`z`$, both positive at $`q`$, change by
 $`O(\epsilon)`$; the column of $`z'`$ contributes
-`epsilon*log2(1/epsilon) + O(epsilon)` to `H(q^eps_Y) - H(q_Y)` if it had zero
+$`\epsilon\,\log_2(1/\epsilon) + O(\epsilon)`$ to $`H((q^\epsilon)_Y) - H(q_Y)`$ if it had zero
 mass at $`q`$, and $`O(\epsilon)`$ otherwise. Let $`k \in \{0,1\}`$ count that
 case. Then
 
-```text
-Phi(q^eps) - Phi(q) = (3 - 2*k)*epsilon*log2(1/epsilon) + O(epsilon),
+```math
+\Phi(q^\epsilon) - \Phi(q) = (3 - 2k)\,\epsilon\,\log_2(1/\epsilon) + O(\epsilon),
 ```
 
-with $`3 - 2k \ge 1`$, while `ell(q^eps) - ell(q) = O(epsilon)`. If $`q`$ were
-a contact, `ell(q^eps) - Phi(q^eps)` would be negative for small $`\epsilon`$,
+with $`3 - 2k \ge 1`$, while $`\ell(q^\epsilon) - \ell(q) = O(\epsilon)`$. If $`q`$ were
+a contact, $`\ell(q^\epsilon) - \Phi(q^\epsilon)`$ would be negative for small $`\epsilon`$,
 contradicting $`\ell \ge \Phi`$ on $`\Delta_S`$. So every contact is positive
 on every cell of $`S`$; in particular it has nondegenerate marginals.
 
@@ -654,8 +657,8 @@ so its derivative vanishes, that is, the linear part of $`\ell`$ agrees with
 $`\ell_q`$ on tangent vectors. Since also $`\ell(q) = \Phi(q) = \ell_q(q)`$,
 the two affine functions agree on $`\Delta_S`$: $`\ell = \ell_q`$. Consequently
 
-```text
-ell(r) - Phi(r) = delta_q(r)   for every r in Delta_S,
+```math
+\ell(r) - \Phi(r) = \delta_q(r) \qquad \text{for every } r \in \Delta_S,
 ```
 
 so $`\delta_q \ge 0`$ on $`\Delta_S`$, $`q`$ passes the tangent test of Theorem
@@ -674,15 +677,17 @@ $`E_q = \nu_1^2\,\nu_0 > 0`$, a contradiction.
 
 *(d) At most two equality rays, and one contact per ray.* Let
 $`r \in C(\ell)`$, so $`\delta_q(r) = 0`$. Apply the construction of Lemma 4.3
-with $`q`$ as the reference law: `f_x = (r_X(x)/q_X(x))^{2/3}`,
-`g_y = (r_Y(y)/q_Y(y))^{2/3}`, $`W = E_q[fg]`$, `w = q*f*g/W`. By (4.3),
+with $`q`$ as the reference law: $`f_x = (r_X(x)/q_X(x))^{2/3}`$,
+$`g_y = (r_Y(y)/q_Y(y))^{2/3}`$, $`W = E_q[fg]`$, $`w = q\,f\,g/W`$. By (4.3),
 $`\delta_q(r) = 0`$ forces $`D(r \| w) = 0`$ and $`\log_2 W = 0`$: $`r = w`$
 and $`W = 1`$. With $`K`$ the kernel of $`q`$,
 
-```text
-1 = W = E_{q_X}[ f * (K g) ]
-   <= ||f||_{3/2,q_X} * ||K g||_{3,q_X}
-   <= ||f||_{3/2,q_X} * ||g||_{3/2,q_Y} = 1,
+```math
+\begin{aligned}
+1 = W &= E_{q_X}[ f\,(K g) ] \\
+&\le \|f\|_{3/2,q_X} \cdot \|K g\|_{3,q_X} \\
+&\le \|f\|_{3/2,q_X} \cdot \|g\|_{3/2,q_Y} = 1,
+\end{aligned}
 ```
 
 so both inequalities are equalities. In particular $`g`$ is a nonzero equality
@@ -691,7 +696,7 @@ $`(g_0, 0)`$ has cubed slack $`g_0^3 A_q > 0`$ and the ray $`(0, g_1)`$ has
 cubed slack $`g_1^3 E_q > 0`$. So $`g = \gamma\,(x^2, 1)`$ with $`\gamma > 0`$,
 $`x > 0`$, and its cubed slack $`\gamma^3 P_q(x)`$ vanishes: $`P_q(x) = 0`$.
 
-Write `t = (E_q/A_q)^{1/3}` and $`\sigma = A_q t\,(t+1)`$ as in Lemma 4.9. A
+Write $`t = (E_q/A_q)^{1/3}`$ and $`\sigma = A_q t\,(t+1)`$ as in Lemma 4.9. A
 direct expansion, using $`E_q = A_q t^3`$, gives
 
 ```math
@@ -703,10 +708,10 @@ The bracket is positive for $`x \ge 0`$, and $`\sigma - V_q \ge 0`$ by Lemma
 Since $`P_q = (x-1)^2 Q_q`$, the zeros of $`P_q`$ on $`x > 0`$ lie in
 $`\{1, t\}`$. There are at most two rays.
 
-Each ray yields at most one contact. The unit norm `||g||_{3/2,q_Y} = 1` fixes
+Each ray yields at most one contact. The unit norm $`\|g\|_{3/2,q_Y} = 1`$ fixes
 $`\gamma`$. The vector $`h = K g`$ is strictly positive, because $`K`$ has
 nonnegative entries, unit row sums, and $`g`$ is positive. Equality in Lemma
-4.4 with `||f||_{3/2,q_X} = ||h||_{3,q_X} = 1` forces $`f = h^2`$. Then
+4.4 with $`\|f\|_{3/2,q_X} = \|h\|_{3,q_X} = 1`$ forces $`f = h^2`$. Then
 $`r = w = qfg`$ is determined. The ray $`x = 1`$ gives $`g = (1,1)`$,
 $`f = (1,1)`$, and $`r = q`$ itself.
 
@@ -744,8 +749,8 @@ $`(u_0, \infty)`$. Moreover $`u_0 > v`$. If $`w = 0`$, then
 $`f_p(u) = u^2\,(u - v)`$, its largest nonnegative root is $`u_0 = v`$, and
 $`f_p > 0`$ exactly on $`(v, \infty)`$.
 
-*Proof.* For $`w > 0`$ and $`u > 0`$, `f_p(u)/u^2 = u - v - w/u - w*s/u^2` has
-derivative `1 + w/u^2 + 2*w*s/u^3 > 0`, tends to `-infinity` at $`0`$ and to
+*Proof.* For $`w > 0`$ and $`u > 0`$, $`f_p(u)/u^2 = u - v - w/u - ws/u^2`$ has
+derivative $`1 + w/u^2 + 2ws/u^3 > 0`$, tends to $`-\infty`$ at $`0`$ and to
 $`+\infty`$ at $`\infty`$, so it has exactly one zero and the stated signs;
 $`f_p(0) = -ws < 0`$ completes the sign on $`[0, u_0)`$. Also
 $`f_p(v) = -wv - ws = -w\,(v + s) = -w < 0`$, so $`u_0 > v`$. The case
@@ -774,8 +779,8 @@ $`n_0 = a+c`$, $`n_1 = b+d`$, put
 \end{aligned}
 ```
 
-Then `A = An/(z^2*m0^2*m1^2)`, `E = En/(z^2*m0^2*m1^2)`,
-`V = (xi - eta)^2/(z^2*m0*m1)`, `M = n0*n1/z^2`, and expanding both sides
+Then $`A = \mathrm{An}/(z^2 m_0^2 m_1^2)`$, $`E = \mathrm{En}/(z^2 m_0^2 m_1^2)`$,
+$`V = (\xi - \eta)^2/(z^2 m_0 m_1)`$, $`M = n_0 n_1/z^2`$, and expanding both sides
 gives
 
 ```math
@@ -797,7 +802,7 @@ $`u = \sqrt{\xi} = \sqrt{ad}`$,
 \Lambda - u\,(\xi - \eta) = -f_q(u). \qquad \text{(6.3)}
 ```
 
-Consequently $`AEM - V^3`$ has the sign of `-f_q(sqrt(a*d))`; in particular it
+Consequently $`AEM - V^3`$ has the sign of $`-f_q(\sqrt{ad})`$; in particular it
 vanishes exactly when $`f_q(\sqrt{ad}) = 0`$.
 
 *Proof.* If $`\eta > 0`$, then
@@ -811,7 +816,7 @@ $`u\,(\xi - \eta) = u^3 - uw`$, so
 $`\Lambda - u\,(\xi-\eta) = -(u^3 - vu^2 - wu - ws)`$. Since
 $`\Lambda + u\,(\xi - \eta) > 0`$, the first factor
 $`\Lambda^2 - \xi\,(\xi-\eta)^2 = (\Lambda - u\,(\xi-\eta))\,(\Lambda + u\,(\xi-\eta))`$
-has the sign of `-f_q(u)`.
+has the sign of $`-f_q(u)`$.
 
 **Lemma 6.4 (a second contact is a diagonal swap).** Let $`q`$ be positive on a
 support $`S`$ with $`\lvert S \rvert \ge 3`$, suppose $`\delta_q \ge 0`$ on
@@ -833,11 +838,11 @@ Take $`\det q > 0`$. Lemma 6.3 turns $`V_q^3 = A_q E_q M_q`$ into
 $`f_q(u) = 0`$ with $`u = \sqrt{ad}`$. Let $`q' = (d, b, c, a)`$; it has
 support $`S`$. Compare the coefficients (3.1) of $`\ell_q`$ and $`\ell_{q'}`$
 cell by cell. At the off-diagonal cell $`(0,1)`$ the coefficient is
-`log2( (a+b)^2*(b+d)^2 / b^3 )` for $`q`$ and `log2( (d+b)^2*(a+b)^2 / b^3 )`
+$`\log_2( (a+b)^2 (b+d)^2 / b^3 )`$ for $`q`$ and $`\log_2( (d+b)^2 (a+b)^2 / b^3 )`$
 for $`q'`$: equal. The cell $`(1,0)`$ is the same. At the diagonal cell
-$`(0,0)`$ the two coefficients are `log2( (a+b)^2*(a+c)^2 / a^3 )` and
-`log2( (d+b)^2*(d+c)^2 / d^3 )`, and they agree exactly when
-`a^{3/2}*(d+b)*(d+c) = d^{3/2}*(a+b)*(a+c)`. With $`\alpha = \sqrt{a}`$,
+$`(0,0)`$ the two coefficients are $`\log_2( (a+b)^2 (a+c)^2 / a^3 )`$ and
+$`\log_2( (d+b)^2 (d+c)^2 / d^3 )`$, and they agree exactly when
+$`a^{3/2} (d+b)(d+c) = d^{3/2} (a+b)(a+c)`$. With $`\alpha = \sqrt{a}`$,
 $`\beta = \sqrt{d}`$, $`u = \alpha\,\beta`$, direct expansion gives
 
 ```math
@@ -925,12 +930,12 @@ $`\tau(p) \le I_p(X;Y)`$, the inequality is strict.
 (The optimum.) In the mixed case the contacts are the diagonal-swap pair with
 off-diagonal cells $`b, c`$, diagonal sum $`s`$, and diagonal product
 $`u_0^2`$, so the diagonal entries are the roots of $`y^2 - sy + u_0^2`$,
-namely `(s +/- rho)/2` with $`\rho = \sqrt{s^2 - 4u_0^2}`$. This is real and
-positive because `u_0 < sqrt(a*d) <= s/2`. Both laws have nonnegative entries.
+namely $`(s \pm \rho)/2`$ with $`\rho = \sqrt{s^2 - 4u_0^2}`$. This is real and
+positive because $`u_0 < \sqrt{ad} \le s/2`$. Both laws have nonnegative entries.
 The weight is fixed by the first cell:
-`a = lambda*(s+rho)/2 + (1-lambda)*(s-rho)/2`, giving the displayed
+$`a = \lambda\,(s+\rho)/2 + (1-\lambda)\,(s-\rho)/2`$, giving the displayed
 $`\lambda`$, and $`0 < \lambda < 1`$ because
-`a*d > u_0^2 = ((s+rho)/2)*((s-rho)/2)` with $`a + d = s`$ places $`a`$
+$`ad > u_0^2 = ((s+\rho)/2)\,((s-\rho)/2)`$ with $`a + d = s`$ places $`a`$
 strictly between the two roots. Swapping the diagonal entries preserves
 $`H(q)`$ and exchanges $`H(q_X)`$ with $`H(q_Y)`$, so $`\Phi(q^+) = \Phi(q^-)`$
 and (1.1) gives $`\tau(p) = \Psi(p) - \Phi(q^+)`$.
@@ -963,32 +968,32 @@ Theorems 6.6 and 6.7.
 ## 7. Consequences
 
 **Corollary 7.1 (the disagreement band).** Let $`v = b + c = P(X \ne Y)`$. If
-`1/3 <= v <= 2/3`, then $`\tau(p) = T(p) = I_p(X;Y)`$. The band is sharp as a
-condition on $`v`$ alone: for every $`v`$ outside `[1/3, 2/3]` there is a law
+$`1/3 \le v \le 2/3`$, then $`\tau(p) = T(p) = I_p(X;Y)`$. The band is sharp as a
+condition on $`v`$ alone: for every $`v`$ outside $`[1/3, 2/3]`$ there is a law
 with that disagreement mass and $`\tau(p) < I_p(X;Y)`$.
 
 *Proof.* If $`\Delta > 0`$ and $`\tau(p) < I_p(X;Y)`$, Theorem 6.6 gives
-$`\sqrt{ad} > u_0 \ge v`$ (Lemma 6.1), while `sqrt(a*d) <= (a+d)/2 = (1-v)/2`;
-so `v < (1-v)/2`, that is, `v < 1/3`. If $`\Delta < 0`$, exchange the $`Y`$
+$`\sqrt{ad} > u_0 \ge v`$ (Lemma 6.1), while $`\sqrt{ad} \le (a+d)/2 = (1-v)/2`$;
+so $`v < (1-v)/2`$, that is, $`v < 1/3`$. If $`\Delta < 0`$, exchange the $`Y`$
 labels: the disagreement mass becomes $`1 - v`$, and the same argument gives
-`1 - v < 1/3`. If $`\Delta = 0`$, $`\tau = I = 0`$. Contraposition proves the
+$`1 - v < 1/3`$. If $`\Delta = 0`$, $`\tau = I = 0`$. Contraposition proves the
 band, and (1.2) the deterministic equality. For sharpness, take
-`p = ((1-v)/2, v, 0, (1-v)/2)` with `0 < v < 1/3`: $`\Delta > 0`$, $`w = 0`$,
-$`u_0 = v`$, and `sqrt(a*d) = (1-v)/2 > v`, so $`\tau(p) < I_p(X;Y)`$ by
-Theorem 6.6. At $`v = 0`$, the law `(1/2, 0, 0, 1/2)` has $`\tau = 0 < 1 = I`$.
-A column exchange gives examples for `v > 2/3`.
+$`p = ((1-v)/2, v, 0, (1-v)/2)`$ with $`0 < v < 1/3`$: $`\Delta > 0`$, $`w = 0`$,
+$`u_0 = v`$, and $`\sqrt{ad} = (1-v)/2 > v`$, so $`\tau(p) < I_p(X;Y)`$ by
+Theorem 6.6. At $`v = 0`$, the law $`(1/2, 0, 0, 1/2)`$ has $`\tau = 0 < 1 = I`$.
+A column exchange gives examples for $`v > 2/3`$.
 
-The band has normalized volume `13/27` in the simplex of binary laws: in the
+The band has normalized volume $`13/27`$ in the simplex of binary laws: in the
 coordinates $`(a, b, v)`$, reached from $`(a, b, c)`$ by a map of unit
 Jacobian, the section at fixed $`v`$ is the rectangle $`0 \le a \le 1-v`$,
-$`0 \le b \le v`$, of area $`v\,(1-v)`$; the whole simplex has volume `1/6`,
-and `6 * integral_{1/3}^{2/3} v*(1-v) dv = 13/27`. This is a region on which
+$`0 \le b \le v`$, of area $`v\,(1-v)`$; the whole simplex has volume $`1/6`$,
+and $`6 \int_{1/3}^{2/3} v\,(1-v)\,dv = 13/27`$. This is a region on which
 the answer is known, not a count of anything else.
 
 **Corollary 7.2 (an optimal latent is blind to agreement).** For every binary
 law $`p`$ and every $`\tau`$-optimal finite latent $`L`$, the latent is
 independent of the event $`\{X = Y\}`$; reading both observables as
-$`\{0,1\}`$-valued, $`I(L; X xor Y) = 0`$.
+$`\{0,1\}`$-valued, $`I(L; X \,\mathrm{xor}\, Y) = 0`$.
 
 *Proof.* By Theorem 6.7 every positive-weight component is $`p`$, or one of
 $`q^+`$, $`q^-`$, which share the off-diagonal cells $`b, c`$ (when
@@ -998,29 +1003,29 @@ $`b + c`$ is again common). So every positive-weight label has the same
 conditional probability of $`\{X \ne Y\}`$, which is independence.
 
 **Example 7.3 (the uniform-marginal family, again).** For
-`p = ((1+r)/4, (1-r)/4, (1-r)/4, (1+r)/4)` with $`0 < r < 1`$, `Delta = r/4`,
-`s = (1+r)/2`, `v = (1-r)/2`, `w = (1-r)^2/16`, and `sqrt(a*d) = (1+r)/4`.
-Direct substitution gives `f_p((1+r)/4) = (1+r)*(2*r - 1)/16`. So the constant
-latent is optimal exactly when `r <= 1/2`, in agreement with Example 4.10, and
-for `r > 1/2` the optimum is the diagonal-swap pair with $`u_0`$ the positive
+$`p = ((1+r)/4, (1-r)/4, (1-r)/4, (1+r)/4)`$ with $`0 < r < 1`$, $`\Delta = r/4`$,
+$`s = (1+r)/2`$, $`v = (1-r)/2`$, $`w = (1-r)^2/16`$, and $`\sqrt{ad} = (1+r)/4`$.
+Direct substitution gives $`f_p((1+r)/4) = (1+r)\,(2r - 1)/16`$. So the constant
+latent is optimal exactly when $`r \le 1/2`$, in agreement with Example 4.10, and
+for $`r > 1/2`$ the optimum is the diagonal-swap pair with $`u_0`$ the positive
 root of $`f_p`$.
 
 **Example 7.4 (a law with a nonconstant optimum).** For
-`p = (3/5, 1/20, 1/20, 3/10)`, `Delta = 71/400 > 0`, `s = 9/10`, `v = 1/10`,
-`w = 1/400`, and `a*d = 9/50`. Then
+$`p = (3/5, 1/20, 1/20, 3/10)`$, $`\Delta = 71/400 > 0`$, $`s = 9/10`$, $`v = 1/10`$,
+$`w = 1/400`$, and $`ad = 9/50`$. Then
 
 ```math
 f_p(\sqrt{9/50}) = (71/400)\,\sqrt{9/50} - 81/4000 > 0,
 ```
 
-since `sqrt(9/50) > 81/710`. So $`\sqrt{ad} > u_0`$, the constant latent is not
+since $`\sqrt{9/50} > 81/710`$. So $`\sqrt{ad} > u_0`$, the constant latent is not
 optimal, and the optimal components swap the diagonal entries around the root
-$`u_0`$ of `u^3 - u^2/10 - u/400 - 9/4000`.
+$`u_0`$ of $`u^3 - u^2/10 - u/400 - 9/4000`$.
 
 **Example 7.5 (Example 4.12 through the cubic).** For
-`p = (1/2, 1/5, 1/10, 1/5)`, `s = 7/10`, `v = 3/10`, `w = 1/50`, and
-`a*d = 1/10`. Then `f_p(1/sqrt(10)) = (2/25)/sqrt(10) - 11/250 < 0`, since
-`(2/25)/sqrt(10) < 2/75 < 11/250`. So $`\sqrt{ad} < u_0`$ and the constant
+$`p = (1/2, 1/5, 1/10, 1/5)`$, $`s = 7/10`$, $`v = 3/10`$, $`w = 1/50`$, and
+$`ad = 1/10`$. Then $`f_p(1/\sqrt{10}) = (2/25)/\sqrt{10} - 11/250 < 0`$, since
+$`(2/25)/\sqrt{10} < 2/75 < 11/250`$. So $`\sqrt{ad} < u_0`$ and the constant
 latent is optimal, as the rational test found.
 
 ## 8. Scope and formalization
@@ -1036,7 +1041,7 @@ and `BIN-DISAGREEMENT-BAND` (Corollary 7.1).
 
 **What is not proved here.** No inequality between $`T(p)`$ and $`\tau(p)`$
 beyond $`\tau(p) \le T(p)`$ is stated. `BIN-C2` remains a conjecture. Nothing
-is claimed about which laws maximize `T(p)/tau(p)`, about alphabets larger than
+is claimed about which laws maximize $`T(p)/\tau(p)`$, about alphabets larger than
 $`2 \times 2`$, or about latents that are not finite mixtures.
 
 **What changes for `BIN-C2`.** The conjecture $`T(p) \le 2\,\tau(p)`$ now
