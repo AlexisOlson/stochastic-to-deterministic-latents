@@ -18,7 +18,7 @@ $`2 \times 2`$ laws only, so $`C_2 \le C_*`$.
 | $`C_* \le 1771`$ | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision, which is its current `main`; open upstream pull requests claim smaller constants, down to `96`, and are not merged or verified here |
 | $`C_2 \le 9`$ | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | $`C_* \le 9`$ | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
-| $`C_2 \le 2`$ | `paper proof` here ([`BIN-C2`](claims.md#ledger)); not formalized |
+| $`C_2 \le 2`$ | `paper proof` here ([`BIN-C2`](claims.md#ledger)); not formalized here; the inequality `kernel-verified` in the reviewed source workspace |
 
 Two constants are interesting. A universal constant of $`2`$ would sit within
 two percent of the general lower bound. For binary laws the constant $`2`$ is
@@ -74,9 +74,10 @@ library yet. The one-parameter family of symmetric laws $`p_{00} = p_{11}`$,
 $`p_{01} = p_{10}`$ is the natural place to start.
 
 **What remains.** A Lean proof of the target signatures in the
-[Lean contracts](lean-contracts.md#binary-factor-two); the sharpness of the
-constant, that is, a binary lower bound above the trivial $`1`$; and the
-equality cases.
+[Lean contracts](lean-contracts.md#binary-factor-two), of which the inequality
+is `kernel-verified` in the reviewed source workspace and the full-support
+witness is not; the sharpness of the constant, that is, a binary lower bound
+above the trivial $`1`$; and the equality cases.
 
 **Tier.** `paper proof`.
 

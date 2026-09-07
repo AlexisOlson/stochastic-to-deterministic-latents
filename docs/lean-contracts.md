@@ -297,7 +297,9 @@ setup does not supply.
 
 The rows `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER`, and `BIN-FIXED-CUT` are
 `paper proof` in the [binary factor two](binary-factor-two.md) page. No public
-declaration states any of them.
+declaration states any of them. The `BIN-C2` inequality, over the same upstream
+`T`, `tau`, and `IsPMF`, was `kernel-verified` in the reviewed source workspace
+and remains qualified as such; the full-support witness target below was not.
 
 **Prerequisite targets.** The stochastic-optimum targets above
 (`Binary.cubicRoot`, `Binary.swapContact`, and
