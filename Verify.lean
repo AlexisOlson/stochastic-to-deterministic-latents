@@ -2797,3 +2797,37 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.normBound_of_positivityG
 /-- info: 'StochasticToDeterministicLatents.Binary.normBound_of_positivityGate' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.normBound_of_positivityGate
+
+/-! ## Binary.FactorTwo.Optimum -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_contact
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_contact' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_contact
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_self
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_self' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_self
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot
+
+/-! ## Binary.FactorTwo.Orientation -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.detScore_pushforward
+/-- info: 'StochasticToDeterministicLatents.Binary.detScore_pushforward' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.detScore_pushforward
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_pushforward
+/-- info: 'StochasticToDeterministicLatents.Binary.T_pushforward' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_pushforward
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented

@@ -25,6 +25,8 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.Contact
 import StochasticToDeterministicLatents.Binary.FactorTwo.Touch
 import StochasticToDeterministicLatents.Binary.FactorTwo.RationalTest
 import StochasticToDeterministicLatents.Binary.FactorTwo.NormBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.Optimum
+import StochasticToDeterministicLatents.Binary.FactorTwo.Orientation
 
 /-!
 # Stochastic-to-Deterministic Latents
