@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 21 modules and 495 theorem endpoints. Definitions, including
+contains 27 modules and 547 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -24,7 +24,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.Selector](../StochasticToDeterministicLatents/Binary/Selector.lean) | 2026-09-01 | 6 | Mathematical catalog and score-minimizing selector |
 | [Binary.CountSelector](../StochasticToDeterministicLatents/Binary/CountSelector.lean) | 2026-09-01 | 4 | Structural count-selector lemmas |
 | [Pricing](../StochasticToDeterministicLatents/Pricing.lean) | 2026-09-01 | 6 | Fixed-code identity, rebate, and PRICE(c) |
-| [Bridge](../StochasticToDeterministicLatents/Bridge.lean) | 2026-09-02 | 22 | Upstream objective, contact, seed, and quotient interfaces |
+| [Bridge](../StochasticToDeterministicLatents/Bridge.lean) | 2026-09-02 | 23 | Upstream objective, contact, seed, and quotient interfaces |
 | [Binary.Symmetry](../StochasticToDeterministicLatents/Binary/Symmetry.lean) | 2026-09-02 | 37 | Cell, code, and latent transport |
 | [Binary.Chart](../StochasticToDeterministicLatents/Binary/Chart.lean) | 2026-09-03 | 15 | Transpose-chart law and two-arm cost identity |
 | [Binary.ContactChart](../StochasticToDeterministicLatents/Binary/ContactChart.lean) | 2026-09-03 | 61 | Contact geometry, scalar ledgers, and bit conversions |
@@ -38,6 +38,12 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorNine.PositivePhase](../StochasticToDeterministicLatents/Binary/FactorNine/PositivePhase.lean) | 2026-09-04 | 64 | Positive scalar arm and chart cost under seam hypotheses |
 | [Binary.FactorNine.SeamEndpoints](../StochasticToDeterministicLatents/Binary/FactorNine/SeamEndpoints.lean) | 2026-09-04 | 41 | Both seam estimates and unconditional chart cost |
 | [Binary.FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) | 2026-09-04 | 4 | All-law C9 and full-support latent/selector headlines |
+| [Binary.FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean) | 2026-09-07 | 6 | Scalar curvature and shape lemmas for the chord margins |
+| [Binary.FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean) | 2026-09-07 | 18 | Binary cubic, its top root, and the diagonal contact pair |
+| [Binary.FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean) | 2026-09-07 | 11 | Affine majorants of $`\Phi`$ and the optimum at a contact pair |
+| [Binary.FactorTwo.Touch](../StochasticToDeterministicLatents/Binary/FactorTwo/Touch.lean) | 2026-09-07 | 10 | Contact cells, the swap invariance, and the touching identity |
+| [Binary.FactorTwo.RationalTest](../StochasticToDeterministicLatents/Binary/FactorTwo/RationalTest.lean) | 2026-09-07 | 4 | The positivity gate at a contact and at a constant optimum |
+| [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 
 ## Axiom sets
 
@@ -105,6 +111,53 @@ its binary full-support premise at nine extends the `T` bound to all laws.
 Finite deterministic attainment then supplies the existential code. This
 composition gives neither a sparse selected-latent $`\mathrm{W3}`$ estimate nor
 a sparse bound for the named selector.
+
+## Factor-two admission checks
+
+The factor-two modules are a separate lane and prove no headline yet. Shape
+supplies the scalar curvature and shape lemmas the chord margins consume. Defs
+fixes the binary cubic, proves its top root exists and is unique, and builds the
+diagonal contact pair and its mixture. Contact supplies both sides of the
+optimum at a contact pair: a two-point latent bounds $`\tau`$ above, and an
+affine majorant of $`\Phi`$ bounds it below. Touch names the two diagonal cells
+of the contact pair, proves that the two contacts carry the same $`\Phi`$
+because the diagonal swap only relabels cells, and proves that at a root of the
+cubic the tangent certificate at one contact is tight at the other as well.
+
+RationalTest verifies the positivity gate in the two places the factor-two
+argument needs it. Clearing the denominators turns the three gate quantities
+into polynomials in the cells, and the gap between the two sides of the gate
+then factors as a product of two balance forms. At the upper contact of a law
+whose cubic has the root $`u`$ the contact relation $`AD = u^2`$ makes the
+first balance form vanish, so the gate holds there with equality; at a law
+whose top root has reached $`\sqrt{ad}`$, so that the stochastic optimum is
+constant, both forms are only nonnegative and the gate holds as an inequality.
+Every step is a `ring` identity in named indeterminates or a positivity
+argument from the cells; the module introduces no analytic fact.
+
+NormBound closes the certificate side. The gate expressions are the
+coefficients of the norm-gate quartic, which Shape already proves nonnegative
+on the half line from the gate inequality alone. That quartic is $`(x-1)^2`$
+times the norm-gate polynomial of the law, so the polynomial is nonnegative
+too, and weighted Hölder at the conjugate exponents $`3\text/2`$ and $`3`$
+turns the resulting cube bound into `Binary.NormBound`. Hölder is the one
+inequality the factor-two lane uses that is not a polynomial fact about the
+cells. The two marginal positivity lemmas of Contact become public here,
+because this module is their first consumer.
+
+The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
+alone, with no duality vocabulary in the statement; the majorant property is
+carried as the explicit inequality `Binary.Majorizes`. The single duality fact
+consumed, `phi_le_logCertificate_of_feasible`, was added to Bridge in its own
+commit; it is the forward direction of an upstream equivalence, restated with
+the upstream validity predicate unfolded.
+
+The module states no unproved analytic fact. `Binary.majorizes_tangentCert_of_normBound`
+takes the norm bound as a hypothesis; `Binary.PositivityGate` and the four gate
+expressions are stated here without a consumer in this module, because the two
+modules that reduce the gate to the norm bound and verify it on a chart both
+import this one and neither imports the other. No claim in the ledger changes
+status here.
 
 ## Factor-nine admission checks
 

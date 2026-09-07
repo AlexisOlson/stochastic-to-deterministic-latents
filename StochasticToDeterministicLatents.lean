@@ -19,6 +19,12 @@ import StochasticToDeterministicLatents.Binary.FactorNine.NonpositivePhase
 import StochasticToDeterministicLatents.Binary.FactorNine.PositivePhase
 import StochasticToDeterministicLatents.Binary.FactorNine.SeamEndpoints
 import StochasticToDeterministicLatents.Binary.FactorNine
+import StochasticToDeterministicLatents.Binary.FactorTwo.Shape
+import StochasticToDeterministicLatents.Binary.FactorTwo.Defs
+import StochasticToDeterministicLatents.Binary.FactorTwo.Contact
+import StochasticToDeterministicLatents.Binary.FactorTwo.Touch
+import StochasticToDeterministicLatents.Binary.FactorTwo.RationalTest
+import StochasticToDeterministicLatents.Binary.FactorTwo.NormBound
 
 /-!
 # Stochastic-to-Deterministic Latents

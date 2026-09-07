@@ -153,6 +153,17 @@ theorem contact_support_eq {S : Finset (α × β)} {w : α × β → ℝ}
     support q = S :=
   stoch_to_det.contact_support_eq hw hS hq
 
+/-- The logarithmic certificate of a feasible kernel majorizes `Φ` on every
+probability law supported in the cell set.  This is the direction of the
+upstream duality equivalence that the binary arguments consume; stating it here
+keeps `Valid` and the rest of the duality vocabulary out of the library. -/
+theorem phi_le_logCertificate_of_feasible
+    {S : Finset (α × β)} {w : α × β → ℝ} (hw : ∀ z ∈ S, 0 < w z)
+    (hfeas : Feasible S w) {q : α × β → ℝ} (hq : IsPMF q)
+    (hsupp : stoch_to_det.Supported S q) :
+    Phi q ≤ ∑ z ∈ S, (-3 * Real.logb 2 (w z)) * q z :=
+  (stoch_to_det.valid_iff_feasible hw).2 hfeas q hq hsupp
+
 /-! ## Seed setup -/
 
 /-- A probability law with connected support, a latent attaining the stochastic
