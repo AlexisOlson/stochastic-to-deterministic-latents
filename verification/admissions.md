@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 34 modules and 622 theorem endpoints. Definitions, including
+contains 35 modules and 628 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -51,6 +51,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
 | [Binary.FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | 2026-09-07 | 8 | Three sufficient conditions for the chord margin, and the bounds from them |
+| [Binary.FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | 2026-09-07 | 6 | The fixed cut, the root sign test, and the corner information |
 
 ## Axiom sets
 
@@ -259,6 +260,19 @@ diagonal mass, its off-diagonal mass, and its off-diagonal product are positive
 -- had been re-proved privately in four modules. They are public in
 `FactorTwo.Defs` now and the copies are gone, which is why that module's
 endpoint count rises by three without any new mathematics.
+
+Strip supplies three things the quantitative estimates need. Below an
+eighth of off-diagonal mass the smaller cell of the contact pair is below half
+that mass -- `contactMass_lt_half_disagreement`, the first of the contract
+page's five quantitative rows to be proved -- and therefore the point that
+leaves three times that cell below it lies strictly inside the segment. A point
+where the cubic is already positive lies beyond the top root, which is the
+converse of the top root's defining property. And `cornerInfo`, the
+unnormalized mutual information of a law with one zero corner, is squeezed
+between $`bc\text/(a+b+c)`$ and $`bc\text/a`$.
+
+None of these compares a margin with zero, so no gate is discharged and no
+claim in the ledger changes status.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is

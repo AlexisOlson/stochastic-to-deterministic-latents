@@ -3186,3 +3186,35 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates
 /-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates
+
+/-! ## Binary.FactorTwo.Strip -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement
+/-- info: 'StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.fixedCut_mem_chord
+/-- info: 'StochasticToDeterministicLatents.Binary.fixedCut_mem_chord' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.fixedCut_mem_chord
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cornerInfo_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.cornerInfo_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cornerInfo_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactEnds_log_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.contactEnds_log_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactEnds_log_eq

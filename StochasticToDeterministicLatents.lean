@@ -32,6 +32,7 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
 import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonScore
 import StochasticToDeterministicLatents.Binary.FactorTwo.Margins
 import StochasticToDeterministicLatents.Binary.FactorTwo.Gates
+import StochasticToDeterministicLatents.Binary.FactorTwo.Strip
 
 /-!
 # Stochastic-to-Deterministic Latents

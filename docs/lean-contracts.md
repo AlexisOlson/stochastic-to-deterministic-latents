@@ -439,11 +439,15 @@ end nonnegative, not strictly positive, so
 used; and nothing supplies
 `Binary.exists_witness_detScore_le_two_mul_tau`, which names the witness.
 
-The quantitative rows remain unimplemented: the two centre estimates, the
-contact-mass bound, and the two fixed-cut estimates. They are exactly the
-hypothesis of `Binary.T_le_two_tau_of_gates`, and `BIN-C2` stays `paper proof`
-until they are proved.
-
+Of the five quantitative rows, the contact-mass bound is supplied:
+`Binary.contactMass_lt_half_disagreement`, again with `Binary.ChordDomain p u`
+in place of `Binary.Oriented p`, and with `Binary.chordBottom p u` for
+`Binary.contactMass p`. The same module defines `Binary.fixedCut p u` as the
+diagonal mass less three times that cell, and places it strictly inside the
+segment. The two centre estimates and the two fixed-cut estimates remain
+unimplemented; they are the rest of the hypothesis of
+`Binary.T_le_two_tau_of_gates`, and `BIN-C2` stays `paper proof` until they are
+proved.
 
 ## Arbitrary finite alphabets
 
@@ -514,6 +518,7 @@ in this table. Their public theorems are audited in
 | Orientation | [FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | Both optima under the swaps and the transpose, and the reduction to an oriented law |
 | Diagonal chord | [FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean), [FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean), [FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | A segment of laws sharing one stochastic optimum, and the two competitors' scores along it |
 | Chord margins and gates | [FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean), [FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean), [FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | The margins as scalar functions, their shape, and the conditional factor-two bound |
+| Fixed cut and corner information | [FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | The contact-mass bound, the fixed cut, the root sign test, and the corner information |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -559,6 +564,7 @@ graph TD
       Binary_FactorTwo_RationalTest["RationalTest"]
       Binary_FactorTwo_Shape["Shape"]
       Binary_FactorTwo_SingletonScore["SingletonScore"]
+      Binary_FactorTwo_Strip["Strip"]
       Binary_FactorTwo_Touch["Touch"]
     end
   end
@@ -601,6 +607,8 @@ graph TD
   Binary_FactorTwo_RationalTest --> Binary_FactorTwo_Touch
   Binary_FactorTwo_Shape --> MATHLIB
   Binary_FactorTwo_SingletonScore --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_Strip --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_Strip --> Binary_ContactChart
   Binary_FactorTwo_Touch --> Binary_FactorTwo_Contact
   Binary_NormalForm --> Binary_CatalogRecovery
   Binary_Reduction --> Binary_ContactChart
