@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 29 modules and 553 theorem endpoints. Definitions, including
+contains 34 modules and 622 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -39,13 +39,18 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorNine.SeamEndpoints](../StochasticToDeterministicLatents/Binary/FactorNine/SeamEndpoints.lean) | 2026-09-04 | 41 | Both seam estimates and unconditional chart cost |
 | [Binary.FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) | 2026-09-04 | 4 | All-law C9 and full-support latent/selector headlines |
 | [Binary.FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean) | 2026-09-07 | 6 | Scalar curvature and shape lemmas for the chord margins |
-| [Binary.FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean) | 2026-09-07 | 18 | Binary cubic, its top root, and the diagonal contact pair |
+| [Binary.FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean) | 2026-09-07 | 21 | Binary cubic, its top root, and the diagonal contact pair |
 | [Binary.FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean) | 2026-09-07 | 11 | Affine majorants of $`\Phi`$ and the optimum at a contact pair |
 | [Binary.FactorTwo.Touch](../StochasticToDeterministicLatents/Binary/FactorTwo/Touch.lean) | 2026-09-07 | 10 | Contact cells, the swap invariance, and the touching identity |
 | [Binary.FactorTwo.RationalTest](../StochasticToDeterministicLatents/Binary/FactorTwo/RationalTest.lean) | 2026-09-07 | 4 | The positivity gate at a contact and at a constant optimum |
 | [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 | [Binary.FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | 2026-09-07 | 3 | The stochastic optimum of a fully supported binary law |
 | [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 3 | Deterministic-score transport and the oriented region |
+| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 39 | The diagonal chord and its two competitor margins |
+| [Binary.FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean) | 2026-09-07 | 6 | The chord's entropies as scalar expressions |
+| [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
+| [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
+| [Binary.FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | 2026-09-07 | 8 | Three sufficient conditions for the chord margin, and the bounds from them |
 
 ## Axiom sets
 
@@ -172,6 +177,88 @@ multiplicative bound has only to be proved there. The last theorem removes the
 orientation and, through `T_le_mul_tau_of_forall_fullSupport`, the
 full-support hypothesis as well; it is a reduction, not a bound, and no claim
 in the ledger changes status here.
+
+Chord is where the deterministic side of the factor-two argument
+begins. Sliding mass along the diagonal, holding the off-diagonal and the
+diagonal total fixed, leaves the cubic unchanged, so `contactAt_chordAt` says
+the contact pair -- and with it the value of $`\Phi`$ that module 7 subtracts
+-- is the same at every point of the chord. The chord runs from the midpoint
+of the diagonal to the upper contact; its ends are ordered, and a law with an
+ordered diagonal lies on it. Two named deterministic competitors are measured
+against the chord's budget: the constant code, whose score is $`\Psi - \Phi`$,
+and the code isolating the last cell. If either margin is nonnegative
+everywhere on the chord, then $`T(p) \le 2\,\tau(p)`$ at the law itself. That
+is a reduction of the factor-two bound to a one-dimensional inequality, not a
+proof of it, and no claim in the ledger changes status here.
+
+Two facts are needed from outside the chord. `T_le_psi_sub_phi` bounds the
+deterministic optimum by the mutual information, through the upstream bound and
+`T_eq_upstream`; it is the deterministic counterpart of `tau_le_psi_sub_phi`.
+`determinant_pos_of_nonconstant` shows that a fully supported law whose top
+root falls below the geometric mean of its diagonal has a strictly positive
+determinant, because at a vanishing determinant the cubic is negative at that
+geometric mean. That is what lets the oriented region of the previous module be
+taken at a nonnegative determinant while every chord statement asks for a
+positive one.
+
+ChordScalars makes the chord's entropies visible as scalar
+expressions, which is what the one-dimensional argument downstream of it
+differentiates. For a probability law the entropy is minus the sum of `xLogX`
+over its values, so along the chord the law contributes four terms in the
+moving coordinate and each marginal two. Since
+$`\Psi(q) + \Phi(q) = 5\,H(q) - 3\,H(q_X) - 3\,H(q_Y)`$, the constant margin
+is eight such terms together with the value of $`\Phi`$ at the fixed contact.
+The library's information quantities are in bits and `xLogX` is in natural-log
+units, so every statement here carries its explicit factor of `Real.log 2`
+rather than absorbing the conversion. Nothing is proved about the sign of any
+margin, and no claim in the ledger changes status here.
+
+SingletonScore measures the chord's second competitor, the code that
+gives the last cell its own label. Its labels are drawn from the canonical
+label type, so two of the four labels carry no mass and contribute nothing;
+three pushforwards are computed, the cell together with its label is the law
+itself because the label is a function of the cell, and the two reversed pairs
+are equivalences of the computed ones. The resulting score, and the margin it
+leaves against the chord's budget, are sums of `xLogX` terms in the moving
+coordinate. As in the previous module the statements are in natural-log units
+with an explicit factor of `Real.log 2`. Nothing is proved about the sign of
+the margin, and no claim in the ledger changes status here.
+
+Margins names the two margins as functions of the diagonal mass, the
+two off-diagonal cells, the contact's $`\Phi`$ and the moving coordinate, and
+differentiates them twice. Because the library's scalar ledger is in
+natural-log units, the second derivatives are exactly the expressions
+`Shape.lean` already analyses: the constant margin's curvature is the left side
+of `constantCurvature_eq_numerator_div`, and the isolating margin's is
+`singletonCurvature_neg` at the complementary diagonal cell. The module also
+records that the constant margin is stationary at the midpoint of the diagonal,
+which is the hypothesis the endpoint comparison downstream needs, and that
+every argument the derivatives are taken at is positive on the chord. No
+inequality between the margins and zero is proved here, and no claim in the
+ledger changes status.
+
+Gates supplies three sufficient conditions for the chord reduction's
+hypothesis, each checkable at one or two points. The constant margin has no
+interior minimum, because its curvature changes sign at most once on the upper
+half of the diagonal and its slope vanishes at the midpoint; so a nonnegative
+value at the midpoint carries the whole segment, the upper end being the
+contact's own mutual information. The isolating margin is concave, because its
+curvature is negative throughout; so nonnegative values at the two ends carry
+the segment, and a nonnegative value at the midpoint together with an interior
+point where both margins are nonnegative covers it in two pieces.
+
+`T_le_two_tau_of_gates` assembles those with the orientation and the constant
+branch of the stochastic optimum: it proves $`T(p) \le 2\,\tau(p)`$ for every
+probability law, from a hypothesis that is entirely one-dimensional. It is a
+conditional theorem, not a proof of `BIN-C2`: the hypothesis compares explicit
+scalar functions with zero at named points of an arbitrary chord domain, and
+nothing here proves that comparison. No claim in the ledger changes status.
+
+Three one-line positivity facts about a fully supported law -- that its
+diagonal mass, its off-diagonal mass, and its off-diagonal product are positive
+-- had been re-proved privately in four modules. They are public in
+`FactorTwo.Defs` now and the copies are gone, which is why that module's
+endpoint count rises by three without any new mathematics.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is

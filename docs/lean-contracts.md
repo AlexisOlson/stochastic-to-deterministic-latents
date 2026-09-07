@@ -247,8 +247,6 @@ theorem Binary.optimalLatent_two_components
     ∃ q₁ q₂ : Binary.RealTable,
       ∀ v, L.prior v ≠ 0 → L.comp v = q₁ ∨ L.comp v = q₂
 
-noncomputable def Binary.cubicRoot (p : Binary.RealTable) : ℝ
-
 theorem Binary.tau_eq_of_constantBranch
     (p : Binary.RealTable) (hp : IsPMF p)
     (hdet : 0 < p (0, 0) * p (1, 1) - p (0, 1) * p (1, 0))
@@ -272,6 +270,20 @@ definition requires `Binary.cubicRoot`, which is the largest nonnegative root
 of $`u^3 - (b+c)u^2 - bcu - bc(a+d)`$. A definition of the
 root by `Classical.choose` from an existence lemma is acceptable; the theorems
 do not require it to be computable.
+
+**The two definitions are supplied.** `Binary.cubicRoot` and
+`Binary.swapContact` are defined in
+[`Binary/FactorTwo/Defs.lean`](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean)
+over that same cubic, the root by choice as permitted and determined by
+`isTopRoot_unique`, and `swapContact p = contactAt p (cubicRoot p)`. The two
+branch theorems above remain unimplemented as stated.
+[`Binary/FactorTwo/Optimum.lean`](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean)
+proves `tau_eq_at_topRoot`, which splits on the same test — the branch
+condition `Binary.Nonconstant p u` is $`u < \sqrt{ad}`$ — and weakens
+$`0 < \det`$ to $`0 \le \det`$, but it assumes `FullSupport p` and its constant
+branch concludes $`\tau(p) = \Psi(p) - \Phi(p)`$ rather than naming the mutual
+information. Closing the gap to the signatures above needs the sparse case and
+that identification.
 
 **A formalization route.** The two-contact chart of
 [`Binary/NormalForm.lean`](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
@@ -301,10 +313,10 @@ declaration states any of them. The `BIN-C2` inequality, over the same upstream
 `T`, `tau`, and `IsPMF`, was `kernel-verified` in the reviewed source workspace
 and remains qualified as such; the full-support witness target below was not.
 
-**Prerequisite targets.** The stochastic-optimum targets above
-(`Binary.cubicRoot`, `Binary.swapContact`, and
-`Binary.tau_eq_of_mixedBranch`) are unimplemented; once formalized they supply
-the right-hand side.
+**Prerequisite targets.** `Binary.cubicRoot` and `Binary.swapContact` are
+defined, and `Binary.tau_eq_at_topRoot` supplies the right-hand side on full
+support; `Binary.tau_eq_of_mixedBranch` as stated above, without that
+hypothesis, is unimplemented.
 
 **Existing declarations the proof rests on.** `T_le_detScore`
 and `exists_optimalCode` in
@@ -396,6 +408,43 @@ and its gradient (Lemmas 3.1 and 3.2), which a formalization would state about
 `Binary.swapContact p`; they are consequences of the tangent identity behind
 `Binary.tau_eq_of_mixedBranch` and need no separate row.
 
+**What the chord modules supply.** The chord law and the two margins are
+defined in
+[`Binary/FactorTwo/`](../StochasticToDeterministicLatents/Binary/FactorTwo/),
+with one difference of shape: they take the top root as an explicit argument,
+`Binary.chordAt p t`, `Binary.constantMargin p u t` and
+`Binary.singletonMargin p u t`, rather than reading it from
+`Binary.swapContact p`. The hypothesis bundle is `Binary.ChordDomain p u`,
+which is `Binary.Oriented p` at $`u_0 = u`$ together with
+`Binary.IsTopRoot p u`.
+
+On that bundle, `Binary.singletonMargin_concaveOn` and
+`Binary.constantMargin_min_le` are the concavity and no-interior-minimum
+signatures above, and `Binary.T_le_two_mul_tau_of_centerGate` and
+`Binary.T_le_two_mul_tau_of_cutGates` are the two conditional bounds, each
+carrying `Binary.ChordDomain p u` where the signature above carries
+`Binary.Oriented p`. A third gate, which has no signature above, takes the
+isolating margin nonnegative at both ends of the segment.
+
+`Binary.T_le_two_tau_of_gates` is the conditional form of
+`Binary.T_le_two_mul_tau` itself. It proves $`T(p) \le 2\,\tau(p)`$ for every
+probability law from a hypothesis that supplies one of the three gates at every
+chord domain, which is more than the two conditional bounds assume at $`p`$
+alone: the orientation carries an arbitrary law to an oriented one, and the
+gate is needed there.
+
+Two differences of strength: `Binary.constantMargin_chordTop` gives the contact
+end nonnegative, not strictly positive, so
+`Binary.constantMargin_contactEnd_pos` as stated is not supplied and is not
+used; and nothing supplies
+`Binary.exists_witness_detScore_le_two_mul_tau`, which names the witness.
+
+The quantitative rows remain unimplemented: the two centre estimates, the
+contact-mass bound, and the two fixed-cut estimates. They are exactly the
+hypothesis of `Binary.T_le_two_tau_of_gates`, and `BIN-C2` stays `paper proof`
+until they are proved.
+
+
 ## Arbitrary finite alphabets
 
 These declarations remain conjectural.
@@ -460,6 +509,11 @@ in this table. Their public theorems are audited in
 | Seam closure | [FactorNine.SeamEndpoints](../StochasticToDeterministicLatents/Binary/FactorNine/SeamEndpoints.lean) | Both seam endpoints and `ContactChart.strictFactorEight` |
 | Boundary transfer | [SparseLimit](../StochasticToDeterministicLatents/SparseLimit.lean) | A generic bound on `T` from its full-support premise |
 | Binary factor nine | [FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) | Full-support `BIN-W3-8` and selector bound; all-law `BIN-C9` |
+| Binary factor-two contact | [FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean), [FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean), [FactorTwo.Touch](../StochasticToDeterministicLatents/Binary/FactorTwo/Touch.lean), [FactorTwo.RationalTest](../StochasticToDeterministicLatents/Binary/FactorTwo/RationalTest.lean), [FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | The cubic and its top root, the diagonal contact pair, and a tangent certificate tight at both contacts |
+| Stochastic optimum of a binary law | [FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | `tau` in closed form at the top root, on full support |
+| Orientation | [FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | Both optima under the swaps and the transpose, and the reduction to an oriented law |
+| Diagonal chord | [FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean), [FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean), [FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | A segment of laws sharing one stochastic optimum, and the two competitors' scores along it |
+| Chord margins and gates | [FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean), [FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean), [FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | The margins as scalar functions, their shape, and the conditional factor-two bound |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -468,7 +522,6 @@ module imports every module and is not drawn):
 
 ```mermaid
 graph TD
-  root["root (StochasticToDeterministicLatents.lean)"]
   Bridge["Bridge"]
   Deterministic["Deterministic"]
   Information["Information"]
@@ -493,30 +546,24 @@ graph TD
       Binary_FactorNine_PositivePhase["PositivePhase"]
       Binary_FactorNine_SeamEndpoints["SeamEndpoints"]
     end
+    subgraph FACTORTWO["Binary/FactorTwo/"]
+      Binary_FactorTwo_Chord["Chord"]
+      Binary_FactorTwo_ChordScalars["ChordScalars"]
+      Binary_FactorTwo_Contact["Contact"]
+      Binary_FactorTwo_Defs["Defs"]
+      Binary_FactorTwo_Gates["Gates"]
+      Binary_FactorTwo_Margins["Margins"]
+      Binary_FactorTwo_NormBound["NormBound"]
+      Binary_FactorTwo_Optimum["Optimum"]
+      Binary_FactorTwo_Orientation["Orientation"]
+      Binary_FactorTwo_RationalTest["RationalTest"]
+      Binary_FactorTwo_Shape["Shape"]
+      Binary_FactorTwo_SingletonScore["SingletonScore"]
+      Binary_FactorTwo_Touch["Touch"]
+    end
   end
   UPSTREAM[("stoch_to_det.* (pinned upstream)")]
   MATHLIB[("Mathlib.*")]
-  root -.-> Information
-  root -.-> Latent
-  root -.-> Deterministic
-  root -.-> Bridge
-  root -.-> Binary_Table
-  root -.-> Binary_Selector
-  root -.-> Binary_CountSelector
-  root -.-> Pricing
-  root -.-> Binary_Symmetry
-  root -.-> Binary_Chart
-  root -.-> Binary_ContactChart
-  root -.-> Binary_TransposeNormalForm
-  root -.-> Binary_CatalogRecovery
-  root -.-> Binary_NormalForm
-  root -.-> SparseLimit
-  root -.-> Binary_ScalarEstimates
-  root -.-> Binary_Reduction
-  root -.-> Binary_FactorNine_NonpositivePhase
-  root -.-> Binary_FactorNine_PositivePhase
-  root -.-> Binary_FactorNine_SeamEndpoints
-  root -.-> Binary_FactorNine
   Binary_CatalogRecovery --> Binary_Selector
   Binary_CatalogRecovery --> Binary_ContactChart
   Binary_CatalogRecovery --> Binary_TransposeNormalForm
@@ -533,6 +580,28 @@ graph TD
   Binary_FactorNine --> Binary_FactorNine_SeamEndpoints
   Binary_FactorNine --> Binary_NormalForm
   Binary_FactorNine --> SparseLimit
+  Binary_FactorTwo_Chord --> Binary_FactorTwo_Optimum
+  Binary_FactorTwo_ChordScalars --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_ChordScalars --> Binary_ContactChart
+  Binary_FactorTwo_Contact --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_Contact --> Bridge
+  Binary_FactorTwo_Defs --> Binary_Selector
+  Binary_FactorTwo_Defs --> MATHLIB
+  Binary_FactorTwo_Gates --> Binary_FactorTwo_Margins
+  Binary_FactorTwo_Gates --> Binary_FactorTwo_Orientation
+  Binary_FactorTwo_Margins --> Binary_FactorTwo_SingletonScore
+  Binary_FactorTwo_Margins --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_NormBound --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_NormBound --> Binary_FactorTwo_Contact
+  Binary_FactorTwo_Optimum --> Binary_FactorTwo_NormBound
+  Binary_FactorTwo_Optimum --> Binary_FactorTwo_RationalTest
+  Binary_FactorTwo_Orientation --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_Orientation --> Binary_Symmetry
+  Binary_FactorTwo_Orientation --> SparseLimit
+  Binary_FactorTwo_RationalTest --> Binary_FactorTwo_Touch
+  Binary_FactorTwo_Shape --> MATHLIB
+  Binary_FactorTwo_SingletonScore --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_Touch --> Binary_FactorTwo_Contact
   Binary_NormalForm --> Binary_CatalogRecovery
   Binary_Reduction --> Binary_ContactChart
   Binary_ScalarEstimates --> Binary_ContactChart

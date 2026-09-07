@@ -259,9 +259,21 @@ theorem cell_pos {p : RealTable} (hpos : FullSupport p) :
     0 < entryA p ∧ 0 < entryB p ∧ 0 < entryC p ∧ 0 < entryD p :=
   ⟨hpos (0, 0), hpos (0, 1), hpos (1, 0), hpos (1, 1)⟩
 
-private theorem diagonalMass_pos {p : RealTable} (hpos : FullSupport p) :
+/-- The diagonal of a fully supported law carries positive mass. -/
+theorem diagonalMass_pos {p : RealTable} (hpos : FullSupport p) :
     0 < diagonalMass p :=
   add_pos (cell_pos hpos).1 (cell_pos hpos).2.2.2
+
+/-- The off-diagonal of a fully supported law carries positive mass. -/
+theorem offDiagonalMass_pos {p : RealTable} (hpos : FullSupport p) :
+    0 < offDiagonalMass p :=
+  add_pos (cell_pos hpos).2.1 (cell_pos hpos).2.2.1
+
+/-- The off-diagonal product of a fully supported law is positive. -/
+theorem offDiagonalProduct_pos {p : RealTable} (hpos : FullSupport p) :
+    0 < offDiagonalProduct p := by
+  rw [offDiagonalProduct_eq]
+  exact mul_pos (cell_pos hpos).2.1 (cell_pos hpos).2.2.1
 
 private theorem sq_lt_diagonalProduct {p : RealTable} {u : ℝ} (hpos : FullSupport p)
     (hu : 0 < u) (hnc : Nonconstant p u) : u ^ 2 < diagonalProduct p := by

@@ -13,8 +13,8 @@ Read from `StochasticToDeterministicLatents.lean` (the root) and every `*.lean`
 file under `StochasticToDeterministicLatents/`. Only lines matching
 `^import\\s+<Name>\\s*$` count (the anchor matters: `Binary/Table.lean` has a
 docstring line beginning with the word "important"). Local modules are nodes,
-labelled by the last component of their name (the `Binary/` and
-`Binary/FactorNine/` subgraphs supply the rest); the root file is the node
+labelled by the last component of their name (the `Binary/` subgraph and one
+subgraph per directory beneath it supply the rest); the root file is the node
 `root`. Every `stoch_to_det.*` import collapses into one boundary node and
 every `Mathlib.*` import into another. Any other import prefix is an error.
 Edge direction is "imports": `A --> B` means A imports B.
@@ -174,14 +174,20 @@ def imports_mermaid(graph: dict[str, list[str]]) -> str:
         return f'  {node_id(mod)}["{mod.rsplit(".", 1)[-1]}"]'
 
     top = sorted(m for m in local if not m.startswith("Binary."))
-    binary = sorted(m for m in local if m.startswith("Binary.") and not m.startswith("Binary.FactorNine."))
-    factor_nine = sorted(m for m in local if m.startswith("Binary.FactorNine."))
+    binary = sorted(m for m in local if m.startswith("Binary.") and m.count(".") == 1)
+    groups: dict[str, list[str]] = {}
+    for m in sorted(local):
+        parts = m.split(".")
+        if parts[0] == "Binary" and len(parts) == 3:
+            groups.setdefault(parts[1], []).append(m)
+        elif parts[0] == "Binary" and len(parts) > 3:
+            fail(f"{m} sits deeper than the one directory level the diagram groups")
     out.extend(decl(m) for m in top)
     out.append('  subgraph BINARY["Binary/"]')
     out.extend("  " + decl(m) for m in binary)
-    if factor_nine:
-        out.append('    subgraph FACTORNINE["Binary/FactorNine/"]')
-        out.extend("    " + decl(m) for m in factor_nine)
+    for sub, members in sorted(groups.items()):
+        out.append(f'    subgraph {node_id(sub).upper()}["Binary/{sub}/"]')
+        out.extend("    " + decl(m) for m in members)
         out.append("    end")
     out.append("  end")
     if used_upstream:

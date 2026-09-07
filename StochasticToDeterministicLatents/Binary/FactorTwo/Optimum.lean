@@ -87,17 +87,9 @@ theorem tau_eq_self (hp : IsPMF p) (hpos : FullSupport p)
 
 /-! ## The dichotomy -/
 
-private theorem diagonalMass_pos (hpos : FullSupport p) : 0 < diagonalMass p :=
-  add_pos (hpos (0, 0)) (hpos (1, 1))
-
 private theorem offDiagonalMass_nonneg (hpos : FullSupport p) :
     0 ≤ offDiagonalMass p :=
-  add_nonneg (hpos (0, 1)).le (hpos (1, 0)).le
-
-private theorem offDiagonalProduct_pos (hpos : FullSupport p) :
-    0 < offDiagonalProduct p := by
-  rw [offDiagonalProduct_eq]
-  exact mul_pos (hpos (0, 1)) (hpos (1, 0))
+  (offDiagonalMass_pos hpos).le
 
 /-- The stochastic optimum of a fully supported binary law with nonnegative
 determinant, in both branches, at the top root of its cubic. -/

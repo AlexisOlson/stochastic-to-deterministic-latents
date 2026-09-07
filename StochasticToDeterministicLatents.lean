@@ -27,6 +27,11 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.RationalTest
 import StochasticToDeterministicLatents.Binary.FactorTwo.NormBound
 import StochasticToDeterministicLatents.Binary.FactorTwo.Optimum
 import StochasticToDeterministicLatents.Binary.FactorTwo.Orientation
+import StochasticToDeterministicLatents.Binary.FactorTwo.Chord
+import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
+import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonScore
+import StochasticToDeterministicLatents.Binary.FactorTwo.Margins
+import StochasticToDeterministicLatents.Binary.FactorTwo.Gates
 
 /-!
 # Stochastic-to-Deterministic Latents
