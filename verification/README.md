@@ -27,7 +27,8 @@ regression to fix, never to suppress. The pinned upstream dependency emits
 about seventy linter warnings of its own, which are distinct from elaboration
 or audit failures and are not changed here.
 
-The root build and audit passed in the prepared local checkout on 2026-09-04.
+The root build and audit run in continuous integration on every change that
+touches Lean, and last passed in the prepared local checkout on 2026-09-04.
 A fresh-machine replay has not been performed. Do not change the pinned
 toolchain or dependencies, or run `lake update`, as part of a verification run.
 
@@ -89,7 +90,8 @@ For a new or changed theorem module:
 3. Review the declarations and human-readable proof against their source
    artifacts. Correct substantive mismatches before root admission.
 4. Add the root import, theorem assertions, and discovered pins as needed.
-   Update the admission record and the claim ledger in the same change.
+   Update the admission record, the claim ledger, and the
+   [Lean contracts](../docs/lean-contracts.md) page in the same change.
 5. Run the full root build and Verify. Check theorem coverage, local links,
    the Markdown math check from CLAUDE.md, private paths, generated
    artifacts, and `git diff --check`.

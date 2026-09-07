@@ -2,7 +2,7 @@
 
 This page proves the binary constant two. It is `paper proof` in the sense of
 the [claim ledger](claims.md#status-vocabulary): a complete rigorous prose
-derivation with no unresolved step, not formalized. No Lean
+derivation with no unresolved step, not formalized here. No Lean
 declaration in this repository states it. Where a kernel-verified declaration
 supplies an input, it is quoted in its own words.
 
@@ -84,9 +84,9 @@ with $`\eta(0) = 0`$. For a law $`p'`$ on the four cells,
 - [Theorem 6.6](binary-stochastic-optimum.md#6-the-cubic) (the cubic decides
   and locates the optimum), with [Lemma 6.1](binary-stochastic-optimum.md#6-the-cubic)
   on the root and [Lemma 6.4](binary-stochastic-optimum.md#6-the-cubic) on the
-  tangent coefficients of a contact, together with display (1.2) of that page,
-  $`\tau(p) \le T(p) \le I_p(X;Y)`$ with equality throughout when
-  $`\tau(p) = I_p(X;Y)`$.
+  tangent coefficients of a contact, together with the score comparison of
+  section 1 of that page, $`\tau(p) \le T(p) \le I_p(X;Y)`$, and its display
+  (1.2), equality throughout when $`\tau(p) = I_p(X;Y)`$.
 - [Theorem 3.2](binary-stochastic-optimum.md#3-the-deficit-and-the-tangent-test)
   (the tangent test), used once, for a single reference law in
   [section 4](#4-the-center), and
@@ -1154,7 +1154,7 @@ $`T(p) \le 2\,\tau(p)`$, and the constant code or one of the four singleton code
 attains $`D_p(g) \le 2\,\tau(p)`$, as stated at the head of the page.
 
 *Proof.* If $`\Delta = 0`$, $`p`$ is a product law, so $`I_p(X;Y) = 0`$ and
-$`\tau(p) = T(p) = 0`$ from $`0 \le \tau(p) \le T(p) \le I_p(X;Y)`$ (display (1.2) of
+$`\tau(p) = T(p) = 0`$ from $`0 \le \tau(p) \le T(p) \le I_p(X;Y)`$ (section 1 of
 the stochastic-optimum page); the constant code is a witness. If $`\Delta < 0`$, relabel $`Y`$ (Lemma 1.2), which
 preserves $`\tau`$, $`T`$, and code scores, maps the off-diagonal cells to the
 diagonal, and reduces to $`\Delta > 0`$. If $`\Delta > 0`$, the two remaining
