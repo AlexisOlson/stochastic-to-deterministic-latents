@@ -22,6 +22,7 @@ import StochasticToDeterministicLatents.Binary.FactorNine
 import StochasticToDeterministicLatents.Binary.FactorTwo.Shape
 import StochasticToDeterministicLatents.Binary.FactorTwo.LogSeries
 import StochasticToDeterministicLatents.Binary.FactorTwo.LogValues
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterLogValues
 import StochasticToDeterministicLatents.Binary.FactorTwo.ConstantRatio
 import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonRatio
 import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonMass
@@ -34,6 +35,7 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.Touch
 import StochasticToDeterministicLatents.Binary.FactorTwo.RationalTest
 import StochasticToDeterministicLatents.Binary.FactorTwo.NormBound
 import StochasticToDeterministicLatents.Binary.FactorTwo.Optimum
+import StochasticToDeterministicLatents.Binary.FactorTwo.Planes
 import StochasticToDeterministicLatents.Binary.FactorTwo.Orientation
 import StochasticToDeterministicLatents.Binary.FactorTwo.Chord
 import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
@@ -41,6 +43,12 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonScore
 import StochasticToDeterministicLatents.Binary.FactorTwo.Margins
 import StochasticToDeterministicLatents.Binary.FactorTwo.Gates
 import StochasticToDeterministicLatents.Binary.FactorTwo.Strip
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterMajorant
+import StochasticToDeterministicLatents.Binary.FactorTwo.CertValues
+import StochasticToDeterministicLatents.Binary.FactorTwo.Center
+import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneEndpoints
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeam
 
 /-!
 # Stochastic-to-Deterministic Latents

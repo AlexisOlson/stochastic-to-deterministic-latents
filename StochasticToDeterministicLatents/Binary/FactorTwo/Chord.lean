@@ -404,7 +404,7 @@ private theorem offDiagonalProduct_lt_sq_topRoot (h : ChordDomain p u) :
 /-- Every point of the chord below the upper contact carries the same chord
 domain, with the same top root.  The upper contact is excluded: there the
 diagonal product falls to `u ^ 2` and the law is constant-optimal. -/
-private theorem chordDomain_chordAt (h : ChordDomain p u)
+theorem chordDomain_chordAt (h : ChordDomain p u)
     (ht : t ∈ Set.Ico (chordMidpoint p) (chordTop p u)) : ChordDomain (chordAt p t) u := by
   have hu := topRoot_pos h.isPMF h.fullSupport h.topRoot
   have hsum := chordTop_add_chordBottom (p := p) (u := u)

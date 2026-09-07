@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 43 modules and 649 theorem endpoints. Definitions, including
+contains 49 modules and 667 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -46,7 +46,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 | [Binary.FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | 2026-09-07 | 3 | The stochastic optimum of a fully supported binary law |
 | [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 3 | Deterministic-score transport and the oriented region |
-| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 41 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
+| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 42 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
 | [Binary.FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean) | 2026-09-07 | 6 | The chord's entropies as scalar expressions |
 | [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
@@ -60,6 +60,14 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.FixedCutConstant](../StochasticToDeterministicLatents/Binary/FactorTwo/FixedCutConstant.lean) | 2026-09-07 | 7 | The chord potential, its remainder at the fixed cut, and the entry to the constant scalar |
 | [Binary.FactorTwo.ConstantBound](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantBound.lean) | 2026-09-07 | 1 | The constant margin's strict lower bound at the fixed cut, below an eighth of off-diagonal mass |
 | [Binary.FactorTwo.SingletonBound](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonBound.lean) | 2026-09-07 | 1 | The singleton margin's strict lower bound at the fixed cut, below an eighth of off-diagonal mass |
+| [Binary.FactorTwo.Center](../StochasticToDeterministicLatents/Binary/FactorTwo/Center.lean) | 2026-09-07 | 3 | The chord's midpoint law and the two margins' closed forms there |
+| [Binary.FactorTwo.CertValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CertValues.lean) | 2026-09-07 | 2 | The tangent certificate's four values at a contact law, and `Phi` there |
+| [Binary.FactorTwo.CenterMajorant](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterMajorant.lean) | 2026-09-07 | 1 | A contact plane evaluated at the centre of a chord |
+| [Binary.FactorTwo.Planes](../StochasticToDeterministicLatents/Binary/FactorTwo/Planes.lean) | 2026-09-07 | 2 | Four explicit reference laws and their planes in closed form |
+| [Binary.FactorTwo.PlaneBound](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneBound.lean) | 2026-09-07 | 1 | The plane bound is concave in the imbalance |
+| [Binary.FactorTwo.CenterLogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLogValues.lean) | 2026-09-07 | 8 | Decimal enclosures of eight more logarithms |
+| [Binary.FactorTwo.PlaneEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneEndpoints.lean) | 2026-09-07 | 4 | The plane bound exceeds one hundredth at eight endpoints |
+| [Binary.FactorTwo.CenterSeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeam.lean) | 2026-09-07 | 1 | The constant margin at the centre, on the seam |
 
 ## Axiom sets
 
@@ -386,6 +394,135 @@ the two margins are $`2\,\tau - I`$ and $`2\,\tau - S_{11}`$ at the chord
 point, which is what the ledger's factor-two rows mean by them. The upper
 contact is excluded, where the diagonal product falls to $`u^2`$ and the law
 is constant-optimal; `constantMargin_chordTop` covers that end separately.
+
+Center names the chord's midpoint law and says what the two margins are there.
+Both marginals coincide at the midpoint, so the row and column entropies of
+Margins collapse to one number and the four cells are fixed by two: the
+off-diagonal mass $`v`$ and the imbalance $`z = (b - c)\text/v`$.
+`centerConstantScalar` and `centerSingletonScalar` are the two margins written
+in those coordinates, and `log_two_mul_constantMargin_center` and
+`log_two_mul_singletonMargin_center` identify them with the margins at
+`chordMidpoint p`, in natural-log units. `chordDomain_center` is the midpoint
+case of `chordDomain_chordAt`, which this module's use makes public. Nothing
+here bounds either margin; the module supplies the coordinates in which the
+centre's estimates are stated.
+
+CertValues evaluates the tangent certificate of
+[Contact.lean](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean)
+at a contact law, where the diagonal cells multiply to $`u^2`$ and the cubic
+vanishes at $`u`$. Under those two hypotheses each of its four values is the
+logarithm of a rational function of the cells: the two diagonal values are
+`certDiagonal` of the diagonal mass and $`u`$, equal to one another, and the two
+off-diagonal values are `certOffDiagonal` in the two orders. Pairing that
+certificate with the law it was built at gives `Phi` there, so
+`log_two_mul_phi_contact` states `Phi` in the same three logarithms, in
+natural-log units. Nothing here is a bound; the module makes an explicit
+reference law's certificate computable in closed form, which is what a later
+module needs in order to use one as an affine minorant.
+
+CenterMajorant turns a contact plane into a bound at a chord's midpoint, for two
+independent laws: the plane may come from one chord domain's contact and be
+evaluated at another's centre. The mechanism is that a contact plane does not
+distinguish the two diagonal cells, which is the first two components of
+`tangentCert_contact_values`; the chord moves mass only between those cells and
+holds their sum fixed, so the pairing is constant along the chord, and the
+contact is one of its points. The majorant itself is the route
+`tau_eq_contact` already takes, through `positivityGate_contactAt`,
+`normBound_of_positivityGate`, and `majorizes_tangentCert_of_normBound`. The
+module supplies no number; it says where a plane may be evaluated.
+
+Planes supplies four explicit rational laws for `CenterMajorant` to draw a plane
+from. `chordDomain_referencePlane` checks all seven chord-domain conditions on
+each, and `tangentCert_referencePlane` evaluates each plane at its contact
+through `CertValues`: three rational numbers per plane, the two diagonal cells
+sharing one. Every step is `fin_cases` over the four followed by `norm_num` on
+explicit rationals. Nothing here says which plane applies to which imbalance,
+and no bound is stated.
+
+The first plane's contact is the reference law
+$`q_{\mathrm{r}} = (112, 8, 8, 7)\text{/}135`$ of the factor-two page, with the
+page's constants $`K = 375\text{/}343`$ and $`P_b^2\text{/}b^3 = 375\text{/}8`$;
+the plane's own law is the midpoint of that contact's chord, which carries the
+same plane.
+
+PlaneBound fixes the off-diagonal mass at $`1\text{/}8`$ and the split between
+the two off-diagonal cells at $`(1 \pm z)\text{/}16`$, pairs a reference plane
+against that law, and feeds the result to `centerConstantScalar`, giving a
+function of the imbalance $`z`$ alone. `centerPlaneBound_concaveOn` proves that
+function concave on $`[0, 1]`$ from a nonpositive second derivative, through
+`concaveOn_Icc_of_hasDerivAt2_nonpos`. The second derivative,
+$`-5\text{/}(8(1 - z^2)) + 6\text{/}(64 - z^2)`$, does not mention the plane at
+all: a plane contributes only a term linear in $`z`$. So no positivity of a
+plane's three values is needed, and the same concavity serves all four.
+
+The constant fed to `centerConstantScalar` carries the sign the certificate
+gives it, $`(7\text{/}8)\log K - ((1+z)\text{/}16)\log L_b -
+((1-z)\text{/}16)\log L_c`$, which is `Real.log 2` times the pairing of
+`tangentCert_referencePlane` against `cellTable` at those weights;
+`centerConstantScalar` subtracts twice its argument because that argument is
+the contact's $`\Phi`$ in natural-log units. No bound on a margin is stated
+here: that step needs the pairing inequality.
+
+CenterLogValues adds $`\mathrm{log}`$ at 17, 19, 23, 47, 173, 179, 313 and 3581,
+each to eight places except 3581, which is to three units in that place. It is
+a second module rather than an extension of
+[LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean)
+because that one is admitted and its five endpoints are recorded above; the two
+are the same four-step proof at different points. Every one of the centre's
+numeric comparisons is against a ratio of products of these eight primes and
+the earlier six, so an integer combination of the thirteen enclosures and
+Mathlib's $`\mathrm{log}\,2`$ replaces a separate series estimate at each
+ratio. The points here are coarser -- 3581 needs $`t`$ near $`0.27`$ where 11
+needed $`3\text{/}19`$ -- and six series terms still suffice at every one of
+them: the widest tail is $`7.6 \times 10^{-9}`$. No law, code or margin appears
+in this module, and it states no comparison.
+
+PlaneEndpoints evaluates the plane bound at the two ends of the interval each
+reference plane governs and shows it exceeds $`1\text{/}100`$ there. The four
+intervals $`[0, 1\text{/}3]`$, $`[1\text{/}3, 2\text{/}3]`$,
+$`[2\text{/}3, 19\text{/}20]`$ and $`[19\text{/}20, 1]`$ cover $`[0, 1]`$, so
+with `centerPlaneBound_concaveOn` these eight numbers are what a lower bound
+over the whole range of the imbalance would rest on. That step is not taken
+here: no law, code or margin appears in the module, and no bound on a margin is
+stated.
+
+Unfolding the definitions at a rational $`z`$ leaves a rational combination of
+logarithms of rationals -- the two diagonal cells give
+$`\mathrm{log}\,(7\text{/}16)`$, the off-diagonal cells
+$`\mathrm{log}\,((1 \pm z)\text{/}16)`$, the two marginals
+$`\mathrm{log}\,((8 \pm z)\text{/}16)`$, and the plane its three values.
+Twenty-eight such rationals occur across the eight, and every one factors over
+the fourteen primes enclosed by LogValues and CenterLogValues; all fourteen are
+used and no other prime occurs. A private table of twenty-eight equations
+rewrites each logarithm into that basis exactly, and `linarith` applies the
+enclosures once, at the end. That is why the table holds equations rather than
+enclosures: bounding each of eight terms separately would compound the
+enclosure error eight times over. The smallest slack over $`1\text{/}100`$ is
+about $`2.6 \times 10^{-3}`$, against an accumulated enclosure error near
+$`3 \times 10^{-7}`$.
+
+CenterSeam is the first module of this route to bound a margin. For a chord
+domain whose off-diagonal mass is exactly $`1\text{/}8`$,
+`seam_constantMargin_center_gt` puts the constant margin above
+$`1\text{/}100`$ nats at the centre of the contact chord. As with the fixed
+cut, the bound is stated multiplied through by $`\log 2`$, so no public
+statement divides by it.
+
+Three steps join. The contact's $`\Phi`$ is at most its pairing against any
+reference plane's certificate; the two diagonal cells of the chord at any
+parameter sum to its diagonal mass, so that pairing collapses to three
+terms and the step needs no hypothesis on the off-diagonal mass. On the seam
+those three terms are exactly the constant fed to `centerPlaneBound`, because
+the diagonal mass is $`7\text{/}8`$ and the two off-diagonal cells are
+$`(1 \pm z)\text{/}16`$. Since `centerConstantScalar` **subtracts** twice its
+argument, the plane bound then lies below the margin. Finally the four
+intervals cover $`[0, 1]`$ and concavity puts the plane bound above
+$`1\text{/}100`$ on each. The certificate is in bits and the scalar in nats;
+the one multiplication by $`\log 2`$ is where they meet.
+
+The plane index is produced existentially rather than by a nested conditional,
+which is possible because the step from a plane's bound to the margin holds for
+every one of the four.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is
