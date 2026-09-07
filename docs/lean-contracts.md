@@ -518,6 +518,7 @@ in this table. Their public theorems are audited in
 | Orientation | [FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | Both optima under the swaps and the transpose, and the reduction to an oriented law |
 | Diagonal chord | [FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean), [FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean), [FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | A segment of laws sharing one stochastic optimum, and the two competitors' scores along it |
 | Chord margins and gates | [FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean), [FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean), [FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | The margins as scalar functions, their shape, and the conditional factor-two bound |
+| Logarithm enclosures | [FactorTwo.LogSeries](../StochasticToDeterministicLatents/Binary/FactorTwo/LogSeries.lean), [FactorTwo.LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean) | The odd logarithm series with two error terms, and decimal enclosures of five logarithms |
 | Fixed cut and corner information | [FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | The contact-mass bound, the fixed cut, the root sign test, and the corner information |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
@@ -557,6 +558,8 @@ graph TD
       Binary_FactorTwo_Contact["Contact"]
       Binary_FactorTwo_Defs["Defs"]
       Binary_FactorTwo_Gates["Gates"]
+      Binary_FactorTwo_LogSeries["LogSeries"]
+      Binary_FactorTwo_LogValues["LogValues"]
       Binary_FactorTwo_Margins["Margins"]
       Binary_FactorTwo_NormBound["NormBound"]
       Binary_FactorTwo_Optimum["Optimum"]
@@ -595,6 +598,9 @@ graph TD
   Binary_FactorTwo_Defs --> MATHLIB
   Binary_FactorTwo_Gates --> Binary_FactorTwo_Margins
   Binary_FactorTwo_Gates --> Binary_FactorTwo_Orientation
+  Binary_FactorTwo_LogSeries --> MATHLIB
+  Binary_FactorTwo_LogValues --> MATHLIB
+  Binary_FactorTwo_LogValues --> Binary_FactorTwo_LogSeries
   Binary_FactorTwo_Margins --> Binary_FactorTwo_SingletonScore
   Binary_FactorTwo_Margins --> Binary_FactorTwo_Shape
   Binary_FactorTwo_NormBound --> Binary_FactorTwo_Shape

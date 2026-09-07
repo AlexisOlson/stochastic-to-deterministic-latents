@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 35 modules and 628 theorem endpoints. Definitions, including
+contains 37 modules and 635 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -52,6 +52,8 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
 | [Binary.FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | 2026-09-07 | 8 | Three sufficient conditions for the chord margin, and the bounds from them |
 | [Binary.FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | 2026-09-07 | 6 | The fixed cut, the root sign test, and the corner information |
+| [Binary.FactorTwo.LogSeries](../StochasticToDeterministicLatents/Binary/FactorTwo/LogSeries.lean) | 2026-09-07 | 2 | The odd logarithm series with two error terms |
+| [Binary.FactorTwo.LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean) | 2026-09-07 | 5 | Decimal enclosures of `log 3`, `log 5`, `log 7`, `log 11` and `log 13` |
 
 ## Axiom sets
 
@@ -273,6 +275,24 @@ between $`bc\text/(a+b+c)`$ and $`bc\text/a`$.
 
 None of these compares a margin with zero, so no gate is discharged and no
 claim in the ledger changes status.
+
+LogSeries banks the one tool every quantitative estimate uses: the odd
+part of the series for $`\log((1+t)\text/(1-t))`$, truncated at any length,
+with two error terms -- Mathlib's logarithm remainder and the geometric bound
+on the omitted terms. `logRatioSeries_enclosure` brackets the logarithm by the
+first; `logRatio_mem_of_side` says a short truncation brackets it as soon as a
+longer one is seen to fall inside the short one's tail, which is the shape a
+consumer wants: it names its own two lengths and its own rational point, and
+discharges both hypotheses by `norm_num`. The module mentions no probability
+law and imports nothing from this library.
+
+LogValues turns that tool into the five numbers the estimates need.
+Mathlib gives `Real.log 2` to nine places; each of `Real.log 3`, `Real.log 5`,
+`Real.log 7`, `Real.log 11` and `Real.log 13` follows to eight from one
+rational point, by writing the number as a power of two times
+$`(1+t)\text/(1-t)`$ and bracketing that ratio. The arithmetic is `norm_num`
+over finite sums of rationals: no `native_decide`, and the audit records the
+standard three axioms for all five.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is

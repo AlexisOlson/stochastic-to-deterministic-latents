@@ -20,6 +20,8 @@ import StochasticToDeterministicLatents.Binary.FactorNine.PositivePhase
 import StochasticToDeterministicLatents.Binary.FactorNine.SeamEndpoints
 import StochasticToDeterministicLatents.Binary.FactorNine
 import StochasticToDeterministicLatents.Binary.FactorTwo.Shape
+import StochasticToDeterministicLatents.Binary.FactorTwo.LogSeries
+import StochasticToDeterministicLatents.Binary.FactorTwo.LogValues
 import StochasticToDeterministicLatents.Binary.FactorTwo.Defs
 import StochasticToDeterministicLatents.Binary.FactorTwo.Contact
 import StochasticToDeterministicLatents.Binary.FactorTwo.Touch

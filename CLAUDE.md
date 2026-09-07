@@ -33,7 +33,7 @@ not apply the lakefile's Lean options. Pass `-DrelaxedAutoImplicit=false` for
 scratch checks: unbound multi-character identifiers must be errors. Rebuild
 the root after import changes before running Verify, which reads its olean.
 
-The root exports 35 modules and Verify has 628 theorem endpoints. Recount
+The root exports 37 modules and Verify has 635 theorem endpoints. Recount
 after changes. A successful Verify run is silent and exits 0; a build may
 replay linter warnings. There is no separate test framework: the required
 checks are builds, theorem coverage, the axiom audit, and the claim ledger.

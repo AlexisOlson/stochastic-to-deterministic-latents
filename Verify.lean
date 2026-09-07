@@ -3218,3 +3218,42 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.contactEnds_log_eq
 /-- info: 'StochasticToDeterministicLatents.Binary.contactEnds_log_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.contactEnds_log_eq
+
+/-! ## Binary.FactorTwo.LogSeries -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure
+/-- info: 'StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.logRatio_mem_of_side
+/-- info: 'StochasticToDeterministicLatents.Binary.logRatio_mem_of_side' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.logRatio_mem_of_side
+
+/-! ## Binary.FactorTwo.LogValues -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_three_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_three_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_three_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_five_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_five_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_five_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_seven_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_seven_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_seven_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_eleven_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_eleven_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_eleven_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_thirteen_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_thirteen_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_thirteen_bounds
