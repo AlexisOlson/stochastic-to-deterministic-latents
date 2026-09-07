@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 37 modules and 635 theorem endpoints. Definitions, including
+contains 43 modules and 649 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -46,7 +46,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 | [Binary.FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | 2026-09-07 | 3 | The stochastic optimum of a fully supported binary law |
 | [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 3 | Deterministic-score transport and the oriented region |
-| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 39 | The diagonal chord and its two competitor margins |
+| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 41 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
 | [Binary.FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean) | 2026-09-07 | 6 | The chord's entropies as scalar expressions |
 | [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
@@ -54,6 +54,12 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | 2026-09-07 | 6 | The fixed cut, the root sign test, and the corner information |
 | [Binary.FactorTwo.LogSeries](../StochasticToDeterministicLatents/Binary/FactorTwo/LogSeries.lean) | 2026-09-07 | 2 | The odd logarithm series with two error terms |
 | [Binary.FactorTwo.LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean) | 2026-09-07 | 5 | Decimal enclosures of `log 3`, `log 5`, `log 7`, `log 11` and `log 13` |
+| [Binary.FactorTwo.ConstantRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantRatio.lean) | 2026-09-07 | 1 | The constant margin's ratio term at the fixed cut, and its lower bound |
+| [Binary.FactorTwo.SingletonRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonRatio.lean) | 2026-09-07 | 1 | The singleton margin's ratio term at the fixed cut, and its pair bound |
+| [Binary.FactorTwo.SingletonMass](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonMass.lean) | 2026-09-07 | 1 | The singleton margin's mass term, and the lower bound on its three scalar terms together |
+| [Binary.FactorTwo.FixedCutConstant](../StochasticToDeterministicLatents/Binary/FactorTwo/FixedCutConstant.lean) | 2026-09-07 | 7 | The chord potential, its remainder at the fixed cut, and the entry to the constant scalar |
+| [Binary.FactorTwo.ConstantBound](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantBound.lean) | 2026-09-07 | 1 | The constant margin's strict lower bound at the fixed cut, below an eighth of off-diagonal mass |
+| [Binary.FactorTwo.SingletonBound](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonBound.lean) | 2026-09-07 | 1 | The singleton margin's strict lower bound at the fixed cut, below an eighth of off-diagonal mass |
 
 ## Axiom sets
 
@@ -293,6 +299,93 @@ rational point, by writing the number as a power of two times
 $`(1+t)\text/(1-t)`$ and bracketing that ratio. The arithmetic is `norm_num`
 over finite sums of rationals: no `native_decide`, and the audit records the
 standard three axioms for all five.
+
+ConstantRatio is the first of the three scalar families under the
+fixed-cut estimates. The constant margin at the fixed cut is bounded below by
+`constantRatioTerm` at each of the two off-diagonal cells over the contact
+cell, less explicit constants, and the only fact the estimate needs is
+$`19\text/2 < V(x)`$ for every positive $`x`$. Below $`x = 1`$ that is the
+tangent at $`1\text/2`$, whose intercept exceeds $`19\text/2`$ by about
+$`0.0087`$; above it, monotonicity from $`V(1) = 14 \log 2`$. The two
+constants of the tangent are settled here from the enclosures of `Real.log 3`
+and `Real.log 7`, so the public theorem carries no numerical hypothesis. Like
+Shape and LogSeries the module mentions no probability law, no code and no
+information quantity.
+
+SingletonRatio is the second family. The singleton margin's two
+ratio terms are bounded together, not one at a time: at the fixed cut the two
+ratios sum to at least $`2`$, and on that half plane
+$`8 \log 2 - 6 \log 3 \le \psi(x) + \psi(y)`$. The proof restricts to the
+symmetric slice $`x + y = 2`$, where the sum is stationary at $`x = 1`$ by
+symmetry and has positive second derivative -- a cubic in $`(x-1)^2`$ after
+clearing denominators -- and then carries the bound off the slice by strict
+monotonicity of $`\psi`$ above $`1`$. The bound is exact: no decimal
+enclosure enters it.
+
+SingletonMass closes the three scalar families. Its own function is
+concave in the contact cell on the fixed cut's box, so it is least at one of
+the two ends; each end is antitone in the off-diagonal mass, so each is least
+at $`v = 1\text/8`$, where it is an explicit combination of logarithms of
+$`2`$, $`3`$, $`5`$, $`7`$, $`11`$ and $`13`$. What the module exports is not
+that bound alone but `singletonTerms_gt`, the sum with the two ratio terms of
+SingletonRatio, which the singleton estimate consumes directly: on the box the
+three terms exceed $`1\text/100`$. Stating it that way keeps the two corner
+values private, as the tangent constants are private in ConstantRatio.
+
+FixedCutConstant carries the constant margin from the chord to that
+scalar. The chord's potential $`\log 2 \cdot \Phi`$ is written as eight
+`xLogX` terms in the small diagonal mass; its derivative vanishes at the
+contact mass, which is Strip's root identity, and its second derivative is
+bounded below on the small half of the chord. So the potential's decrease
+from the contact mass to the fixed cut is at most a signed combination of
+three elementary remainders, taken at the shifts zero and the two off-diagonal
+cells, which is `chordPotential_remainder`.
+The mutual information at the cut is written in the same terms, and
+`constantRatioTerm_affine` divides the cell part by the contact mass to leave
+exactly `constantRatioTerm` at the two ratios. The estimate itself is not
+proved here; the module supplies the three identities and the three
+inequalities a later assembly needs.
+
+ConstantBound closes the constant arm. It rearranges Strip's contact identity
+into the cell ratios at the two ends of the chord, adds those three
+inequalities, and divides by the contact mass, which leaves two
+copies of `constantRatioTerm` at the two ratios. Each exceeds
+$`19\text/2`$ by ConstantRatio, and the terms they are set against are small
+because the contact mass is: below an eighth of off-diagonal mass the contact
+mass is under a sixteenth, so the upper contact is above thirteen sixteenths
+and the two ratios there sum to less than $`2\text/13`$. What survives is
+`fixedCut_constantMargin_gt`, a strict lower bound proportional to the contact
+mass. It is stated multiplied through by $`\log 2`$, so no public statement
+divides by that constant. This is one hypothesis of
+`T_le_two_mul_tau_of_cutGates`, not the theorem; the singleton arm and the
+midpoint hypothesis are separate.
+
+SingletonBound is the other arm, and it is longer, because the singleton
+margin does not reduce to its scalar by an identity alone. The margin at the
+cut is written out against the chord potential at the contact mass, and
+dividing by that mass leaves two copies of `singletonRatioTerm` and a
+correction. Four estimates bound the correction below by `singletonMassTerm`:
+the corner information at the upper contact is at least half the one at the
+cut, the entropy of the contact mass has a quadratic tangent, `pairInfo` grows
+over an interval by at most the slope at its left end times its length, and
+two cell logarithms are dominated by twice the one at their mean.
+`singletonTerms_gt` then bounds the three scalar terms together and leaves
+`fixedCut_singletonMargin_gt`, in the same multiplied-through units as the
+constant arm. With it and `fixedCut_constantMargin_gt`, two of the three
+hypotheses of `T_le_two_mul_tau_of_cutGates` are supplied; the singleton
+margin at the midpoint is not, and no declaration here proves the bound.
+
+Chord gained the identification the two margins are named for. A point of the
+chord strictly below the upper contact carries the same chord domain and the
+same top root -- the determinant stays positive because the top root exceeds
+the geometric mean of the off-diagonal, and the diagonal product stays above
+$`u^2`$ -- so `tau_eq_chord` applies at that point and the chord budget there
+is twice its own stochastic optimum. Hence
+`constantMargin_eq_two_mul_tau_sub` and `singletonMargin_eq_two_mul_tau_sub`:
+the two margins are $`2\,\tau - I`$ and $`2\,\tau - S_{11}`$ at the chord
+point, which is what the ledger's factor-two rows mean by them. The upper
+contact is excluded, where the diagonal product falls to $`u^2`$ and the law
+is constant-optimal; `constantMargin_chordTop` covers that end separately.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is

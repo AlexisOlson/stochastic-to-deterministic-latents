@@ -337,7 +337,7 @@ private theorem certDiff_one_one {p : RealTable} {u : ℝ}
   rw [Real.logb_div hA.ne' hD.ne',
     Real.logb_div (add_pos hA hb).ne' (add_pos hD hb).ne',
     Real.logb_div (add_pos hA hc).ne' (add_pos hD hc).ne']
-  ring
+  ring_nf
 
 /-- The tangent certificate at the upper contact pairs with the lower contact
 to give `Phi` there.  With `tangentCert_self` this makes the certificate tight

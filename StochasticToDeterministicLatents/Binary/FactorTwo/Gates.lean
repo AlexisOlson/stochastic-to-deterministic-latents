@@ -86,7 +86,7 @@ theorem singletonMargin_concaveOn (h : ChordDomain p u) :
   refine ((singletonScalar_concaveOn h).smul
     (inv_nonneg.mpr log_two_pos.le)).congr ?_
   intro x hx
-  simp only [Pi.smul_apply, smul_eq_mul]
+  simp only [smul_eq_mul]
   rw [← log_two_mul_singletonMargin_eq h hx, ← mul_assoc,
     inv_mul_cancel₀ log_two_pos.ne', one_mul]
 

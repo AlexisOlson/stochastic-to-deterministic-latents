@@ -380,6 +380,81 @@ theorem singletonMargin_entryA (h : ChordDomain p u) :
       = 2 * tau p - detScore p (singletonCode cell11) := by
   rw [singletonMargin, chordBudget_entryA h, chordAt_entryA]
 
+/-! ## The chord point is itself a chord domain -/
+
+/-- The top root exceeds the geometric mean of the off-diagonal.  This is what
+keeps the determinant positive at every point of the chord, not only at `p`. -/
+private theorem offDiagonalProduct_lt_sq_topRoot (h : ChordDomain p u) :
+    offDiagonalProduct p < u ^ 2 := by
+  have hu := topRoot_pos h.isPMF h.fullSupport h.topRoot
+  have hw : 0 < offDiagonalProduct p := by
+    rw [offDiagonalProduct_eq]
+    exact mul_pos (cell_pos h.fullSupport).2.1 (cell_pos h.fullSupport).2.2.1
+  have hs := diagonalMass_pos h.fullSupport
+  have hv := offDiagonalMass_pos h.fullSupport
+  have hroot := h.topRoot.2.1
+  rw [cubic] at hroot
+  have key : u * (u ^ 2 - offDiagonalProduct p)
+      = offDiagonalMass p * u ^ 2 + offDiagonalProduct p * diagonalMass p := by
+    linear_combination hroot
+  have hpos : 0 < offDiagonalMass p * u ^ 2 + offDiagonalProduct p * diagonalMass p := by
+    positivity
+  nlinarith [key, hpos, hu]
+
+/-- Every point of the chord below the upper contact carries the same chord
+domain, with the same top root.  The upper contact is excluded: there the
+diagonal product falls to `u ^ 2` and the law is constant-optimal. -/
+private theorem chordDomain_chordAt (h : ChordDomain p u)
+    (ht : t ∈ Set.Ico (chordMidpoint p) (chordTop p u)) : ChordDomain (chordAt p t) u := by
+  have hu := topRoot_pos h.isPMF h.fullSupport h.topRoot
+  have hsum := chordTop_add_chordBottom (p := p) (u := u)
+  have hTB := chordTop_mul_chordBottom h
+  have hDmid := chordBottom_lt_chordMidpoint h
+  have hmem : t ∈ Set.Icc (chordMidpoint p) (chordTop p u) := ⟨ht.1, ht.2.le⟩
+  have hmid : chordMidpoint p ≤ t := ht.1
+  rw [chordMidpoint] at hmid hDmid
+  have hBt : chordBottom p u < t := by linarith
+  have hkey : 0 < (chordTop p u - t) * (t - chordBottom p u) :=
+    mul_pos (sub_pos.mpr ht.2) (sub_pos.mpr hBt)
+  have hexp : (chordTop p u - t) * (t - chordBottom p u)
+      = t * (diagonalMass p - t) - u ^ 2 := by
+    rw [← hsum, ← hTB]
+    ring
+  have hprod : u ^ 2 < t * (diagonalMass p - t) := by linarith [hexp ▸ hkey]
+  refine ⟨isPMF_chordAt h hmem, fullSupport_chordAt h hmem, ?_,
+    isTopRoot_chordAt h.topRoot, ?_, ?_, ?_⟩
+  · rw [determinant_chordAt]
+    linarith [offDiagonalProduct_lt_sq_topRoot h]
+  · rw [Nonconstant, diagonalProduct_eq, entryA_chordAt, entryD_chordAt]
+    have hlt := Real.sqrt_lt_sqrt (sq_nonneg u) hprod
+    rwa [Real.sqrt_sq hu.le] at hlt
+  · rw [entryA_chordAt, entryD_chordAt]
+    linarith
+  · rw [entryB_chordAt, entryC_chordAt]
+    exact h.offDiagonal_le
+
+/-- The chord budget at any point below the upper contact is twice that
+point's own stochastic optimum.  This is what makes `constantMargin` and
+`singletonMargin` the margins their names claim. -/
+private theorem chordBudget_eq_two_mul_tau (h : ChordDomain p u)
+    (ht : t ∈ Set.Ico (chordMidpoint p) (chordTop p u)) :
+    chordBudget p u t = 2 * tau (chordAt p t) := by
+  rw [chordBudget, tau_eq_chord (chordDomain_chordAt h ht), contactAt_chordAt]
+
+/-- The constant code's margin is `2 tau - I` at the chord point. -/
+theorem constantMargin_eq_two_mul_tau_sub (h : ChordDomain p u)
+    (ht : t ∈ Set.Ico (chordMidpoint p) (chordTop p u)) :
+    constantMargin p u t
+      = 2 * tau (chordAt p t) - (Psi (chordAt p t) - Phi (chordAt p t)) := by
+  rw [constantMargin, chordBudget_eq_two_mul_tau h ht]
+
+/-- The isolating code's margin is `2 tau - S` at the chord point. -/
+theorem singletonMargin_eq_two_mul_tau_sub (h : ChordDomain p u)
+    (ht : t ∈ Set.Ico (chordMidpoint p) (chordTop p u)) :
+    singletonMargin p u t
+      = 2 * tau (chordAt p t) - detScore (chordAt p t) (singletonCode cell11) := by
+  rw [singletonMargin, chordBudget_eq_two_mul_tau h ht]
+
 /-- If one of the two margins is nonnegative everywhere on the chord, then the
 deterministic optimum is at most twice the stochastic one. -/
 theorem T_le_two_tau_of_chordMargin (h : ChordDomain p u)

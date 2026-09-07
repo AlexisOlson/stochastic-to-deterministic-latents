@@ -1209,7 +1209,9 @@ functions), and finitely many rational-logarithm comparisons decided by the
 series of Lemma 1.3. It is `paper proof` in the ledger's sense. The ledger rows
 are `BIN-C2` (Theorems 6.1 and 6.2), `BIN-CHORD-CUT` (Theorem 2.5 with Lemmas
 2.2 to 2.4), `BIN-CENTER` (Theorem 4.1), and `BIN-FIXED-CUT` (Lemma 5.1 with
-Theorems 5.2 and 5.3). The quantitative margins $`1\text/200`$, $`1\text/250`$,
+Theorems 5.2 and 5.3). Of those four, `BIN-FIXED-CUT` has since been
+`kernel-verified` in the library; the derivation above remains its prose
+proof, and the other three rows stay at `paper proof`. The quantitative margins $`1\text/200`$, $`1\text/250`$,
 $`4v\text/125`$, $`3D\text/208`$, and $`D\text/100`$ are in nats; only their positivity is
 used downstream.
 

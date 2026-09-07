@@ -307,9 +307,12 @@ setup does not supply.
 
 ## Binary factor two
 
-The rows `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER`, and `BIN-FIXED-CUT` are
-`paper proof` in the [binary factor two](binary-factor-two.md) page. No public
-declaration states any of them. The `BIN-C2` inequality, over the same upstream
+The rows `BIN-C2`, `BIN-CHORD-CUT`, and `BIN-CENTER` are `paper proof` in the
+[binary factor two](binary-factor-two.md) page, and no public declaration
+states any of them. `BIN-FIXED-CUT` is `kernel-verified` here: its three
+clauses are `Binary.contactMass_lt_half_disagreement`,
+`Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`,
+in the shapes recorded below. The `BIN-C2` inequality, over the same upstream
 `T`, `tau`, and `IsPMF`, was `kernel-verified` in the reviewed source workspace
 and remains qualified as such; the full-support witness target below was not.
 
@@ -416,7 +419,11 @@ with one difference of shape: they take the top root as an explicit argument,
 `Binary.singletonMargin p u t`, rather than reading it from
 `Binary.swapContact p`. The hypothesis bundle is `Binary.ChordDomain p u`,
 which is `Binary.Oriented p` at $`u_0 = u`$ together with
-`Binary.IsTopRoot p u`.
+`Binary.IsTopRoot p u`. The shape difference costs nothing:
+`Binary.constantMargin_eq_two_mul_tau_sub` and
+`Binary.singletonMargin_eq_two_mul_tau_sub` identify the two margins with
+$`2\,\tau - I`$ and $`2\,\tau - S_{11}`$ at every chord point below the upper
+contact, taken there against that point's own $`\tau`$.
 
 On that bundle, `Binary.singletonMargin_concaveOn` and
 `Binary.constantMargin_min_le` are the concavity and no-interior-minimum
@@ -439,15 +446,24 @@ end nonnegative, not strictly positive, so
 used; and nothing supplies
 `Binary.exists_witness_detScore_le_two_mul_tau`, which names the witness.
 
-Of the five quantitative rows, the contact-mass bound is supplied:
-`Binary.contactMass_lt_half_disagreement`, again with `Binary.ChordDomain p u`
-in place of `Binary.Oriented p`, and with `Binary.chordBottom p u` for
-`Binary.contactMass p`. The same module defines `Binary.fixedCut p u` as the
-diagonal mass less three times that cell, and places it strictly inside the
-segment. The two centre estimates and the two fixed-cut estimates remain
-unimplemented; they are the rest of the hypothesis of
-`Binary.T_le_two_tau_of_gates`, and `BIN-C2` stays `paper proof` until they are
-proved.
+Of the five quantitative rows, three are supplied, each with
+`Binary.ChordDomain p u` in place of `Binary.Oriented p` and with
+`Binary.chordBottom p u` for `Binary.contactMass p`. The contact-mass bound is
+`Binary.contactMass_lt_half_disagreement`; the same module defines
+`Binary.fixedCut p u` as the diagonal mass less three times that cell, and
+places it strictly inside the segment. The two fixed-cut estimates are
+`Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`
+at that point, with one further difference of shape: each is stated multiplied
+through by `Real.log 2`, as `3 * Binary.chordBottom p u / 208 < Real.log 2 *
+...`, rather than dividing by it, so that no public statement carries
+`Real.log 2` in a denominator.
+
+`Binary.centerSingletonMargin_ge` and `Binary.centerConstantMargin_pos` remain
+unimplemented. They are the rest of the hypothesis of
+`Binary.T_le_two_tau_of_gates` -- the first supplies the isolating margin at
+the chord center below an eighth, which the cut branch needs alongside the two
+estimates above, and the second the constant gate above an eighth -- and
+`BIN-C2` stays `paper proof` until they are proved.
 
 ## Arbitrary finite alphabets
 
@@ -520,6 +536,10 @@ in this table. Their public theorems are audited in
 | Chord margins and gates | [FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean), [FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean), [FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | The margins as scalar functions, their shape, and the conditional factor-two bound |
 | Logarithm enclosures | [FactorTwo.LogSeries](../StochasticToDeterministicLatents/Binary/FactorTwo/LogSeries.lean), [FactorTwo.LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean) | The odd logarithm series with two error terms, and decimal enclosures of five logarithms |
 | Fixed cut and corner information | [FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | The contact-mass bound, the fixed cut, the root sign test, and the corner information |
+| Fixed-cut scalars | [FactorTwo.ConstantRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantRatio.lean), [FactorTwo.SingletonRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonRatio.lean), [FactorTwo.SingletonMass](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonMass.lean) | The scalar terms of the two margins at the fixed cut, with the constant margin's lower bound and the singleton margin's |
+| Fixed-cut estimates | [FactorTwo.FixedCutConstant](../StochasticToDeterministicLatents/Binary/FactorTwo/FixedCutConstant.lean) | The chord potential and its remainder at the fixed cut, and the entry to the constant margin's scalar |
+| Fixed-cut estimates | [FactorTwo.ConstantBound](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantBound.lean) | The constant margin's strict lower bound at the fixed cut |
+| Fixed-cut estimates | [FactorTwo.SingletonBound](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonBound.lean) | The singleton margin's strict lower bound at the fixed cut |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -555,8 +575,11 @@ graph TD
     subgraph FACTORTWO["Binary/FactorTwo/"]
       Binary_FactorTwo_Chord["Chord"]
       Binary_FactorTwo_ChordScalars["ChordScalars"]
+      Binary_FactorTwo_ConstantBound["ConstantBound"]
+      Binary_FactorTwo_ConstantRatio["ConstantRatio"]
       Binary_FactorTwo_Contact["Contact"]
       Binary_FactorTwo_Defs["Defs"]
+      Binary_FactorTwo_FixedCutConstant["FixedCutConstant"]
       Binary_FactorTwo_Gates["Gates"]
       Binary_FactorTwo_LogSeries["LogSeries"]
       Binary_FactorTwo_LogValues["LogValues"]
@@ -566,6 +589,9 @@ graph TD
       Binary_FactorTwo_Orientation["Orientation"]
       Binary_FactorTwo_RationalTest["RationalTest"]
       Binary_FactorTwo_Shape["Shape"]
+      Binary_FactorTwo_SingletonBound["SingletonBound"]
+      Binary_FactorTwo_SingletonMass["SingletonMass"]
+      Binary_FactorTwo_SingletonRatio["SingletonRatio"]
       Binary_FactorTwo_SingletonScore["SingletonScore"]
       Binary_FactorTwo_Strip["Strip"]
       Binary_FactorTwo_Touch["Touch"]
@@ -592,10 +618,17 @@ graph TD
   Binary_FactorTwo_Chord --> Binary_FactorTwo_Optimum
   Binary_FactorTwo_ChordScalars --> Binary_FactorTwo_Chord
   Binary_FactorTwo_ChordScalars --> Binary_ContactChart
+  Binary_FactorTwo_ConstantBound --> Binary_FactorTwo_FixedCutConstant
+  Binary_FactorTwo_ConstantRatio --> MATHLIB
+  Binary_FactorTwo_ConstantRatio --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_ConstantRatio --> Binary_FactorTwo_LogValues
   Binary_FactorTwo_Contact --> Binary_FactorTwo_Defs
   Binary_FactorTwo_Contact --> Bridge
   Binary_FactorTwo_Defs --> Binary_Selector
   Binary_FactorTwo_Defs --> MATHLIB
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_Strip
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_ConstantRatio
   Binary_FactorTwo_Gates --> Binary_FactorTwo_Margins
   Binary_FactorTwo_Gates --> Binary_FactorTwo_Orientation
   Binary_FactorTwo_LogSeries --> MATHLIB
@@ -612,6 +645,13 @@ graph TD
   Binary_FactorTwo_Orientation --> SparseLimit
   Binary_FactorTwo_RationalTest --> Binary_FactorTwo_Touch
   Binary_FactorTwo_Shape --> MATHLIB
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_FixedCutConstant
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_SingletonMass
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_SingletonScore
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_SingletonRatio
+  Binary_FactorTwo_SingletonRatio --> MATHLIB
   Binary_FactorTwo_SingletonScore --> Binary_FactorTwo_ChordScalars
   Binary_FactorTwo_Strip --> Binary_FactorTwo_Chord
   Binary_FactorTwo_Strip --> Binary_ContactChart
