@@ -147,6 +147,11 @@ assert_no_sorry StochasticToDeterministicLatents.contact_support_eq
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.contact_support_eq
 
+assert_no_sorry StochasticToDeterministicLatents.phi_le_logCertificate_of_feasible
+/-- info: 'StochasticToDeterministicLatents.phi_le_logCertificate_of_feasible' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.phi_le_logCertificate_of_feasible
+
 assert_no_sorry StochasticToDeterministicLatents.exists_seedSetup
 /-- info: 'StochasticToDeterministicLatents.exists_seedSetup' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
@@ -571,6 +576,11 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.w3Cost_phaseSelector_eq_
 
 /-! ## Binary.ContactChart -/
 
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuousOn_xLogX
+/-- info: 'StochasticToDeterministicLatents.Binary.continuousOn_xLogX' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuousOn_xLogX
+
 assert_no_sorry StochasticToDeterministicLatents.Binary.ScalarContactChart.y_pos
 /-- info: 'StochasticToDeterministicLatents.Binary.ScalarContactChart.y_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
@@ -820,11 +830,6 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.ScalarContactChart.lowIn
 /-- info: 'StochasticToDeterministicLatents.Binary.ScalarContactChart.lowInformation_le_highInformation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.ScalarContactChart.lowInformation_le_highInformation
-
-assert_no_sorry StochasticToDeterministicLatents.Binary.ScalarContactChart.two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order
-/-- info: 'StochasticToDeterministicLatents.Binary.ScalarContactChart.two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms StochasticToDeterministicLatents.Binary.ScalarContactChart.two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order
 
 assert_no_sorry StochasticToDeterministicLatents.Binary.ScalarContactChart.two_mul_highInformationLoss_le_offDiagonalLoss
 /-- info: 'StochasticToDeterministicLatents.Binary.ScalarContactChart.two_mul_highInformationLoss_le_offDiagonalLoss' depends on axioms: [propext, Classical.choice, Quot.sound] -/
@@ -1575,11 +1580,6 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.mixingTerm_eq_integral_k
 /-- info: 'StochasticToDeterministicLatents.Binary.mixingTerm_eq_integral_kernel' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.mixingTerm_eq_integral_kernel
-
-assert_no_sorry StochasticToDeterministicLatents.Binary.mixtureMass_sum_eq_one_add_r
-/-- info: 'StochasticToDeterministicLatents.Binary.mixtureMass_sum_eq_one_add_r' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms StochasticToDeterministicLatents.Binary.mixtureMass_sum_eq_one_add_r
 
 assert_no_sorry StochasticToDeterministicLatents.Binary.tendsto_mixingTerm_atTop
 /-- info: 'StochasticToDeterministicLatents.Binary.tendsto_mixingTerm_atTop' depends on axioms: [propext, Classical.choice, Quot.sound] -/
@@ -2525,3 +2525,1394 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.exists_code_detScore_le_
 /-- info: 'StochasticToDeterministicLatents.Binary.exists_code_detScore_le_nine_mul_tau' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.exists_code_detScore_le_nine_mul_tau
+
+/-! ## Binary.FactorTwo.Shape -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.singletonCurvature_neg
+/-- info: 'StochasticToDeterministicLatents.Binary.singletonCurvature_neg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.singletonCurvature_neg
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantCurvature_eq_numerator_div
+/-- info: 'StochasticToDeterministicLatents.Binary.constantCurvature_eq_numerator_div' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantCurvature_eq_numerator_div
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantCurvature_sign_switch
+/-- info: 'StochasticToDeterministicLatents.Binary.constantCurvature_sign_switch' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantCurvature_sign_switch
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.min_endpoints_le_of_curvature_switch
+/-- info: 'StochasticToDeterministicLatents.Binary.min_endpoints_le_of_curvature_switch' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.min_endpoints_le_of_curvature_switch
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.concaveOn_Icc_of_hasDerivAt2_nonpos
+/-- info: 'StochasticToDeterministicLatents.Binary.concaveOn_Icc_of_hasDerivAt2_nonpos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.concaveOn_Icc_of_hasDerivAt2_nonpos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.normGateQuartic_nonneg
+/-- info: 'StochasticToDeterministicLatents.Binary.normGateQuartic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.normGateQuartic_nonneg
+
+/-! ## Binary.FactorTwo.Defs -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.diagonalProduct_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.diagonalProduct_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.diagonalProduct_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.determinant_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.determinant_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.determinant_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.sum_cells
+/-- info: 'StochasticToDeterministicLatents.Binary.sum_cells' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.sum_cells
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cubic_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.cubic_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cubic_zero
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isTopRoot_of_pos_root
+/-- info: 'StochasticToDeterministicLatents.Binary.isTopRoot_of_pos_root' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isTopRoot_of_pos_root
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.exists_unique_pos_root
+/-- info: 'StochasticToDeterministicLatents.Binary.exists_unique_pos_root' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.exists_unique_pos_root
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isTopRoot_unique
+/-- info: 'StochasticToDeterministicLatents.Binary.isTopRoot_unique' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isTopRoot_unique
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isTopRoot_cubicRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.isTopRoot_cubicRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isTopRoot_cubicRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cubicRoot_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.cubicRoot_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cubicRoot_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cell_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.cell_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cell_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.diagonalMass_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.diagonalMass_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.diagonalMass_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalMass_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalMass_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalMass_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactRadius_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.contactRadius_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactRadius_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactRadius_sq
+/-- info: 'StochasticToDeterministicLatents.Binary.contactRadius_sq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactRadius_sq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.abs_sub_lt_contactRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.abs_sub_lt_contactRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.abs_sub_lt_contactRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.diagonalMass_sub_contactRadius_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.diagonalMass_sub_contactRadius_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.diagonalMass_sub_contactRadius_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactAt_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.contactAt_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactAt_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isPMF_contactAt
+/-- info: 'StochasticToDeterministicLatents.Binary.isPMF_contactAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isPMF_contactAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contact_mixture
+/-- info: 'StochasticToDeterministicLatents.Binary.contact_mixture' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contact_mixture
+
+/-! ## Binary.FactorTwo.Contact -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_ge_of_majorizes
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_ge_of_majorizes' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_ge_of_majorizes
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.sum_mul_logb_self
+/-- info: 'StochasticToDeterministicLatents.Binary.sum_mul_logb_self' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.sum_mul_logb_self
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tangentCert_self
+/-- info: 'StochasticToDeterministicLatents.Binary.tangentCert_self' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tangentCert_self
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalX_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalX_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalX_zero
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalX_one
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalX_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalX_one
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalY_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalY_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalY_zero
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalY_one
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalY_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalY_one
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.majorizes_tangentCert_of_normBound
+/-- info: 'StochasticToDeterministicLatents.Binary.majorizes_tangentCert_of_normBound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.majorizes_tangentCert_of_normBound
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_le_psi_sub_phi
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_le_psi_sub_phi' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_le_psi_sub_phi
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_le_contact
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_le_contact' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_le_contact
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalX_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalX_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalX_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.marginalY_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.marginalY_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.marginalY_pos
+
+/-! ## Binary.FactorTwo.Touch -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.phi_oppositeContactAt
+/-- info: 'StochasticToDeterministicLatents.Binary.phi_oppositeContactAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.phi_oppositeContactAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactAt_apply_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.contactAt_apply_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactAt_apply_zero
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactAt_apply_one
+/-- info: 'StochasticToDeterministicLatents.Binary.contactAt_apply_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactAt_apply_one
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_zero
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_one
+/-- info: 'StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.oppositeContactAt_apply_one
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.upperContactCell_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.upperContactCell_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.upperContactCell_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.lowerContactCell_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.lowerContactCell_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.lowerContactCell_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalQuadratic_factor
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalQuadratic_factor' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalQuadratic_factor
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactCell_cube_quadratic_sq
+/-- info: 'StochasticToDeterministicLatents.Binary.contactCell_cube_quadratic_sq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactCell_cube_quadratic_sq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tangentCert_contact_pairing
+/-- info: 'StochasticToDeterministicLatents.Binary.tangentCert_contact_pairing' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tangentCert_contact_pairing
+
+/-! ## Binary.FactorTwo.RationalTest -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cubic_cross_difference
+/-- info: 'StochasticToDeterministicLatents.Binary.cubic_cross_difference' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cubic_cross_difference
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactCell_mul_gt_offDiagonalProduct
+/-- info: 'StochasticToDeterministicLatents.Binary.contactCell_mul_gt_offDiagonalProduct' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactCell_mul_gt_offDiagonalProduct
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.positivityGate_contactAt
+/-- info: 'StochasticToDeterministicLatents.Binary.positivityGate_contactAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.positivityGate_contactAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.positivityGate_of_constant
+/-- info: 'StochasticToDeterministicLatents.Binary.positivityGate_of_constant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.positivityGate_of_constant
+
+/-! ## Binary.FactorTwo.NormBound -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.gatePolynomial_nonneg
+/-- info: 'StochasticToDeterministicLatents.Binary.gatePolynomial_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.gatePolynomial_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.normBound_of_positivityGate
+/-- info: 'StochasticToDeterministicLatents.Binary.normBound_of_positivityGate' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.normBound_of_positivityGate
+
+/-! ## Binary.FactorTwo.Optimum -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_contact
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_contact' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_contact
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_self
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_self' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_self
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot
+
+/-! ## Binary.FactorTwo.Orientation -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.detScore_pushforward
+/-- info: 'StochasticToDeterministicLatents.Binary.detScore_pushforward' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.detScore_pushforward
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_pushforward
+/-- info: 'StochasticToDeterministicLatents.Binary.T_pushforward' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_pushforward
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.of_oriented
+/-- info: 'StochasticToDeterministicLatents.Binary.of_oriented' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.of_oriented
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_mul_tau_of_oriented
+
+/-! ## Binary.FactorTwo.Chord -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_psi_sub_phi
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_psi_sub_phi' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_psi_sub_phi
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordTop_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chordTop_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordTop_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordBottom_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chordBottom_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordBottom_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.entryA_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.entryA_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.entryA_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.entryB_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.entryB_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.entryB_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.entryC_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.entryC_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.entryC_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.entryD_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.entryD_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.entryD_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.diagonalMass_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.diagonalMass_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.diagonalMass_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalMass_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalMass_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalMass_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cubic_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.cubic_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cubic_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isTopRoot_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.isTopRoot_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isTopRoot_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactRadius_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.contactRadius_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactRadius_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactAt_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.contactAt_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactAt_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.determinant_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.determinant_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.determinant_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordAt_entryA
+/-- info: 'StochasticToDeterministicLatents.Binary.chordAt_entryA' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordAt_entryA
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordAt_chordTop
+/-- info: 'StochasticToDeterministicLatents.Binary.chordAt_chordTop' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordAt_chordTop
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.diagonalMass_add_offDiagonalMass
+/-- info: 'StochasticToDeterministicLatents.Binary.diagonalMass_add_offDiagonalMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.diagonalMass_add_offDiagonalMass
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.determinant_pos_of_nonconstant
+/-- info: 'StochasticToDeterministicLatents.Binary.determinant_pos_of_nonconstant' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.determinant_pos_of_nonconstant
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalMass_lt_topRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalMass_lt_topRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalMass_lt_topRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.topRoot_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.topRoot_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.topRoot_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.topRoot_lt_chordMidpoint
+/-- info: 'StochasticToDeterministicLatents.Binary.topRoot_lt_chordMidpoint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.topRoot_lt_chordMidpoint
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordBottom_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.chordBottom_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordBottom_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordTop_add_chordBottom
+/-- info: 'StochasticToDeterministicLatents.Binary.chordTop_add_chordBottom' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordTop_add_chordBottom
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordBottom_lt_chordMidpoint
+/-- info: 'StochasticToDeterministicLatents.Binary.chordBottom_lt_chordMidpoint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordBottom_lt_chordMidpoint
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordMidpoint_lt_chordTop
+/-- info: 'StochasticToDeterministicLatents.Binary.chordMidpoint_lt_chordTop' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordMidpoint_lt_chordTop
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordTop_mul_chordBottom
+/-- info: 'StochasticToDeterministicLatents.Binary.chordTop_mul_chordBottom' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordTop_mul_chordBottom
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.isPMF_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.isPMF_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.isPMF_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.fullSupport_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.fullSupport_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.fullSupport_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.psi_sub_phi_nonneg
+/-- info: 'StochasticToDeterministicLatents.Binary.psi_sub_phi_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.psi_sub_phi_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantMargin_chordTop
+/-- info: 'StochasticToDeterministicLatents.Binary.constantMargin_chordTop' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantMargin_chordTop
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordBudget_entryA
+/-- info: 'StochasticToDeterministicLatents.Binary.chordBudget_entryA' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordBudget_entryA
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantMargin_eq_two_mul_tau_sub
+/-- info: 'StochasticToDeterministicLatents.Binary.constantMargin_eq_two_mul_tau_sub' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantMargin_eq_two_mul_tau_sub
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.singletonMargin_eq_two_mul_tau_sub
+/-- info: 'StochasticToDeterministicLatents.Binary.singletonMargin_eq_two_mul_tau_sub' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.singletonMargin_eq_two_mul_tau_sub
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_lt_sq_topRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_lt_sq_topRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_lt_sq_topRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordMargin_witness
+/-- info: 'StochasticToDeterministicLatents.Binary.chordMargin_witness' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordMargin_witness
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_tau_of_chordMargin
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_tau_of_chordMargin' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_two_tau_of_chordMargin
+
+/-! ## Binary.FactorTwo.Center -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_center
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_center' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_center
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_center
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_center' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_center
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_center
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_center' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_center
+
+/-! ## Binary.FactorTwo.CenterLogValues -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_seventeen_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_seventeen_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_seventeen_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_nineteen_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_nineteen_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_nineteen_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_twentythree_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_twentythree_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_twentythree_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_fortyseven_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_fortyseven_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_fortyseven_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_onehundredseventythree_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_onehundredseventythree_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_onehundredseventythree_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_onehundredseventynine_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_onehundredseventynine_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_onehundredseventynine_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_threehundredthirteen_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_threehundredthirteen_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_threehundredthirteen_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_thirtyfivehundredeightyone_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_thirtyfivehundredeightyone_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_thirtyfivehundredeightyone_bounds
+
+/-! ## Binary.FactorTwo.PlaneBound -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_concaveOn
+/-- info: 'StochasticToDeterministicLatents.Binary.centerPlaneBound_concaveOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.centerPlaneBound_concaveOn
+
+/-! ## Binary.FactorTwo.CenterSeam -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_constantMargin_center_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_constantMargin_center_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_constantMargin_center_gt
+
+/-! ## Binary.FactorTwo.CenterChart -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartRoot_cubic
+/-- info: 'StochasticToDeterministicLatents.Binary.chartRoot_cubic' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartRoot_cubic
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartDiscriminant_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartDiscriminant_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartDiscriminant_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chart_identities
+/-- info: 'StochasticToDeterministicLatents.Binary.chart_identities' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chart_identities
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chart_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.chart_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chart_pos
+
+/-! ## Binary.FactorTwo.CenterFractions -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartFactors_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.chartFactors_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartFactors_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartOffDiagonalProduct_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartOffDiagonalProduct_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartOffDiagonalProduct_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartDiscriminant_frac
+/-- info: 'StochasticToDeterministicLatents.Binary.chartDiscriminant_frac' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartDiscriminant_frac
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartCubicDeriv_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartCubicDeriv_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartCubicDeriv_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartDeterminant_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartDeterminant_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartDeterminant_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartRootDeriv_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartRootDeriv_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartRootDeriv_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartLogKDeriv_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartLogKDeriv_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartLogKDeriv_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartCommonDeriv_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.chartCommonDeriv_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartCommonDeriv_eq
+
+/-! ## Binary.FactorTwo.CenterCurvature -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_lt_third
+/-- info: 'StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_lt_third' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartOffDiagonalMass_lt_third
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartContactSecondOrder_eq_logKDeriv
+/-- info: 'StochasticToDeterministicLatents.Binary.chartContactSecondOrder_eq_logKDeriv' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartContactSecondOrder_eq_logKDeriv
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartContactSecondOrder_lt
+/-- info: 'StochasticToDeterministicLatents.Binary.chartContactSecondOrder_lt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartContactSecondOrder_lt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartConstantSecondOrder_neg
+/-- info: 'StochasticToDeterministicLatents.Binary.chartConstantSecondOrder_neg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartConstantSecondOrder_neg
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartSingletonSecondOrder_neg
+/-- info: 'StochasticToDeterministicLatents.Binary.chartSingletonSecondOrder_neg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartSingletonSecondOrder_neg
+
+/-! ## Binary.FactorTwo.CenterRay -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.criticalRadius_spec
+/-- info: 'StochasticToDeterministicLatents.Binary.criticalRadius_spec' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.criticalRadius_spec
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.radius_lt_criticalRadius_iff
+/-- info: 'StochasticToDeterministicLatents.Binary.radius_lt_criticalRadius_iff' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.radius_lt_criticalRadius_iff
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.ray_boundary_values
+/-- info: 'StochasticToDeterministicLatents.Binary.ray_boundary_values' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.ray_boundary_values
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayLaw_isPMF
+/-- info: 'StochasticToDeterministicLatents.Binary.rayLaw_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayLaw_isPMF
+
+/-! ## Binary.FactorTwo.CenterLaws -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chart_certValues
+/-- info: 'StochasticToDeterministicLatents.Binary.chart_certValues' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chart_certValues
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartDomain_of_chordDomain
+/-- info: 'StochasticToDeterministicLatents.Binary.chartDomain_of_chordDomain' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartDomain_of_chordDomain
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact_chart
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact_chart' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact_chart
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayRoot_eq_chartRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.rayRoot_eq_chartRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayRoot_eq_chartRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayLaw_chartCoordinates
+/-- info: 'StochasticToDeterministicLatents.Binary.rayLaw_chartCoordinates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayLaw_chartCoordinates
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartDomain_ray
+/-- info: 'StochasticToDeterministicLatents.Binary.chartDomain_ray' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartDomain_ray
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_rayLaw
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_rayLaw' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_rayLaw
+/-! ## Binary.FactorTwo.CenterDerivatives -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_chartRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_chartRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_chartRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_log_certDiagonal
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_log_certDiagonal' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_log_certDiagonal
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_chartHeight
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_chartHeight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_chartHeight
+/-! ## Binary.FactorTwo.CenterDictionary -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_rayCoordinates
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_rayCoordinates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_rayCoordinates
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayConstantScalar_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.rayConstantScalar_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayConstantScalar_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.raySingletonScalar_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.raySingletonScalar_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.raySingletonScalar_eq
+/-! ## Binary.FactorTwo.CenterSeamChart -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates
+/-! ## Binary.FactorTwo.CenterSeamPositivity -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamCells_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.seamCells_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamCells_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_log_identity
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_log_identity' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_log_identity
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_logRatio_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_logRatio_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_logRatio_pos
+/-! ## Binary.FactorTwo.CenterSeamDerivative -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamHeight_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.seamHeight_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamHeight_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn
+/-- info: 'StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar
+/-! ## Binary.FactorTwo.CenterSeamMargin -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn
+/-- info: 'StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt
+
+/-! ## Binary.FactorTwo.CenterRayMass -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayRoot
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayRoot
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayMass
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayMass
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayMassDeriv_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.rayMassDeriv_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayMassDeriv_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayMass_strictMonoOn
+/-- info: 'StochasticToDeterministicLatents.Binary.rayMass_strictMonoOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayMass_strictMonoOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayNorm_factors_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.rayNorm_factors_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayNorm_factors_pos
+
+/-! ## Binary.FactorTwo.CenterRayMargins -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeight
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeight
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chartRootDeriv_mul_rayMassDeriv
+/-- info: 'StochasticToDeterministicLatents.Binary.chartRootDeriv_mul_rayMassDeriv' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chartRootDeriv_mul_rayMassDeriv
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeightSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeightSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayHeightSlope
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_rayConstantSlope
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_raySingletonSlope
+
+/-! ## Binary.FactorTwo.CenterRayEnds -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayNorm_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.rayNorm_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayNorm_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayHeight_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.rayHeight_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayHeight_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuousOn_rayMass
+/-- info: 'StochasticToDeterministicLatents.Binary.continuousOn_rayMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuousOn_rayMass
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuousOn_rayConstantScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.continuousOn_rayConstantScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuousOn_rayConstantScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuousOn_raySingletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.continuousOn_raySingletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuousOn_raySingletonScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.raySingletonScalar_zero
+/-- info: 'StochasticToDeterministicLatents.Binary.raySingletonScalar_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.raySingletonScalar_zero
+
+/-! ## Binary.FactorTwo.CenterRayBoundary -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayLaw_coalesces
+/-- info: 'StochasticToDeterministicLatents.Binary.rayLaw_coalesces' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayLaw_coalesces
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_nonneg
+/-- info: 'StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayConstantScalar_boundary_nonneg
+
+/-! ## Binary.FactorTwo.CenterRaySeam -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.exists_raySeamRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.exists_raySeamRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.exists_raySeamRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayConstantSlope_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.Binary.rayConstantSlope_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayConstantSlope_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.raySingletonSlope_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.Binary.raySingletonSlope_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.raySingletonSlope_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayConstantScalar_gt_of_seam
+/-- info: 'StochasticToDeterministicLatents.Binary.rayConstantScalar_gt_of_seam' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayConstantScalar_gt_of_seam
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.raySeam_margins_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.raySeam_margins_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.raySeam_margins_gt
+
+/-! ## Binary.FactorTwo.CenterEndpoints -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.center_singletonMargin_ge
+/-- info: 'StochasticToDeterministicLatents.Binary.center_singletonMargin_ge' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.center_singletonMargin_ge
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.center_singletonMargin_nonneg
+/-- info: 'StochasticToDeterministicLatents.Binary.center_singletonMargin_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.center_singletonMargin_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.center_constantMargin_ge
+/-- info: 'StochasticToDeterministicLatents.Binary.center_constantMargin_ge' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.center_constantMargin_ge
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.center_constantMargin_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.center_constantMargin_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.center_constantMargin_pos
+
+/-! ## Binary.FactorTwo -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.gates_of_chordDomain
+/-- info: 'StochasticToDeterministicLatents.Binary.gates_of_chordDomain' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.gates_of_chordDomain
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_mul_tau
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_mul_tau' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_two_mul_tau
+
+/-! ## Binary.FactorTwo.CenterEndpointMin -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.antitoneOn_Ioo_of_hasDerivAt_nonpos
+/-- info: 'StochasticToDeterministicLatents.Binary.antitoneOn_Ioo_of_hasDerivAt_nonpos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.antitoneOn_Ioo_of_hasDerivAt_nonpos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.min_endpoints_le_of_antitoneSlope_affine
+/-- info: 'StochasticToDeterministicLatents.Binary.min_endpoints_le_of_antitoneSlope_affine' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.min_endpoints_le_of_antitoneSlope_affine
+
+/-! ## Binary.FactorTwo.PlaneEndpoints -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_one
+/-- info: 'StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_one
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_two
+/-- info: 'StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_two' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_two
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_three
+/-- info: 'StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_three
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_four
+/-- info: 'StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_four' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_four
+
+/-! ## Binary.FactorTwo.Planes -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_referencePlane
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_referencePlane' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_referencePlane
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tangentCert_referencePlane
+/-- info: 'StochasticToDeterministicLatents.Binary.tangentCert_referencePlane' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tangentCert_referencePlane
+
+/-! ## Binary.FactorTwo.CenterMajorant -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.phi_contact_le_chordMidpoint_pairing
+/-- info: 'StochasticToDeterministicLatents.Binary.phi_contact_le_chordMidpoint_pairing' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.phi_contact_le_chordMidpoint_pairing
+
+/-! ## Binary.FactorTwo.CertValues -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.tangentCert_contact_values
+/-- info: 'StochasticToDeterministicLatents.Binary.tangentCert_contact_values' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.tangentCert_contact_values
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_phi_contact
+
+/-! ## Binary.FactorTwo.ChordScalars -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_entropy
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_entropy' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_entropy
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_entropy_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_entropy_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_entropy_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalX_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalX_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalX_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalY_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalY_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_entropy_marginalY_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantMargin_eq_psi_add_phi
+/-- info: 'StochasticToDeterministicLatents.Binary.constantMargin_eq_psi_add_phi' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantMargin_eq_psi_add_phi
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin
+
+/-! ## Binary.FactorTwo.SingletonScore -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_detScore_singletonCode_chordAt
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_detScore_singletonCode_chordAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_detScore_singletonCode_chordAt
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin
+
+/-! ## Binary.FactorTwo.Margins -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_singletonMargin_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuous_constantScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.continuous_constantScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuous_constantScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuous_singletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.continuous_singletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuous_singletonScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_constantScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_constantScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_constantScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_singletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_singletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_singletonScalar
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_constantSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_constantSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_constantSlope
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_singletonSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_singletonSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_singletonSlope
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.continuousOn_constantSlope
+/-- info: 'StochasticToDeterministicLatents.Binary.continuousOn_constantSlope' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.continuousOn_constantSlope
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantSlope_chordMidpoint
+/-- info: 'StochasticToDeterministicLatents.Binary.constantSlope_chordMidpoint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantSlope_chordMidpoint
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordArguments_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.chordArguments_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordArguments_pos
+
+/-! ## Binary.FactorTwo.Gates -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.singletonMargin_concaveOn
+/-- info: 'StochasticToDeterministicLatents.Binary.singletonMargin_concaveOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.singletonMargin_concaveOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantMargin_min_le
+/-- info: 'StochasticToDeterministicLatents.Binary.constantMargin_min_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantMargin_min_le
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordMargin_of_constantCentre
+/-- info: 'StochasticToDeterministicLatents.Binary.chordMargin_of_constantCentre' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordMargin_of_constantCentre
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordMargin_of_singletonEnds
+/-- info: 'StochasticToDeterministicLatents.Binary.chordMargin_of_singletonEnds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordMargin_of_singletonEnds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordMargin_of_crossover
+/-- info: 'StochasticToDeterministicLatents.Binary.chordMargin_of_crossover' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordMargin_of_crossover
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_centerGate
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_centerGate' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_centerGate
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_cutGates
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_cutGates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_two_mul_tau_of_cutGates
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates
+/-- info: 'StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.T_le_two_tau_of_gates
+
+/-! ## Binary.FactorTwo.Strip -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four
+/-- info: 'StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.offDiagonalProduct_le_sq_div_four
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement
+/-- info: 'StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactMass_lt_half_disagreement
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.fixedCut_mem_chord
+/-- info: 'StochasticToDeterministicLatents.Binary.fixedCut_mem_chord' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.fixedCut_mem_chord
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.topRoot_lt_of_cubic_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cornerInfo_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.cornerInfo_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cornerInfo_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.contactEnds_log_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.contactEnds_log_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.contactEnds_log_eq
+
+/-! ## Binary.FactorTwo.LogSeries -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure
+/-- info: 'StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.logRatioSeries_enclosure
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.logRatio_mem_of_side
+/-- info: 'StochasticToDeterministicLatents.Binary.logRatio_mem_of_side' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.logRatio_mem_of_side
+
+/-! ## Binary.FactorTwo.LogValues -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_three_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_three_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_three_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_five_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_five_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_five_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_seven_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_seven_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_seven_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_eleven_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_eleven_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_eleven_bounds
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_thirteen_bounds
+/-- info: 'StochasticToDeterministicLatents.Binary.log_thirteen_bounds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_thirteen_bounds
+
+/-! ## Binary.FactorTwo.ConstantRatio -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantRatioTerm_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.constantRatioTerm_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantRatioTerm_gt
+
+/-! ## Binary.FactorTwo.SingletonRatio -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.singletonRatioTerm_pair
+/-- info: 'StochasticToDeterministicLatents.Binary.singletonRatioTerm_pair' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.singletonRatioTerm_pair
+
+/-! ## Binary.FactorTwo.SingletonMass -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.singletonTerms_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.singletonTerms_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.singletonTerms_gt
+
+/-! ## Binary.FactorTwo.FixedCutConstant -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordPotential_chordBottom
+/-- info: 'StochasticToDeterministicLatents.Binary.chordPotential_chordBottom' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordPotential_chordBottom
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_potential
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_potential' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_constantMargin_potential
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordPotential_remainder
+/-- info: 'StochasticToDeterministicLatents.Binary.chordPotential_remainder' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordPotential_remainder
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.log_two_mul_mutualInfo_fixedCut
+/-- info: 'StochasticToDeterministicLatents.Binary.log_two_mul_mutualInfo_fixedCut' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.log_two_mul_mutualInfo_fixedCut
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.cornerInfo_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.cornerInfo_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.cornerInfo_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.binaryEntropyNat_ge
+/-- info: 'StochasticToDeterministicLatents.Binary.binaryEntropyNat_ge' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.binaryEntropyNat_ge
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantRatioTerm_affine
+/-- info: 'StochasticToDeterministicLatents.Binary.constantRatioTerm_affine' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantRatioTerm_affine
+
+/-! ## Binary.FactorTwo.ConstantBound -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.fixedCut_constantMargin_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.fixedCut_constantMargin_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.fixedCut_constantMargin_gt
+
+/-! ## Binary.FactorTwo.SingletonBound -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.fixedCut_singletonMargin_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.fixedCut_singletonMargin_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.fixedCut_singletonMargin_gt
+
+/-! ## Binary.FactorTwo.ContactPositive -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.psi_sub_phi_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.psi_sub_phi_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.psi_sub_phi_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.constantMargin_chordTop_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.constantMargin_chordTop_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.constantMargin_chordTop_pos
+
+/-! ## Binary.FactorTwo.Witness -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.detScore_constantCode
+/-- info: 'StochasticToDeterministicLatents.Binary.detScore_constantCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.detScore_constantCode
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.exists_witnessCode
+/-- info: 'StochasticToDeterministicLatents.Binary.exists_witnessCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.exists_witnessCode

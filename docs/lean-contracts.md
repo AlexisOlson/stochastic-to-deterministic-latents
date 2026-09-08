@@ -247,8 +247,6 @@ theorem Binary.optimalLatent_two_components
     ∃ q₁ q₂ : Binary.RealTable,
       ∀ v, L.prior v ≠ 0 → L.comp v = q₁ ∨ L.comp v = q₂
 
-noncomputable def Binary.cubicRoot (p : Binary.RealTable) : ℝ
-
 theorem Binary.tau_eq_of_constantBranch
     (p : Binary.RealTable) (hp : IsPMF p)
     (hdet : 0 < p (0, 0) * p (1, 1) - p (0, 1) * p (1, 0))
@@ -269,9 +267,38 @@ theorem Binary.tau_eq_mutualInfo_of_disagreementBand
 
 `Binary.swapContact p` denotes the component $`q^+`$ of the page; its
 definition requires `Binary.cubicRoot`, which is the largest nonnegative root
-of $`u^3 - (b+c)u^2 - bcu - bc(a+d)`$. A definition of the
+of $`u^3 - (b+c)u^2 - bcu - bc(a+d)`$.
+
+**`Binary.tau_eq_of_mixedBranch` is proved on full support**, and is listed
+above only for its unrestricted shape.
+`StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot` is
+`kernel-verified` and audited, and its first disjunct is that statement. Both
+identifications are definitional: the hypothesis
+`Binary.cubicRoot p < Real.sqrt (p (0, 0) * p (1, 1))` is
+`Binary.Nonconstant p (Binary.cubicRoot p)`, since `Binary.diagonalProduct` is
+`entryA * entryD` by `rfl`; and `Binary.swapContact p` is
+`Binary.contactAt p (Binary.cubicRoot p)`, which is how `swapContact` is
+defined.
+What is open is the statement without `FullSupport`, which needs the page's
+support-face argument; no result in this repository consumes it, because laws
+with a zero cell reach the factor-two bound through
+`T_le_mul_tau_of_forall_fullSupport` instead. A definition of the
 root by `Classical.choose` from an existence lemma is acceptable; the theorems
 do not require it to be computable.
+
+**The two definitions are supplied.** `Binary.cubicRoot` and
+`Binary.swapContact` are defined in
+[`Binary/FactorTwo/Defs.lean`](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean)
+over that same cubic, the root by choice as permitted and determined by
+`isTopRoot_unique`, and `swapContact p = contactAt p (cubicRoot p)`. The two
+branch theorems above remain unimplemented as stated.
+[`Binary/FactorTwo/Optimum.lean`](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean)
+proves `tau_eq_at_topRoot`, which splits on the same test — the branch
+condition `Binary.Nonconstant p u` is $`u < \sqrt{ad}`$ — and weakens
+$`0 < \det`$ to $`0 \le \det`$, but it assumes `FullSupport p` and its constant
+branch concludes $`\tau(p) = \Psi(p) - \Phi(p)`$ rather than naming the mutual
+information. Closing the gap to the signatures above needs the sparse case and
+that identification.
 
 **A formalization route.** The two-contact chart of
 [`Binary/NormalForm.lean`](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
@@ -295,16 +322,25 @@ setup does not supply.
 
 ## Binary factor two
 
-The rows `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER`, and `BIN-FIXED-CUT` are
-`paper proof` in the [binary factor two](binary-factor-two.md) page. No public
-declaration states any of them. The `BIN-C2` inequality, over the same upstream
-`T`, `tau`, and `IsPMF`, was `kernel-verified` in the reviewed source workspace
-and remains qualified as such; the full-support witness target below was not.
+All four rows of this section -- `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER` and
+`BIN-FIXED-CUT` -- are now `kernel-verified` here, and the
+[binary factor two](binary-factor-two.md) page is their prose derivation. The
+supplied declarations are named in the module map at the end of this page and
+listed against the target signatures below; where a supplied shape differs from
+the target, the difference is recorded. Several parts of the page are not supplied. The *location* of the singleton
+witness, which the page reads off the sign of the determinant, is stated by no
+declaration here. Neither is the page's concavity in the mass, nor its strict
+positivity at the far end of a centre ray, where only nonnegativity is proved
+and only nonnegativity is needed, nor the chord-wide form of its Theorem 2.5,
+nor the quadratic-growth half of its Proposition 4.6. The claim ledger records
+each of these against the row it belongs to.
 
-**Prerequisite targets.** The stochastic-optimum targets above
-(`Binary.cubicRoot`, `Binary.swapContact`, and
-`Binary.tau_eq_of_mixedBranch`) are unimplemented; once formalized they supply
-the right-hand side.
+**Prerequisite targets.** `Binary.cubicRoot` and `Binary.swapContact` are
+defined, and `Binary.tau_eq_at_topRoot` supplies the right-hand side on full
+support -- which is `Binary.tau_eq_of_mixedBranch` itself on that hypothesis,
+as recorded above. Only the sparse statement is open, and this section does not
+need it: the bound reaches laws with a zero cell through
+`T_le_mul_tau_of_forall_fullSupport`.
 
 **Existing declarations the proof rests on.** `T_le_detScore`
 and `exists_optimalCode` in
@@ -317,7 +353,8 @@ transport codes and their scores; and `T_le_mul_tau_of_forall_fullSupport` in
 [`SparseLimit.lean`](../StochasticToDeterministicLatents/SparseLimit.lean)
 extends a full-support bound to every law.
 
-**Unimplemented targets.** The margins below are the entropy expressions of
+**Target signatures.** Every target below is now supplied, in the shapes
+recorded after the block. The margins below are the entropy expressions of
 the page, in bits, so every quantitative bound of the page is divided by
 $`\ln 2`$; only positivity is consumed downstream. `Binary.chordLaw p a`
 denotes the chord law $`(a, b, c, s - a)`$, `Binary.contactMass p` the smaller
@@ -396,6 +433,67 @@ and its gradient (Lemmas 3.1 and 3.2), which a formalization would state about
 `Binary.swapContact p`; they are consequences of the tangent identity behind
 `Binary.tau_eq_of_mixedBranch` and need no separate row.
 
+**What the chord modules supply.** The chord law and the two margins are
+defined in
+[`Binary/FactorTwo/`](../StochasticToDeterministicLatents/Binary/FactorTwo/),
+with one difference of shape: they take the top root as an explicit argument,
+`Binary.chordAt p t`, `Binary.constantMargin p u t` and
+`Binary.singletonMargin p u t`, rather than reading it from
+`Binary.swapContact p`. The hypothesis bundle is `Binary.ChordDomain p u`,
+which is `Binary.Oriented p` at $`u_0 = u`$ together with
+`Binary.IsTopRoot p u`. The shape difference costs nothing:
+`Binary.constantMargin_eq_two_mul_tau_sub` and
+`Binary.singletonMargin_eq_two_mul_tau_sub` identify the two margins with
+$`2\,\tau - I`$ and $`2\,\tau - S_{11}`$ at every chord point below the upper
+contact, taken there against that point's own $`\tau`$.
+
+On that bundle, `Binary.singletonMargin_concaveOn` and
+`Binary.constantMargin_min_le` are the concavity and no-interior-minimum
+signatures above, and `Binary.T_le_two_mul_tau_of_centerGate` and
+`Binary.T_le_two_mul_tau_of_cutGates` are the two conditional bounds, each
+carrying `Binary.ChordDomain p u` where the signature above carries
+`Binary.Oriented p`. A third gate, which has no signature above, takes the
+isolating margin nonnegative at both ends of the segment.
+
+`Binary.T_le_two_tau_of_gates` is the conditional form of
+`Binary.T_le_two_mul_tau` itself. It proves $`T(p) \le 2\,\tau(p)`$ for every
+probability law from a hypothesis that supplies one of the three gates at every
+chord domain, which is more than the two conditional bounds assume at $`p`$
+alone: the orientation carries an arbitrary law to an oriented one, and the
+gate is needed there.
+
+Two differences of name and shape. `Binary.constantMargin_chordTop` gives the
+contact end nonnegative; the strict form `Binary.constantMargin_contactEnd_pos`
+is supplied as `Binary.constantMargin_chordTop_pos`, which rests on
+`Binary.psi_sub_phi_pos`, that a full-support binary law of nonvanishing
+determinant has positive mutual information. And
+`Binary.exists_witness_detScore_le_two_mul_tau` is supplied as
+`Binary.exists_witnessCode`, with the anonymous disjunction of the target
+replaced by the public `Prop`-valued definition `Binary.IsWitnessCode` and the
+pointwise positivity by `FullSupport`; the conclusion is the same, and neither
+form locates the singleton.
+
+Of the five quantitative rows, all five are supplied, each with
+`Binary.ChordDomain p u` in place of `Binary.Oriented p` and with
+`Binary.chordBottom p u` for `Binary.contactMass p`. The contact-mass bound is
+`Binary.contactMass_lt_half_disagreement`; the same module defines
+`Binary.fixedCut p u` as the diagonal mass less three times that cell, and
+places it strictly inside the segment. The two fixed-cut estimates are
+`Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`
+at that point, with one further difference of shape: each is stated multiplied
+through by `Real.log 2`, as `3 * Binary.chordBottom p u / 208 < Real.log 2 *
+...`, rather than dividing by it, so that no public statement carries
+`Real.log 2` in a denominator.
+
+`Binary.centerSingletonMargin_ge` and `Binary.centerConstantMargin_pos` are
+supplied as `Binary.center_singletonMargin_ge` and
+`Binary.center_constantMargin_pos`. They are the rest of the hypothesis of
+`Binary.T_le_two_tau_of_gates` -- the first supplies the isolating margin at
+the chord center below an eighth, which the cut branch needs alongside the two
+estimates above, and the second the constant gate above an eighth. With them,
+`Binary.gates_of_chordDomain` closes one of the three gates at every chord
+domain and `Binary.T_le_two_mul_tau` is the row's inequality for every law.
+
 ## Arbitrary finite alphabets
 
 These declarations remain conjectural.
@@ -460,6 +558,46 @@ in this table. Their public theorems are audited in
 | Seam closure | [FactorNine.SeamEndpoints](../StochasticToDeterministicLatents/Binary/FactorNine/SeamEndpoints.lean) | Both seam endpoints and `ContactChart.strictFactorEight` |
 | Boundary transfer | [SparseLimit](../StochasticToDeterministicLatents/SparseLimit.lean) | A generic bound on `T` from its full-support premise |
 | Binary factor nine | [FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) | Full-support `BIN-W3-8` and selector bound; all-law `BIN-C9` |
+| Binary factor-two contact | [FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean), [FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean), [FactorTwo.Touch](../StochasticToDeterministicLatents/Binary/FactorTwo/Touch.lean), [FactorTwo.RationalTest](../StochasticToDeterministicLatents/Binary/FactorTwo/RationalTest.lean), [FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | The cubic and its top root, the diagonal contact pair, and a tangent certificate tight at both contacts |
+| Stochastic optimum of a binary law | [FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | `tau` in closed form at the top root, on full support |
+| Orientation | [FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | Both optima under the swaps and the transpose, and the reduction to an oriented law |
+| Diagonal chord | [FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean), [FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean), [FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | A segment of laws sharing one stochastic optimum, and the two competitors' scores along it |
+| Chord margins and gates | [FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean), [FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean), [FactorTwo.Gates](../StochasticToDeterministicLatents/Binary/FactorTwo/Gates.lean) | The margins as scalar functions, their shape, and the conditional factor-two bound |
+| Logarithm enclosures | [FactorTwo.LogSeries](../StochasticToDeterministicLatents/Binary/FactorTwo/LogSeries.lean), [FactorTwo.LogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/LogValues.lean) | The odd logarithm series with two error terms, and decimal enclosures of five logarithms |
+| Fixed cut and corner information | [FactorTwo.Strip](../StochasticToDeterministicLatents/Binary/FactorTwo/Strip.lean) | The contact-mass bound, the fixed cut, the root sign test, and the corner information |
+| Fixed-cut scalars | [FactorTwo.ConstantRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantRatio.lean), [FactorTwo.SingletonRatio](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonRatio.lean), [FactorTwo.SingletonMass](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonMass.lean) | The scalar terms of the two margins at the fixed cut, with the constant margin's lower bound and the singleton margin's |
+| Fixed-cut estimates | [FactorTwo.FixedCutConstant](../StochasticToDeterministicLatents/Binary/FactorTwo/FixedCutConstant.lean) | The chord potential and its remainder at the fixed cut, and the entry to the constant margin's scalar |
+| Fixed-cut estimates | [FactorTwo.ConstantBound](../StochasticToDeterministicLatents/Binary/FactorTwo/ConstantBound.lean) | The constant margin's strict lower bound at the fixed cut |
+| Fixed-cut estimates | [FactorTwo.SingletonBound](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonBound.lean) | The singleton margin's strict lower bound at the fixed cut |
+| Centre | [FactorTwo.Center](../StochasticToDeterministicLatents/Binary/FactorTwo/Center.lean) | The chord's midpoint law and the two margins' closed forms in $`(v, z)`$ |
+| Certificate values | [FactorTwo.CertValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CertValues.lean) | The tangent certificate's four values at a contact law, and $`\Phi`$ there |
+| Plane at the centre | [FactorTwo.CenterMajorant](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterMajorant.lean) | A contact plane evaluated at the centre of a chord |
+| Reference planes | [FactorTwo.Planes](../StochasticToDeterministicLatents/Binary/FactorTwo/Planes.lean) | Four explicit rational laws and their planes in closed form |
+| Plane bound | [FactorTwo.PlaneBound](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneBound.lean) | The plane bound in the imbalance, and its concavity |
+| Centre logarithms | [FactorTwo.CenterLogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLogValues.lean) | Decimal enclosures of eight more logarithms |
+| Plane endpoints | [FactorTwo.PlaneEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneEndpoints.lean) | The plane bound exceeds one hundredth at the eight interval endpoints |
+| Centre seam | [FactorTwo.CenterSeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeam.lean) | The constant margin at the centre exceeds one hundredth on the seam |
+| Contact chart | [FactorTwo.CenterChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterChart.lean) | The contact chart of the page's Lemma 3.3, its identities and its positivity |
+| Chart derivatives | [FactorTwo.CenterFractions](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterFractions.lean) | The chart's radial derivatives in closed form, including display (3.7) |
+| Chart second order | [FactorTwo.CenterCurvature](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterCurvature.lean) | The chart's second-order expressions, display (3.8) and both signs of display (4.3) |
+| Ray of fixed imbalance | [FactorTwo.CenterRay](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRay.lean) | The centre's ray of laws, its critical radius, and the radius test |
+| Chart and laws | [FactorTwo.CenterLaws](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLaws.lean) | The chart read at a chord domain, display (3.5), and the ray's laws |
+| Chart derivatives | [FactorTwo.CenterDerivatives](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDerivatives.lean) | The root, the diagonal certificate value and the height, differentiated along a path |
+| Chord law and ray | [FactorTwo.CenterDictionary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDictionary.lean) | A chord law's ray coordinates, and the two margins as functions of them |
+| The seam | [FactorTwo.CenterSeamChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamChart.lean) | The seam in the chart's radius, and the isolating code's margin as a function of it |
+| The seam | [FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | The signs the seam's derivative turns on |
+| The seam | [FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | The isolating code's margin, differentiated along the seam |
+| The seam | [FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | The margin's bound along the seam |
+| The rays | [FactorTwo.CenterRayMass](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMass.lean) | The mass along a ray, differentiated and increasing |
+| The rays | [FactorTwo.CenterRayMargins](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMargins.lean) | The two margins along a ray, differentiated twice |
+| The rays | [FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | A minimum at an endpoint, for a positively weighted antitone slope |
+| The rays | [FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | The two margins, continuous out to both ends of the ray |
+| The rays | [FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | The ray's law at the critical radius, and the constant code's margin there |
+| The rays | [FactorTwo.CenterRaySeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRaySeam.lean) | The seam radius on a ray, the two slopes' order, and the seam bounds there |
+| The rays | [FactorTwo.CenterEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpoints.lean) | The centre theorem: both margins at the midpoint of the chord |
+| The contact | [FactorTwo.ContactPositive](../StochasticToDeterministicLatents/Binary/FactorTwo/ContactPositive.lean) | A positive mutual information away from a product law, and the constant code's margin at the contact |
+| The bound | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | The complete gate at every chord domain, and `T p <= 2 * tau p` for every law |
+| The witness | [FactorTwo.Witness](../StochasticToDeterministicLatents/Binary/FactorTwo/Witness.lean) | The constant code's own score, and that one of five named codes meets the factor-two bound on full support |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -467,8 +605,10 @@ The import graph of the library, generated from the `import` lines by
 module imports every module and is not drawn):
 
 ```mermaid
+%% Module import graph. Edge A --> B means A imports B. The root
+%% module imports every module and is not drawn.
+%% Generated by gen_diagrams.py; do not edit by hand.
 graph TD
-  root["root (StochasticToDeterministicLatents.lean)"]
   Bridge["Bridge"]
   Deterministic["Deterministic"]
   Information["Information"]
@@ -481,6 +621,7 @@ graph TD
     Binary_ContactChart["ContactChart"]
     Binary_CountSelector["CountSelector"]
     Binary_FactorNine["FactorNine"]
+    Binary_FactorTwo["FactorTwo"]
     Binary_NormalForm["NormalForm"]
     Binary_Reduction["Reduction"]
     Binary_ScalarEstimates["ScalarEstimates"]
@@ -493,30 +634,61 @@ graph TD
       Binary_FactorNine_PositivePhase["PositivePhase"]
       Binary_FactorNine_SeamEndpoints["SeamEndpoints"]
     end
+    subgraph FACTORTWO["Binary/FactorTwo/"]
+      Binary_FactorTwo_Center["Center"]
+      Binary_FactorTwo_CenterChart["CenterChart"]
+      Binary_FactorTwo_CenterCurvature["CenterCurvature"]
+      Binary_FactorTwo_CenterDerivatives["CenterDerivatives"]
+      Binary_FactorTwo_CenterDictionary["CenterDictionary"]
+      Binary_FactorTwo_CenterEndpointMin["CenterEndpointMin"]
+      Binary_FactorTwo_CenterEndpoints["CenterEndpoints"]
+      Binary_FactorTwo_CenterFractions["CenterFractions"]
+      Binary_FactorTwo_CenterLaws["CenterLaws"]
+      Binary_FactorTwo_CenterLogValues["CenterLogValues"]
+      Binary_FactorTwo_CenterMajorant["CenterMajorant"]
+      Binary_FactorTwo_CenterRay["CenterRay"]
+      Binary_FactorTwo_CenterRayBoundary["CenterRayBoundary"]
+      Binary_FactorTwo_CenterRayEnds["CenterRayEnds"]
+      Binary_FactorTwo_CenterRayMargins["CenterRayMargins"]
+      Binary_FactorTwo_CenterRayMass["CenterRayMass"]
+      Binary_FactorTwo_CenterRaySeam["CenterRaySeam"]
+      Binary_FactorTwo_CenterSeam["CenterSeam"]
+      Binary_FactorTwo_CenterSeamChart["CenterSeamChart"]
+      Binary_FactorTwo_CenterSeamDerivative["CenterSeamDerivative"]
+      Binary_FactorTwo_CenterSeamMargin["CenterSeamMargin"]
+      Binary_FactorTwo_CenterSeamPositivity["CenterSeamPositivity"]
+      Binary_FactorTwo_CertValues["CertValues"]
+      Binary_FactorTwo_Chord["Chord"]
+      Binary_FactorTwo_ChordScalars["ChordScalars"]
+      Binary_FactorTwo_ConstantBound["ConstantBound"]
+      Binary_FactorTwo_ConstantRatio["ConstantRatio"]
+      Binary_FactorTwo_Contact["Contact"]
+      Binary_FactorTwo_ContactPositive["ContactPositive"]
+      Binary_FactorTwo_Defs["Defs"]
+      Binary_FactorTwo_FixedCutConstant["FixedCutConstant"]
+      Binary_FactorTwo_Gates["Gates"]
+      Binary_FactorTwo_LogSeries["LogSeries"]
+      Binary_FactorTwo_LogValues["LogValues"]
+      Binary_FactorTwo_Margins["Margins"]
+      Binary_FactorTwo_NormBound["NormBound"]
+      Binary_FactorTwo_Optimum["Optimum"]
+      Binary_FactorTwo_Orientation["Orientation"]
+      Binary_FactorTwo_PlaneBound["PlaneBound"]
+      Binary_FactorTwo_PlaneEndpoints["PlaneEndpoints"]
+      Binary_FactorTwo_Planes["Planes"]
+      Binary_FactorTwo_RationalTest["RationalTest"]
+      Binary_FactorTwo_Shape["Shape"]
+      Binary_FactorTwo_SingletonBound["SingletonBound"]
+      Binary_FactorTwo_SingletonMass["SingletonMass"]
+      Binary_FactorTwo_SingletonRatio["SingletonRatio"]
+      Binary_FactorTwo_SingletonScore["SingletonScore"]
+      Binary_FactorTwo_Strip["Strip"]
+      Binary_FactorTwo_Touch["Touch"]
+      Binary_FactorTwo_Witness["Witness"]
+    end
   end
   UPSTREAM[("stoch_to_det.* (pinned upstream)")]
   MATHLIB[("Mathlib.*")]
-  root -.-> Information
-  root -.-> Latent
-  root -.-> Deterministic
-  root -.-> Bridge
-  root -.-> Binary_Table
-  root -.-> Binary_Selector
-  root -.-> Binary_CountSelector
-  root -.-> Pricing
-  root -.-> Binary_Symmetry
-  root -.-> Binary_Chart
-  root -.-> Binary_ContactChart
-  root -.-> Binary_TransposeNormalForm
-  root -.-> Binary_CatalogRecovery
-  root -.-> Binary_NormalForm
-  root -.-> SparseLimit
-  root -.-> Binary_ScalarEstimates
-  root -.-> Binary_Reduction
-  root -.-> Binary_FactorNine_NonpositivePhase
-  root -.-> Binary_FactorNine_PositivePhase
-  root -.-> Binary_FactorNine_SeamEndpoints
-  root -.-> Binary_FactorNine
   Binary_CatalogRecovery --> Binary_Selector
   Binary_CatalogRecovery --> Binary_ContactChart
   Binary_CatalogRecovery --> Binary_TransposeNormalForm
@@ -533,6 +705,105 @@ graph TD
   Binary_FactorNine --> Binary_FactorNine_SeamEndpoints
   Binary_FactorNine --> Binary_NormalForm
   Binary_FactorNine --> SparseLimit
+  Binary_FactorTwo_Center --> Binary_FactorTwo_Margins
+  Binary_FactorTwo_CenterChart --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_CenterCurvature --> Binary_FactorTwo_CenterFractions
+  Binary_FactorTwo_CenterDerivatives --> Binary_FactorTwo_CenterLaws
+  Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_CenterLaws
+  Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_Center
+  Binary_FactorTwo_CenterEndpointMin --> MATHLIB
+  Binary_FactorTwo_CenterEndpoints --> Binary_FactorTwo_CenterRaySeam
+  Binary_FactorTwo_CenterEndpoints --> Binary_FactorTwo_CenterRayBoundary
+  Binary_FactorTwo_CenterFractions --> Binary_FactorTwo_CenterChart
+  Binary_FactorTwo_CenterLaws --> Binary_ContactChart
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CertValues
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CenterRay
+  Binary_FactorTwo_CenterLogValues --> MATHLIB
+  Binary_FactorTwo_CenterLogValues --> Binary_FactorTwo_LogSeries
+  Binary_FactorTwo_CenterMajorant --> Binary_FactorTwo_CertValues
+  Binary_FactorTwo_CenterMajorant --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_CenterRay --> Binary_Chart
+  Binary_FactorTwo_CenterRay --> Binary_FactorTwo_CenterCurvature
+  Binary_FactorTwo_CenterRayBoundary --> Binary_FactorTwo_CenterRayEnds
+  Binary_FactorTwo_CenterRayBoundary --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_CenterRayEnds --> Binary_FactorTwo_CenterRayMass
+  Binary_FactorTwo_CenterRayEnds --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterRayMass
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterDerivatives
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterCurvature
+  Binary_FactorTwo_CenterRayMass --> Binary_FactorTwo_CenterRay
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterRayMargins
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterRayEnds
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterSeam
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterSeamMargin
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterEndpointMin
+  Binary_FactorTwo_CenterSeam --> Binary_FactorTwo_PlaneEndpoints
+  Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_Strip
+  Binary_FactorTwo_CenterSeamDerivative --> Binary_FactorTwo_CenterSeamPositivity
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_CenterSeamDerivative
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_CenterMajorant
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_Planes
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_CenterSeamPositivity --> Binary_FactorTwo_CenterSeamChart
+  Binary_FactorTwo_CertValues --> Binary_FactorTwo_Contact
+  Binary_FactorTwo_Chord --> Binary_FactorTwo_Optimum
+  Binary_FactorTwo_ChordScalars --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_ChordScalars --> Binary_ContactChart
+  Binary_FactorTwo_ConstantBound --> Binary_FactorTwo_FixedCutConstant
+  Binary_FactorTwo_ConstantRatio --> MATHLIB
+  Binary_FactorTwo_ConstantRatio --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_ConstantRatio --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_Contact --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_Contact --> Bridge
+  Binary_FactorTwo_ContactPositive --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_Defs --> Binary_Selector
+  Binary_FactorTwo_Defs --> MATHLIB
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_Strip
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_ConstantRatio
+  Binary_FactorTwo_Gates --> Binary_FactorTwo_Margins
+  Binary_FactorTwo_Gates --> Binary_FactorTwo_Orientation
+  Binary_FactorTwo_LogSeries --> MATHLIB
+  Binary_FactorTwo_LogValues --> MATHLIB
+  Binary_FactorTwo_LogValues --> Binary_FactorTwo_LogSeries
+  Binary_FactorTwo_Margins --> Binary_FactorTwo_SingletonScore
+  Binary_FactorTwo_Margins --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_NormBound --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_NormBound --> Binary_FactorTwo_Contact
+  Binary_FactorTwo_Optimum --> Binary_FactorTwo_NormBound
+  Binary_FactorTwo_Optimum --> Binary_FactorTwo_RationalTest
+  Binary_FactorTwo_Orientation --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_Orientation --> Binary_Symmetry
+  Binary_FactorTwo_Orientation --> SparseLimit
+  Binary_FactorTwo_PlaneBound --> Binary_FactorTwo_Center
+  Binary_FactorTwo_PlaneBound --> Binary_FactorTwo_Planes
+  Binary_FactorTwo_PlaneBound --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_PlaneEndpoints --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_PlaneEndpoints --> Binary_FactorTwo_CenterLogValues
+  Binary_FactorTwo_PlaneEndpoints --> Binary_FactorTwo_PlaneBound
+  Binary_FactorTwo_Planes --> Binary_FactorTwo_CenterMajorant
+  Binary_FactorTwo_RationalTest --> Binary_FactorTwo_Touch
+  Binary_FactorTwo_Shape --> MATHLIB
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_FixedCutConstant
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_SingletonMass
+  Binary_FactorTwo_SingletonBound --> Binary_FactorTwo_SingletonScore
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_Shape
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_SingletonMass --> Binary_FactorTwo_SingletonRatio
+  Binary_FactorTwo_SingletonRatio --> MATHLIB
+  Binary_FactorTwo_SingletonScore --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_Strip --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_Strip --> Binary_ContactChart
+  Binary_FactorTwo_Touch --> Binary_FactorTwo_Contact
+  Binary_FactorTwo_Witness --> Binary_FactorTwo
+  Binary_FactorTwo_Witness --> Binary_FactorTwo_Orientation
+  Binary_FactorTwo --> Binary_FactorTwo_CenterEndpoints
+  Binary_FactorTwo --> Binary_FactorTwo_ConstantBound
+  Binary_FactorTwo --> Binary_FactorTwo_SingletonBound
+  Binary_FactorTwo --> Binary_FactorTwo_Gates
   Binary_NormalForm --> Binary_CatalogRecovery
   Binary_Reduction --> Binary_ContactChart
   Binary_ScalarEstimates --> Binary_ContactChart

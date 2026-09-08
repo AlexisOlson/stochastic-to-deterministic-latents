@@ -5,6 +5,7 @@ build/
 *.c
 *.o
 *.out
+*.bak
 .DS_Store
 
 .claude/

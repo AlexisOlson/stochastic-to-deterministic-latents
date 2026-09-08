@@ -1,10 +1,14 @@
 # Binary factor two
 
-This page proves the binary constant two. It is `paper proof` in the sense of
-the [claim ledger](claims.md#status-vocabulary): a complete rigorous prose
-derivation with no unresolved step, not formalized here. No Lean
-declaration in this repository states it. Where a kernel-verified declaration
-supplies an input, it is quoted in its own words.
+This page proves the binary constant two. The page itself is a complete
+rigorous prose derivation with no unresolved step, in the sense of the
+[claim ledger](claims.md#status-vocabulary). The theorem it proves is since
+2026-09-08 also `kernel-verified` in this repository, by a route that follows
+this page in outline without reproducing all of it; section 7 says what the
+library does not state, and the [claim ledger](claims.md#ledger) records where
+the Lean argument takes a different route from the one given here.
+Where a kernel-verified declaration supplies an input, it is quoted in its own
+words.
 
 Write a binary law as $`p = (a,b,c,d) = (p_{00},p_{01},p_{10},p_{11})`$ and put
 $`\Delta = ad - bc`$.
@@ -79,7 +83,9 @@ with $`\eta(0) = 0`$. For a law $`p'`$ on the four cells,
 
 **Public inputs.** The proof uses the following results of the
 [binary stochastic optimum](binary-stochastic-optimum.md) page, all at
-`paper proof`, and three kernel-verified declarations.
+`paper proof`, and three kernel-verified declarations. This list is what the
+prose derivation below quotes, not the extent of the formal backing: the
+theorem itself is kernel-verified, and section 7 says so.
 
 - [Theorem 6.6](binary-stochastic-optimum.md#6-the-cubic) (the cubic decides
   and locates the optimum), with [Lemma 6.1](binary-stochastic-optimum.md#6-the-cubic)
@@ -1151,7 +1157,7 @@ about $`0.1167`$ and $`0.0134`$. The check script replays both enclosures.
 
 **Theorem 6.1 (full support).** Let $`p`$ be a full-support binary law. Then
 $`T(p) \le 2\,\tau(p)`$, and the constant code or one of the four singleton codes
-attains $`D_p(g) \le 2\,\tau(p)`$, as stated at the head of the page.
+has $`D_p(g) \le 2\,\tau(p)`$, as stated at the head of the page.
 
 *Proof.* If $`\Delta = 0`$, $`p`$ is a product law, so $`I_p(X;Y) = 0`$ and
 $`\tau(p) = T(p) = 0`$ from $`0 \le \tau(p) \le T(p) \le I_p(X;Y)`$ (section 1 of
@@ -1206,10 +1212,15 @@ there.
 the public inputs of [section 1](#1-setting), elementary calculus (the mean
 value theorem, integration of monotone bounds, convexity of one-variable
 functions), and finitely many rational-logarithm comparisons decided by the
-series of Lemma 1.3. It is `paper proof` in the ledger's sense. The ledger rows
+series of Lemma 1.3. The ledger rows
 are `BIN-C2` (Theorems 6.1 and 6.2), `BIN-CHORD-CUT` (Theorem 2.5 with Lemmas
 2.2 to 2.4), `BIN-CENTER` (Theorem 4.1), and `BIN-FIXED-CUT` (Lemma 5.1 with
-Theorems 5.2 and 5.3). The quantitative margins $`1\text/200`$, $`1\text/250`$,
+Theorems 5.2 and 5.3). All four have since been `kernel-verified` in the
+library, and the derivation above remains their prose proof. Two things stated
+here are not in the library: Theorem 2.5's conclusion at every point of the
+chord, where each declaration concludes at the law itself, and the *location*
+of the singleton witness given at the head of this page, where the Lean
+statement only says that one of the five named codes works. The quantitative margins $`1\text/200`$, $`1\text/250`$,
 $`4v\text/125`$, $`3D\text/208`$, and $`D\text/100`$ are in nats; only their positivity is
 used downstream.
 

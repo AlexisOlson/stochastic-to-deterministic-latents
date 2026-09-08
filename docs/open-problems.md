@@ -18,11 +18,11 @@ $`2 \times 2`$ laws only, so $`C_2 \le C_*`$.
 | $`C_* \le 1771`$ | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision, which is its current `main`; open upstream pull requests claim smaller constants, down to `96`, and are not merged or verified here |
 | $`C_2 \le 9`$ | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | $`C_* \le 9`$ | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
-| $`C_2 \le 2`$ | `paper proof` here ([`BIN-C2`](claims.md#ledger)); not formalized here; the inequality `kernel-verified` in the reviewed source workspace |
+| $`C_2 \le 2`$ | `kernel-verified` here, certificate-free ([`BIN-C2`](claims.md#ledger)) |
 
 Two constants are interesting. A universal constant of $`2`$ would sit within
 two percent of the general lower bound. For binary laws the constant $`2`$ is
-proved at `paper proof`; whether it is sharp is open, since the $`12 \times 12`$
+proved; whether it is sharp is open, since the $`12 \times 12`$
 witness says nothing about $`C_2`$ and this repository holds no binary lower
 bound above the trivial $`1`$.
 
@@ -33,8 +33,9 @@ bound above the trivial $`1`$.
 **Statement.** $`T(p) \le 2\,\tau(p)`$ for every binary $`2 \times 2`$
 law $`p`$.
 
-**What is known.** Proved at `paper proof` on the
-[binary factor two](binary-factor-two.md) page ([`BIN-C2`](claims.md#ledger)).
+**What is known.** Proved, and `kernel-verified` here
+([`BIN-C2`](claims.md#ledger)); the prose derivation is on the
+[binary factor two](binary-factor-two.md) page.
 The right-hand side is the exact optimum of the
 [binary stochastic optimum](binary-stochastic-optimum.md) page
 ([`BIN-TAU-EXACT`](claims.md#ledger)): either the constant latent is optimal
@@ -73,13 +74,14 @@ ratio is then exact rather than a lower bound. No such certificate is in the
 library yet. The one-parameter family of symmetric laws $`p_{00} = p_{11}`$,
 $`p_{01} = p_{10}`$ is the natural place to start.
 
-**What remains.** A Lean proof of the target signatures in the
-[Lean contracts](lean-contracts.md#binary-factor-two), of which the inequality
-is `kernel-verified` in the reviewed source workspace and the full-support
-witness is not; the sharpness of the constant, that is, a binary lower bound
-above the trivial $`1`$; and the equality cases.
+**What remains.** The sharpness of the constant, that is, a binary lower bound
+above the trivial $`1`$; the equality cases; and, of the statement itself, the
+part that *locates* the singleton -- the page reads the witness off the law, at
+a lightest diagonal cell when $`ad > bc`$ and a lightest off-diagonal cell when
+$`ad < bc`$, while the Lean statement only says that one of the five codes
+works.
 
-**Tier.** `paper proof`.
+**Tier.** `kernel-verified` here.
 
 ### 2.2 The general factor-eight estimate (`GEN-W3-8`)
 

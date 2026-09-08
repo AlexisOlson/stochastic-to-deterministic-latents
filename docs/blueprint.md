@@ -1,9 +1,8 @@
 # Constructive blueprint
 
 This is the canonical notation and mechanism guide. The certificate-free binary
-factor-nine theorem is kernel-verified in this repository, and the binary
-constant two is proved at `paper proof`. The arbitrary-alphabet factor-nine
-statement remains open.
+factor-two and factor-nine theorems are both kernel-verified in this
+repository. The arbitrary-alphabet factor-nine statement remains open.
 
 The [claim ledger](claims.md) records exact evidence status. Start with the
 [definitions](#1-laws-entropy-and-codes) and [pricing rule](#2-price-the-act-of-determinizing),
@@ -66,7 +65,8 @@ prior-weighted sum $`\sum_l \pi_l\,\Phi(q_l)`$, with the weights always written
 explicitly. For binary laws the stochastic optimum is computed exactly in the
 [binary stochastic optimum](binary-stochastic-optimum.md) page, and the
 [binary factor two](binary-factor-two.md) page proves $`T(p) \le 2\,\tau(p)`$
-for every binary law; both are at `paper proof`.
+for every binary law. The exact optimum is at `paper proof`; the factor-two
+theorem is `kernel-verified` here.
 
 The deterministic optimum is the attained finite minimum
 

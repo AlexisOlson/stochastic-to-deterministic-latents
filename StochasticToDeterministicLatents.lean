@@ -19,16 +19,73 @@ import StochasticToDeterministicLatents.Binary.FactorNine.NonpositivePhase
 import StochasticToDeterministicLatents.Binary.FactorNine.PositivePhase
 import StochasticToDeterministicLatents.Binary.FactorNine.SeamEndpoints
 import StochasticToDeterministicLatents.Binary.FactorNine
+import StochasticToDeterministicLatents.Binary.FactorTwo.Shape
+import StochasticToDeterministicLatents.Binary.FactorTwo.LogSeries
+import StochasticToDeterministicLatents.Binary.FactorTwo.LogValues
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterLogValues
+import StochasticToDeterministicLatents.Binary.FactorTwo.ConstantRatio
+import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonRatio
+import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonMass
+import StochasticToDeterministicLatents.Binary.FactorTwo.FixedCutConstant
+import StochasticToDeterministicLatents.Binary.FactorTwo.ConstantBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.Defs
+import StochasticToDeterministicLatents.Binary.FactorTwo.Contact
+import StochasticToDeterministicLatents.Binary.FactorTwo.Touch
+import StochasticToDeterministicLatents.Binary.FactorTwo.RationalTest
+import StochasticToDeterministicLatents.Binary.FactorTwo.NormBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.Optimum
+import StochasticToDeterministicLatents.Binary.FactorTwo.Planes
+import StochasticToDeterministicLatents.Binary.FactorTwo.Orientation
+import StochasticToDeterministicLatents.Binary.FactorTwo.Chord
+import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
+import StochasticToDeterministicLatents.Binary.FactorTwo.SingletonScore
+import StochasticToDeterministicLatents.Binary.FactorTwo.Margins
+import StochasticToDeterministicLatents.Binary.FactorTwo.Gates
+import StochasticToDeterministicLatents.Binary.FactorTwo.Strip
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterMajorant
+import StochasticToDeterministicLatents.Binary.FactorTwo.CertValues
+import StochasticToDeterministicLatents.Binary.FactorTwo.Center
+import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneBound
+import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneEndpoints
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeam
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterChart
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterFractions
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterCurvature
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRay
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterLaws
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDerivatives
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDictionary
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamChart
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamPositivity
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamDerivative
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamMargin
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayMass
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayMargins
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpointMin
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayEnds
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayBoundary
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRaySeam
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpoints
+import StochasticToDeterministicLatents.Binary.FactorTwo.ContactPositive
+import StochasticToDeterministicLatents.Binary.FactorTwo
+import StochasticToDeterministicLatents.Binary.FactorTwo.Witness
 
 /-!
 # Stochastic-to-Deterministic Latents
 
 The root exports the finite-information and latent interfaces, deterministic
 codes and pricing, binary normal forms, scalar phase estimates, catalog
-recovery, and the sparse-law transfer.
+recovery, the sparse-law transfer, and the contact-chord apparatus of
+`Binary.FactorTwo`.
 
-`Binary.T_le_nine_mul_tau` proves `T p ≤ 9 * tau p` for every binary
-probability law. `Binary.exists_code_detScore_le_nine_mul_tau` supplies a
+`Binary.T_le_two_mul_tau` proves `T p ≤ 2 * tau p` for every binary
+probability law, and `Binary.exists_witnessCode` narrows the code on full
+support to the constant code or one of the four singletons. Neither is a
+sharpness claim.
+
+`Binary.T_le_nine_mul_tau` proves the weaker `T p ≤ 9 * tau p` by an
+independent route. `Binary.exists_code_detScore_le_nine_mul_tau` supplies a
 deterministic witness. On full support,
 `Binary.detScore_selector_le_nine_mul_tau_of_fullSupport` bounds the law-only
 selector and `Binary.exists_optimalLatent_w3_le_eight_of_fullSupport` supplies
