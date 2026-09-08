@@ -49,6 +49,13 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.Center
 import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneBound
 import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneEndpoints
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeam
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterChart
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterFractions
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterCurvature
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRay
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterLaws
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDerivatives
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDictionary
 
 /-!
 # Stochastic-to-Deterministic Latents

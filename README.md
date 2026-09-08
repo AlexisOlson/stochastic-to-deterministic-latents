@@ -99,12 +99,13 @@ lake build                  # the root library; ends with "Build completed succe
 lake env lean Verify.lean   # the audit; prints nothing and exits 0 on success
 ```
 
-`Verify.lean` carries, for each of the 495 public theorem endpoints, an
+`Verify.lean` carries, for each of the 707 public theorem endpoints, an
 `assert_no_sorry` check and a `#print axioms` result pinned with `#guard_msgs`.
 Every pinned set was discovered by running `#print axioms` after compilation;
-the four headlines each report `[propext, Classical.choice, Quot.sound]`. The
-root build takes about eleven minutes with a warm cache, and the audit can
-exceed ten. The [verification guide](verification/README.md) gives the trust
+the four headlines each report `[propext, Classical.choice, Quot.sound]`. A
+root build after a single module changes takes a minute or two, and the audit
+about twenty seconds once the root is built; both take considerably longer from
+a cold cache, and either may exceed ten minutes there. The [verification guide](verification/README.md) gives the trust
 scan, the single-module check, and the admission procedure.
 
 ## Contributing

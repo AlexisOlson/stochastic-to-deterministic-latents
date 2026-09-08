@@ -565,6 +565,13 @@ in this table. Their public theorems are audited in
 | Centre logarithms | [FactorTwo.CenterLogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLogValues.lean) | Decimal enclosures of eight more logarithms |
 | Plane endpoints | [FactorTwo.PlaneEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneEndpoints.lean) | The plane bound exceeds one hundredth at the eight interval endpoints |
 | Centre seam | [FactorTwo.CenterSeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeam.lean) | The constant margin at the centre exceeds one hundredth on the seam |
+| Contact chart | [FactorTwo.CenterChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterChart.lean) | The contact chart of the page's Lemma 3.3, its identities and its positivity |
+| Chart derivatives | [FactorTwo.CenterFractions](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterFractions.lean) | The chart's radial derivatives in closed form, including display (3.7) |
+| Chart second order | [FactorTwo.CenterCurvature](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterCurvature.lean) | The chart's second-order expressions, display (3.8) and both signs of display (4.3) |
+| Ray of fixed imbalance | [FactorTwo.CenterRay](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRay.lean) | The centre's ray of laws, its critical radius, and the radius test |
+| Chart and laws | [FactorTwo.CenterLaws](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLaws.lean) | The chart read at a chord domain, display (3.5), and the ray's laws |
+| Chart derivatives | [FactorTwo.CenterDerivatives](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDerivatives.lean) | The root, the diagonal certificate value and the height, differentiated along a path |
+| Chord law and ray | [FactorTwo.CenterDictionary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDictionary.lean) | A chord law's ray coordinates, and the two margins as functions of them |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -602,8 +609,15 @@ graph TD
     end
     subgraph FACTORTWO["Binary/FactorTwo/"]
       Binary_FactorTwo_Center["Center"]
+      Binary_FactorTwo_CenterChart["CenterChart"]
+      Binary_FactorTwo_CenterCurvature["CenterCurvature"]
+      Binary_FactorTwo_CenterDerivatives["CenterDerivatives"]
+      Binary_FactorTwo_CenterDictionary["CenterDictionary"]
+      Binary_FactorTwo_CenterFractions["CenterFractions"]
+      Binary_FactorTwo_CenterLaws["CenterLaws"]
       Binary_FactorTwo_CenterLogValues["CenterLogValues"]
       Binary_FactorTwo_CenterMajorant["CenterMajorant"]
+      Binary_FactorTwo_CenterRay["CenterRay"]
       Binary_FactorTwo_CenterSeam["CenterSeam"]
       Binary_FactorTwo_CertValues["CertValues"]
       Binary_FactorTwo_Chord["Chord"]
@@ -652,10 +666,22 @@ graph TD
   Binary_FactorNine --> Binary_NormalForm
   Binary_FactorNine --> SparseLimit
   Binary_FactorTwo_Center --> Binary_FactorTwo_Margins
+  Binary_FactorTwo_CenterChart --> Binary_FactorTwo_Defs
+  Binary_FactorTwo_CenterCurvature --> Binary_FactorTwo_CenterFractions
+  Binary_FactorTwo_CenterDerivatives --> Binary_FactorTwo_CenterLaws
+  Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_CenterLaws
+  Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_Center
+  Binary_FactorTwo_CenterFractions --> Binary_FactorTwo_CenterChart
+  Binary_FactorTwo_CenterLaws --> Binary_ContactChart
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CertValues
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CenterRay
   Binary_FactorTwo_CenterLogValues --> MATHLIB
   Binary_FactorTwo_CenterLogValues --> Binary_FactorTwo_LogSeries
   Binary_FactorTwo_CenterMajorant --> Binary_FactorTwo_CertValues
   Binary_FactorTwo_CenterMajorant --> Binary_FactorTwo_Chord
+  Binary_FactorTwo_CenterRay --> Binary_Chart
+  Binary_FactorTwo_CenterRay --> Binary_FactorTwo_CenterCurvature
   Binary_FactorTwo_CenterSeam --> Binary_FactorTwo_PlaneEndpoints
   Binary_FactorTwo_CertValues --> Binary_FactorTwo_Contact
   Binary_FactorTwo_Chord --> Binary_FactorTwo_Optimum

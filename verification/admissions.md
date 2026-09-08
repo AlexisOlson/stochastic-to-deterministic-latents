@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 49 modules and 667 theorem endpoints. Definitions, including
+contains 58 modules and 707 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -68,6 +68,13 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.CenterLogValues](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLogValues.lean) | 2026-09-07 | 8 | Decimal enclosures of eight more logarithms |
 | [Binary.FactorTwo.PlaneEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/PlaneEndpoints.lean) | 2026-09-07 | 4 | The plane bound exceeds one hundredth at eight endpoints |
 | [Binary.FactorTwo.CenterSeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeam.lean) | 2026-09-07 | 1 | The constant margin at the centre, on the seam |
+| [Binary.FactorTwo.CenterChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterChart.lean) | 2026-09-07 | 4 | The contact chart, its identities and its positivity |
+| [Binary.FactorTwo.CenterFractions](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterFractions.lean) | 2026-09-07 | 9 | The chart's radial derivatives in closed form |
+| [Binary.FactorTwo.CenterCurvature](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterCurvature.lean) | 2026-09-07 | 5 | The chart's second-order expressions along a ray |
+| [Binary.FactorTwo.CenterRay](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRay.lean) | 2026-09-07 | 4 | The ray of fixed imbalance and its critical radius |
+| [Binary.FactorTwo.CenterLaws](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLaws.lean) | 2026-09-07 | 7 | The chart and the laws it describes |
+| [Binary.FactorTwo.CenterDerivatives](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDerivatives.lean) | 2026-09-07 | 3 | Derivatives along a path in the chart |
+| [Binary.FactorTwo.CenterDictionary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDictionary.lean) | 2026-09-07 | 3 | A chord law in the ray's coordinates |
 
 ## Axiom sets
 
@@ -523,6 +530,118 @@ the one multiplication by $`\log 2`$ is where they meet.
 The plane index is produced existentially rather than by a nested conditional,
 which is possible because the step from a plane's bound to the margin holds for
 every one of the four.
+
+CenterChart opens the centre's other arm and states nothing about a law. Along
+the contact chord the cubic's positive root rescales the two off-diagonal
+cells, and everything above this module depends on the rescaled pair only
+through its sum $`r`$ and product $`\omega`$. `ChartDomain` is the resulting
+parameter set and the six scalars are the chart's normalizer, the cubic's root,
+the off-diagonal mass, the diagonal mass, the off-diagonal product and the
+discriminant.
+
+Two of the four theorems say what the chart is. `chartRoot_cubic` shows the
+root solves the cubic by construction: the polynomial collapses to
+$`u^2 (u \cdot n - \omega)`$, which vanishes because $`u = \omega\text{/}n`$.
+The page proves the same identity in the other direction, dividing the cubic to
+reach $`u_0 n = \omega`$; here that equation is the definition and the cubic's
+vanishing is the consequence, which is the page's converse paragraph.
+`chartDiscriminant_eq` identifies the curvature input with the cubic's
+discriminant $`v^2 - 4w`$. Both were run as a scratch `example` against
+[Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean) before
+the module was written, and they are what fixed the public names: these are the
+library's own three quantities and its cubic root, in coordinates.
+
+`chart_identities` proves the three entries of the page's display (3.4) that
+are not definitional here, and `chart_pos` collects the positivity every
+consumer needs, so that no module above this one re-derives it. The private
+source proves that positivity and then never uses it, three later modules
+re-deriving what they need; six of its declarations, a pair of two-variable
+polynomials with their positivity and a pair of denominators with theirs, are
+consumed by nothing in the whole transfer closure and were dropped.
+
+CenterFractions carries the radial derivatives the page computes from the
+cubic, in that chart and in closed form: the cubic's own derivative at the
+root, the quantity $`u^2 - w`$, the root's radial derivative, the part of the
+two contact masses' derivatives that does not depend on the cell, and the
+radial derivative of $`\log K`$. Each is proved equal to an explicit ratio of
+polynomials in $`r`$ and $`\omega`$.
+
+`chartLogKDeriv_eq` is the right side of the page's display (3.7).
+`chartFactors_pos` is the page's own list of positive factors, and every
+denominator in the module is one of them.
+
+CenterCurvature carries the three second-order expressions the page's
+Lemma 3.4 and Lemma 4.3 use, in the same chart. `chartContactSecondOrder` is
+the right side of display (3.9), and `chartContactSecondOrder_eq_logKDeriv`
+proves it equal to the radial derivative of $`\log K`$, which is the page's own
+step from (3.9) to (3.7) reached by carrying both sides to one closed form
+rather than by its cancellation of a factor $`v + s`$.
+`chartContactSecondOrder_lt` is display (3.8), and
+`chartConstantSecondOrder_neg` and `chartSingletonSecondOrder_neg` put the two
+expressions of display (4.3) below zero on the chart domain.
+
+**No module here differentiates anything.** That these expressions are the two
+margins' second radial derivatives, and hence that the margins are concave
+along a ray, is the analytic half of Lemma 4.3 and is not stated. Nothing in
+the three modules bounds a margin, and none of them mentions a law.
+
+CenterRay is the first module of this apparatus that does mention a law. It
+defines the ray of fixed imbalance the centre argument runs along, on the
+public `tableOfEntries`, and proves that every law on the closed ray is a
+probability law with full support at positive radius; that the critical radius
+lies in $`(0, 1)`$ with its mass in $`[1\text/4, 1\text/3)`$ and the chart's
+interior condition vanishing there; the test for a radius being below it; and
+the mass and root at it. The private cell constructor is not ported:
+`tableOfEntries` is the same map with the same row-major order, checked cell by
+cell.
+
+This ties the chart's parameters to laws -- radius $`r`$ and product
+$`\kappa(z)\,r^2`$ -- and does no more. No declaration in it bounds a margin
+or differentiates anything.
+
+CenterLaws supplies the correspondence between the chart and the laws, in both
+directions. `chartDomain_of_chordDomain` is the forward direction of the
+correspondence in the page's Lemma 3.3:
+a chord domain's two off-diagonal cells, rescaled by its top root, are positive
+and ordered, they satisfy `ChartDomain`, and that root is the chart's root.
+`chart_certValues` is display (3.5), stated through the two public certificate
+values rather than the page's contact masses. `log_two_mul_phi_contact_chart`
+evaluates $`\log 2 \cdot \Phi`$ at a chord domain's contact as minus the new
+definition `chartHeight` at those coordinates, in nats. `chartDomain_ray` and
+`chordDomain_rayLaw` run the other way: a radius strictly inside the critical
+one puts the ray's parameters in the chart domain and makes the law there a
+chord domain. `rayLaw_chartCoordinates` and `rayRoot_eq_chartRoot` identify
+that law's own chart coordinates with the radius and the ray's product, which
+is what makes the two directions compose. Nothing in the module differentiates
+anything.
+
+CenterDerivatives is the first module of this group that does.  It moves along
+a path in the chart -- the two rescaled cells are differentiable functions of a
+real parameter -- and differentiates three things along it.
+`hasDerivAt_chartRoot` gives the root's derivative, the quotient rule's value;
+`hasDerivAt_log_certDiagonal` gives the diagonal certificate value's logarithm;
+and `hasDerivAt_chartHeight` gives the height, whose derivative is the page's
+display (3.3) contracted against the path's velocity in the contact's two
+off-diagonal cells: the first cell's coefficient uses `certOffDiagonal b c u`
+and the second's uses `certOffDiagonal c b u`, that value not being symmetric
+in its first two arguments.  The path's root derivative is a hypothesis of the last
+two, discharged by the first.  These are derivatives along an **arbitrary**
+path: the radial expressions `chartRootDeriv`, `chartCommonDeriv` and
+`chartLogKDeriv` of `CenterFractions` are still not shown to be derivatives of
+anything, and no declaration identifies any of this with a margin's radial
+derivative.
+
+CenterDictionary joins the chart apparatus to the two margins.
+`chordDomain_rayCoordinates` reads a chord law in the ray's coordinates: its
+imbalance lies in `[0, 1)`, its off-diagonal mass over its top root lies
+strictly between zero and the critical radius, and at that pair the ray's root,
+off-diagonal mass and law are the chord law's own root, its own off-diagonal
+mass, and the chord law recentred at its midpoint.  `rayConstantScalar` and
+`raySingletonScalar` then write `Center`'s two centre scalars as functions of
+the imbalance and the radius alone, and `rayConstantScalar_eq` and
+`raySingletonScalar_eq` say that at a chord law's own coordinates they are that
+law's two margins at the midpoint.  Nothing in the module bounds a margin or
+differentiates anything.
 
 The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
 alone, with no duality vocabulary in the statement; the majorant property is
