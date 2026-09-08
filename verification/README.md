@@ -1,8 +1,8 @@
 # Verify the Lean library
 
-The public library proves the binary factor-nine theorem. Its root exports 70
-modules, and [Verify.lean](../Verify.lean) audits all 746 public theorem
-endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
+The public library proves the binary factor-two and factor-nine theorems. Its
+root exports 72 modules, and [Verify.lean](../Verify.lean) audits all 754
+public theorem endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
 not pinned separately; they are used only inside audited proofs, where the
 audit covers them transitively, and pinning or privatizing them is pending. The [admission record](admissions.md) lists the modules, dates,
 discovered axiom sets, and exact claim promotions.

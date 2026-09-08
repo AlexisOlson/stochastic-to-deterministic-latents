@@ -36,10 +36,13 @@ positive multiple of `chordBottom`, and the margins themselves are in bits;
 each conversion is one step against `Real.log_pos` and `chordBottom_pos`.
 
 **What is proved here and what is not.**  `T_le_two_mul_tau` is the inequality
-for every probability law.  It says nothing about which code attains it: no
-declaration in this tree exhibits a latent or a deterministic code realising
-the bound, and the full-support witness clause of the factor-two claim is not
-proved anywhere here.
+for every probability law, and says nothing on its own about which code meets
+it.  On full support `FactorTwo.Witness` narrows the code to one of five:
+`exists_witnessCode` produces the constant code, or a code isolating a single
+cell, whose score is at most twice the stochastic optimum.  Neither statement
+is a sharpness claim.  No declaration in this tree exhibits a law and a code
+whose score *equals* twice the optimum, none locates the isolated cell from
+the law, and the constant is not claimed to be the least possible.
 
 ## Attribution
 

@@ -384,7 +384,7 @@ private theorem singletonMargin_entryA (h : ChordDomain p u) :
 
 /-- The top root exceeds the geometric mean of the off-diagonal.  This is what
 keeps the determinant positive at every point of the chord, not only at `p`. -/
-private theorem offDiagonalProduct_lt_sq_topRoot (h : ChordDomain p u) :
+theorem offDiagonalProduct_lt_sq_topRoot (h : ChordDomain p u) :
     offDiagonalProduct p < u ^ 2 := by
   have hu := topRoot_pos h.isPMF h.fullSupport h.topRoot
   have hw : 0 < offDiagonalProduct p := by
@@ -455,16 +455,30 @@ theorem singletonMargin_eq_two_mul_tau_sub (h : ChordDomain p u)
       = 2 * tau (chordAt p t) - detScore (chordAt p t) (singletonCode cell11) := by
   rw [singletonMargin, chordBudget_eq_two_mul_tau h ht]
 
+/-- **Which code the chord margin exhibits.**  The margin hypothesis is used
+at one point only, the law's own place on its chord, and there the disjunction
+is about two *named* codes: the constant code and the code that isolates the
+last cell.  Bounding an infimum from above already meant exhibiting a
+competitor; this states which one. -/
+theorem chordMargin_witness (h : ChordDomain p u)
+    (hmargin : ∀ t ∈ Set.Icc (chordMidpoint p) (chordTop p u),
+      0 ≤ constantMargin p u t ∨ 0 ≤ singletonMargin p u t) :
+    Psi p - Phi p ≤ 2 * tau p
+      ∨ detScore p (singletonCode cell11) ≤ 2 * tau p := by
+  rcases hmargin (entryA p) (entryA_mem_chord h) with h0 | hD
+  · rw [constantMargin_entryA h] at h0
+    exact Or.inl (by linarith)
+  · rw [singletonMargin_entryA h] at hD
+    exact Or.inr (by linarith)
+
 /-- If one of the two margins is nonnegative everywhere on the chord, then the
 deterministic optimum is at most twice the stochastic one. -/
 theorem T_le_two_tau_of_chordMargin (h : ChordDomain p u)
     (hmargin : ∀ t ∈ Set.Icc (chordMidpoint p) (chordTop p u),
       0 ≤ constantMargin p u t ∨ 0 ≤ singletonMargin p u t) :
     T p ≤ 2 * tau p := by
-  rcases hmargin (entryA p) (entryA_mem_chord h) with h0 | hD
-  · rw [constantMargin_entryA h] at h0
-    linarith [T_le_psi_sub_phi h.isPMF]
-  · rw [singletonMargin_entryA h] at hD
-    linarith [T_le_detScore p (singletonCode cell11)]
+  rcases chordMargin_witness h hmargin with h0 | hD
+  · linarith [T_le_psi_sub_phi h.isPMF]
+  · linarith [T_le_detScore p (singletonCode cell11)]
 
 end StochasticToDeterministicLatents.Binary

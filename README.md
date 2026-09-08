@@ -5,13 +5,16 @@ observations at bounded information cost. For every binary $`2 \times 2`$ law,
 this repository proves
 
 ```math
-T(p) \le 9\,\tau(p),
+T(p) \le 2\,\tau(p),
 ```
 
 where $`T`$ is the deterministic optimum and $`\tau`$ is the stochastic
-optimum. The proof is kernel-verified in the public Lean library and
-certificate-free: every analytic step is an exact rational-logarithm bound
-proved in Lean, with nothing delegated to a numerical certificate.
+optimum. On full support it also names the code: the constant code or one of
+the four singleton codes has score at most $`2\,\tau(p)`$. The weaker
+$`T(p) \le 9\,\tau(p)`$ is proved by an independent route. Both proofs are
+kernel-verified in the public Lean library and certificate-free: every analytic
+step is an exact rational-logarithm bound proved in Lean, with nothing
+delegated to a numerical certificate. Neither constant is claimed to be sharp.
 
 Here $`p`$ is the joint law of two observations $`(X,Y)`$. A finite stochastic
 latent $`L`$ coupled to them has score
@@ -38,7 +41,7 @@ the notation.
 |---|---:|---|---|
 | Binary $`2 \times 2`$ | $`T(p) \le 9\,\tau(p)`$ | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
 | Binary $`2 \times 2`$ | $`\tau(p)`$ exactly, from one cubic root; every optimal latent has at most two component laws | [Binary stochastic optimum](docs/binary-stochastic-optimum.md) | `paper proof` |
-| Binary $`2 \times 2`$ | $`T(p) \le 2\,\tau(p)`$ | [Binary factor two](docs/binary-factor-two.md): on full support, the constant code or a singleton code, compared with the exact optimum along each contact chord; sparse laws by the kernel-verified transfer | `paper proof` |
+| Binary $`2 \times 2`$ | $`T(p) \le 2\,\tau(p)`$ | [Binary factor two](docs/binary-factor-two.md): on full support, the constant code or a singleton code, compared with the exact optimum along each contact chord; sparse laws by the kernel-verified transfer | `kernel-verified` in this repository; certificate-free |
 | Arbitrary finite alphabets | $`T(p) \le 9\,\tau(p)`$ | Open | `conjecture` |
 
 For a full-support binary law, the deterministic witness can be chosen from the
@@ -99,10 +102,11 @@ lake build                  # the root library; ends with "Build completed succe
 lake env lean Verify.lean   # the audit; prints nothing and exits 0 on success
 ```
 
-`Verify.lean` carries, for each of the 746 public theorem endpoints, an
+`Verify.lean` carries, for each of the 754 public theorem endpoints, an
 `assert_no_sorry` check and a `#print axioms` result pinned with `#guard_msgs`.
 Every pinned set was discovered by running `#print axioms` after compilation;
-the four headlines each report `[propext, Classical.choice, Quot.sound]`. A
+the headline theorems, factor two and factor nine alike, each report
+`[propext, Classical.choice, Quot.sound]`. A
 root build after a single module changes takes a minute or two, and the audit
 about twenty seconds once the root is built; both take considerably longer from
 a cold cache, and either may exceed ten minutes there. The [verification guide](verification/README.md) gives the trust
@@ -124,7 +128,7 @@ naming the problem before starting anything large.
 - [Blueprint](docs/blueprint.md): notation, pricing, and the selector recipe.
 - [Binary factor nine](docs/binary-factor-nine.md): the complete proof, with every analytic step an exact rational-logarithm bound.
 - [Binary stochastic optimum](docs/binary-stochastic-optimum.md): $`\tau(p)`$ in closed form for every binary law, at `paper proof`.
-- [Binary factor two](docs/binary-factor-two.md): the binary constant two, at `paper proof`, from two deterministic scores compared with the exact stochastic optimum along each contact chord.
+- [Binary factor two](docs/binary-factor-two.md): the binary constant two, from two deterministic scores compared with the exact stochastic optimum along each contact chord. The prose derivation on that page; the theorem itself is `kernel-verified`.
 - [Claim ledger](docs/claims.md) and [Lean contracts](docs/lean-contracts.md): statements, scope, and existing or proposed signatures.
 - [Verification](verification/README.md): commands, trust model, and admission requirements.
 - [Examples](examples/README.md): exact inputs, branch calculations, and selected partitions.

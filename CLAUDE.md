@@ -1,7 +1,7 @@
 # Repository guidance
 
-This Lean 4 / Mathlib project proves the certificate-free binary factor-nine
-theorem for stochastic-to-deterministic latents. Read [docs/claims.md](docs/claims.md)
+This Lean 4 / Mathlib project proves the certificate-free binary factor-two and
+factor-nine theorems for stochastic-to-deterministic latents. Read [docs/claims.md](docs/claims.md)
 and [verification/README.md](verification/README.md) before editing. They define
 the mathematical scope and admission requirements.
 
@@ -33,7 +33,7 @@ not apply the lakefile's Lean options. Pass `-DrelaxedAutoImplicit=false` for
 scratch checks: unbound multi-character identifiers must be errors. Rebuild
 the root after import changes before running Verify, which reads its olean.
 
-The root exports 70 modules and Verify has 746 theorem endpoints. Recount
+The root exports 72 modules and Verify has 754 theorem endpoints. Recount
 after changes. A successful Verify run is silent and exits 0; a build may
 replay linter warnings. There is no separate test framework: the required
 checks are builds, theorem coverage, the axiom audit, and the claim ledger.
@@ -55,6 +55,13 @@ from future targets and map the public modules.
   bound on `T` to all laws; FactorNine supplies its binary premise at nine.
 - `Binary.Reduction` proves cost minimality over `BinaryCode`. The numerical
   factor-nine proof does not depend on this minimality theorem.
+- `Binary/FactorTwo/` and `Binary/FactorTwo.lean` are the contact-chord route
+  to the stronger binary bound: the chord, the centre, the fixed cut, the seam
+  and the rays. `FactorTwo.Gates` reduces the theorem to a disjunction of three
+  one-dimensional conditions at each chord domain and `gates_of_chordDomain`
+  supplies one, giving `T_le_two_mul_tau` for every law through `SparseLimit`.
+  `FactorTwo.Witness` adds the full-support clause naming the code. Keep those
+  two clauses distinct, and neither is a sharpness claim.
 
 Preserve the distinction between an all-law bound on `T` and full-support
 guarantees for a selected optimal latent or the named selector. Neither scalar

@@ -322,14 +322,18 @@ setup does not supply.
 
 ## Binary factor two
 
-The rows `BIN-C2`, `BIN-CHORD-CUT`, and `BIN-CENTER` are `paper proof` in the
-[binary factor two](binary-factor-two.md) page, and no public declaration
-states any of them. `BIN-FIXED-CUT` is `kernel-verified` here: its three
-clauses are `Binary.contactMass_lt_half_disagreement`,
-`Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`,
-in the shapes recorded below. The `BIN-C2` inequality, over the same upstream
-`T`, `tau`, and `IsPMF`, was `kernel-verified` in the reviewed source workspace
-and remains qualified as such; the full-support witness target below was not.
+All four rows of this section -- `BIN-C2`, `BIN-CHORD-CUT`, `BIN-CENTER` and
+`BIN-FIXED-CUT` -- are now `kernel-verified` here, and the
+[binary factor two](binary-factor-two.md) page is their prose derivation. The
+supplied declarations are named in the module map at the end of this page and
+listed against the target signatures below; where a supplied shape differs from
+the target, the difference is recorded. Several parts of the page are not supplied. The *location* of the singleton
+witness, which the page reads off the sign of the determinant, is stated by no
+declaration here. Neither is the page's concavity in the mass, nor its strict
+positivity at the far end of a centre ray, where only nonnegativity is proved
+and only nonnegativity is needed, nor the chord-wide form of its Theorem 2.5,
+nor the quadratic-growth half of its Proposition 4.6. The claim ledger records
+each of these against the row it belongs to.
 
 **Prerequisite targets.** `Binary.cubicRoot` and `Binary.swapContact` are
 defined, and `Binary.tau_eq_at_topRoot` supplies the right-hand side on full
@@ -349,7 +353,8 @@ transport codes and their scores; and `T_le_mul_tau_of_forall_fullSupport` in
 [`SparseLimit.lean`](../StochasticToDeterministicLatents/SparseLimit.lean)
 extends a full-support bound to every law.
 
-**Unimplemented targets.** The margins below are the entropy expressions of
+**Target signatures.** Every target below is now supplied, in the shapes
+recorded after the block. The margins below are the entropy expressions of
 the page, in bits, so every quantitative bound of the page is divided by
 $`\ln 2`$; only positivity is consumed downstream. `Binary.chordLaw p a`
 denotes the chord law $`(a, b, c, s - a)`$, `Binary.contactMass p` the smaller
@@ -457,13 +462,18 @@ chord domain, which is more than the two conditional bounds assume at $`p`$
 alone: the orientation carries an arbitrary law to an oriented one, and the
 gate is needed there.
 
-Two differences of strength: `Binary.constantMargin_chordTop` gives the contact
-end nonnegative, not strictly positive, so
-`Binary.constantMargin_contactEnd_pos` as stated is not supplied and is not
-used; and nothing supplies
-`Binary.exists_witness_detScore_le_two_mul_tau`, which names the witness.
+Two differences of name and shape. `Binary.constantMargin_chordTop` gives the
+contact end nonnegative; the strict form `Binary.constantMargin_contactEnd_pos`
+is supplied as `Binary.constantMargin_chordTop_pos`, which rests on
+`Binary.psi_sub_phi_pos`, that a full-support binary law of nonvanishing
+determinant has positive mutual information. And
+`Binary.exists_witness_detScore_le_two_mul_tau` is supplied as
+`Binary.exists_witnessCode`, with the anonymous disjunction of the target
+replaced by the public `Prop`-valued definition `Binary.IsWitnessCode` and the
+pointwise positivity by `FullSupport`; the conclusion is the same, and neither
+form locates the singleton.
 
-Of the five quantitative rows, three are supplied, each with
+Of the five quantitative rows, all five are supplied, each with
 `Binary.ChordDomain p u` in place of `Binary.Oriented p` and with
 `Binary.chordBottom p u` for `Binary.contactMass p`. The contact-mass bound is
 `Binary.contactMass_lt_half_disagreement`; the same module defines
@@ -475,12 +485,14 @@ through by `Real.log 2`, as `3 * Binary.chordBottom p u / 208 < Real.log 2 *
 ...`, rather than dividing by it, so that no public statement carries
 `Real.log 2` in a denominator.
 
-`Binary.centerSingletonMargin_ge` and `Binary.centerConstantMargin_pos` remain
-unimplemented. They are the rest of the hypothesis of
+`Binary.centerSingletonMargin_ge` and `Binary.centerConstantMargin_pos` are
+supplied as `Binary.center_singletonMargin_ge` and
+`Binary.center_constantMargin_pos`. They are the rest of the hypothesis of
 `Binary.T_le_two_tau_of_gates` -- the first supplies the isolating margin at
 the chord center below an eighth, which the cut branch needs alongside the two
-estimates above, and the second the constant gate above an eighth -- and
-`BIN-C2` stays `paper proof` until they are proved.
+estimates above, and the second the constant gate above an eighth. With them,
+`Binary.gates_of_chordDomain` closes one of the three gates at every chord
+domain and `Binary.T_le_two_mul_tau` is the row's inequality for every law.
 
 ## Arbitrary finite alphabets
 
@@ -583,7 +595,9 @@ in this table. Their public theorems are audited in
 | The rays | [FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | The ray's law at the critical radius, and the constant code's margin there |
 | The rays | [FactorTwo.CenterRaySeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRaySeam.lean) | The seam radius on a ray, the two slopes' order, and the seam bounds there |
 | The rays | [FactorTwo.CenterEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpoints.lean) | The centre theorem: both margins at the midpoint of the chord |
+| The contact | [FactorTwo.ContactPositive](../StochasticToDeterministicLatents/Binary/FactorTwo/ContactPositive.lean) | A positive mutual information away from a product law, and the constant code's margin at the contact |
 | The bound | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | The complete gate at every chord domain, and `T p <= 2 * tau p` for every law |
+| The witness | [FactorTwo.Witness](../StochasticToDeterministicLatents/Binary/FactorTwo/Witness.lean) | The constant code's own score, and that one of five named codes meets the factor-two bound on full support |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -649,6 +663,7 @@ graph TD
       Binary_FactorTwo_ConstantBound["ConstantBound"]
       Binary_FactorTwo_ConstantRatio["ConstantRatio"]
       Binary_FactorTwo_Contact["Contact"]
+      Binary_FactorTwo_ContactPositive["ContactPositive"]
       Binary_FactorTwo_Defs["Defs"]
       Binary_FactorTwo_FixedCutConstant["FixedCutConstant"]
       Binary_FactorTwo_Gates["Gates"]
@@ -669,6 +684,7 @@ graph TD
       Binary_FactorTwo_SingletonScore["SingletonScore"]
       Binary_FactorTwo_Strip["Strip"]
       Binary_FactorTwo_Touch["Touch"]
+      Binary_FactorTwo_Witness["Witness"]
     end
   end
   UPSTREAM[("stoch_to_det.* (pinned upstream)")]
@@ -742,6 +758,7 @@ graph TD
   Binary_FactorTwo_ConstantRatio --> Binary_FactorTwo_LogValues
   Binary_FactorTwo_Contact --> Binary_FactorTwo_Defs
   Binary_FactorTwo_Contact --> Bridge
+  Binary_FactorTwo_ContactPositive --> Binary_FactorTwo_Chord
   Binary_FactorTwo_Defs --> Binary_Selector
   Binary_FactorTwo_Defs --> MATHLIB
   Binary_FactorTwo_FixedCutConstant --> Binary_FactorTwo_Strip
@@ -781,6 +798,8 @@ graph TD
   Binary_FactorTwo_Strip --> Binary_FactorTwo_Chord
   Binary_FactorTwo_Strip --> Binary_ContactChart
   Binary_FactorTwo_Touch --> Binary_FactorTwo_Contact
+  Binary_FactorTwo_Witness --> Binary_FactorTwo
+  Binary_FactorTwo_Witness --> Binary_FactorTwo_Orientation
   Binary_FactorTwo --> Binary_FactorTwo_CenterEndpoints
   Binary_FactorTwo --> Binary_FactorTwo_ConstantBound
   Binary_FactorTwo --> Binary_FactorTwo_SingletonBound

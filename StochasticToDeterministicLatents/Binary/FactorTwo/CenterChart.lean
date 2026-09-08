@@ -100,7 +100,10 @@ noncomputable def chartDiagonalMass (r omega : ℝ) : ℝ :=
 noncomputable def chartOffDiagonalProduct (r omega : ℝ) : ℝ :=
   omega * chartRoot r omega ^ 2
 
-/-- The cubic's discriminant `v ^ 2 - 4 w`, in the chart. -/
+/-- The squared difference of the two off-diagonal cells, `v ^ 2 - 4 w`, in
+the chart.  This is the discriminant of the *quadratic* whose roots are those
+two cells, not of the contact cubic, whose discriminant is a different
+expression. -/
 noncomputable def chartDiscriminant (r omega : ℝ) : ℝ :=
   (r ^ 2 - 4 * omega) * chartRoot r omega ^ 2
 

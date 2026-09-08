@@ -77,7 +77,10 @@ noncomputable def tangentCert (q : RealTable) : RealTable := fun z =>
   -3 * Real.logb 2 (q z) + 2 * Real.logb 2 (stoch_to_det.mX q z.1)
     + 2 * Real.logb 2 (stoch_to_det.mY q z.2)
 
-private theorem sum_mul_logb_self {γ : Type*} [Fintype γ] {m : γ → ℝ} (hm : IsPMF m) :
+/-- Pairing a probability law with its own base-two logarithm gives the
+negated entropy.  Stated for a general finite alphabet because both the table
+and its two marginals are used this way. -/
+theorem sum_mul_logb_self {γ : Type*} [Fintype γ] {m : γ → ℝ} (hm : IsPMF m) :
     (∑ a, m a * Real.logb 2 (m a)) = -stoch_to_det.H m := by
   rw [stoch_to_det.H, hm.total, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun a _ => ?_

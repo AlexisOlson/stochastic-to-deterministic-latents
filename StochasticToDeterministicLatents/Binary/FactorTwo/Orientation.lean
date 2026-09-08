@@ -204,24 +204,31 @@ private theorem determinant_antiTranspose (p : RealTable) :
   rw [determinant_eq, determinant_eq, hA, hB, hC, hD]
   ring
 
-/-! ## Orienting an arbitrary law
+/-! ## Reducing any symmetry-stable property to the oriented region
 
 The three steps are taken in the order in which they do not disturb each
 other: the column swap fixes the sign of the determinant, the transpose then
 orders the off-diagonal without touching the determinant, and the
-anti-transpose finally orders the diagonal without touching either. -/
+anti-transpose finally orders the diagonal without touching either.
 
-private theorem exists_diagonal_ordered (p : RealTable) (hp : IsPMF p)
-    (hpos : FullSupport p) (hdet : 0 ≤ determinant p)
-    (hcb : entryC p ≤ entryB p) :
-    ∃ q : RealTable, IsPMF q ∧ FullSupport q ∧ 0 ≤ determinant q ∧
-      entryD q ≤ entryA q ∧ entryC q ≤ entryB q ∧ tau q = tau p ∧ T q = T p := by
+They are stated for an arbitrary property that descends along a single
+pushforward.  A bound on `T` and `tau` only needs the oriented law to
+have the same two optima; a statement that names a *code* needs the
+symmetry itself, so that the code can be carried back.  Both are
+instances. -/
+
+private theorem of_diagonal_ordered {P : RealTable → Prop}
+    (hstep : ∀ (r : TableSymmetry) (q : RealTable), IsPMF q →
+      P (pushforward r.equiv q) → P q)
+    (h : ∀ q : RealTable, IsPMF q → FullSupport q → 0 ≤ determinant q →
+      entryD q ≤ entryA q → entryC q ≤ entryB q → P q)
+    (p : RealTable) (hp : IsPMF p) (hpos : FullSupport p)
+    (hdet : 0 ≤ determinant p) (hcb : entryC p ≤ entryB p) : P p := by
   by_cases hda : entryD p ≤ entryA p
-  · exact ⟨p, hp, hpos, hdet, hda, hcb, rfl, rfl⟩
+  · exact h p hp hpos hdet hda hcb
   · obtain ⟨hA, hB, hC, hD⟩ := cells_antiTranspose p
-    refine ⟨pushforward antiTranspose.equiv p, pushforward_isPMF hp,
-      fun z => pushforward_pos hpos _ z, ?_, ?_, ?_,
-      tau_pushforward antiTranspose p hp, T_pushforward antiTranspose p hp⟩
+    refine hstep antiTranspose p hp ?_
+    refine h _ (pushforward_isPMF hp) (fun z => pushforward_pos hpos _ z) ?_ ?_ ?_
     · rw [determinant_antiTranspose]
       exact hdet
     · rw [hA, hD]
@@ -229,37 +236,45 @@ private theorem exists_diagonal_ordered (p : RealTable) (hp : IsPMF p)
     · rw [hB, hC]
       exact hcb
 
-private theorem exists_ordered (p : RealTable) (hp : IsPMF p) (hpos : FullSupport p)
-    (hdet : 0 ≤ determinant p) :
-    ∃ q : RealTable, IsPMF q ∧ FullSupport q ∧ 0 ≤ determinant q ∧
-      entryD q ≤ entryA q ∧ entryC q ≤ entryB q ∧ tau q = tau p ∧ T q = T p := by
+private theorem of_ordered {P : RealTable → Prop}
+    (hstep : ∀ (r : TableSymmetry) (q : RealTable), IsPMF q →
+      P (pushforward r.equiv q) → P q)
+    (h : ∀ q : RealTable, IsPMF q → FullSupport q → 0 ≤ determinant q →
+      entryD q ≤ entryA q → entryC q ≤ entryB q → P q)
+    (p : RealTable) (hp : IsPMF p) (hpos : FullSupport p)
+    (hdet : 0 ≤ determinant p) : P p := by
   by_cases hcb : entryC p ≤ entryB p
-  · exact exists_diagonal_ordered p hp hpos hdet hcb
+  · exact of_diagonal_ordered hstep h p hp hpos hdet hcb
   · obtain ⟨-, hB, hC, -⟩ := cells_transpose p
-    obtain ⟨q, hq, hqpos, hqdet, hda, hqcb, htau, hT⟩ :=
-      exists_diagonal_ordered (pushforward TableSymmetry.transpose.equiv p)
-        (pushforward_isPMF hp) (fun z => pushforward_pos hpos _ z)
-        (by rw [determinant_transpose]; exact hdet)
-        (by rw [hB, hC]; exact le_of_not_ge hcb)
-    exact ⟨q, hq, hqpos, hqdet, hda, hqcb,
-      htau.trans (tau_pushforward .transpose p hp),
-      hT.trans (T_pushforward .transpose p hp)⟩
+    refine hstep TableSymmetry.transpose p hp ?_
+    refine of_diagonal_ordered hstep h _ (pushforward_isPMF hp)
+      (fun z => pushforward_pos hpos _ z) ?_ ?_
+    · rw [determinant_transpose]
+      exact hdet
+    · rw [hB, hC]
+      exact le_of_not_ge hcb
 
-/-- Every fully supported binary law is carried by a symmetry to one with a
-nonnegative determinant and both its diagonal and its off-diagonal entries
-ordered, at the same pair of optima. -/
-private theorem exists_oriented (p : RealTable) (hp : IsPMF p) (hpos : FullSupport p) :
-    ∃ q : RealTable, IsPMF q ∧ FullSupport q ∧ 0 ≤ determinant q ∧
-      entryD q ≤ entryA q ∧ entryC q ≤ entryB q ∧ tau q = tau p ∧ T q = T p := by
+/-- **A symmetry-stable property proved on the oriented region holds on every
+fully supported law.**  Two things separate this from
+`T_le_mul_tau_of_oriented`.  The property must descend along a single
+pushforward, which is `hstep`: for a bound on `T` and `tau` that is immediate,
+since both are invariant; for a statement naming a code it is where the code
+is carried back.  And full support stays a hypothesis on `p` here, where
+`T_le_mul_tau_of_oriented` discharges it through the sparse-law transfer,
+which preserves the two optima but not a code. -/
+theorem of_oriented {P : RealTable → Prop}
+    (hstep : ∀ (r : TableSymmetry) (q : RealTable), IsPMF q →
+      P (pushforward r.equiv q) → P q)
+    (h : ∀ q : RealTable, IsPMF q → FullSupport q → 0 ≤ determinant q →
+      entryD q ≤ entryA q → entryC q ≤ entryB q → P q)
+    (p : RealTable) (hp : IsPMF p) (hpos : FullSupport p) : P p := by
   by_cases hdet : 0 ≤ determinant p
-  · exact exists_ordered p hp hpos hdet
-  · obtain ⟨q, hq, hqpos, hqdet, hda, hcb, htau, hT⟩ :=
-      exists_ordered (pushforward TableSymmetry.swapColumns.equiv p)
-        (pushforward_isPMF hp) (fun z => pushforward_pos hpos _ z)
-        (by rw [determinant_swapColumns]; exact neg_nonneg.mpr (le_of_not_ge hdet))
-    exact ⟨q, hq, hqpos, hqdet, hda, hcb,
-      htau.trans (tau_pushforward .swapColumns p hp),
-      hT.trans (T_pushforward .swapColumns p hp)⟩
+  · exact of_ordered hstep h p hp hpos hdet
+  · refine hstep TableSymmetry.swapColumns p hp ?_
+    refine of_ordered hstep h _ (pushforward_isPMF hp)
+      (fun z => pushforward_pos hpos _ z) ?_
+    rw [determinant_swapColumns]
+    exact neg_nonneg.mpr (le_of_not_ge hdet)
 
 /-! ## Reducing a multiplicative bound to the oriented region -/
 
@@ -273,8 +288,8 @@ theorem T_le_mul_tau_of_oriented {C : ℝ} (hC : 0 ≤ C)
     (p : RealTable) (hp : IsPMF p) : T p ≤ C * tau p := by
   refine T_le_mul_tau_of_forall_fullSupport hC ?_ p hp
   intro w hw hwpos
-  obtain ⟨q, hq, hqpos, hqdet, hda, hcb, htau, hT⟩ := exists_oriented w hw hwpos
-  rw [← htau, ← hT]
-  exact h q hq hqpos hqdet hda hcb
+  refine of_oriented (P := fun q => T q ≤ C * tau q) ?_ h w hw hwpos
+  intro r q hq hPq
+  rwa [T_pushforward r q hq, tau_pushforward r q hq] at hPq
 
 end StochasticToDeterministicLatents.Binary

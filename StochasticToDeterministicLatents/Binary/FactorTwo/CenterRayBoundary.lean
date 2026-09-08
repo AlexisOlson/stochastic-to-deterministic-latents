@@ -38,9 +38,12 @@ statement below therefore carries an explicit `Real.log 2`, as in
 **What is not proved here.**  The page states that the mutual information at
 the critical radius is *positive*, and gives a reason: the law there is not a
 product law.  This module proves only that it is **nonnegative**, through
-`psi_sub_phi_nonneg`, and says nothing about product laws.  The endpoint
-comparison that consumes this uses only the nonnegativity, so nothing below
-waits on the strict inequality.
+`psi_sub_phi_nonneg`.  `psi_sub_phi_pos` now supplies the
+strict inequality for any full-support law of nonvanishing determinant, but
+nothing here shows that the law at the critical radius has one, so the
+endpoint below is still stated in its nonnegative form.  The endpoint
+comparison that consumes it uses only the nonnegativity, so nothing waits
+on the strict inequality.
 -/
 
 namespace StochasticToDeterministicLatents.Binary
@@ -313,9 +316,10 @@ theorem rayConstantScalar_boundary_eq (hz : z ∈ Set.Ico (0 : ℝ) 1) :
 
 /-- **The page's inequality there, weakened.**  The margin at the critical
 radius is nonnegative, because a mutual information is.  The page claims it
-is *positive*, from the law there not being a product law; **the strict
-inequality is proved nowhere in this tree**, and nothing in this module
-says anything about product laws. -/
+is *positive*, from the law there not being a product law.  The general
+fact is available as `psi_sub_phi_pos`; **what is missing is its hypothesis
+here**, since nothing in this tree computes the determinant of the law at
+the critical radius. -/
 theorem rayConstantScalar_boundary_nonneg (hz : z ∈ Set.Ico (0 : ℝ) 1) :
     0 ≤ rayConstantScalar z (criticalRadius z) := by
   rw [rayConstantScalar_boundary_eq hz]

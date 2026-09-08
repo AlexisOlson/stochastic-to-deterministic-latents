@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 58 modules and 707 theorem endpoints. Definitions, including
+contains 72 modules and 754 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -40,13 +40,13 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorNine](../StochasticToDeterministicLatents/Binary/FactorNine.lean) | 2026-09-04 | 4 | All-law C9 and full-support latent/selector headlines |
 | [Binary.FactorTwo.Shape](../StochasticToDeterministicLatents/Binary/FactorTwo/Shape.lean) | 2026-09-07 | 6 | Scalar curvature and shape lemmas for the chord margins |
 | [Binary.FactorTwo.Defs](../StochasticToDeterministicLatents/Binary/FactorTwo/Defs.lean) | 2026-09-07 | 21 | Binary cubic, its top root, and the diagonal contact pair |
-| [Binary.FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean) | 2026-09-07 | 11 | Affine majorants of $`\Phi`$ and the optimum at a contact pair |
+| [Binary.FactorTwo.Contact](../StochasticToDeterministicLatents/Binary/FactorTwo/Contact.lean) | 2026-09-07 | 12 | Affine majorants of $`\Phi`$ and the optimum at a contact pair |
 | [Binary.FactorTwo.Touch](../StochasticToDeterministicLatents/Binary/FactorTwo/Touch.lean) | 2026-09-07 | 10 | Contact cells, the swap invariance, and the touching identity |
 | [Binary.FactorTwo.RationalTest](../StochasticToDeterministicLatents/Binary/FactorTwo/RationalTest.lean) | 2026-09-07 | 4 | The positivity gate at a contact and at a constant optimum |
 | [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 | [Binary.FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | 2026-09-07 | 3 | The stochastic optimum of a fully supported binary law |
-| [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 3 | Deterministic-score transport and the oriented region |
-| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 36 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
+| [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 4 | Deterministic-score transport and the oriented region |
+| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 38 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
 | [Binary.FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean) | 2026-09-07 | 6 | The chord's entropies as scalar expressions |
 | [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
@@ -79,13 +79,15 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | 2026-09-07 | 3 | Signs on the seam |
 | [Binary.FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | 2026-09-07 | 4 | The seam's derivative |
 | [Binary.FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | 2026-09-07 | 2 | The margin along the seam |
-| [Binary.FactorTwo.CenterRayMass](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMass.lean) | 2026-09-07 | 4 | The mass along the ray |
+| [Binary.FactorTwo.CenterRayMass](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMass.lean) | 2026-09-07 | 5 | The mass along the ray |
 | [Binary.FactorTwo.CenterRayMargins](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMargins.lean) | 2026-09-07 | 7 | The margins along the ray |
 | [Binary.FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | 2026-09-07 | 2 | An endpoint minimum principle |
 | [Binary.FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | 2026-09-07 | 6 | The ray out to its ends |
 | [Binary.FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | 2026-09-08 | 3 | The ray's law at the critical radius |
 | [Binary.FactorTwo.CenterRaySeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRaySeam.lean) | 2026-09-08 | 5 | The seam radius on a ray |
 | [Binary.FactorTwo.CenterEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpoints.lean) | 2026-09-08 | 4 | The centre theorem |
+| [Binary.FactorTwo.ContactPositive](../StochasticToDeterministicLatents/Binary/FactorTwo/ContactPositive.lean) | 2026-09-08 | 2 | A positive mutual information at the contact |
+| [Binary.FactorTwo.Witness](../StochasticToDeterministicLatents/Binary/FactorTwo/Witness.lean) | 2026-09-08 | 2 | Five codes suffice for the factor-two bound |
 | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | 2026-09-08 | 2 | The factor-two theorem |
 
 ## Axiom sets
@@ -157,7 +159,9 @@ a sparse bound for the named selector.
 
 ## Factor-two admission checks
 
-The factor-two modules are a separate lane and prove no headline yet. Shape
+The factor-two modules are a separate lane, and since 2026-09-08 they prove
+two headline endpoints of their own, `T_le_two_mul_tau` and
+`exists_witnessCode`. Shape
 supplies the scalar curvature and shape lemmas the chord margins consume. Defs
 fixes the binary cubic, proves its top root exists and is unique, and builds the
 diagonal contact pair and its mixture. Contact supplies both sides of the
@@ -420,7 +424,8 @@ Chord gained the identification the two margins are named for. A point of the
 chord strictly below the upper contact carries the same chord domain and the
 same top root -- the determinant stays positive because the top root exceeds
 the geometric mean of the off-diagonal, and the diagonal product stays above
-$`u^2`$ -- so `tau_eq_chord` applies at that point and the chord budget there
+$`u^2`$ -- so `tau_eq_chord`, public when this was written and privatized on
+2026-09-08 as recorded below, applies at that point and the chord budget there
 is twice its own stochastic optimum. Hence
 `constantMargin_eq_two_mul_tau_sub` and `singletonMargin_eq_two_mul_tau_sub`:
 the two margins are $`2\,\tau - I`$ and $`2\,\tau - S_{11}`$ at the chord
@@ -830,7 +835,8 @@ open interval into antitonicity on it; it is the twin of Shape's private
 `antitoneOn_of_hasDerivAt_nonpos`, which is stated on a closed interval and
 so needs the continuity hypothesis this one derives, and neither serves for
 the other.  **No claim status changes.**  Nothing in the module is evidence
-for any display of the page, and no declaration in this tree yet applies it.
+for any display of the page. **Amended 2026-09-08**: it was applied by no
+declaration when admitted, and `CenterRaySeam` applies it now.
 
 CenterRayEnds carries the ray to the closed interval `[0, r_c]`.  Every
 derivative of this arm is taken strictly inside, because that is where the
@@ -890,10 +896,13 @@ the conversion, as in ChordScalars.
 **The page's strict inequality is not proved.**  Lemma 4.4(2) states that
 the mutual information there is *positive*, with a reason: the law is not a
 product law.  `rayConstantScalar_boundary_nonneg` gives only `0 <= `, from
-`psi_sub_phi_nonneg`, and **the strict inequality is proved nowhere in this
-tree, nor does anything here state that the law at the critical radius is not
-a product law**.  The endpoint comparison still to
-come consumes only the nonnegativity.
+`psi_sub_phi_nonneg`.  The endpoint comparison still to come consumes only
+the nonnegativity.  **Amended 2026-09-08**: the general strict inequality
+is now proved, as `psi_sub_phi_pos` in ContactPositive, so the sentence
+that once stood here -- that it was proved nowhere in this tree -- is no
+longer true.  What is still missing is its hypothesis at this particular
+law: nothing here computes the determinant of the law at the critical
+radius, so this endpoint keeps its nonnegative form.
 
 CenterRaySeam collects what a single ray of fixed imbalance contributes to
 the endpoint comparison.  `exists_raySeamRadius` puts a radius strictly
@@ -996,10 +1005,11 @@ the gate proofs can be supplied separately; `Gates.lean` took the other
 route and takes the disjunction directly.  A duplicate of the endpoint
 under a second name is dropped as well.
 
-**What is not proved.**  Nothing here exhibits a latent or a
-deterministic code attaining the bound, so the full-support witness
-clause of the factor-two claim is still unproved in this tree, and the
-claim ledger says so.
+**What is not proved here.**  Nothing in this module exhibits a latent or a
+code meeting the bound.  Amended 2026-09-08: the full-support witness
+clause is proved in `Witness`, below, in its unlocated form; nothing in
+this tree locates the singleton from the law, and nothing exhibits a law
+and a code whose score *equals* twice the optimum.
 
 **Chord's count fell from 42 to 36 on 2026-09-08.**  Six theorems --
 `cubic_offDiagonalMass`, `determinant_ne_zero_of_nonconstant`,
@@ -1057,3 +1067,94 @@ Each admission also passed the full root build and Verify. The audit contained
 FactorNine. Their source inventories and reconciliation counts are kept in
 the private attribution record described in
 [provenance](../docs/provenance.md#file-level-attribution).
+
+## ContactPositive
+
+**Admitted 2026-09-08.  An original argument for this tree, not a
+transfer of adapted working material**, and the module carries no
+adaptation notice for that reason.  The stronger claim that no proof of
+this statement existed anywhere in the source workspace is **not** made:
+that workspace was searched only narrowly, and it holds an information
+floor of a different kind in a different setting.
+
+Every earlier module in the lane stops at a *nonnegative* mutual
+information, which is all `psi_sub_phi_nonneg` gives.  The chord-cut
+argument's statement of the constant margin at the upper contact asks for
+the strict inequality, and `BIN-CHORD-CUT` was held at `paper proof` for
+exactly that one conjunct.
+
+`psi_sub_phi_pos` supplies it in general: mutual information is the
+divergence of a law from the product of its marginals, `log x <= x - 1`
+bounds each of the four cells below by `q z - mX * mY`, those four bounds
+sum to `1 - 1 = 0`, and `log x < x - 1` away from `x = 1` makes the sum
+strict as soon as one cell differs from its marginal product.  On a binary
+table the first cell differs exactly when the determinant does not vanish,
+since `a - (a + b)(a + c) = ad - bc` for a law of total mass one.
+
+`constantMargin_chordTop_pos` applies it at the upper contact.  The
+contact's diagonal product is `u ^ 2`, so its determinant is `u ^ 2` less
+the off-diagonal product, and the top root of a chord domain exceeds the
+geometric mean of the off-diagonal.  That last fact was already proved and
+private in Chord; it is promoted here rather than restated, as is
+`sum_mul_logb_self` in Contact, which the cell-by-cell expansion of
+`Psi - Phi` needs for the table and for both of its marginals.  Those two
+promotions are the only changes of *interface* to admitted modules; the
+statement scan was run first, and it is what found the Chord lemma. The
+docstrings of CenterRayBoundary were also amended in the same commit,
+where they described the strict inequality as unavailable anywhere in the
+tree.
+
+The endpoints move from 746 to 750: two promotions and the module's own
+two.
+
+## Witness
+
+**Admitted 2026-09-08.  An original argument for this tree, not a
+transfer**, like ContactPositive: no adapted working material supplied the
+clause.  The two helper lemmas are not new mathematics; the private
+per-file source record names their counterparts.  **Amended 2026-09-08**:
+the module does carry an adaptation notice, added after this entry was
+first written.  Its statement and argument are this tree's own, but two of
+its short proof scripts follow the upstream repository's, one of them
+restated here without the probability hypothesis it carries there, and the
+notice credits that.
+
+`T_le_two_mul_tau` bounds an infimum over the whole code space.  The
+factor-two claim says more: on full support one of five named codes -- the
+constant code or one of the four singletons -- already meets the bound.
+That clause is `exists_witnessCode`, and the five codes are
+`IsWitnessCode`.  It is not a sharpness claim.
+
+Most of it was already present.  Bounding an infimum from above meant
+exhibiting a competitor, and the chord argument's competitors are the
+constant code and the code isolating the last cell; `chordMargin_witness`
+in Chord is that step with the codes kept rather than dropped into the
+infimum, and `T_le_two_tau_of_chordMargin` is now derived from it, so its
+statement is unchanged.  Two things had to be added.
+
+**The constant code's score.**  `T_le_psi_sub_phi` bounds `T` by the
+mutual information through the constant *latent*, upstream, which names no
+code.  `detScore_constantCode` computes the constant *code* directly:
+conditioning on a constant changes no entropy, so both conditional entropy
+terms vanish and the conditional mutual information is the plain one.
+
+**Carrying a code through the orientation.**  `exists_oriented` recorded
+only that the oriented law has the same two optima, which is all a bound
+on `T` and `tau` needs; a named code needs the symmetry itself.  The three
+orientation steps are therefore restated for an arbitrary property that
+descends along one pushforward, as `of_oriented`, and the three previous
+private helpers are **replaced** by it rather than duplicated:
+`T_le_mul_tau_of_oriented` is re-derived as the instance where the
+property is the bound itself, and its statement and axioms are unchanged.
+
+Pulling a code back along a relabelling of the cells fixes the constant
+code and sends the singleton at a cell to the singleton at its preimage,
+so the five-code set is closed under the group.  **That is why the clause
+names four singletons and not one.**
+
+The full-support hypothesis is the clause's own and is not removed: the
+sparse-law transfer preserves the two optima but not a code.
+
+With this and ContactPositive, `BIN-C2` is `kernel-verified` in both of
+its clauses.  The endpoints move from 750 to 754: `chordMargin_witness`,
+`of_oriented`, and the module's own two.

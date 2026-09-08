@@ -67,17 +67,25 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayEnds
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayBoundary
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRaySeam
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpoints
+import StochasticToDeterministicLatents.Binary.FactorTwo.ContactPositive
 import StochasticToDeterministicLatents.Binary.FactorTwo
+import StochasticToDeterministicLatents.Binary.FactorTwo.Witness
 
 /-!
 # Stochastic-to-Deterministic Latents
 
 The root exports the finite-information and latent interfaces, deterministic
 codes and pricing, binary normal forms, scalar phase estimates, catalog
-recovery, and the sparse-law transfer.
+recovery, the sparse-law transfer, and the contact-chord apparatus of
+`Binary.FactorTwo`.
 
-`Binary.T_le_nine_mul_tau` proves `T p ≤ 9 * tau p` for every binary
-probability law. `Binary.exists_code_detScore_le_nine_mul_tau` supplies a
+`Binary.T_le_two_mul_tau` proves `T p ≤ 2 * tau p` for every binary
+probability law, and `Binary.exists_witnessCode` narrows the code on full
+support to the constant code or one of the four singletons. Neither is a
+sharpness claim.
+
+`Binary.T_le_nine_mul_tau` proves the weaker `T p ≤ 9 * tau p` by an
+independent route. `Binary.exists_code_detScore_le_nine_mul_tau` supplies a
 deterministic witness. On full support,
 `Binary.detScore_selector_le_nine_mul_tau_of_fullSupport` bounds the law-only
 selector and `Binary.exists_optimalLatent_w3_le_eight_of_fullSupport` supplies

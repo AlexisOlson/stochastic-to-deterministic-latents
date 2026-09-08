@@ -1,4 +1,4 @@
-# Binary factor-nine blueprint
+# Binary factor-two and factor-nine blueprint
 
 This nested Lake package renders the public library's definitions and claim
 dependencies as a Verso Blueprint site. The [claim ledger](../docs/claims.md)
