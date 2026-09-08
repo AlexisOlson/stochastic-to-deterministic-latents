@@ -56,6 +56,10 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRay
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterLaws
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDerivatives
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterDictionary
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamChart
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamPositivity
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamDerivative
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterSeamMargin
 
 /-!
 # Stochastic-to-Deterministic Latents

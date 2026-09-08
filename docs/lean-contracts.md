@@ -572,6 +572,10 @@ in this table. Their public theorems are audited in
 | Chart and laws | [FactorTwo.CenterLaws](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLaws.lean) | The chart read at a chord domain, display (3.5), and the ray's laws |
 | Chart derivatives | [FactorTwo.CenterDerivatives](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDerivatives.lean) | The root, the diagonal certificate value and the height, differentiated along a path |
 | Chord law and ray | [FactorTwo.CenterDictionary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDictionary.lean) | A chord law's ray coordinates, and the two margins as functions of them |
+| The seam | [FactorTwo.CenterSeamChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamChart.lean) | The seam in the chart's radius, and the isolating code's margin as a function of it |
+| The seam | [FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | The signs the seam's derivative turns on |
+| The seam | [FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | The isolating code's margin, differentiated along the seam |
+| The seam | [FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | The margin's bound along the seam |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -619,6 +623,10 @@ graph TD
       Binary_FactorTwo_CenterMajorant["CenterMajorant"]
       Binary_FactorTwo_CenterRay["CenterRay"]
       Binary_FactorTwo_CenterSeam["CenterSeam"]
+      Binary_FactorTwo_CenterSeamChart["CenterSeamChart"]
+      Binary_FactorTwo_CenterSeamDerivative["CenterSeamDerivative"]
+      Binary_FactorTwo_CenterSeamMargin["CenterSeamMargin"]
+      Binary_FactorTwo_CenterSeamPositivity["CenterSeamPositivity"]
       Binary_FactorTwo_CertValues["CertValues"]
       Binary_FactorTwo_Chord["Chord"]
       Binary_FactorTwo_ChordScalars["ChordScalars"]
@@ -683,6 +691,14 @@ graph TD
   Binary_FactorTwo_CenterRay --> Binary_Chart
   Binary_FactorTwo_CenterRay --> Binary_FactorTwo_CenterCurvature
   Binary_FactorTwo_CenterSeam --> Binary_FactorTwo_PlaneEndpoints
+  Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_Strip
+  Binary_FactorTwo_CenterSeamDerivative --> Binary_FactorTwo_CenterSeamPositivity
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_CenterSeamDerivative
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_CenterMajorant
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_Planes
+  Binary_FactorTwo_CenterSeamMargin --> Binary_FactorTwo_LogValues
+  Binary_FactorTwo_CenterSeamPositivity --> Binary_FactorTwo_CenterSeamChart
   Binary_FactorTwo_CertValues --> Binary_FactorTwo_Contact
   Binary_FactorTwo_Chord --> Binary_FactorTwo_Optimum
   Binary_FactorTwo_ChordScalars --> Binary_FactorTwo_Chord

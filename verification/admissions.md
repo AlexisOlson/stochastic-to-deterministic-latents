@@ -75,6 +75,10 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.CenterLaws](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterLaws.lean) | 2026-09-07 | 7 | The chart and the laws it describes |
 | [Binary.FactorTwo.CenterDerivatives](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDerivatives.lean) | 2026-09-07 | 3 | Derivatives along a path in the chart |
 | [Binary.FactorTwo.CenterDictionary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterDictionary.lean) | 2026-09-07 | 3 | A chord law in the ray's coordinates |
+| [Binary.FactorTwo.CenterSeamChart](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamChart.lean) | 2026-09-07 | 3 | The seam, in the chart's radius |
+| [Binary.FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | 2026-09-07 | 3 | Signs on the seam |
+| [Binary.FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | 2026-09-07 | 4 | The seam's derivative |
+| [Binary.FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | 2026-09-07 | 2 | The margin along the seam |
 
 ## Axiom sets
 
@@ -154,6 +158,20 @@ affine majorant of $`\Phi`$ bounds it below. Touch names the two diagonal cells
 of the contact pair, proves that the two contacts carry the same $`\Phi`$
 because the diagonal swap only relabels cells, and proves that at a root of the
 cubic the tangent certificate at one contact is tight at the other as well.
+
+The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
+alone, with no duality vocabulary in the statement; the majorant property is
+carried as the explicit inequality `Binary.Majorizes`. The single duality fact
+consumed, `phi_le_logCertificate_of_feasible`, was added to Bridge in its own
+commit; it is the forward direction of an upstream equivalence, restated with
+the upstream validity predicate unfolded.
+
+The module states no unproved analytic fact. `Binary.majorizes_tangentCert_of_normBound`
+takes the norm bound as a hypothesis; `Binary.PositivityGate` and the four gate
+expressions are stated here without a consumer in this module, because the two
+modules that reduce the gate to the norm bound and verify it on a chart both
+import this one and neither imports the other. No claim in the ledger changes
+status here.
 
 RationalTest verifies the positivity gate in the two places the factor-two
 argument needs it. Clearing the denominators turns the three gate quantities
@@ -643,19 +661,91 @@ the imbalance and the radius alone, and `rayConstantScalar_eq` and
 law's two margins at the midpoint.  Nothing in the module bounds a margin or
 differentiates anything.
 
-The lower bound is proved from `exists_optimalLatent` and `latent_score_eq`
-alone, with no duality vocabulary in the statement; the majorant property is
-carried as the explicit inequality `Binary.Majorizes`. The single duality fact
-consumed, `phi_le_logCertificate_of_feasible`, was added to Bridge in its own
-commit; it is the forward direction of an upstream equivalence, restated with
-the upstream validity predicate unfolded.
+CenterSeamChart collapses the chart to one parameter on the seam, that is,
+on the locus of off-diagonal mass exactly `1 / 8`.  Six definitions carry
+it: `seamProduct` is the product parameter forced by the radius,
+`seamImbalanceSq` the square of the imbalance, `seamCellB` and `seamCellC`
+the two rescaled off-diagonal cells, `seamSingletonScalar` the isolating
+code's margin at the midpoint as a function of the radius alone, and
+`seamLaw` the centre law of mass `1 / 8` and a given imbalance.
+`chordDomain_seamCoordinates` reads a chord law of that mass in the radius:
+the radius lies in `(1 / 2, 1)`, the seam's product parameter there is the
+law's own off-diagonal product over the square of its root, the seam's
+squared imbalance is the square of the law's own, and the seam's singleton
+scalar is the law's isolating-code margin at the chord's midpoint.
+`rayValues_of_seamRadius` runs the other way, taking a radius in that
+interval at which the squared imbalance is nonnegative -- not every radius
+there is -- and putting its chart parameters in `ChartDomain`, with the root,
+the mass and the law there.  `exists_balanced_seamRadius` finds a radius carrying a balanced seam
+law, which the page does not need because it parametrises the seam by the
+difference of the two off-diagonal cells rather than by the radius.
+`seam_topRoot_lt_quarter` is private: its content is the lower end of the
+radius interval above.  The two foundation facts consumed, the converse of
+the top root's defining property and the arithmetic-geometric bound on the
+off-diagonal product, were already public in `Strip`.  Nothing in the module
+bounds a margin or differentiates anything.
 
-The module states no unproved analytic fact. `Binary.majorizes_tangentCert_of_normBound`
-takes the norm bound as a hypothesis; `Binary.PositivityGate` and the four gate
-expressions are stated here without a consumer in this module, because the two
-modules that reduce the gate to the norm bound and verify it on a chart both
-import this one and neither imports the other. No claim in the ledger changes
-status here.
+CenterSeamPositivity supplies every sign the seam's derivative calculation
+needs.  `seamCells_pos` puts the two rescaled cells positive, strictly
+ordered and below one, and both seam denominators positive, at any radius in
+`(1 / 2, 1)` whose squared imbalance is strictly positive.
+`seam_log_identity` collapses the combination of logarithms the derivative
+produces into a single logarithm of a ratio; it is an identity in two
+positive reals and mentions no seam quantity and no law.
+`seam_logRatio_pos` puts that ratio above one.  Its proof factors the
+difference of the two weighted cells through a quartic in their sum and
+product, and shows that quartic positive by the substitution
+`t = (2 r - 1) / (1 - r)`, under which it becomes a ratio of polynomials with
+positive coefficients.  The quartic and its three lemmas are private here.
+**This route is not the page's**: Proposition 4.6 bounds the isolating code's
+seam derivative in the difference of the two off-diagonal cells through an
+integral remainder inequality, and nothing in this module corresponds to a
+display.  Nothing here bounds a margin or differentiates anything.
+
+The module is slow: **five minutes and thirty-nine seconds**, against
+twenty to fifty seconds for every other module of this lane.  The cost is one
+`field_simp` and `ring` on a degree-seven rational identity.
+
+CenterSeamDerivative differentiates the isolating code's margin along the
+seam.  `hasDerivAt_seamImbalanceSq` gives the squared imbalance's derivative,
+the new definition `seamImbalanceSqDeriv`, at every radius of `(1 / 2, 1)`,
+and `seamImbalanceSq_strictMonoOn` puts the squared imbalance strictly
+increasing there.  `hasDerivAt_seamSingletonScalar` is the margin's own
+derivative: the squared imbalance's derivative, over thirty-two times the
+imbalance, times the logarithm `seam_logRatio_pos` puts above zero.  It
+carries the extra hypothesis that the squared imbalance is strictly
+positive, which **excludes the balanced radius**, the imbalance in its
+denominator being zero there.
+**No declaration here concludes that the margin increases**, and none bounds
+it; that is the next module's work.  The route runs through a closed form for
+the height at the seam's two cells, then through two identities -- a
+cancellation of every rational term and a collapse of every logarithm -- both
+private, as are the eleven intermediate derivative lemmas.  The closed form
+itself, `seamHeight_eq`, is public: it holds wherever the squared imbalance
+is nonnegative, which includes the balanced radius, where the derivative
+does not exist and the seam's bound is evaluated.  One theorem of the
+private source, the derivative of half the imbalance, is dropped: nothing in
+the transfer closure consumes it.  **This is not the page's route**, which
+differentiates in the difference of the two off-diagonal cells rather than in
+the radius.
+
+CenterSeamMargin closes the seam.  `seamSingletonScalar_monotoneOn` says the
+isolating code's margin is monotone on any interval running from a balanced
+radius up, which is the conclusion CenterSeamDerivative supplied a derivative
+for and did not draw; `seam_singletonMargin_gt` bounds the margin below by
+`1 / (250 * Real.log 2)` bits at the chord's midpoint, for every chord domain
+whose off-diagonal mass is one eighth.  The route is: the squared imbalance is
+a square, so no law on the seam has a radius below the balanced one; the
+margin's derivative is nonnegative above it; the margin is continuous down to
+it; and at it a single reference plane, the first of the four, bounds the
+margin below by a rational combination of six logarithms.  That combination is
+resolved over the prime basis inside this module rather than by reopening
+PlaneEndpoints, which holds the same six identities privately: what repeats is
+proof text, and no logarithm enclosure is duplicated.  **Only the bound half of
+the page's Proposition 4.6 is claimed.**  Its quadratic growth in the imbalance
+appears nowhere; monotonicity in the radius stands in its place and is a
+different statement.  Two theorems of the private source are kept private here:
+the value at the balanced radius and the continuity that carries it.
 
 ## Factor-nine admission checks
 

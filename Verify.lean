@@ -3316,6 +3316,71 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.raySingletonScalar_eq
 /-- info: 'StochasticToDeterministicLatents.Binary.raySingletonScalar_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.raySingletonScalar_eq
+/-! ## Binary.FactorTwo.CenterSeamChart -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.exists_balanced_seamRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius
+/-- info: 'StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.rayValues_of_seamRadius
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates
+/-- info: 'StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.chordDomain_seamCoordinates
+/-! ## Binary.FactorTwo.CenterSeamPositivity -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamCells_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.seamCells_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamCells_pos
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_log_identity
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_log_identity' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_log_identity
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_logRatio_pos
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_logRatio_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_logRatio_pos
+/-! ## Binary.FactorTwo.CenterSeamDerivative -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamHeight_eq
+/-- info: 'StochasticToDeterministicLatents.Binary.seamHeight_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamHeight_eq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_seamImbalanceSq
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn
+/-- info: 'StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamImbalanceSq_strictMonoOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar
+/-- info: 'StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.hasDerivAt_seamSingletonScalar
+/-! ## Binary.FactorTwo.CenterSeamMargin -/
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn
+/-- info: 'StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seamSingletonScalar_monotoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt
+/-- info: 'StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.Binary.seam_singletonMargin_gt
+
 /-! ## Binary.FactorTwo.PlaneEndpoints -/
 
 assert_no_sorry StochasticToDeterministicLatents.Binary.centerPlaneBound_endpoints_one
