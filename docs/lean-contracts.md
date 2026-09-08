@@ -576,6 +576,11 @@ in this table. Their public theorems are audited in
 | The seam | [FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | The signs the seam's derivative turns on |
 | The seam | [FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | The isolating code's margin, differentiated along the seam |
 | The seam | [FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | The margin's bound along the seam |
+| The rays | [FactorTwo.CenterRayMass](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMass.lean) | The mass along a ray, differentiated and increasing |
+| The rays | [FactorTwo.CenterRayMargins](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMargins.lean) | The two margins along a ray, differentiated twice |
+| The rays | [FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | A minimum at an endpoint, for a positively weighted antitone slope |
+| The rays | [FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | The two margins, continuous out to both ends of the ray |
+| The rays | [FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | The ray's law at the critical radius, and the constant code's margin there |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -617,11 +622,16 @@ graph TD
       Binary_FactorTwo_CenterCurvature["CenterCurvature"]
       Binary_FactorTwo_CenterDerivatives["CenterDerivatives"]
       Binary_FactorTwo_CenterDictionary["CenterDictionary"]
+      Binary_FactorTwo_CenterEndpointMin["CenterEndpointMin"]
       Binary_FactorTwo_CenterFractions["CenterFractions"]
       Binary_FactorTwo_CenterLaws["CenterLaws"]
       Binary_FactorTwo_CenterLogValues["CenterLogValues"]
       Binary_FactorTwo_CenterMajorant["CenterMajorant"]
       Binary_FactorTwo_CenterRay["CenterRay"]
+      Binary_FactorTwo_CenterRayBoundary["CenterRayBoundary"]
+      Binary_FactorTwo_CenterRayEnds["CenterRayEnds"]
+      Binary_FactorTwo_CenterRayMargins["CenterRayMargins"]
+      Binary_FactorTwo_CenterRayMass["CenterRayMass"]
       Binary_FactorTwo_CenterSeam["CenterSeam"]
       Binary_FactorTwo_CenterSeamChart["CenterSeamChart"]
       Binary_FactorTwo_CenterSeamDerivative["CenterSeamDerivative"]
@@ -679,6 +689,7 @@ graph TD
   Binary_FactorTwo_CenterDerivatives --> Binary_FactorTwo_CenterLaws
   Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_CenterLaws
   Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_Center
+  Binary_FactorTwo_CenterEndpointMin --> MATHLIB
   Binary_FactorTwo_CenterFractions --> Binary_FactorTwo_CenterChart
   Binary_FactorTwo_CenterLaws --> Binary_ContactChart
   Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CertValues
@@ -690,6 +701,15 @@ graph TD
   Binary_FactorTwo_CenterMajorant --> Binary_FactorTwo_Chord
   Binary_FactorTwo_CenterRay --> Binary_Chart
   Binary_FactorTwo_CenterRay --> Binary_FactorTwo_CenterCurvature
+  Binary_FactorTwo_CenterRayBoundary --> Binary_FactorTwo_CenterRayEnds
+  Binary_FactorTwo_CenterRayBoundary --> Binary_FactorTwo_ChordScalars
+  Binary_FactorTwo_CenterRayEnds --> Binary_FactorTwo_CenterRayMass
+  Binary_FactorTwo_CenterRayEnds --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterRayMass
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterDictionary
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterDerivatives
+  Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterCurvature
+  Binary_FactorTwo_CenterRayMass --> Binary_FactorTwo_CenterRay
   Binary_FactorTwo_CenterSeam --> Binary_FactorTwo_PlaneEndpoints
   Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_CenterDictionary
   Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_Strip

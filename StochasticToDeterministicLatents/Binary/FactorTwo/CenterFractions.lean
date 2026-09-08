@@ -23,7 +23,8 @@ fraction in `r` and `omega`.
   multiply to `u ^ 2`, so this is that law's determinant; **that identification
   is not stated here**, and nothing in this module mentions a law;
 * `chartRootDeriv` is the root's radial derivative, the quotient the page gets
-  by differentiating the cubic along the ray;
+  by differentiating the cubic along the ray; **nothing here shows it to be a
+  derivative**, which `CenterRayMargins` does;
 * `chartCommonDeriv` is the part of the two contact masses' radial derivatives
   that does not depend on which cell is taken;
 * `chartLogKDeriv` is the radial derivative of `log K`.

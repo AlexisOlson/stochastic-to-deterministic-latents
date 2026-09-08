@@ -18,10 +18,11 @@ off-diagonal to diagonal mass, and concludes that both margin expressions are
 negative on the chart domain.
 
 **What is not stated here.**  Nothing in this file differentiates anything.
-That these expressions are the second derivatives of the two margins, and hence
-that the margins are concave along a ray, is analytic content no declaration in
-this tree yet has.  What is proved is that explicit rational functions of the
-two chart parameters stand in the stated order.
+That these expressions are the second derivatives of the two margins is proved
+in `CenterRayMargins`, not here; the concavity along a ray that it gives
+together with the negativity below is stated by no declaration in this tree.
+What is proved here is that explicit rational functions of the two chart
+parameters stand in the stated order.
 -/
 
 namespace StochasticToDeterministicLatents.Binary
@@ -46,20 +47,23 @@ noncomputable def chartWeightedLogDeriv (r omega : ℝ) : ℝ :=
 
 /-- The page's second-order coefficient for the contact correction, as the
 right side of its display (3.9).  That this expression is the second radial
-difference the page defines it to be is not stated here. -/
+difference the page defines it to be is not stated here; `CenterRayMargins`
+states it, along the ray. -/
 noncomputable def chartContactSecondOrder (r omega : ℝ) : ℝ :=
   chartOffDiagonalMass r omega * chartLogKDeriv r omega
     + 3 * chartOffDiagonalMass r omega - 2 * chartWeightedLogDeriv r omega
 
 /-- The page's second-order expression for the constant margin.  That it is
-that margin's second radial derivative is not stated here. -/
+that margin's second radial derivative is not stated here; `CenterRayMargins`
+states it, along the ray. -/
 noncomputable def chartConstantSecondOrder (r omega : ℝ) : ℝ :=
   -5 * chartOffDiagonalMass r omega / chartDiagonalMass r omega
     + 6 * chartDiscriminant r omega / (1 - chartDiscriminant r omega)
     + 2 * chartContactSecondOrder r omega
 
 /-- The page's second-order expression for the isolating code's margin.  That
-it is that margin's second radial derivative is not stated here. -/
+it is that margin's second radial derivative is not stated here;
+`CenterRayMargins` states it, along the ray. -/
 noncomputable def chartSingletonSecondOrder (r omega : ℝ) : ℝ :=
   -3 * chartOffDiagonalMass r omega / chartDiagonalMass r omega
     + 4 * chartDiscriminant r omega / (1 - chartDiscriminant r omega)

@@ -79,6 +79,11 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.CenterSeamPositivity](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamPositivity.lean) | 2026-09-07 | 3 | Signs on the seam |
 | [Binary.FactorTwo.CenterSeamDerivative](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamDerivative.lean) | 2026-09-07 | 4 | The seam's derivative |
 | [Binary.FactorTwo.CenterSeamMargin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterSeamMargin.lean) | 2026-09-07 | 2 | The margin along the seam |
+| [Binary.FactorTwo.CenterRayMass](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMass.lean) | 2026-09-07 | 4 | The mass along the ray |
+| [Binary.FactorTwo.CenterRayMargins](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayMargins.lean) | 2026-09-07 | 7 | The margins along the ray |
+| [Binary.FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | 2026-09-07 | 2 | An endpoint minimum principle |
+| [Binary.FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | 2026-09-07 | 6 | The ray out to its ends |
+| [Binary.FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | 2026-09-08 | 3 | The ray's law at the critical radius |
 
 ## Axiom sets
 
@@ -599,9 +604,10 @@ rather than by its cancellation of a factor $`v + s`$.
 expressions of display (4.3) below zero on the chart domain.
 
 **No module here differentiates anything.** That these expressions are the two
-margins' second radial derivatives, and hence that the margins are concave
-along a ray, is the analytic half of Lemma 4.3 and is not stated. Nothing in
-the three modules bounds a margin, and none of them mentions a law.
+margins' second radial derivatives is the analytic half of Lemma 4.3; it is
+stated in CenterRayMargins below, not here. The concavity along a ray that it
+and the two negativity results give together is stated nowhere. Nothing in the
+three modules bounds a margin, and none of them mentions a law.
 
 CenterRay is the first module of this apparatus that does mention a law. It
 defines the ray of fixed imbalance the centre argument runs along, on the
@@ -644,10 +650,12 @@ off-diagonal cells: the first cell's coefficient uses `certOffDiagonal b c u`
 and the second's uses `certOffDiagonal c b u`, that value not being symmetric
 in its first two arguments.  The path's root derivative is a hypothesis of the last
 two, discharged by the first.  These are derivatives along an **arbitrary**
-path: the radial expressions `chartRootDeriv`, `chartCommonDeriv` and
-`chartLogKDeriv` of `CenterFractions` are still not shown to be derivatives of
-anything, and no declaration identifies any of this with a margin's radial
-derivative.
+path, and nothing in this module connects them to the radial expressions of
+`CenterFractions`.  CenterRayMargins below connects `chartRootDeriv`;
+`chartCommonDeriv` is still not shown to be a derivative of anything, and
+`chartLogKDeriv` is reached there only through its equality with
+`chartContactSecondOrder`, never as the derivative of `log K` that its name
+claims.
 
 CenterDictionary joins the chart apparatus to the two margins.
 `chordDomain_rayCoordinates` reads a chord law in the ray's coordinates: its
@@ -746,6 +754,133 @@ the page's Proposition 4.6 is claimed.**  Its quadratic growth in the imbalance
 appears nowhere; monotonicity in the radius stands in its place and is a
 different statement.  Two theorems of the private source are kept private here:
 the value at the balanced radius and the continuity that carries it.
+
+CenterRayMass differentiates the ray's two rational coordinates in the
+radius.  `hasDerivAt_rayRoot` and `hasDerivAt_rayMass` give the derivatives of
+the chart's root and of the off-diagonal mass on the open interval from the
+centre to the critical radius, the second through the new definition
+`rayMassDeriv`; `rayMassDeriv_pos` puts that derivative above zero there, and
+`rayMass_strictMonoOn` puts the mass strictly increasing on the closed
+interval.  All four are consumed by modules still to come, so all four are
+public.  **Nothing here is analytic**: no logarithm, no law, and no margin
+appears, so the module crosses no unit or sign convention.  The one private
+lemma is the positivity of the chart normalizer's two factors.
+
+CenterRayMargins differentiates the two centre margins along the ray, twice.
+The page's radial derivative is in the off-diagonal mass, with the operator
+`D = v d/dv`; Lean differentiates in the radius, so every value here carries
+the factor `rayMassDeriv`, which is `dv/dr` and which `CenterRayMass` puts
+above zero strictly inside the ray.  Dividing it out is the change of
+variable.
+
+`hasDerivAt_rayHeight` differentiates the contact height along the ray,
+exhibiting the new definition `rayHeightSlope` as `dk/dv`.
+`hasDerivAt_rayConstantScalar` and `hasDerivAt_raySingletonScalar` do the
+same for the two margins already defined in `CenterDictionary`, exhibiting
+the new definitions `rayConstantSlope` and `raySingletonSlope`.
+`hasDerivAt_rayHeightSlope`, `hasDerivAt_rayConstantSlope` and
+`hasDerivAt_raySingletonSlope` differentiate the three slopes again, with
+values the chart's second-order expressions over the mass squared.  Dividing
+by `rayMassDeriv` twice, these are the page's display (3.7) for the height
+and the two equalities of display (4.3) for the margins.
+
+`chartRootDeriv_mul_rayMassDeriv` is the seventh: `chartRootDeriv` times the
+mass's derivative is the mass times the root's derivative, so that expression
+is `v du/dv`.  It is the first declaration in the tree that ties any of
+`CenterFractions`' radial expressions to a derivative, and it is exported
+under the ledger clause of the admission rule rather than because a later
+module consumes it: the claim ledger named `chartRootDeriv` as an expression
+no declaration exhibited, and the ledger paragraph is rewritten in the same
+commit.
+
+**No sign, monotonicity or bound is claimed.**  Display (4.3) is two chains:
+each expression is bounded by an explicit negative quantity, and that
+quantity by zero.  Only the conclusions are stated in this tree.
+`chartConstantSecondOrder_neg` and `chartSingletonSecondOrder_neg`, admitted
+earlier, say that the two expressions are negative; the intermediate bounds
+`-3v/(1+v)` and `-v(1-2v)/(1-v^2)` the display passes through appear only as
+steps inside those proofs, fused by `linarith`, and no declaration states
+them.  Nothing composes that negativity with the equalities proved here into
+concavity, and the composition is not immediate, since these derivatives are
+in the radius and the page's concavity is in the mass.
+
+CenterEndpointMin is the centre arm's counterpart of Shape: pure real
+analysis, every statement quantifying over arbitrary real functions, with no
+law, code, chart, margin or information quantity anywhere in the module and
+nothing from this library imported.  It states one principle in two forms.
+A function continuous on a closed interval whose derivative there is a
+positive weight times an antitone factor rises and then falls, so it takes no
+interior value below both endpoint values; that is the private
+`min_endpoints_le_of_antitoneSlope`.  Its public form
+`min_endpoints_le_of_antitoneSlope_affine` subtracts an affine function of a
+second function `V` whose derivative is the same weight, which shifts the
+antitone factor by a constant and leaves it antitone.  The wrapper
+`antitoneOn_Ioo_of_hasDerivAt_nonpos` turns a nonpositive derivative on an
+open interval into antitonicity on it; it is the twin of Shape's private
+`antitoneOn_of_hasDerivAt_nonpos`, which is stated on a closed interval and
+so needs the continuity hypothesis this one derives, and neither serves for
+the other.  **No claim status changes.**  Nothing in the module is evidence
+for any display of the page, and no declaration in this tree yet applies it.
+
+CenterRayEnds carries the ray to the closed interval `[0, r_c]`.  Every
+derivative of this arm is taken strictly inside, because that is where the
+chart's interior condition holds, though the mass's strict monotonicity and
+the chart normalizer's positivity already hold on the closed interval; what
+the endpoint arguments still need is the height and the two margins at the
+ends themselves.  `rayNorm_pos` puts the chart's normalizer positive
+there, `continuousOn_rayMass` puts the off-diagonal mass continuous,
+`rayHeight_eq` rewrites the contact height into the ray's coordinates, and
+`continuousOn_rayConstantScalar` and `continuousOn_raySingletonScalar` put
+both margins continuous on the closed interval.  One private lemma of an
+admitted module, `rayNorm_factors_pos`, is lifted to public in CenterRayMass
+in the same commit, since `chartFactors_pos` cannot serve, its `ChartDomain`
+hypothesis failing at the centre.
+
+`raySingletonScalar_zero` is the isolating code's margin at radius zero, and
+it is `0`.  **That value is the `0 log 0 = 0` convention, not a limit**: the
+mass and the root both vanish there, so every entropy term that carries
+either of them is `xLogX 0` and vanishes by the convention, while those
+that remain have argument `1 / 2` and cancel, their coefficients summing to
+zero.  It
+is the pair -- that value together with continuity on the closed interval --
+that gives the page's part (1) of Lemma 4.4, and even then only in the
+radius: **no declaration in this tree states a limit**, and the page's
+statement is a limit in the off-diagonal mass.  Of part (2), only the
+continuity is here.  That the constant margin at the critical radius
+equals the centre law's mutual information is proved in CenterRayBoundary,
+the next module admitted below; **that it is positive there is still not
+stated anywhere in this tree**.
+
+**No bound is proved and nothing is differentiated.**
+
+CenterRayBoundary is the far end of that same ray.  At the critical radius
+the diagonal product `entryA * entryD` is exactly the square of the ray's
+root, so the root sits at the geometric mean of the diagonal rather than
+below it.  That is the `nonconstant` field of `ChordDomain` failing, so
+**no `ChordDomain` holds there at all** and everything taking one --
+`rayConstantScalar_eq` and `log_two_mul_phi_contact_chart` among them --
+is unavailable; the route that would have supplied one is closed for the
+matching reason, `chordDomain_rayLaw` asking for the chart's interior
+condition `0 < 1 - r - 3 omega`, which degenerates to an equality at that
+radius.  The module reaches `Phi` instead through
+`log_two_mul_phi_contact`, which asks only for a fully supported probability
+law, a positive root, and the two cubic conditions.  `rayLaw_coalesces` is the page's
+`rho = 0` and `q^+ = p^o`: the contact radius vanishes and the upper contact
+is the law itself.  `rayConstantScalar_boundary_eq` is then the
+identification in part (2) of the page's Lemma 4.4: the constant code's
+margin at the critical radius is
+`Real.log 2` times the law's mutual information `Psi - Phi`.  **The module
+mixes the two unit conventions on purpose** -- the margin is in nats and the
+mutual information in bits -- and the factor of `Real.log 2` is what carries
+the conversion, as in ChordScalars.
+
+**The page's strict inequality is not proved.**  Lemma 4.4(2) states that
+the mutual information there is *positive*, with a reason: the law is not a
+product law.  `rayConstantScalar_boundary_nonneg` gives only `0 <= `, from
+`psi_sub_phi_nonneg`, and **the strict inequality is proved nowhere in this
+tree, nor does anything here state that the law at the critical radius is not
+a product law**.  The endpoint comparison still to
+come consumes only the nonnegativity.
 
 ## Factor-nine admission checks
 

@@ -26,7 +26,8 @@ since the chart's inverse is not shown to be differentiable.
 `chartLogKDeriv` as radial *expressions* and does not claim that they are
 derivatives.  The theorems below are about an **arbitrary** differentiable
 path, and their values are the quotient rule's, not those expressions.
-Nothing here connects the two.
+Nothing here connects the two; `CenterRayMargins` connects `chartRootDeriv`,
+along the ray.
 -/
 
 namespace StochasticToDeterministicLatents.Binary
@@ -43,8 +44,9 @@ private theorem chartDiagonalMass_eq (x y : ℝ) :
 
 /-- The chart's root has a derivative along any differentiable path with
 positive coordinates below the boundary, and its value is the quotient rule's.
-This is not `chartRootDeriv`, which is a radial expression that no declaration
-shows to be a derivative. -/
+This is not `chartRootDeriv`: that expression is the root's derivative in the
+off-diagonal mass times that mass, which `CenterRayMargins` proves and this
+module does not. -/
 theorem hasDerivAt_chartRoot (hX : HasDerivAt X dx t) (hY : HasDerivAt Y dy t)
     (hx : 0 < X t) (hy : 0 < Y t) (hr : X t + Y t < 1) :
     HasDerivAt (fun s => chartRoot (X s + Y s) (X s * Y s))
