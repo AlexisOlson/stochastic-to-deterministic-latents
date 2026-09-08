@@ -9,10 +9,13 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
 # The ray's law at the critical radius
 
 At the critical radius the diagonal product `entryA * entryD` is exactly the
-square of the ray's root, so the root sits *at* the geometric mean of the
-diagonal rather than below it.  That is the `nonconstant` field of
-`ChordDomain` (`Chord.lean:213`) failing, so **no `ChordDomain` holds there at
-all** and everything that takes one -- `rayConstantScalar_eq` and
+square of the ray's root, so the geometric mean of the diagonal *is* that
+root.  **No `ChordDomain` holds there, at any top root.**  Such a domain's
+`nonconstant` field (`Chord.lean:213`) would put its own root strictly below
+that geometric mean, hence strictly below the ray's root; its `topRoot`
+field then makes the cubic strictly positive at every larger point, and
+`rayLaw_cubic` says the cubic vanishes at the ray's root.  So everything
+that takes one -- `rayConstantScalar_eq` and
 `log_two_mul_phi_contact_chart` among them -- is unavailable.  The route that
 would have supplied one is closed for the matching reason: `chordDomain_rayLaw`
 asks for the chart's interior condition `0 < 1 - r - 3 omega`, and that

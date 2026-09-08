@@ -204,13 +204,7 @@ private theorem seamSingletonScalar_eq_form (hr : r ∈ Set.Ioo ((1 : ℝ) / 2) 
   unfold seamSingletonScalar seamSingletonForm
   rw [seamHeight_eq hr hh]
 
-/-- `xLogX` composed with a continuous function is continuous. -/
-private theorem continuousOn_xLogX_comp {f : ℝ → ℝ} {s : Set ℝ}
-    (hf : ContinuousOn f s) : ContinuousOn (fun r => xLogX (f r)) s := by
-  unfold xLogX
-  convert Real.continuous_mul_log.comp_continuousOn hf using 1
-  rfl
-
+/-- The isolating code's seam form is continuous on a closed subinterval. -/
 private theorem seamSingletonForm_continuousOn (hb : rb ∈ Set.Ioo ((1 : ℝ) / 2) 1)
     (hzero : seamImbalanceSq rb = 0) (hR : R ∈ Set.Ico rb 1) :
     ContinuousOn seamSingletonForm (Set.Icc rb R) := by
@@ -275,16 +269,16 @@ private theorem seamSingletonForm_continuousOn (hb : rb ∈ Set.Ioo ((1 : ℝ) /
   have hJ : ContinuousOn
       (fun r => centerLogEntropy (1 / 8) (Real.sqrt (seamImbalanceSq r))) S := by
     unfold centerLogEntropy
-    exact ((continuousOn_const.add (continuousOn_xLogX_comp
+    exact ((continuousOn_const.add (continuousOn_xLogX
       ((continuousOn_const.mul (continuousOn_const.add hZ)).div_const 2))).add
-      (continuousOn_xLogX_comp
+      (continuousOn_xLogX
         ((continuousOn_const.mul (continuousOn_const.sub hZ)).div_const 2))).neg
   have hRfun : ContinuousOn
       (fun r => centerMarginalEntropy (1 / 8) (Real.sqrt (seamImbalanceSq r))) S := by
     unfold centerMarginalEntropy
-    exact ((continuousOn_xLogX_comp ((continuousOn_const.add
+    exact ((continuousOn_xLogX ((continuousOn_const.add
       (continuousOn_const.mul hZ)).div_const 2)).add
-      (continuousOn_xLogX_comp ((continuousOn_const.sub
+      (continuousOn_xLogX ((continuousOn_const.sub
         (continuousOn_const.mul hZ)).div_const 2))).neg
   have hbody : ContinuousOn (fun r =>
       -(-(7 / 8) * Real.log (certDiagonal (7 / 8) (1 / (8 * r)))
@@ -295,8 +289,8 @@ private theorem seamSingletonForm_continuousOn (hb : rb ∈ Set.Ioo ((1 : ℝ) /
             * Real.log (1 - seamCellB r)
         - 2 * ((1 - Real.sqrt (seamImbalanceSq r)) / 16)
             * Real.log (1 - seamCellC r))) S :=
-    (((((continuousOn_const.mul hlogK).add (continuousOn_xLogX_comp hplus)).add
-      (continuousOn_xLogX_comp hminus)).add
+    (((((continuousOn_const.mul hlogK).add (continuousOn_xLogX hplus)).add
+      (continuousOn_xLogX hminus)).add
       (continuousOn_const.mul hlogr)).sub
       ((continuousOn_const.mul hplus).mul hlogx)).sub
       ((continuousOn_const.mul hminus).mul hlogy) |>.neg

@@ -65,6 +65,9 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayMargins
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpointMin
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayEnds
 import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRayBoundary
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterRaySeam
+import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpoints
+import StochasticToDeterministicLatents.Binary.FactorTwo
 
 /-!
 # Stochastic-to-Deterministic Latents

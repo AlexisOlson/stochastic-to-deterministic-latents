@@ -99,7 +99,7 @@ lake build                  # the root library; ends with "Build completed succe
 lake env lean Verify.lean   # the audit; prints nothing and exits 0 on success
 ```
 
-`Verify.lean` carries, for each of the 742 public theorem endpoints, an
+`Verify.lean` carries, for each of the 746 public theorem endpoints, an
 `assert_no_sorry` check and a `#print axioms` result pinned with `#guard_msgs`.
 Every pinned set was discovered by running `#print axioms` after compilation;
 the four headlines each report `[propext, Classical.choice, Quot.sound]`. A

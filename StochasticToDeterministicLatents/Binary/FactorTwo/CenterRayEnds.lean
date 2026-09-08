@@ -114,13 +114,6 @@ theorem rayHeight_eq (z r : ℝ) :
 
 /-! ## Continuity up to both ends -/
 
-/-- Continuity of `xLogX` composed with a continuous map. -/
-private theorem continuousOn_xLogX_comp {f : ℝ → ℝ} {s : Set ℝ}
-    (hf : ContinuousOn f s) : ContinuousOn (fun r => xLogX (f r)) s := by
-  unfold xLogX
-  convert Real.continuous_mul_log.comp_continuousOn hf using 1
-  rfl
-
 /-- The ray's root is continuous on the closed interval. -/
 private theorem continuousOn_rayRoot (hz : z ∈ Set.Ico (0 : ℝ) 1) :
     ContinuousOn (rayRoot z) (Set.Icc (0 : ℝ) (criticalRadius z)) := by
@@ -193,8 +186,8 @@ private theorem continuousOn_rayHeight (hz : z ∈ Set.Ico (0 : ℝ) 1) :
       (((continuousOn_const.sub continuousOn_const).mul
         continuousOn_id).div_const 2)).log
       (fun r hr => (rayCells_lt_one hz hr).2.ne')
-  exact ((((hs.neg.mul hlogK).add (continuousOn_xLogX_comp ha)).add
-    (continuousOn_xLogX_comp hb)).add
+  exact ((((hs.neg.mul hlogK).add (continuousOn_xLogX ha)).add
+    (continuousOn_xLogX hb)).add
     ((continuousOn_const.mul hV).mul hlr)).sub
     ((continuousOn_const.mul ha).mul hlx) |>.sub
     ((continuousOn_const.mul hb).mul hly)
@@ -209,20 +202,20 @@ theorem continuousOn_rayConstantScalar (hz : z ∈ Set.Ico (0 : ℝ) 1) :
   have hk := continuousOn_rayHeight hz
   have e1 : ContinuousOn (fun r => xLogX ((1 - rayMass z r) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((continuousOn_const.sub hV).div_const 2)
+    continuousOn_xLogX ((continuousOn_const.sub hV).div_const 2)
   have e2 : ContinuousOn (fun r => xLogX (rayMass z r * (1 + z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((hV.mul continuousOn_const).div_const 2)
+    continuousOn_xLogX ((hV.mul continuousOn_const).div_const 2)
   have e3 : ContinuousOn (fun r => xLogX (rayMass z r * (1 - z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((hV.mul continuousOn_const).div_const 2)
+    continuousOn_xLogX ((hV.mul continuousOn_const).div_const 2)
   have e4 : ContinuousOn (fun r => xLogX ((1 + rayMass z r * z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp
+    continuousOn_xLogX
       ((continuousOn_const.add (hV.mul continuousOn_const)).div_const 2)
   have e5 : ContinuousOn (fun r => xLogX ((1 - rayMass z r * z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp
+    continuousOn_xLogX
       ((continuousOn_const.sub (hV.mul continuousOn_const)).div_const 2)
   unfold rayConstantScalar centerConstantScalar centerLogEntropy
     centerMarginalEntropy
@@ -239,24 +232,24 @@ theorem continuousOn_raySingletonScalar (hz : z ∈ Set.Ico (0 : ℝ) 1) :
   have hk := continuousOn_rayHeight hz
   have e1 : ContinuousOn (fun r => xLogX ((1 - rayMass z r) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((continuousOn_const.sub hV).div_const 2)
+    continuousOn_xLogX ((continuousOn_const.sub hV).div_const 2)
   have e2 : ContinuousOn (fun r => xLogX (rayMass z r * (1 + z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((hV.mul continuousOn_const).div_const 2)
+    continuousOn_xLogX ((hV.mul continuousOn_const).div_const 2)
   have e3 : ContinuousOn (fun r => xLogX (rayMass z r * (1 - z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((hV.mul continuousOn_const).div_const 2)
+    continuousOn_xLogX ((hV.mul continuousOn_const).div_const 2)
   have e4 : ContinuousOn (fun r => xLogX ((1 + rayMass z r * z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp
+    continuousOn_xLogX
       ((continuousOn_const.add (hV.mul continuousOn_const)).div_const 2)
   have e5 : ContinuousOn (fun r => xLogX ((1 - rayMass z r * z) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp
+    continuousOn_xLogX
       ((continuousOn_const.sub (hV.mul continuousOn_const)).div_const 2)
   have e6 : ContinuousOn (fun r => xLogX ((1 + rayMass z r) / 2))
       (Set.Icc (0 : ℝ) (criticalRadius z)) :=
-    continuousOn_xLogX_comp ((continuousOn_const.add hV).div_const 2)
+    continuousOn_xLogX ((continuousOn_const.add hV).div_const 2)
   unfold raySingletonScalar centerSingletonScalar centerLogEntropy
     centerMarginalEntropy
   exact ((((continuousOn_const.mul

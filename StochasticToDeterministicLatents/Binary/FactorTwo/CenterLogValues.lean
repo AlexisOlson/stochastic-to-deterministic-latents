@@ -4,7 +4,7 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.LogSeries
 /-!
 # Decimal enclosures of eight more logarithms
 
-[LogValues](LogValues.lean) supplies `Real.log` at 3, 5, 7, 11 and 13, which
+`LogValues` supplies `Real.log` at 3, 5, 7, 11 and 13, which
 is what the fixed cut needs.  The centre needs eight more primes: 17, 19, 23,
 47, 173, 179, 313 and 3581.  Every logarithm the centre compares against a
 rational is a logarithm of a ratio of products of those eight and the earlier

@@ -58,32 +58,6 @@ noncomputable def raySingletonSlope (z r : ℝ) : ℝ :=
     - 1 / 2 * Real.log ((1 + rayMass z r) / (1 - rayMass z r))
     + 2 * rayHeightSlope z r
 
-/-! ## The ray inside the chart -/
-
-/-- The ray's coordinates, read as a path in the two cells. -/
-private theorem rayRoot_eq_chartRoot_scaled (z : ℝ) :
-    (fun s : ℝ => chartRoot ((1 + z) * s / 2 + (1 - z) * s / 2)
-      ((1 + z) * s / 2 * ((1 - z) * s / 2))) = rayRoot z := by
-  funext s
-  unfold rayRoot rayProductCoeff
-  congr 1 <;> ring
-
-/-- Strictly inside the ray the chart's domain hypothesis holds. -/
-private theorem rayChartDomain (hz : z ∈ Set.Ico (0 : ℝ) 1)
-    (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) :
-    ChartDomain r (rayProductCoeff z * r ^ 2) := by
-  have hk : 0 < rayProductCoeff z := by
-    unfold rayProductCoeff
-    have hp : 0 < 1 + z := by linarith [hz.1]
-    nlinarith [mul_pos (sub_pos.mpr hz.2) hp]
-  have hr1 : r < 1 := lt_trans hr.2 (criticalRadius_spec hz).2.1
-  have hq : 0 < 1 - r - 3 * (rayProductCoeff z * r ^ 2) := by
-    have := (radius_lt_criticalRadius_iff hz hr.1 hr1).mp hr.2
-    nlinarith
-  refine ⟨mul_pos hk (sq_pos_of_pos hr.1), hr.1, hr1, hq, ?_⟩
-  unfold rayProductCoeff
-  nlinarith [sq_nonneg (z * r)]
-
 /-- The ray's two cells, in the mass and in the root. -/
 private theorem rayCells (z r : ℝ) :
     (1 + z) * r / 2 * rayRoot z r = (1 + z) / 2 * rayMass z r
@@ -113,7 +87,7 @@ theorem hasDerivAt_rayHeight (hz : z ∈ Set.Ico (0 : ℝ) 1)
       ((1 + z) * s / 2 * ((1 - z) * s / 2)))
       (rayProductCoeff z * r * (2 - r - rayProductCoeff z * r ^ 3)
         / chartNorm r (rayProductCoeff z * r ^ 2) ^ 2) r := by
-    rw [rayRoot_eq_chartRoot_scaled]
+    rw [rayRoot_eq_chartRoot]
     exact hasDerivAt_rayRoot hz hr
   have hx : 0 < (1 + z) * r / 2 := by nlinarith [hz.1, hr.1]
   have hy : 0 < (1 - z) * r / 2 := by nlinarith [hz.2, hr.1]
@@ -249,7 +223,7 @@ theorem hasDerivAt_rayConstantScalar (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) :
     HasDerivAt (rayConstantScalar z)
       (rayMassDeriv z r * rayConstantSlope z r) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hv : 0 < rayMass z r := (chart_pos hdom).2.2.2.1
   have hv1 : rayMass z r < 1 := by
     have h := chartOffDiagonalMass_lt_third hdom
@@ -277,7 +251,7 @@ theorem hasDerivAt_raySingletonScalar (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) :
     HasDerivAt (raySingletonScalar z)
       (rayMassDeriv z r * raySingletonSlope z r) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hv : 0 < rayMass z r := (chart_pos hdom).2.2.2.1
   have hv1 : rayMass z r < 1 := by
     have h := chartOffDiagonalMass_lt_third hdom
@@ -337,7 +311,7 @@ theorem chartRootDeriv_mul_rayMassDeriv (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) :
     chartRootDeriv r (rayProductCoeff z * r ^ 2) * rayMassDeriv z r
       = rayMass z r * rayRootDeriv z r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   obtain ⟨ha, hb, -, -, hf⟩ := chartFactors_pos hdom
   have hn : (1 - r) * (1 - rayProductCoeff z * r ^ 2) ≠ 0 := (mul_pos ha hb).ne'
   have hf' : (3 : ℝ) - 2 * r - rayProductCoeff z * r ^ 2 ≠ 0 := hf.ne'
@@ -554,7 +528,7 @@ private theorem hasDerivAt_ray_log_certDiagonal (hz : z ∈ Set.Ico (0 : ℝ) 1)
     simpa [mul_assoc] using ((hasDerivAt_id r).const_mul (1 - z)).div_const 2
   have hU : HasDerivAt (fun s : ℝ => chartRoot ((1 + z) * s / 2 + (1 - z) * s / 2)
       ((1 + z) * s / 2 * ((1 - z) * s / 2))) (rayRootDeriv z r) r := by
-    rw [rayRoot_eq_chartRoot_scaled]
+    rw [rayRoot_eq_chartRoot]
     exact hasDerivAt_rayRoot hz hr
   have hx : 0 < (1 + z) * r / 2 := by nlinarith [hz.1, hr.1]
   have hy : 0 < (1 - z) * r / 2 := by nlinarith [hz.2, hr.1]
@@ -580,7 +554,7 @@ private theorem hasDerivAt_ray_log_certOffB (hz : z ∈ Set.Ico (0 : ℝ) 1)
             - (1 + z) / 2 * rayMass z r * ((1 - z) / 2 * rayMassDeriv z r))
           / (rayRoot z r ^ 2 + (1 + z) / 2 * rayMass z r
               - (1 + z) / 2 * rayMass z r * ((1 - z) / 2 * rayMass z r))) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hV := hasDerivAt_rayMass hz hr
   have hu : 0 < rayRoot z r := (chart_pos hdom).2.1
   have hb : 0 < (1 + z) / 2 * rayMass z r :=
@@ -613,7 +587,7 @@ private theorem hasDerivAt_ray_log_certOffC (hz : z ∈ Set.Ico (0 : ℝ) 1)
             - (1 - z) / 2 * rayMass z r * ((1 + z) / 2 * rayMassDeriv z r))
           / (rayRoot z r ^ 2 + (1 - z) / 2 * rayMass z r
               - (1 - z) / 2 * rayMass z r * ((1 + z) / 2 * rayMass z r))) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hV := hasDerivAt_rayMass hz hr
   have hu : 0 < rayRoot z r := (chart_pos hdom).2.1
   have hb : 0 < (1 - z) / 2 * rayMass z r :=
@@ -643,7 +617,7 @@ theorem hasDerivAt_rayHeightSlope (hz : z ∈ Set.Ico (0 : ℝ) 1)
       (rayMassDeriv z r
         * (chartContactSecondOrder r (rayProductCoeff z * r ^ 2)
             / rayMass z r ^ 2)) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hu : 0 < rayRoot z r := (chart_pos hdom).2.1
   have hv1 : rayMass z r < 1 := by
     have h := chartOffDiagonalMass_lt_third hdom
@@ -743,7 +717,7 @@ theorem hasDerivAt_rayConstantSlope (hz : z ∈ Set.Ico (0 : ℝ) 1)
       (rayMassDeriv z r
         * (chartConstantSecondOrder r (rayProductCoeff z * r ^ 2)
             / rayMass z r ^ 2)) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hv : 0 < rayMass z r := (chart_pos hdom).2.2.2.1
   have hv1 : rayMass z r < 1 := by
     have h := chartOffDiagonalMass_lt_third hdom
@@ -815,7 +789,7 @@ theorem hasDerivAt_raySingletonSlope (hz : z ∈ Set.Ico (0 : ℝ) 1)
       (rayMassDeriv z r
         * (chartSingletonSecondOrder r (rayProductCoeff z * r ^ 2)
             / rayMass z r ^ 2)) r := by
-  have hdom := rayChartDomain hz hr
+  have hdom := chartDomain_ray hz hr
   have hv : 0 < rayMass z r := (chart_pos hdom).2.2.2.1
   have hv1 : rayMass z r < 1 := by
     have h := chartOffDiagonalMass_lt_third hdom

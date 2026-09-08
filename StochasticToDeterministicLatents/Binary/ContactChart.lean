@@ -243,6 +243,14 @@ end ScalarContactChart
 /-- The continuous extension of `z * log z`, including `xLogX 0 = 0`. -/
 def xLogX (z : ℝ) : ℝ := z * Real.log z
 
+/-- **`xLogX` composed with a continuous function is continuous.**  The
+extension is continuous at `0` as well, so no positivity is needed. -/
+theorem continuousOn_xLogX {f : ℝ → ℝ} {s : Set ℝ}
+    (hf : ContinuousOn f s) : ContinuousOn (fun r => xLogX (f r)) s := by
+  unfold xLogX
+  convert Real.continuous_mul_log.comp_continuousOn hf using 1
+  rfl
+
 /-- One-homogeneous two-point entropy in natural-log units. -/
 def pairEntropy (a b : ℝ) : ℝ :=
   xLogX (a + b) - xLogX a - xLogX b
@@ -876,18 +884,11 @@ theorem lowInformation_le_highInformation (C : ScalarContactChart) :
   simp only [smul_eq_mul, mul_zero, add_zero] at hconc
   linarith
 
-/-- A supplied information orientation puts at most half the split loss on the
-high arm. -/
-theorem two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order
-    (C : ScalarContactChart) (horient : C.lowInformation ≤ C.highInformation) :
-    2 * C.highInformationLoss ≤ C.offDiagonalLoss := by
-  exact C.two_mul_highInformationLoss_le_offDiagonalLoss_of_orientation horient
-
 /-- At most half the split information loss lies on the canonically high arm. -/
 theorem two_mul_highInformationLoss_le_offDiagonalLoss
     (C : ScalarContactChart) :
     2 * C.highInformationLoss ≤ C.offDiagonalLoss := by
-  exact C.two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order
+  exact C.two_mul_highInformationLoss_le_offDiagonalLoss_of_orientation
     C.lowInformation_le_highInformation
 
 end ScalarContactChart

@@ -581,6 +581,9 @@ in this table. Their public theorems are audited in
 | The rays | [FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | A minimum at an endpoint, for a positively weighted antitone slope |
 | The rays | [FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | The two margins, continuous out to both ends of the ray |
 | The rays | [FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | The ray's law at the critical radius, and the constant code's margin there |
+| The rays | [FactorTwo.CenterRaySeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRaySeam.lean) | The seam radius on a ray, the two slopes' order, and the seam bounds there |
+| The rays | [FactorTwo.CenterEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpoints.lean) | The centre theorem: both margins at the midpoint of the chord |
+| The bound | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | The complete gate at every chord domain, and `T p <= 2 * tau p` for every law |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
 
 The import graph of the library, generated from the `import` lines by
@@ -604,6 +607,7 @@ graph TD
     Binary_ContactChart["ContactChart"]
     Binary_CountSelector["CountSelector"]
     Binary_FactorNine["FactorNine"]
+    Binary_FactorTwo["FactorTwo"]
     Binary_NormalForm["NormalForm"]
     Binary_Reduction["Reduction"]
     Binary_ScalarEstimates["ScalarEstimates"]
@@ -623,6 +627,7 @@ graph TD
       Binary_FactorTwo_CenterDerivatives["CenterDerivatives"]
       Binary_FactorTwo_CenterDictionary["CenterDictionary"]
       Binary_FactorTwo_CenterEndpointMin["CenterEndpointMin"]
+      Binary_FactorTwo_CenterEndpoints["CenterEndpoints"]
       Binary_FactorTwo_CenterFractions["CenterFractions"]
       Binary_FactorTwo_CenterLaws["CenterLaws"]
       Binary_FactorTwo_CenterLogValues["CenterLogValues"]
@@ -632,6 +637,7 @@ graph TD
       Binary_FactorTwo_CenterRayEnds["CenterRayEnds"]
       Binary_FactorTwo_CenterRayMargins["CenterRayMargins"]
       Binary_FactorTwo_CenterRayMass["CenterRayMass"]
+      Binary_FactorTwo_CenterRaySeam["CenterRaySeam"]
       Binary_FactorTwo_CenterSeam["CenterSeam"]
       Binary_FactorTwo_CenterSeamChart["CenterSeamChart"]
       Binary_FactorTwo_CenterSeamDerivative["CenterSeamDerivative"]
@@ -690,6 +696,8 @@ graph TD
   Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_CenterLaws
   Binary_FactorTwo_CenterDictionary --> Binary_FactorTwo_Center
   Binary_FactorTwo_CenterEndpointMin --> MATHLIB
+  Binary_FactorTwo_CenterEndpoints --> Binary_FactorTwo_CenterRaySeam
+  Binary_FactorTwo_CenterEndpoints --> Binary_FactorTwo_CenterRayBoundary
   Binary_FactorTwo_CenterFractions --> Binary_FactorTwo_CenterChart
   Binary_FactorTwo_CenterLaws --> Binary_ContactChart
   Binary_FactorTwo_CenterLaws --> Binary_FactorTwo_CertValues
@@ -710,6 +718,11 @@ graph TD
   Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterDerivatives
   Binary_FactorTwo_CenterRayMargins --> Binary_FactorTwo_CenterCurvature
   Binary_FactorTwo_CenterRayMass --> Binary_FactorTwo_CenterRay
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterRayMargins
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterRayEnds
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterSeam
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterSeamMargin
+  Binary_FactorTwo_CenterRaySeam --> Binary_FactorTwo_CenterEndpointMin
   Binary_FactorTwo_CenterSeam --> Binary_FactorTwo_PlaneEndpoints
   Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_CenterDictionary
   Binary_FactorTwo_CenterSeamChart --> Binary_FactorTwo_Strip
@@ -768,6 +781,10 @@ graph TD
   Binary_FactorTwo_Strip --> Binary_FactorTwo_Chord
   Binary_FactorTwo_Strip --> Binary_ContactChart
   Binary_FactorTwo_Touch --> Binary_FactorTwo_Contact
+  Binary_FactorTwo --> Binary_FactorTwo_CenterEndpoints
+  Binary_FactorTwo --> Binary_FactorTwo_ConstantBound
+  Binary_FactorTwo --> Binary_FactorTwo_SingletonBound
+  Binary_FactorTwo --> Binary_FactorTwo_Gates
   Binary_NormalForm --> Binary_CatalogRecovery
   Binary_Reduction --> Binary_ContactChart
   Binary_ScalarEstimates --> Binary_ContactChart

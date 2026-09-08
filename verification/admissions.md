@@ -32,7 +32,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.CatalogRecovery](../StochasticToDeterministicLatents/Binary/CatalogRecovery.lean) | 2026-09-03 | 17 | Full-support equal-cost catalog recovery |
 | [Binary.NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean) | 2026-09-03 | 32 | Selected one-class or contact-chart presentation |
 | [SparseLimit](../StochasticToDeterministicLatents/SparseLimit.lean) | 2026-09-03 | 1 | Conditional transfer from full support to all laws |
-| [Binary.ScalarEstimates](../StochasticToDeterministicLatents/Binary/ScalarEstimates.lean) | 2026-09-03 | 71 | Logarithm, mixing, proxy, and seam tools |
+| [Binary.ScalarEstimates](../StochasticToDeterministicLatents/Binary/ScalarEstimates.lean) | 2026-09-03 | 70 | Logarithm, mixing, proxy, and seam tools |
 | [Binary.Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | 2026-09-03 | 3 | Cost dominance over the canonical BinaryCode space |
 | [Binary.FactorNine.NonpositivePhase](../StochasticToDeterministicLatents/Binary/FactorNine/NonpositivePhase.lean) | 2026-09-03 | 37 | Nonpositive scalar arm |
 | [Binary.FactorNine.PositivePhase](../StochasticToDeterministicLatents/Binary/FactorNine/PositivePhase.lean) | 2026-09-04 | 64 | Positive scalar arm and chart cost under seam hypotheses |
@@ -46,7 +46,7 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.NormBound](../StochasticToDeterministicLatents/Binary/FactorTwo/NormBound.lean) | 2026-09-07 | 2 | The norm bound from the positivity gate |
 | [Binary.FactorTwo.Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean) | 2026-09-07 | 3 | The stochastic optimum of a fully supported binary law |
 | [Binary.FactorTwo.Orientation](../StochasticToDeterministicLatents/Binary/FactorTwo/Orientation.lean) | 2026-09-07 | 3 | Deterministic-score transport and the oriented region |
-| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 42 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
+| [Binary.FactorTwo.Chord](../StochasticToDeterministicLatents/Binary/FactorTwo/Chord.lean) | 2026-09-07 | 36 | The diagonal chord, its two competitor margins, and their identification with the stochastic optimum at the chord point |
 | [Binary.FactorTwo.ChordScalars](../StochasticToDeterministicLatents/Binary/FactorTwo/ChordScalars.lean) | 2026-09-07 | 6 | The chord's entropies as scalar expressions |
 | [Binary.FactorTwo.SingletonScore](../StochasticToDeterministicLatents/Binary/FactorTwo/SingletonScore.lean) | 2026-09-07 | 2 | The isolating code's score and margin along the chord |
 | [Binary.FactorTwo.Margins](../StochasticToDeterministicLatents/Binary/FactorTwo/Margins.lean) | 2026-09-07 | 11 | The two margins as scalar functions, and their two derivatives |
@@ -84,6 +84,9 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.CenterEndpointMin](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpointMin.lean) | 2026-09-07 | 2 | An endpoint minimum principle |
 | [Binary.FactorTwo.CenterRayEnds](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayEnds.lean) | 2026-09-07 | 6 | The ray out to its ends |
 | [Binary.FactorTwo.CenterRayBoundary](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRayBoundary.lean) | 2026-09-08 | 3 | The ray's law at the critical radius |
+| [Binary.FactorTwo.CenterRaySeam](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterRaySeam.lean) | 2026-09-08 | 5 | The seam radius on a ray |
+| [Binary.FactorTwo.CenterEndpoints](../StochasticToDeterministicLatents/Binary/FactorTwo/CenterEndpoints.lean) | 2026-09-08 | 4 | The centre theorem |
+| [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | 2026-09-08 | 2 | The factor-two theorem |
 
 ## Axiom sets
 
@@ -767,6 +770,13 @@ appears, so the module crosses no unit or sign convention.  The one private
 lemma is the positivity of the chart normalizer's two factors.
 
 CenterRayMargins differentiates the two centre margins along the ray, twice.
+**Its count rose from seven to eight on 2026-09-08 and fell back the same
+day.**  A private `rayChartDomain` was promoted so that the next module
+could use it -- and `CenterLaws` already had `chartDomain_ray`, the same
+statement with the same proof, public and in scope, which the promotion
+had not found.  The duplicate is gone and every use here and in
+`CenterRaySeam` now calls `chartDomain_ray`, which had until then been
+exported and used by nothing.
 The page's radial derivative is in the off-diagonal mass, with the operator
 `D = v d/dv`; Lean differentiates in the radius, so every value here carries
 the factor `rayMassDeriv`, which is `dv/dr` and which `CenterRayMass` puts
@@ -855,9 +865,12 @@ stated anywhere in this tree**.
 
 CenterRayBoundary is the far end of that same ray.  At the critical radius
 the diagonal product `entryA * entryD` is exactly the square of the ray's
-root, so the root sits at the geometric mean of the diagonal rather than
-below it.  That is the `nonconstant` field of `ChordDomain` failing, so
-**no `ChordDomain` holds there at all** and everything taking one --
+root, so the geometric mean of the diagonal is that root.  **No
+`ChordDomain` holds there, at any top root**: such a domain's `nonconstant`
+field would put its own root strictly below that mean and so strictly
+below the ray's root, its `topRoot` field would then make the cubic
+strictly positive at every larger point, and `rayLaw_cubic` says the cubic
+vanishes at the ray's root.  Everything taking one --
 `rayConstantScalar_eq` and `log_two_mul_phi_contact_chart` among them --
 is unavailable; the route that would have supplied one is closed for the
 matching reason, `chordDomain_rayLaw` asking for the chart's interior
@@ -881,6 +894,154 @@ product law.  `rayConstantScalar_boundary_nonneg` gives only `0 <= `, from
 tree, nor does anything here state that the law at the critical radius is not
 a product law**.  The endpoint comparison still to
 come consumes only the nonnegativity.
+
+CenterRaySeam collects what a single ray of fixed imbalance contributes to
+the endpoint comparison.  `exists_raySeamRadius` puts a radius strictly
+inside every ray at off-diagonal mass exactly `1 / 8`: the mass is `0` at
+the centre, at least `1 / 4` at the critical radius by
+`criticalRadius_spec`, and continuous between them by
+`continuousOn_rayMass`, so the intermediate value theorem applies.  This is
+the page's remark that `1/8 < 1/4 <= v_c(z)` puts the seam inside every ray.
+
+`rayConstantSlope_antitoneOn` and `raySingletonSlope_antitoneOn` put the two
+margin slopes antitone on the open ray.  Each slope's derivative was
+admitted in CenterRayMargins as the mass's derivative times a chart
+second-order expression over the mass squared; `rayMassDeriv_pos` puts the
+first factor above zero and `chartConstantSecondOrder_neg` and
+`chartSingletonSecondOrder_neg` put the second below it, so the product is
+nonpositive and `antitoneOn_Ioo_of_hasDerivAt_nonpos` concludes.
+
+**These are stated in the radius, not in the off-diagonal mass.**  The
+page's Lemma 4.3 is concavity of the two margins in the mass.  The mass is
+strictly increasing in the radius -- `rayMass_strictMonoOn`, admitted in
+CenterRayMass -- so the change of variable is available, but **no
+declaration in this tree carries it out and none states the concavity**.
+
+`rayConstantScalar_gt_of_seam` and `raySeam_margins_gt` read the two seam
+bounds at the ray's own law.  `chordDomain_rayLaw` turns the chart domain
+into a chord domain, three private lemmas recover the ray's coordinates
+from that law, and `rayConstantScalar_eq` and `raySingletonScalar_eq`
+transfer the admitted bounds.  **The two admitted bounds are stated in
+different units in this tree**: `seam_constantMargin_center_gt` is already
+in natural-log units, so the constant arm converts nothing, while
+`seam_singletonMargin_gt` is in bits, so the isolating arm carries an
+explicit `Real.log 2`.  Both crossings were checked as scratch examples
+before the module was written.  The isolating arm's own statement is
+private: it does not escape, and `raySeam_margins_gt` is what the endpoint
+comparison consumes.
+
+**No endpoint comparison is made here**, and nothing about a law off its
+own ray is claimed.
+
+CenterEndpoints closes the centre arm.  Both halves run the same way: a
+chord domain sits at one radius on one ray of fixed imbalance, the seam
+sits at another radius on that ray, the margin's slope is antitone
+between them, and `min_endpoints_le_of_antitoneSlope_affine` therefore
+bounds the margin, corrected by an affine function of the mass, below by
+the smaller of its two endpoint values.  Both endpoint values are already
+admitted.
+
+`center_singletonMargin_ge` is the small-mass half.  Between the centre of
+the ray and the seam the correction is `4/125` times the mass; at the
+centre `raySingletonScalar_zero` makes both terms vanish, and at the seam
+`raySeam_margins_gt` puts the margin above `1/250`, which is exactly what
+the correction takes there.  `center_singletonMargin_nonneg` weakens it to
+the form the gate assembly consumes.
+
+`center_constantMargin_ge` is the large-mass half, between the seam and
+the critical radius, with the affine function through the two known
+endpoint values: `rayConstantScalar_gt_of_seam` at the seam and
+`rayConstantScalar_boundary_nonneg` at the critical radius, where that
+function is zero.  `center_constantMargin_pos` is strict, and **the
+strictness does not come from the far endpoint**: it comes from the
+bound's numerator, the mass at a radius strictly inside the ray being
+strictly below its value at the critical radius by
+`rayMass_strictMonoOn`.  So the positivity the page states at that
+endpoint is still not proved in this tree and is still not needed.
+
+**This is a different route from the page's.**  The page's step (2) argues
+that a concave function with positive values at both ends is positive
+throughout, which needs the far endpoint to be positive.  The affine
+correction needs it only to be nonnegative.
+
+**Units.**  `constantMargin` and `singletonMargin` are in bits and the ray
+scalars are in natural-log units, so each bound carries a `Real.log 2` in
+its denominator.  The ledger states the same bound in nats.
+
+**The two gate wrappers of the private source are dropped.**  They inhabit
+`Prop` abbreviations that have no counterpart here: `Gates.lean` takes the
+inequalities directly.
+
+Binary.FactorTwo is the top of the chain.  `gates_of_chordDomain` splits
+on the off-diagonal mass and supplies, at every chord domain, the
+disjunction `T_le_two_tau_of_gates` quantifies over: above an eighth
+`center_constantMargin_pos` gives the first branch; at or below an eighth
+the fixed cut is an interior point of the chord by `fixedCut_mem_chord`,
+both margins are positive there by `fixedCut_constantMargin_gt` and
+`fixedCut_singletonMargin_gt`, and `center_singletonMargin_nonneg` gives
+the margin at the midpoint, which together are the third branch.  The two
+cases overlap at an eighth, where either applies.
+
+`T_le_two_mul_tau` is then `T p <= 2 * tau p` for every `IsPMF p`.
+
+**The two fixed-cut bounds are in natural-log units** and against a
+positive multiple of `chordBottom`, while the margins are in bits; each
+conversion is one step against `Real.log_pos` and `chordBottom_pos`, and
+all three conversions were checked as scratch examples before the module
+was written.
+
+**Five gate `Prop`s and six theorems parametrised by them are dropped.**
+The private assembly declares `CenterSmallGate` and four siblings so that
+the gate proofs can be supplied separately; `Gates.lean` took the other
+route and takes the disjunction directly.  A duplicate of the endpoint
+under a second name is dropped as well.
+
+**What is not proved.**  Nothing here exhibits a latent or a
+deterministic code attaining the bound, so the full-support witness
+clause of the factor-two claim is still unproved in this tree, and the
+claim ledger says so.
+
+**Chord's count fell from 42 to 36 on 2026-09-08.**  Six theorems --
+`cubic_offDiagonalMass`, `determinant_ne_zero_of_nonconstant`,
+`entryA_mem_chord`, `tau_eq_chord`, `constantMargin_entryA` and
+`singletonMargin_entryA` -- were public but used only inside their own
+module, so they are now private and their pins are gone.  **Nothing else
+changed**: the module was rebuilt and the whole audit re-run.  This is
+the privatizing rule applied to the six declarations that were carried
+for it; a seventh candidate, `singletonRatioTerm_pair`, turned out to be
+consumed by `SingletonRatio` and stays public.
+
+**Two duplicates removed on 2026-09-08.**  `CenterRayMargins` held a
+private copy of `rayRoot_eq_chartRoot`, identical to the public one in
+`CenterLaws` in statement and proof, and reachable from it; the copy is
+gone.  `CenterRayEnds` and `CenterSeamMargin` each held an identical
+private continuity lemma for `xLogX` composed with a continuous
+function; both are gone and one public `continuousOn_xLogX` sits beside
+`xLogX` in ContactChart, whose count rises from 61 to 62.  **A third
+candidate was not a duplicate**: `Shape`'s private
+`antitoneOn_of_hasDerivAt_nonpos` is stated on a closed interval and
+takes a continuity hypothesis, where `CenterEndpointMin`'s public
+`antitoneOn_Ioo_of_hasDerivAt_nonpos` is stated on an open one and
+derives it.
+
+**Two redundant public theorems removed on 2026-09-08**, found by the
+statement scan of the cleanup pass.  ContactChart's
+`two_mul_highInformationLoss_le_offDiagonalLoss_of_information_order`
+was an alias whose whole proof was one application of
+`..._of_orientation` in the same file, used once and named in no
+document; the one use now calls the original.  ScalarEstimates'
+`mixtureMass_sum_eq_one_add_r` re-proved ContactChart's `e_add_ell`,
+which it imports; its one use now calls that.  ContactChart falls from
+62 to 61 and ScalarEstimates from 71 to 70.
+
+**Two further duplicates were left in place, deliberately.**
+`w3Cost_constantCode_eq_zero_of_subsingleton` is private in both
+ContactChart and FactorNine, so removing the duplication would mean
+**adding** public surface to delete a private copy, which is the wrong
+direction for this tree.  `mixingKernel_rectangle_integrable` is private
+in ScalarEstimates and public in NonpositivePhase, and merging them
+would delete a long proof from an admitted module of the other arm
+without changing the endpoint count at all.
 
 ## Factor-nine admission checks
 

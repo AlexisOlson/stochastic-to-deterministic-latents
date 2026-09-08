@@ -153,7 +153,7 @@ theorem diagonalMass_add_offDiagonalMass (hp : IsPMF p) :
   linarith
 
 /-- The cubic at the off-diagonal mass is minus the off-diagonal product. -/
-theorem cubic_offDiagonalMass (hp : IsPMF p) :
+private theorem cubic_offDiagonalMass (hp : IsPMF p) :
     cubic p (offDiagonalMass p) = -offDiagonalProduct p := by
   have hs : diagonalMass p = 1 - offDiagonalMass p := by
     linarith [diagonalMass_add_offDiagonalMass hp]
@@ -167,7 +167,7 @@ while every chord statement asks for a strictly positive one. -/
 
 /-- A fully supported law with a non-constant top root has a nonzero
 determinant. -/
-theorem determinant_ne_zero_of_nonconstant (hp : IsPMF p) (hpos : FullSupport p)
+private theorem determinant_ne_zero_of_nonconstant (hp : IsPMF p) (hpos : FullSupport p)
     (htop : IsTopRoot p u) (hnc : Nonconstant p u) : determinant p ≠ 0 := by
   intro hdet
   have hw : 0 < offDiagonalProduct p := offDiagonalProduct_pos hpos
@@ -282,7 +282,7 @@ theorem chordTop_mul_chordBottom (h : ChordDomain p u) :
 
 /-- The law itself sits between the midpoint and the upper end, which is why
 testing a competitor along the chord tests it at `p`. -/
-theorem entryA_mem_chord (h : ChordDomain p u) :
+private theorem entryA_mem_chord (h : ChordDomain p u) :
     entryA p ∈ Set.Icc (chordMidpoint p) (chordTop p u) := by
   have hu := topRoot_pos h.isPMF h.fullSupport h.topRoot
   have habs := abs_sub_lt_contactRadius h.fullSupport hu h.nonconstant
@@ -362,7 +362,7 @@ theorem constantMargin_chordTop (h : ChordDomain p u) :
   rw [constantMargin, chordBudget, chordAt_chordTop]
   ring
 
-theorem tau_eq_chord (h : ChordDomain p u) :
+private theorem tau_eq_chord (h : ChordDomain p u) :
     tau p = Psi p - Phi (contactAt p u) :=
   tau_eq_contact h.isPMF h.fullSupport (topRoot_pos h.isPMF h.fullSupport h.topRoot)
     h.nonconstant h.topRoot.2.1
@@ -371,11 +371,11 @@ theorem chordBudget_entryA (h : ChordDomain p u) :
     chordBudget p u (entryA p) = 2 * tau p := by
   rw [chordBudget, chordAt_entryA, tau_eq_chord h]
 
-theorem constantMargin_entryA (h : ChordDomain p u) :
+private theorem constantMargin_entryA (h : ChordDomain p u) :
     constantMargin p u (entryA p) = 2 * tau p - (Psi p - Phi p) := by
   rw [constantMargin, chordBudget_entryA h, chordAt_entryA]
 
-theorem singletonMargin_entryA (h : ChordDomain p u) :
+private theorem singletonMargin_entryA (h : ChordDomain p u) :
     singletonMargin p u (entryA p)
       = 2 * tau p - detScore p (singletonCode cell11) := by
   rw [singletonMargin, chordBudget_entryA h, chordAt_entryA]

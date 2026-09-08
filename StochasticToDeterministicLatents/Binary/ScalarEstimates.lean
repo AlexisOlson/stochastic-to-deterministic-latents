@@ -894,13 +894,6 @@ theorem mixingTerm_eq_integral_kernel (C : ScalarContactChart)
   rw [intervalIntegral.integral_of_le (mixingGap_nonnegative C)]
   exact (integral_mixingGap_eq_mixingSlope C ht.1).symm
 
-/-- The two off-diagonal mixture masses sum to `1 + r`. -/
-theorem mixtureMass_sum_eq_one_add_r (C : ScalarContactChart) :
-    C.e + C.ell = 1 + C.r := by
-  have h0 := shifted_product_sub_eq_mixingGap C 0
-  have h1 := shifted_product_sub_eq_mixingGap C 1
-  linarith
-
 private theorem tendsto_add_mul_log_one_add_div (c : ℝ) :
     Filter.Tendsto (fun z : ℝ => (z + c) * Real.log (1 + c / z))
       Filter.atTop (nhds c) := by
@@ -923,7 +916,7 @@ theorem tendsto_mixingTerm_atTop (C : ScalarContactChart) :
     Filter.Tendsto C.mixingTerm Filter.atTop
       (nhds (C.r * Real.log C.r - C.e * Real.log C.e -
         C.ell * Real.log C.ell)) := by
-  have hchart : C.e + C.ell = 1 + C.r := mixtureMass_sum_eq_one_add_r C
+  have hchart : C.e + C.ell = 1 + C.r := C.e_add_ell
   have hrewrite : ∀ᶠ z : ℝ in Filter.atTop,
       C.mixingTerm z =
         (z + C.e) * Real.log (1 + C.e / z) +

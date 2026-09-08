@@ -118,19 +118,18 @@ private theorem cert_referencePlane (i : Fin 4) :
         (referencePlanes i).root)) (entryB (contactAt (referencePlanes i).law
         (referencePlanes i).root)) (referencePlanes i).root
       = (referencePlanes i).offValueC := by
-  have hs : ∀ i : Fin 4, diagonalMass (contactAt (referencePlanes i).law
+  have hs : diagonalMass (contactAt (referencePlanes i).law
       (referencePlanes i).root) = diagonalMass (referencePlanes i).law := by
-    intro i
     simp only [diagonalMass, entryA, entryD, contactAt]
     norm_num
     ring
-  have hb : ∀ i : Fin 4, entryB (contactAt (referencePlanes i).law
+  have hb : entryB (contactAt (referencePlanes i).law
       (referencePlanes i).root) = entryB (referencePlanes i).law := by
-    intro i; simp [entryB, contactAt]
-  have hc : ∀ i : Fin 4, entryC (contactAt (referencePlanes i).law
+    simp [entryB, contactAt]
+  have hc : entryC (contactAt (referencePlanes i).law
       (referencePlanes i).root) = entryC (referencePlanes i).law := by
-    intro i; simp [entryC, contactAt]
-  rw [hs i, hb i, hc i]
+    simp [entryC, contactAt]
+  rw [hs, hb, hc]
   refine ⟨?_, ?_, ?_⟩ <;>
     · fin_cases i <;>
         norm_num [referencePlanes, cellTable, certDiagonal, certOffDiagonal,
