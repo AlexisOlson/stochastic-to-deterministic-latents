@@ -507,7 +507,7 @@ domain and `Binary.T_le_two_mul_tau` is the row's inequality for every law.
 This section serves the row `BIN-ROW-C27-4`, which is `kernel-verified` here
 in both clauses. The two pages
 [the optimal latent and the replica](binary-rows-replica.md) and
-[factor 27/4](binary-rows-27-4.md) are its prose derivation. The row had no
+[factor seven](binary-rows-27-4.md) are its prose derivation. The row had no
 target signature before it was proved; the declarations below are the
 existing ones.
 

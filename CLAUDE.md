@@ -1,8 +1,9 @@
 # Repository guidance
 
 This Lean 4 / Mathlib project proves the certificate-free binary factor-two and
-factor-nine theorems for stochastic-to-deterministic latents, and the factor
-27/4 for laws with one binary alphabet. Read [docs/claims.md](docs/claims.md)
+factor-nine theorems for stochastic-to-deterministic latents, and the
+factor-seven theorem (constant 27/4) for laws with one binary alphabet. Read
+[docs/claims.md](docs/claims.md)
 and [verification/README.md](verification/README.md) before editing. They define
 the mathematical scope and admission requirements.
 

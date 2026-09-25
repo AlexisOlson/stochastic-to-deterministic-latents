@@ -1,8 +1,9 @@
-# Binary rows: factor 27/4
+# Binary rows: factor seven
 
 This page proves $`T(p) \le (27\text/4)\,\tau(p)`$ for every law $`p`$ of a binary
 $`X`$ and a $`Y`$ with values in any finite nonempty set, and, by exchanging the
-coordinates, for every law of a finite $`X`$ and a binary $`Y`$. It completes the
+coordinates, for every law of a finite $`X`$ and a binary $`Y`$. Since
+$`27\text/4 < 7`$, the result is called factor seven. This page completes the
 structural half proved on
 [Binary rows: the optimal latent and the replica](binary-rows-replica.md). The
 derivation here is at `paper proof` in the sense of the
@@ -14,8 +15,8 @@ The symbols of the companion page's [section 1](binary-rows-replica.md#1-setting
 are used without restatement, and everything is in natural logarithms
 ([section 1](#1-setting)).
 
-> **Binary-row theorem.** For every finite nonempty set $`Y`$ and every law
-> $`p`$ on $`\{0,1\} \times Y`$,
+> **Binary-row theorem (factor seven).** For every finite nonempty set $`Y`$ and
+> every law $`p`$ on $`\{0,1\} \times Y`$,
 >
 > ```math
 > T(p) \le (27\text/4)\,\tau(p).

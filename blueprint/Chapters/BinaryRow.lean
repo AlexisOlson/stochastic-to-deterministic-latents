@@ -9,13 +9,13 @@ open Informal
 
 set_option verso.blueprint.externalCode.strictResolve true
 
-#doc (Manual) "The binary-row factor 27/4" =>
+#doc (Manual) "The binary-row factor-seven theorem" =>
 
 :::group "binaryrow"
-The binary-row factor 27/4.
+The binary-row factor-seven theorem.
 :::
 
-When one alphabet is binary and the other is any finite set, the factor is $`27/4`. The inequality holds for every such law, and the clause naming the code holds on full support over $`\{0,1\}\times Y`.
+When one alphabet is binary and the other is any finite set, the constant is $`27/4`; since $`27/4<7`, the result is called factor seven. The inequality holds for every such law, and the clause naming the code holds on full support over $`\{0,1\}\times Y`.
 
 :::theorem "BIN-ROW-C27-4" (parent := "binaryrow") (lean := "StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau, StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau_col, StochasticToDeterministicLatents.BinaryRow.exists_rowWitnessCode") (uses := "BIN-SPARSE, DEF-TAU, DEF-DETSCORE") (tags := "kernel-verified")
 For every law on $`\{0,1\}\times Y` or $`Y\times\{0,1\}` with $`Y` finite and nonempty, $`T(p)\leq(27/4)\tau(p)`. On full support over $`\{0,1\}\times Y` the constant code, the row code, or a purified code of a $`\tau`-optimal latent with positive weights and distinct components has $`D_p(g)\leq(27/4)\tau(p)`. The constant is not claimed to be the least possible, and at $`Y=\{0,1\}` the bound is implied by the factor-two theorem.

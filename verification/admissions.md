@@ -1346,7 +1346,7 @@ clause in FactorTwentySevenQuarters added four.
 
 **Pages.**  The prose derivation is on two pages,
 [the optimal latent and the replica](../docs/binary-rows-replica.md) and
-[factor 27/4](../docs/binary-rows-27-4.md), both at `paper proof`.  An earlier
+[factor seven](../docs/binary-rows-27-4.md), both at `paper proof`.  An earlier
 version of the two pages had a fidelity read against the research proof they
 distil, a cold read of the public tree, and a check of the edits made after
 those reads.  The present version adds the status sentences, Lemma 4.1 without
@@ -1356,7 +1356,7 @@ re-derived the relation between the page's cell objective and
 `purifyObjective`, confirmed that the proof of Lemma 4.1 does not use a
 tie-break, and read both pages cold for scope and rendering.  Two sentences
 were edited after that read: the status of Lemma 4.1 in the public inputs of
-the factor-27/4 page, and the relation between the two cell objectives in the
+the factor-seven page, and the relation between the two cell objectives in the
 formalization paragraph of the replica page.  A second independent read the
 same day re-derived that relation and its sign from `purifyObjective` and
 `IsPurifiedCode`, and located the replica page's statement of Lemma 4.1's

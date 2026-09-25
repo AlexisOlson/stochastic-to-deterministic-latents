@@ -14,9 +14,10 @@ of the four singleton codes, has score at most $`2\,\tau(p)`$; the Lean
 statement does not say which. The weaker
 $`T(p) \le 9\,\tau(p)`$ is proved by an independent route. Beyond
 $`2 \times 2`$, when one observation is binary and the other takes values in
-any finite set, the repository proves $`T(p) \le (27\text/4)\,\tau(p)`$; on
-full support, with the binary observation as the row, the constant code, the
-row code, or a purified code of an optimal latent meets that bound. All three
+any finite set, the repository proves $`T(p) \le (27\text/4)\,\tau(p)`$,
+called factor seven since $`27\text/4 < 7`$; on full support, with the binary
+observation as the row, the constant code, the row code, or a purified code of
+an optimal latent meets the bound at $`27\text/4`$. All three
 proofs are kernel-verified in the public Lean library and certificate-free:
 every numerical comparison is an exact rational bound on logarithms proved in
 Lean, with nothing delegated to an interval certificate. No constant is
@@ -36,7 +37,7 @@ the notation.
 | Understand the construction | [Constructive blueprint](docs/blueprint.md), including the [selector recipe](docs/blueprint.md#5-recover-the-code-from-the-law) |
 | Follow the headline proof | [Binary factor two](docs/binary-factor-two.md) |
 | Follow the independent factor-nine proof and the law-only selector | [Binary factor nine](docs/binary-factor-nine.md) |
-| Follow the proof for one binary alphabet | [Binary rows: the optimal latent and the replica](docs/binary-rows-replica.md), then [Binary rows: factor 27/4](docs/binary-rows-27-4.md) |
+| Follow the proof for one binary alphabet | [Binary rows: the optimal latent and the replica](docs/binary-rows-replica.md), then [Binary rows: factor seven](docs/binary-rows-27-4.md) |
 | Inspect the Lean statements | [Existing endpoints and target contracts](docs/lean-contracts.md) |
 | Check the verification | [Verification procedure](verification/README.md) |
 | Pick a problem | [Open problems](docs/open-problems.md), with the standing of each target and where a contribution lands |
@@ -117,9 +118,8 @@ on success.
 `Verify.lean` carries, for each of the 947 public theorem endpoints, an
 `assert_no_sorry` check and a `#print axioms` result pinned with `#guard_msgs`.
 Every pinned set was discovered by running `#print axioms` after compilation;
-the headline theorems, factor two, factor nine and the binary-row factor
-alike, each report
-`[propext, Classical.choice, Quot.sound]`. A
+the headline theorems, factor two, factor nine and factor seven alike, each
+report `[propext, Classical.choice, Quot.sound]`. A
 root build after a single module changes takes a minute or two, and the audit
 about twenty seconds once the root is built; both take considerably longer from
 a cold cache, and either may exceed ten minutes there. The [verification guide](verification/README.md) gives the trust
@@ -142,7 +142,7 @@ naming the problem before starting anything large.
 - [Binary factor nine](docs/binary-factor-nine.md): the independent factor-nine proof, which also bounds the law-only selector.
 - [Binary stochastic optimum](docs/binary-stochastic-optimum.md): $`\tau(p)`$ in closed form for every binary law, at `paper proof`.
 - [Binary factor two](docs/binary-factor-two.md): the binary constant two, from two deterministic scores compared with the exact stochastic optimum along each contact chord. The page gives the prose derivation at `paper proof`; the theorem itself is `kernel-verified`.
-- [Binary rows: the optimal latent and the replica](docs/binary-rows-replica.md) and [Binary rows: factor 27/4](docs/binary-rows-27-4.md): the constant $`27\text/4`$ when one alphabet is binary, from an optimal latent with at most two labels, three codes, and a replica of the binary observation. The pages give the prose derivation at `paper proof`; the theorem itself is `kernel-verified`.
+- [Binary rows: the optimal latent and the replica](docs/binary-rows-replica.md) and [Binary rows: factor seven](docs/binary-rows-27-4.md): the constant $`27\text/4`$ (factor seven) when one alphabet is binary, from an optimal latent with at most two labels, three codes, and a replica of the binary observation. The pages give the prose derivation at `paper proof`; the theorem itself is `kernel-verified`.
 - [Claim ledger](docs/claims.md) and [Lean contracts](docs/lean-contracts.md): statements, scope, and existing or proposed signatures.
 - [Verification](verification/README.md): commands, trust model, and admission requirements.
 - [Examples](examples/README.md): exact inputs, branch calculations, and selected partitions.

@@ -43,8 +43,8 @@ keep those differences visible.
 The certificate-free binary factor-nine theorem requires a self-contained paper
 proof, an accurate claim ledger, and the audited public Lean theorem and its
 admitted dependencies. The binary factor-two theorem is `kernel-verified`, with
-its prose proof at `paper proof`. So is the binary-row theorem, the factor
-27/4 for laws with one binary alphabet, whose prose proof is on two pages. The
+its prose proof at `paper proof`. So is the factor-seven theorem (constant
+27/4) for laws with one binary alphabet, whose prose proof is on two pages. The
 exact binary stochastic optimum is
 presented at `paper proof`; its value on full support with nonnegative
 determinant is `kernel-verified`, and its other Lean targets are stated and

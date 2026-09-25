@@ -17,9 +17,9 @@ open Verso.Genre
 open Verso.Genre.Manual
 open Informal
 
-#doc (Manual) "Binary factor two and factor nine: dependency blueprint" =>
+#doc (Manual) "Binary factor two, factor nine and factor seven: dependency blueprint" =>
 
-This graph links the definitions and dependency steps of the public binary factor-nine, factor-two and binary-row proofs to their compiled Lean declarations, and records the paper-proof and conjecture rows of the ledger as nodes without declarations. The [claim ledger](https://github.com/AlexisOlson/stochastic-to-deterministic-latents/blob/main/docs/claims.md) is authoritative for evidence tiers; this site records a checked projection of it.
+This graph links the definitions and dependency steps of the public binary factor-nine, factor-two and factor-seven proofs to their compiled Lean declarations, and records the paper-proof and conjecture rows of the ledger as nodes without declarations. The [claim ledger](https://github.com/AlexisOlson/stochastic-to-deterministic-latents/blob/main/docs/claims.md) is authoritative for evidence tiers; this site records a checked projection of it.
 
 {include 0 Chapters.Foundations}
 

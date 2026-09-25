@@ -10,7 +10,7 @@ The derivations here are at `paper proof` in the sense of the
 [claim ledger](claims.md#status-vocabulary). The purification lemma and the
 bound this page serves are also `kernel-verified` in this repository
 ([section 9](#9-scope-and-formalization)), and the estimate that completes
-the proof is on the companion page [Binary rows: factor 27/4](binary-rows-27-4.md).
+the proof is on the companion page [Binary rows: factor seven](binary-rows-27-4.md).
 Section 7, the Bernoulli layer, serves that page; the structure theorem does not use it.
 
 The constant $`27\text/4`$ lies between the constant $`2`$ that
@@ -687,7 +687,7 @@ derivations from the public inputs of [section 1](#1-setting), Shannon's chain
 rules, and one-variable calculus. Sections 2 to 4 hold for every finite law and
 every finite latent. Sections 5 to 8 need full support on
 $`\{0,1\} \times Y`$. The companion page
-[Binary rows: factor 27/4](binary-rows-27-4.md) uses the structure theorem,
+[Binary rows: factor seven](binary-rows-27-4.md) uses the structure theorem,
 Lemmas 2.1 and 4.1, Lemmas 6.2 to 6.4, and Lemmas 7.1 to 7.4.
 
 **What is not proved here.** The structure theorem is an existence statement: it does not say
