@@ -19,6 +19,7 @@ $`2 \times 2`$ laws only, so $`C_2 \le C_*`$.
 | $`C_2 \le 9`$ | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | $`C_* \le 9`$ | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
 | $`C_2 \le 2`$ | `kernel-verified` here, certificate-free ([`BIN-C2`](claims.md#ledger)) |
+| $`T(p) \le (27\text/4)\,\tau(p)`$ on $`\{0,1\} \times Y`$ and $`Y \times \{0,1\}`$, for every finite $`Y`$ | `kernel-verified` here, certificate-free ([`BIN-ROW-C27-4`](claims.md#ledger)); covers the case of `GEN-C9` in which one alphabet is binary, since $`27\text/4 < 9`$; `GEN-C9` keeps its tier, and no bound on $`C_*`$ follows |
 
 Two constants are interesting. A universal constant of $`2`$ would sit within
 two percent of the general lower bound. For binary laws the constant $`2`$ is

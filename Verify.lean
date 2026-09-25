@@ -3916,3 +3916,1022 @@ assert_no_sorry StochasticToDeterministicLatents.Binary.exists_witnessCode
 /-- info: 'StochasticToDeterministicLatents.Binary.exists_witnessCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms StochasticToDeterministicLatents.Binary.exists_witnessCode
+
+/-! ## BinaryRow.Shannon -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.isPMF_of_latent
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.isPMF_of_latent' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.isPMF_of_latent
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.relabelLatent_score
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.relabelLatent_score' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.relabelLatent_score
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_chain_pair
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_chain_pair' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_chain_pair
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_comm
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_comm' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_comm
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mutualInfo_sub_mutualInfo
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mutualInfo_sub_mutualInfo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mutualInfo_sub_mutualInfo
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condEntropy_function_eq_zero
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condEntropy_function_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condEntropy_function_eq_zero
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.entropyOf_pushforward_comp
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.entropyOf_pushforward_comp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.entropyOf_pushforward_comp
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_pushforward_comp
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_pushforward_comp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_pushforward_comp
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.log_two_mul_entropyOf
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.log_two_mul_entropyOf' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.log_two_mul_entropyOf
+
+/-! ## BinaryRow.Contact -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.pushforward_fst_eq_rowMass
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.pushforward_fst_eq_rowMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.pushforward_fst_eq_rowMass
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.pushforward_snd_eq_colMass
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.pushforward_snd_eq_colMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.pushforward_snd_eq_colMass
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mX_eq_rowMass
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mX_eq_rowMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mX_eq_rowMass
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mY_eq_colMass
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mY_eq_colMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mY_eq_colMass
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMass_isPMF
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMass_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMass_isPMF
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.colMass_isPMF
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.colMass_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.colMass_isPMF
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eval
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eval' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eval
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_natDegree_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_natDegree_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_natDegree_le
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_five
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_five' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_five
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.univ_nonempty_of_isPMF
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.univ_nonempty_of_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.univ_nonempty_of_isPMF
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_le_cubeRoot
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_le_cubeRoot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_le_cubeRoot
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_cubeLaw
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_cubeLaw' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_cubeLaw
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_cube_le_one_of_twoThirds_cap
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_cube_le_one_of_twoThirds_cap' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_cube_le_one_of_twoThirds_cap
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_eq_one_bestResponse
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_eq_one_bestResponse' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_twoThirds_eq_one_bestResponse
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_rows
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_rows' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_rows
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_cols
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_cols' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowLambda_eq_cols
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_lambda_eq_one
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_lambda_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_lambda_eq_one
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_hasCubeParam
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_hasCubeParam' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_hasCubeParam
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibility_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibility_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibility_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_root
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_root' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_root
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_injective
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_injective' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_injective
+
+/-! ## BinaryRow.Optimizer -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.isConnected_univ_prod
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.isConnected_univ_prod' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.isConnected_univ_prod
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.support_eq_univ_of_forall_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.support_eq_univ_of_forall_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.support_eq_univ_of_forall_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_seedSetup_of_forall_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_seedSetup_of_forall_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_seedSetup_of_forall_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.card_eq_one_or_two_of_three_dup
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.card_eq_one_or_two_of_three_dup' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.card_eq_one_or_two_of_three_dup
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.score_eq_mutualInfo_of_subsingleton
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.score_eq_mutualInfo_of_subsingleton' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.score_eq_mutualInfo_of_subsingleton
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.oneClass_tau_eq_mutualInfo
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.oneClass_tau_eq_mutualInfo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.oneClass_tau_eq_mutualInfo
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_three
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_coeff_three
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_ne_zero
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_ne_zero
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_param_ne
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_param_ne' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_param_ne
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_param_square_dvd
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_param_square_dvd' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_param_square_dvd
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_three_dup
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_three_dup' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_three_dup
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowClustering_card_eq_one_or_two
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowClustering_card_eq_one_or_two' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowClustering_card_eq_one_or_two
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_optimalLatent_bit
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_optimalLatent_bit' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_optimalLatent_bit
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowOptimizer_dichotomy
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowOptimizer_dichotomy' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowOptimizer_dichotomy
+
+/-! ## BinaryRow.Moments -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_zero
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_zero
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_one
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_one
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_two
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_two' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_two
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_three
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_three
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_colCoeff_cube_eq_moments
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_colCoeff_cube_eq_moments' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_colCoeff_cube_eq_moments
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityExpression_eq_moments
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityExpression_eq_moments' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityExpression_eq_moments
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_cubeSum
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_cubeSum' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_cubeSum
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_entry
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_entry' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_entry
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eq_moments
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eq_moments' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowFeasibilityPolynomial_eq_moments
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_factorization
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_factorization' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_factorization
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_moments
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_moments' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_moments
+
+/-! ## BinaryRow.Foundation -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.isPMF_of_marginal
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.isPMF_of_marginal' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.isPMF_of_marginal
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.latentOfJoint_joint
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.latentOfJoint_joint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.latentOfJoint_joint
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.latentOfJoint_score
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.latentOfJoint_score' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.latentOfJoint_score
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.tau_le_of_joint
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.tau_le_of_joint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.tau_le_of_joint
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.nonempty_of_isPMF
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.nonempty_of_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.nonempty_of_isPMF
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.entropyOf_const
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.entropyOf_const' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.entropyOf_const
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_const_eq_mutualInfo
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_const_eq_mutualInfo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_const_eq_mutualInfo
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_given_self_eq_zero
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_given_self_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_given_self_eq_zero
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_functionScore
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_functionScore' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_functionScore
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.isPMF_swap
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.isPMF_swap' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.isPMF_swap
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.swapLatent_score
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.swapLatent_score' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.swapLatent_score
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.tau_swap
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.tau_swap' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.tau_swap
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_swap
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_swap' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_swap
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.detScore_constantCode_eq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.detScore_constantCode_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.detScore_constantCode_eq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_mutualInfo
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_mutualInfo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_mutualInfo
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_row
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_row' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_row
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_col
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_col' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_condEntropy_col
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.tau_le_mutualInfo
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.tau_le_mutualInfo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.tau_le_mutualInfo
+
+/-! ## BinaryRow.Presentation -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_colMass
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_colMass' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_colMass
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_colMass_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_colMass_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_colMass_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_det_low_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowMoment_det_high_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_det_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_det_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_det_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_param_ineq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_param_ineq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_param_ineq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_ell_mem
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_ell_mem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_ell_mem
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_a_mem
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_a_mem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_a_mem
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_b_mem
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_b_mem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_b_mem
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_sq_sum
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_sq_sum' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_sq_sum
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_variance
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_variance' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_variance
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_sum
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_sum' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_sum
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_mixture
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_mixture' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_mixture
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_presentation
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_presentation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_presentation
+
+/-! ## BinaryRow.Bernoulli -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_eq_mul_log
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_eq_mul_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_eq_mul_log
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.continuous_klBer_left
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.continuous_klBer_left' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.continuous_klBer_left
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.owL_mul_one_sub_two_mul
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.owL_mul_one_sub_two_mul' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.owL_mul_one_sub_two_mul
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.owL_half
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.owL_half' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.owL_half
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_one_sub_one_sub
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_one_sub_one_sub' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_one_sub_one_sub
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_ge_two_sq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_ge_two_sq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_ge_two_sq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.owL_symm
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.owL_symm' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.owL_symm
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.two_le_owL
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.two_le_owL' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.two_le_owL
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.owL_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.owL_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.owL_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_ge_owL_mul_sq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_ge_owL_mul_sq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_ge_owL_mul_sq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_self
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_self' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_self
+
+/-! ## BinaryRow.Posterior -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowCubeParam_unique
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowCubeParam_unique' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowCubeParam_unique
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.ne_of_rowCubeParam_ne
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.ne_of_rowCubeParam_ne' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.ne_of_rowCubeParam_ne
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_posterior
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_posterior' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_posterior
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_mean
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_mean' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_posterior_mean
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_gap_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_gap_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_gap_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_lt_one
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_prior_lt_one
+
+/-! ## BinaryRow.Purification -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.functionScore_eq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.functionScore_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.functionScore_eq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_isPurifiedCode
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_isPurifiedCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_isPurifiedCode
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.IsPurifiedCode.score_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.IsPurifiedCode.score_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.IsPurifiedCode.score_le
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_purified_phi
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_purified_phi' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_purified_phi
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_purifiedCode
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_purifiedCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_purifiedCode
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_score_add_three_condEntropy
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_score_add_three_condEntropy' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_score_add_three_condEntropy
+
+/-! ## BinaryRow.Replica -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_zero_of_factor
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_zero_of_factor' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_zero_of_factor
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_swap_snd
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_swap_snd' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_swap_snd
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_add_le_of_condIndep
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_add_le_of_condIndep' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_add_le_of_condIndep
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.labelColMass_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.labelColMass_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.labelColMass_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_isPMF
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_isPMF' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_isPMF
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_replica
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_replica' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_replica
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_original
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_original' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_sum_original
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_original
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_original' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_original
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_replica
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_replica' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_replica
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_condMutualInfo_rows_eq_zero
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_condMutualInfo_rows_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_condMutualInfo_rows_eq_zero
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replica_bound_sharp
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replica_bound_sharp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replica_bound_sharp
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replica_bound
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replica_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replica_bound
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.latent_replica_bound
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.latent_replica_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.latent_replica_bound
+
+/-! ## BinaryRow.Balance -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mixture_variance_split
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mixture_variance_split' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mixture_variance_split
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.posterior_label_variance
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.posterior_label_variance' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.posterior_label_variance
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.scalar_balance
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.scalar_balance' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.scalar_balance
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoCode_balance
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoCode_balance' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoCode_balance
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.balanceCoeff_bands_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.balanceCoeff_bands_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.balanceCoeff_bands_le
+
+/-! ## BinaryRow.Interfaces -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mutualInfo_eq_latent
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mutualInfo_eq_latent' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mutualInfo_eq_latent
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condEntropy_eq_latent
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condEntropy_eq_latent' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condEntropy_eq_latent
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mutualInfo_le_score_add
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mutualInfo_le_score_add' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mutualInfo_le_score_add
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condEntropy_le_score_add
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condEntropy_le_score_add' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condEntropy_le_score_add
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condEntropy_label_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condEntropy_label_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condEntropy_label_le
+
+/-! ## BinaryRow.ComponentInfo -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.log_two_mul_mutualInfo_bitRow
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.log_two_mul_mutualInfo_bitRow' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.log_two_mul_mutualInfo_bitRow
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_sum_prior
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_sum_prior' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_sum_prior
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowTwoContact_mutualInfo_ge_owL
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowTwoContact_mutualInfo_ge_owL' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowTwoContact_mutualInfo_ge_owL
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_owL
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_owL' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_owL
+
+/-! ## BinaryRow.ReplicaCells -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_apply
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_apply' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_apply
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_rows
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_rows' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_pushforward_rows
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_condEntropy_sub
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_condEntropy_sub' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condMutualInfo_eq_condEntropy_sub
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaLaw_B2_eq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaLaw_B2_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaLaw_B2_eq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.labelColMass_latent_joint
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.labelColMass_latent_joint' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.labelColMass_latent_joint
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowContact_replicaCell
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowContact_replicaCell' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowContact_replicaCell
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_replica_rows
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_replica_rows' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_replica_rows
+
+/-! ## BinaryRow.EntropyVariance -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.binEntropy_div_symm
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.binEntropy_div_symm' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.binEntropy_div_symm
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.binEntropy_div_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.binEntropy_div_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.binEntropy_div_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.binEntropy_le_mul_of_mem
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.binEntropy_le_mul_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.binEntropy_le_mul_of_mem
+
+/-! ## BinaryRow.ConcaveSign -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.concaveOn_sign_of_roots
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.concaveOn_sign_of_roots' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.concaveOn_sign_of_roots
+
+/-! ## BinaryRow.EntropySums -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.condEntropy_pushforward_comp
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.condEntropy_pushforward_comp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.condEntropy_pushforward_comp
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.log_two_mul_condEntropy_eq_sum
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.log_two_mul_condEntropy_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.log_two_mul_condEntropy_eq_sum
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_row
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_row' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_row
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_mutualInfo_label_row
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_mutualInfo_label_row' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_mutualInfo_label_row
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_label
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_label' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bitLatent_log_two_mul_condEntropy_label
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_log_two_mul_condEntropy_label_rows
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_log_two_mul_condEntropy_label_rows' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_log_two_mul_condEntropy_label_rows
+
+/-! ## BinaryRow.JensenGap -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_eq_bregman
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_eq_bregman' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_eq_bregman
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.binEntropy_gap_le_of_klBer_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.binEntropy_gap_le_of_klBer_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.binEntropy_gap_le_of_klBer_le
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.klBer_div_sq_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.klBer_div_sq_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.klBer_div_sq_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.binEntropy_jensenGap_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.binEntropy_jensenGap_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.binEntropy_jensenGap_le
+
+/-! ## BinaryRow.SeparationBand -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.mul_div_add_sq_eq
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.mul_div_add_sq_eq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.mul_div_add_sq_eq
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.kappa_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.kappa_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.kappa_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.bandUpper_antitoneOn
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.bandUpper_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.bandUpper_antitoneOn
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.owL_min_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.owL_min_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.owL_min_le
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_rowMass_mem_band
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_rowMass_mem_band' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_rowMass_mem_band
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_band
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_band' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_condMutualInfo_ge_band
+
+/-! ## BinaryRow.ReplicaInfo -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.replicaCell_pos
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.replicaCell_pos' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.replicaCell_pos
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.rowCubeParam_rowMass_mem
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.rowCubeParam_rowMass_mem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.rowCubeParam_rowMass_mem
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_replica_info_ge
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_replica_info_ge' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_replica_info_ge
+
+/-! ## BinaryRow.BandConstants -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.sum_le_log_one_add
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.sum_le_log_one_add' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.sum_le_log_one_add
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.log_one_add_le_sum_add
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.log_one_add_le_sum_add' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.log_one_add_le_sum_add
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_1_4
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_1_4' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_1_4
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_4_8
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_4_8' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_4_8
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_8_12
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_8_12' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_8_12
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_12_14
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_12_14' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_12_14
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_14_76_5
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_14_76_5' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_14_76_5
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.constants_band_76_5_16
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.constants_band_76_5_16' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.constants_band_76_5_16
+
+/-! ## BinaryRow.ModerateSeparation -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_balanceCoeff
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_balanceCoeff' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_balanceCoeff
+
+/-! ## BinaryRow.ModerateBands -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_twentySevenQuarters
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_twentySevenQuarters' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_min_le_twentySevenQuarters
+
+/-! ## BinaryRow.HomEntropy -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_eq_log
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_eq_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_eq_log
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_comm
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_comm' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_comm
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mul
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mul' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mul
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_nonneg
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_nonneg
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_left
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_left' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_left
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_right
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_right' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_mono_right
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_separation
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_separation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_separation
+
+/-! ## BinaryRow.EntropyScaling -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.homBinEntropy_scale_le
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.homBinEntropy_scale_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.homBinEntropy_scale_le
+
+/-! ## BinaryRow.LargeSeparation -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.twoContact_condEntropy_label_le_score
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.twoContact_condEntropy_label_le_score' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.twoContact_condEntropy_label_le_score
+
+/-! ## BinaryRow.FactorTwentySevenQuarters -/
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.detScore_comp_injective
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.detScore_comp_injective' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.detScore_comp_injective
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.exists_rowWitnessCode
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.exists_rowWitnessCode' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.exists_rowWitnessCode
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau
+
+assert_no_sorry StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau_col
+/-- info: 'StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau_col' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms StochasticToDeterministicLatents.BinaryRow.T_le_twentySevenQuarters_mul_tau_col

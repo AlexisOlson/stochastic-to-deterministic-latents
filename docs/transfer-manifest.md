@@ -43,7 +43,9 @@ keep those differences visible.
 The certificate-free binary factor-nine theorem requires a self-contained paper
 proof, an accurate claim ledger, and the audited public Lean theorem and its
 admitted dependencies. The binary factor-two theorem is `kernel-verified`, with
-its prose proof at `paper proof`. The exact binary stochastic optimum is
+its prose proof at `paper proof`. So is the factor-seven theorem (constant
+27/4) for laws with one binary alphabet, whose prose proof is on two pages. The
+exact binary stochastic optimum is
 presented at `paper proof`; its value on full support with nonnegative
 determinant is `kernel-verified`, and its other Lean targets are stated and
 unproved. The sharper factor-five argument and its interval certificate are
@@ -61,6 +63,8 @@ sharper route. Local audits are in the
 | `docs/binary-stochastic-optimum.md`, `scripts/check_stochastic_optimum_identities.py` | Paper-proof exposition of the exact binary stochastic optimum, with a sympy replay of its identities | Blueprint nodes for its four rows; Lean proofs of the target signatures in the contracts page. |
 | `docs/binary-factor-two.md`, `scripts/check_factor_two_identities.py` | Prose exposition of the binary factor-two theorem, with a sympy replay of its identities and fixed logarithm comparisons | Blueprint nodes for its three component rows. The target signatures of the contracts page are supplied; the page's location of the singleton witness, and its chord-wide form of Theorem 2.5, are not. |
 | `Binary/FactorTwo.lean`, `Binary/FactorTwo/` | Fifty-one audited modules: the contact chord, the centre, the fixed cut, the seam and rays, and the two audited endpoints `T_le_two_mul_tau` and `exists_witnessCode` | Keep the all-law inequality distinct from the full-support clause naming the code, and neither stated as a sharpness claim. |
+| `docs/binary-rows-replica.md`, `docs/binary-rows-27-4.md` | Prose exposition of the binary-row theorem in two pages: the optimal latent, three codes and the replica bound; then the band estimates, large separation and the assembly | No script in `scripts/` replays the pages' finite constants. |
+| `BinaryRow/` | Twenty-seven audited modules: the two-label optimizer on `Bit × Y`, purification, the replica, the band and separation estimates, and the audited endpoints `T_le_twentySevenQuarters_mul_tau`, `T_le_twentySevenQuarters_mul_tau_col` and `exists_rowWitnessCode` | Keep the all-law inequality distinct from the full-support clause naming the code, which covers only `Bit × Y`; neither is a sharpness claim. |
 | `Pricing.lean` | Audited pricing identity, rebate, minimizer, and conditional theorem | Supplies the factor $`1+c`$ when an optimal latent's cost bound is given. |
 | `Binary/Table.lean`, `Binary/Selector.lean` | Audited table, support, catalog, and mathematical-selector interfaces | General support-partition canonicalization and executable refinement remain target contracts. |
 | `Binary/CountSelector.lean` | Executable count/rational definitions and audited structural lemmas | Prove normalization, score-key, support, and count/rational-to-real refinement. |

@@ -89,10 +89,12 @@ locally kernel-verified result.
 ## Contribution and evidence
 
 This repository provides a constructive explanation, a claim ledger, and a
-Lean library organized by mathematical dependency. Its certificate-free binary
+Lean library organized by mathematical dependency. Its certificate-free
 proofs give $`T(p) \le 2\,\tau(p)`$ and $`T(p) \le 9\,\tau(p)`$ for every
-binary law. On full support they also give a five-code witness at factor two,
-the law-only selector at factor nine, and a selected optimal latent with
+binary law, and $`T(p) \le (27\text/4)\,\tau(p)`$ for every law in which one
+alphabet is binary. On full support they also give a five-code witness at factor two, a
+three-code witness at $`27\text/4`$ (factor seven) in the row orientation, the
+law-only selector at factor nine, and a selected optimal latent with
 $`\mathrm{W3}(L) \le 8\,\tau(p)`$. Every headline theorem and its dependencies
 are audited in `Verify.lean`; the general-alphabet conjectures retain their
 separate evidence tier.

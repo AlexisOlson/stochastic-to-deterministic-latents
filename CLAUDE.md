@@ -1,7 +1,9 @@
 # Repository guidance
 
 This Lean 4 / Mathlib project proves the certificate-free binary factor-two and
-factor-nine theorems for stochastic-to-deterministic latents. Read [docs/claims.md](docs/claims.md)
+factor-nine theorems for stochastic-to-deterministic latents, and the
+factor-seven theorem (constant 27/4) for laws with one binary alphabet. Read
+[docs/claims.md](docs/claims.md)
 and [verification/README.md](verification/README.md) before editing. They define
 the mathematical scope and admission requirements.
 
@@ -33,7 +35,7 @@ not apply the lakefile's Lean options. Pass `-DrelaxedAutoImplicit=false` for
 scratch checks: unbound multi-character identifiers must be errors. Rebuild
 the root after import changes before running Verify, which reads its olean.
 
-The root exports 72 modules and Verify has 754 theorem endpoints. Recount
+The root exports 99 modules and Verify has 947 theorem endpoints. Recount
 after changes. A successful Verify run is silent and exits 0; a build may
 replay linter warnings. There is no separate test framework: the required
 checks are builds, theorem coverage, the axiom audit, and the claim ledger.
@@ -62,6 +64,13 @@ from future targets and map the public modules.
   supplies one, giving `T_le_two_mul_tau` for every law through `SparseLimit`.
   `FactorTwo.Witness` adds the full-support clause naming the code. Keep those
   two clauses distinct, and neither is a sharpness claim.
+- `BinaryRow/` proves `T p ≤ 27/4 * tau p` for every law on `Bit × Y` and
+  `Y × Bit`, with `Y : Type` finite. On full support over `Bit × Y`,
+  `exists_rowWitnessCode` names the constant code, the row code, or a purified
+  code of an optimal latent; with two labels the choice splits at 16 in the
+  ratio of the two contacts' row parameters. `SparseLimit` extends the bound on `T` to all laws, and
+  transposition gives `Y × Bit`. The code clause covers neither laws with a zero
+  cell nor the column orientation, and the constant is not claimed least.
 
 Preserve the distinction between an all-law bound on `T` and full-support
 guarantees for a selected optimal latent or the named selector. Neither scalar

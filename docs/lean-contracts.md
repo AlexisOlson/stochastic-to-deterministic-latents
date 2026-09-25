@@ -502,6 +502,62 @@ estimates above, and the second the constant gate above an eighth. With them,
 `Binary.gates_of_chordDomain` closes one of the three gates at every chord
 domain and `Binary.T_le_two_mul_tau` is the row's inequality for every law.
 
+## Binary rows
+
+This section serves the row `BIN-ROW-C27-4`, which is `kernel-verified` here
+in both clauses. The two pages
+[the optimal latent and the replica](binary-rows-replica.md) and
+[factor seven](binary-rows-27-4.md) are its prose derivation. The row had no
+target signature before it was proved; the declarations below are the
+existing ones.
+
+**Existing and audited.** Defined in
+[`BinaryRow/FactorTwentySevenQuarters.lean`](../StochasticToDeterministicLatents/BinaryRow/FactorTwentySevenQuarters.lean),
+in the namespace `BinaryRow` with `Binary` open, so that `Bit` is
+`Binary.Bit`, which is `Fin 2`. The block is copied from the source, with the
+section variable it depends on and without proof bodies:
+
+```lean
+variable {Y : Type} [Fintype Y] [DecidableEq Y]
+
+def IsRowCode (g : Code Bit Y) : Prop :=
+  ∃ e : Bit → Fin (Fintype.card (Bit × Y)), Function.Injective e ∧ ∀ z, g z = e z.1
+
+def IsOptimalPurifiedCode (p : Bit × Y → ℝ) (g : Code Bit Y) : Prop :=
+  ∃ (V : Latent p) (f : Bit × Y → V.ι) (e : V.ι → Fin (Fintype.card (Bit × Y))),
+    V.score = tau p ∧ (∀ v, 0 < V.prior v) ∧ Function.Injective V.comp ∧
+      IsPurifiedCode V f ∧ Function.Injective e ∧ ∀ z, g z = e (f z)
+
+def IsRowWitnessCode (p : Bit × Y → ℝ) (g : Code Bit Y) : Prop :=
+  g = StochasticToDeterministicLatents.constantCode ∨ IsRowCode g ∨ IsOptimalPurifiedCode p g
+
+theorem exists_rowWitnessCode (p : Bit × Y → ℝ) (hp : IsPMF p) (hpos : ∀ z, 0 < p z) :
+    ∃ g : Code Bit Y, IsRowWitnessCode p g ∧ detScore p g ≤ 27 / 4 * tau p
+
+theorem T_le_twentySevenQuarters_mul_tau (p : Bit × Y → ℝ) (hp : IsPMF p) :
+    T p ≤ 27 / 4 * tau p
+
+theorem T_le_twentySevenQuarters_mul_tau_col (p : Y × Bit → ℝ) (hp : IsPMF p) :
+    T p ≤ 27 / 4 * tau p
+```
+
+The three definitions are `Prop`-valued and are not themselves proof
+evidence; `BinaryRow.exists_rowWitnessCode` is. `IsPurifiedCode`, defined in
+[`BinaryRow/Purification.lean`](../StochasticToDeterministicLatents/BinaryRow/Purification.lean),
+is a labelling of the cells by a latent's labels that minimises the per-cell
+objective `BinaryRow.purifyObjective` at every cell of positive mass;
+`BinaryRow.exists_isPurifiedCode` supplies one for every latent and
+`BinaryRow.IsPurifiedCode.score_le` bounds its score. A purified code and the
+row code reach the canonical code alphabet through an injection, and
+`BinaryRow.detScore_comp_injective` states that such a recoding keeps the
+score.
+
+The code clause is stated for full support on `Bit × Y` only. The alphabet
+`Y` is taken in `Type`, while `T` and `tau` are defined for `Type*`. Nothing
+here is a target: no row asks for a sharper constant, for a code at a law with
+a zero cell, or for a statement when both alphabets have more than two
+letters.
+
 ## Arbitrary finite alphabets
 
 These declarations remain conjectural.
@@ -607,6 +663,14 @@ in this table. Their public theorems are audited in
 | The bound | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | The complete gate at every chord domain, and `T p <= 2 * tau p` for every law |
 | The witness | [FactorTwo.Witness](../StochasticToDeterministicLatents/Binary/FactorTwo/Witness.lean) | The constant code's own score, and that one of five named codes meets the factor-two bound on full support |
 | Separate code reduction | [Reduction](../StochasticToDeterministicLatents/Binary/Reduction.lean) | `BIN-REDUCE` over the canonical `BinaryCode` space |
+| Binary-row information toolkit | [BinaryRow.Shannon](../StochasticToDeterministicLatents/BinaryRow/Shannon.lean), [BinaryRow.Foundation](../StochasticToDeterministicLatents/BinaryRow/Foundation.lean), [BinaryRow.Interfaces](../StochasticToDeterministicLatents/BinaryRow/Interfaces.lean), [BinaryRow.EntropySums](../StochasticToDeterministicLatents/BinaryRow/EntropySums.lean) | Chain rules and transport, latents from joint laws, transposition of both optima, the elementary code bounds, and a latent's code interfaces and entropy sums |
+| Binary-row optimizer | [BinaryRow.Contact](../StochasticToDeterministicLatents/BinaryRow/Contact.lean), [BinaryRow.Optimizer](../StochasticToDeterministicLatents/BinaryRow/Optimizer.lean), [BinaryRow.Moments](../StochasticToDeterministicLatents/BinaryRow/Moments.lean), [BinaryRow.Presentation](../StochasticToDeterministicLatents/BinaryRow/Presentation.lean), [BinaryRow.Posterior](../StochasticToDeterministicLatents/BinaryRow/Posterior.lean) | Contacts on `Bit × Y`, the one-class or two-contact dichotomy on full support, and the oriented two-contact presentation |
+| Purification and the row replica | [BinaryRow.Purification](../StochasticToDeterministicLatents/BinaryRow/Purification.lean), [BinaryRow.Replica](../StochasticToDeterministicLatents/BinaryRow/Replica.lean), [BinaryRow.ReplicaCells](../StochasticToDeterministicLatents/BinaryRow/ReplicaCells.lean) | Purified codes, their existence, and each one's score at most the latent's score plus three times its label entropy given the pair, which bounds `T`; the replica's information bound and cells |
+| Bernoulli and entropy scalars | [BinaryRow.Bernoulli](../StochasticToDeterministicLatents/BinaryRow/Bernoulli.lean), [BinaryRow.ConcaveSign](../StochasticToDeterministicLatents/BinaryRow/ConcaveSign.lean), [BinaryRow.EntropyVariance](../StochasticToDeterministicLatents/BinaryRow/EntropyVariance.lean), [BinaryRow.JensenGap](../StochasticToDeterministicLatents/BinaryRow/JensenGap.lean) | Pinsker and Ordentlich–Weinberger bounds, binary entropy against variance, the Jensen gap on a band, and the sign of a concave function with two zeros |
+| Separation bands | [BinaryRow.Balance](../StochasticToDeterministicLatents/BinaryRow/Balance.lean), [BinaryRow.ComponentInfo](../StochasticToDeterministicLatents/BinaryRow/ComponentInfo.lean), [BinaryRow.SeparationBand](../StochasticToDeterministicLatents/BinaryRow/SeparationBand.lean), [BinaryRow.ReplicaInfo](../StochasticToDeterministicLatents/BinaryRow/ReplicaInfo.lean), [BinaryRow.BandConstants](../StochasticToDeterministicLatents/BinaryRow/BandConstants.lean) | The balance coefficient, the band's information bounds, and rational constants for six bands |
+| Moderate separation | [BinaryRow.ModerateSeparation](../StochasticToDeterministicLatents/BinaryRow/ModerateSeparation.lean), [BinaryRow.ModerateBands](../StochasticToDeterministicLatents/BinaryRow/ModerateBands.lean) | The smaller of the mutual information and the row entropy given the column, at most `27/4` times a two-contact score, for separation ratio at most 16 |
+| Large separation | [BinaryRow.HomEntropy](../StochasticToDeterministicLatents/BinaryRow/HomEntropy.lean), [BinaryRow.EntropyScaling](../StochasticToDeterministicLatents/BinaryRow/EntropyScaling.lean), [BinaryRow.LargeSeparation](../StochasticToDeterministicLatents/BinaryRow/LargeSeparation.lean) | Homogeneous binary entropy, and the label's entropy given the row at most `325/173` times a two-contact score, for separation ratio at least 16 |
+| The binary-row bound | [BinaryRow.FactorTwentySevenQuarters](../StochasticToDeterministicLatents/BinaryRow/FactorTwentySevenQuarters.lean) | `BIN-ROW-C27-4`: all-law `T p <= 27/4 * tau p` on `Bit × Y` and `Y × Bit`, and on full support over `Bit × Y` one of three named codes meeting the bound |
 
 The import graph of the library, generated from the `import` lines by
 `scripts/gen_diagrams.py` (an edge from A to B means A imports B; the root
@@ -694,6 +758,35 @@ graph TD
       Binary_FactorTwo_Touch["Touch"]
       Binary_FactorTwo_Witness["Witness"]
     end
+  end
+  subgraph BINARYROW["BinaryRow/"]
+    BinaryRow_Balance["Balance"]
+    BinaryRow_BandConstants["BandConstants"]
+    BinaryRow_Bernoulli["Bernoulli"]
+    BinaryRow_ComponentInfo["ComponentInfo"]
+    BinaryRow_ConcaveSign["ConcaveSign"]
+    BinaryRow_Contact["Contact"]
+    BinaryRow_EntropyScaling["EntropyScaling"]
+    BinaryRow_EntropySums["EntropySums"]
+    BinaryRow_EntropyVariance["EntropyVariance"]
+    BinaryRow_FactorTwentySevenQuarters["FactorTwentySevenQuarters"]
+    BinaryRow_Foundation["Foundation"]
+    BinaryRow_HomEntropy["HomEntropy"]
+    BinaryRow_Interfaces["Interfaces"]
+    BinaryRow_JensenGap["JensenGap"]
+    BinaryRow_LargeSeparation["LargeSeparation"]
+    BinaryRow_ModerateBands["ModerateBands"]
+    BinaryRow_ModerateSeparation["ModerateSeparation"]
+    BinaryRow_Moments["Moments"]
+    BinaryRow_Optimizer["Optimizer"]
+    BinaryRow_Posterior["Posterior"]
+    BinaryRow_Presentation["Presentation"]
+    BinaryRow_Purification["Purification"]
+    BinaryRow_Replica["Replica"]
+    BinaryRow_ReplicaCells["ReplicaCells"]
+    BinaryRow_ReplicaInfo["ReplicaInfo"]
+    BinaryRow_SeparationBand["SeparationBand"]
+    BinaryRow_Shannon["Shannon"]
   end
   UPSTREAM[("stoch_to_det.* (pinned upstream)")]
   MATHLIB[("Mathlib.*")]
@@ -824,6 +917,56 @@ graph TD
   Binary_Table --> MATHLIB
   Binary_TransposeNormalForm --> Binary_Symmetry
   Binary_TransposeNormalForm --> MATHLIB
+  BinaryRow_Balance --> MATHLIB
+  BinaryRow_BandConstants --> BinaryRow_Bernoulli
+  BinaryRow_BandConstants --> MATHLIB
+  BinaryRow_Bernoulli --> MATHLIB
+  BinaryRow_ComponentInfo --> BinaryRow_Bernoulli
+  BinaryRow_ComponentInfo --> BinaryRow_Posterior
+  BinaryRow_ConcaveSign --> MATHLIB
+  BinaryRow_Contact --> Binary_TransposeNormalForm
+  BinaryRow_EntropyScaling --> BinaryRow_HomEntropy
+  BinaryRow_EntropyScaling --> BinaryRow_BandConstants
+  BinaryRow_EntropySums --> BinaryRow_ReplicaCells
+  BinaryRow_EntropySums --> MATHLIB
+  BinaryRow_EntropyVariance --> MATHLIB
+  BinaryRow_FactorTwentySevenQuarters --> BinaryRow_ModerateBands
+  BinaryRow_FactorTwentySevenQuarters --> BinaryRow_LargeSeparation
+  BinaryRow_FactorTwentySevenQuarters --> BinaryRow_Optimizer
+  BinaryRow_FactorTwentySevenQuarters --> BinaryRow_Purification
+  BinaryRow_FactorTwentySevenQuarters --> SparseLimit
+  BinaryRow_Foundation --> BinaryRow_Shannon
+  BinaryRow_HomEntropy --> MATHLIB
+  BinaryRow_Interfaces --> BinaryRow_Foundation
+  BinaryRow_JensenGap --> BinaryRow_Bernoulli
+  BinaryRow_LargeSeparation --> BinaryRow_EntropyScaling
+  BinaryRow_LargeSeparation --> BinaryRow_ReplicaCells
+  BinaryRow_LargeSeparation --> BinaryRow_EntropySums
+  BinaryRow_LargeSeparation --> BinaryRow_ComponentInfo
+  BinaryRow_ModerateBands --> BinaryRow_ModerateSeparation
+  BinaryRow_ModerateBands --> BinaryRow_BandConstants
+  BinaryRow_ModerateSeparation --> BinaryRow_ReplicaInfo
+  BinaryRow_ModerateSeparation --> BinaryRow_SeparationBand
+  BinaryRow_ModerateSeparation --> BinaryRow_JensenGap
+  BinaryRow_ModerateSeparation --> BinaryRow_EntropyVariance
+  BinaryRow_ModerateSeparation --> BinaryRow_EntropySums
+  BinaryRow_ModerateSeparation --> BinaryRow_Interfaces
+  BinaryRow_Moments --> BinaryRow_Contact
+  BinaryRow_Optimizer --> BinaryRow_Contact
+  BinaryRow_Optimizer --> BinaryRow_Shannon
+  BinaryRow_Posterior --> BinaryRow_Presentation
+  BinaryRow_Presentation --> BinaryRow_Optimizer
+  BinaryRow_Presentation --> BinaryRow_Moments
+  BinaryRow_Purification --> BinaryRow_Foundation
+  BinaryRow_Replica --> BinaryRow_Foundation
+  BinaryRow_ReplicaCells --> BinaryRow_Replica
+  BinaryRow_ReplicaCells --> BinaryRow_Posterior
+  BinaryRow_ReplicaInfo --> BinaryRow_ReplicaCells
+  BinaryRow_ReplicaInfo --> BinaryRow_ComponentInfo
+  BinaryRow_ReplicaInfo --> BinaryRow_Balance
+  BinaryRow_SeparationBand --> BinaryRow_ComponentInfo
+  BinaryRow_SeparationBand --> BinaryRow_Balance
+  BinaryRow_Shannon --> Bridge
   Bridge --> Latent
   Bridge --> Deterministic
   Bridge --> UPSTREAM
