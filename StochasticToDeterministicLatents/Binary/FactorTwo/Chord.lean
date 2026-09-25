@@ -13,8 +13,9 @@ two ends and its midpoint are ordered, the law itself lies on it whenever the
 diagonal is ordered, and at each of its points the two named competitors --
 the constant code and the code isolating the last cell -- are measured against
 one budget: twice `Psi` at the point, less twice `Phi` at the common contact.
-At the law itself that budget is twice the stochastic optimum, so if either
-margin is nonnegative everywhere on the segment, then `T p ≤ 2 * tau p`.
+At the law itself that budget is twice the stochastic optimum, so if at every
+point of the segment one of the two margins is nonnegative, then
+`T p ≤ 2 * tau p`.
 
 ## Attribution
 
@@ -471,8 +472,8 @@ theorem chordMargin_witness (h : ChordDomain p u)
   · rw [singletonMargin_entryA h] at hD
     exact Or.inr (by linarith)
 
-/-- If one of the two margins is nonnegative everywhere on the chord, then the
-deterministic optimum is at most twice the stochastic one. -/
+/-- If at every point of the chord one of the two margins is nonnegative, then
+the deterministic optimum is at most twice the stochastic one. -/
 theorem T_le_two_tau_of_chordMargin (h : ChordDomain p u)
     (hmargin : ∀ t ∈ Set.Icc (chordMidpoint p) (chordTop p u),
       0 ≤ constantMargin p u t ∨ 0 ≤ singletonMargin p u t) :

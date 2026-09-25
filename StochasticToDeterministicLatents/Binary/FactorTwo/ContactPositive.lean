@@ -3,8 +3,8 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.Chord
 /-!
 # A positive mutual information at the contact
 
-Every earlier module in this lane stops at *nonnegative* mutual information,
-which is all `psi_sub_phi_nonneg` gives.  The chord argument's statement of the
+`Chord` states only a *nonnegative* mutual information at the contact, which is
+all `psi_sub_phi_nonneg` gives.  The chord argument's statement of the
 constant margin at the upper contact asks for more: that the mutual information
 there is strictly positive.  This module supplies it.
 
@@ -171,8 +171,8 @@ private theorem determinant_contactAt (hpos : FullSupport p) (hu : 0 < u)
   nlinarith [h]
 
 /-- **The constant margin at the upper contact is strictly positive.**  This is
-the conjunct the chord-cut argument states and that the tree previously had only
-in its nonnegative form: the margin there is the contact's own mutual
+the conjunct the chord-cut argument states; `constantMargin_chordTop` gives only
+its nonnegative form.  The margin there is the contact's own mutual
 information, and the contact is not a product law because its determinant is
 `u ^ 2 - bc`, which the top root keeps positive. -/
 theorem constantMargin_chordTop_pos (h : ChordDomain p u) :

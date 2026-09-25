@@ -34,7 +34,8 @@ u ^ 3 - v * u ^ 2 - w * u - w * s = u ^ 2 * (u * chartNorm - omega) = 0,
 which is `chartRoot_cubic`, and the polynomial on the left is `cubic` written
 out in `offDiagonalMass`, `offDiagonalProduct` and `diagonalMass`.  So the
 chart's scalars are those three quantities and the cubic's root, in
-coordinates, and `chartDiscriminant` is the cubic's discriminant `v ^ 2 - 4 w`.
+coordinates, and `chartDiscriminant` is `v ^ 2 - 4 w`, the discriminant of the
+quadratic whose roots are the two off-diagonal cells.
 
 Nothing here mentions a law: the identification of these scalars with the cells
 of a chord domain is a separate step, and no declaration in this module is
@@ -141,7 +142,8 @@ theorem chartRoot_cubic (h : ChartDomain r omega) :
     ring
   rw [key, hun, sub_self, mul_zero]
 
-/-- **The discriminant is the cubic's.** -/
+/-- **The discriminant of `t ^ 2 - v t + w`**, in the chart's off-diagonal mass
+`v` and product `w`: `v ^ 2 - 4 w`. -/
 theorem chartDiscriminant_eq (r omega : ℝ) :
     chartDiscriminant r omega
       = chartOffDiagonalMass r omega ^ 2 - 4 * chartOffDiagonalProduct r omega := by
@@ -171,8 +173,8 @@ theorem chart_identities (h : ChartDomain r omega) :
 
 /-! ## Positivity on the domain -/
 
-/-- **The chart's positivity, proved once.**  Every module above this one works
-on a `ChartDomain`, and each of these is wanted there. -/
+/-- **The chart's positivity, proved once.**  Each of these is wanted wherever a
+later module works on a `ChartDomain`. -/
 theorem chart_pos (h : ChartDomain r omega) :
     0 < chartNorm r omega ∧ 0 < chartRoot r omega ∧ chartRoot r omega < 1
       ∧ 0 < chartOffDiagonalMass r omega ∧ 0 < chartDiagonalMass r omega

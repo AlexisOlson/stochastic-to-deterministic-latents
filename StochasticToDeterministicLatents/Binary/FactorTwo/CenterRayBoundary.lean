@@ -11,7 +11,8 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.ChordScalars
 At the critical radius the diagonal product `entryA * entryD` is exactly the
 square of the ray's root, so the geometric mean of the diagonal *is* that
 root.  **No `ChordDomain` holds there, at any top root.**  Such a domain's
-`nonconstant` field (`Chord.lean:213`) would put its own root strictly below
+`nonconstant` field (`ChordDomain.nonconstant`) would put its own root
+strictly below
 that geometric mean, hence strictly below the ray's root; its `topRoot`
 field then makes the cubic strictly positive at every larger point, and
 `rayLaw_cubic` says the cubic vanishes at the ray's root.  So everything
@@ -38,10 +39,10 @@ statement below therefore carries an explicit `Real.log 2`, as in
 **What is not proved here.**  The page states that the mutual information at
 the critical radius is *positive*, and gives a reason: the law there is not a
 product law.  This module proves only that it is **nonnegative**, through
-`psi_sub_phi_nonneg`.  `psi_sub_phi_pos` now supplies the
+`psi_sub_phi_nonneg`.  `psi_sub_phi_pos` supplies the
 strict inequality for any full-support law of nonvanishing determinant, but
 nothing here shows that the law at the critical radius has one, so the
-endpoint below is still stated in its nonnegative form.  The endpoint
+endpoint below is stated in its nonnegative form.  The endpoint
 comparison that consumes it uses only the nonnegativity, so nothing waits
 on the strict inequality.
 -/
@@ -211,8 +212,8 @@ private theorem log_two_mul_entropy_rayLaw (hz : z ∈ Set.Ico (0 : ℝ) 1)
     unfold centerMarginalEntropy
     ring
 
-/-- `Phi` along the ray.  The private material's `lowerPhi` is `-Phi`, so this
-statement is the negation of the one it was adapted from. -/
+/-- `Phi` along the ray, in natural-log units.  The statement it was adapted
+from carried `-Phi`; this is its negation. -/
 private theorem log_two_mul_phi_rayLaw (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Icc (0 : ℝ) (criticalRadius z)) :
     Real.log 2 * Phi (rayLaw z r)

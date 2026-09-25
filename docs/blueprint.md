@@ -7,8 +7,9 @@ repository. The arbitrary-alphabet factor-nine statement remains open.
 The [claim ledger](claims.md) records exact evidence status. Start with the
 [definitions](#1-laws-entropy-and-codes) and [pricing rule](#2-price-the-act-of-determinizing),
 or go directly to the [law-only selector](#5-recover-the-code-from-the-law).
-The [factor-nine proof](binary-factor-nine.md) gives the complete verified
-argument.
+The [factor-two proof](binary-factor-two.md) gives the headline bound; the
+[factor-nine proof](binary-factor-nine.md) is the argument whose mechanism
+this page describes.
 
 ## 1. Laws, entropy, and codes
 

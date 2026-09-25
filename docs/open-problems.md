@@ -15,7 +15,7 @@ $`2 \times 2`$ laws only, so $`C_2 \le C_*`$.
 | Fact | Status |
 |---|---|
 | $`C_* \ge 1.960073002187`$, witnessed by a $`12 \times 12`$ law | external `native_decide` certificate ([`LOWER-1960`](claims.md#ledger)); not reproduced here |
-| $`C_* \le 1771`$ | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the pinned revision, which is its current `main`; open upstream pull requests claim smaller constants, down to `96`, and are not merged or verified here |
+| $`C_* \le 1771`$ | `kernel-verified` upstream in [`DLorell/stoch_to_det`](https://github.com/DLorell/stoch_to_det) at the revision pinned here; not re-checked in this repository and not a ledger row |
 | $`C_2 \le 9`$ | `kernel-verified` here, certificate-free ([`BIN-C9`](claims.md#ledger)) |
 | $`C_* \le 9`$ | `conjecture` ([`GEN-C9`](claims.md#ledger)) |
 | $`C_2 \le 2`$ | `kernel-verified` here, certificate-free ([`BIN-C2`](claims.md#ledger)) |
@@ -45,13 +45,13 @@ that share the off-diagonal cells and the contact pair, the proof compares two
 deterministic scores, the constant code and the singleton at the lighter
 diagonal cell, with $`2\,\tau`$: the singleton margin is concave and the
 constant margin has no interior minimum on any subinterval
-([`BIN-CHORD-CUT`](claims.md#ledger)), so one point with both margins
-nonnegative, together with a nonnegative singleton margin at the center,
-settles the chord. That point is the chord center when the
-disagreement mass $`p_{01} + p_{10}`$ is at least $`1\text{/}8`$
-([`BIN-CENTER`](claims.md#ledger)), and otherwise the chord point whose
-smaller diagonal cell is three times the smaller contact mass
-([`BIN-FIXED-CUT`](claims.md#ledger)). Laws with a zero cell inherit the bound
+([`BIN-CHORD-CUT`](claims.md#ledger)), so a nonnegative constant margin at the
+chord center settles the chord, and so does one point with both margins
+nonnegative, together with a nonnegative singleton margin at the center. The
+first case holds when the disagreement mass $`p_{01} + p_{10}`$ is at least
+$`1\text{/}8`$ ([`BIN-CENTER`](claims.md#ledger)); the second holds otherwise,
+at the chord point whose smaller diagonal cell is three times the smaller
+contact mass ([`BIN-FIXED-CUT`](claims.md#ledger)). Laws with a zero cell inherit the bound
 from the kernel-verified transfer theorem `T_le_mul_tau_of_forall_fullSupport`.
 The factor-nine route does not approach $`2`$: its constant is $`1 + 8`$ from
 the pricing rule. Harwood and Gillen report numerical experiments on binary

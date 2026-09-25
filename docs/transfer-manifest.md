@@ -24,7 +24,7 @@ The decision words are normative:
 | **adapt** | Exact `W3` identity, nonnegative rebate, minimizer, and pricing rule | Organize by mathematical dependency rather than source layout. | Re-run local no-`sorry` and axiom checks before changing claim status. |
 | **adapt** | Exact binary geometry and finite-code reduction | Transfer one theorem dependency at a time with neutral public names. | Keep chart hypotheses and boundary scope explicit. |
 | **rewrite** | Certificate-free binary factor-eight estimate | Present the two phase arguments and their exact finite rational-log ledgers without the research chronology. | Keep the selected-latent estimate restricted to full support. State the locally verified full-support selector bound separately from the all-law `T` bound and finite-code witness. |
-| **rewrite** | Exact binary stochastic optimum: the rational constant-optimality test, the two-component bound on every support, the cubic locating the optimal pair, and the disagreement band | Present as one `paper proof` page under the public `Phi`, with every display re-derived rather than transcribed; ledger rows at `paper proof`; Lean targets in the contracts page. | Independent read against the source proofs and a cold read of the public tree before commit; the sympy replay script is not evidence; no row compares `tau` with `T`. |
+| **rewrite** | Exact binary stochastic optimum: the rational constant-optimality test, the two-component bound on every support, the cubic locating the optimal pair, and the disagreement band | Present as one `paper proof` page under the public `Phi`, with every display re-derived rather than transcribed; ledger rows at `paper proof`; Lean targets in the contracts page. | Independent read against the source proofs and a cold read of the public tree before commit; the sympy replay script is not evidence; its rows compare `tau` with `T` only through the equality that holds where the constant latent is optimal. |
 | **adapt** | Exact count/rational selector core | Expose the determinant, endpoint-mass, support, and final-score tie rules. | Do not publish uninhabited interfaces as results. |
 | **defer** | Sharper binary factor-five argument, its factor-four interval-certificate verifier, the certificate contract, and any immutable certificate inputs | Held for a later release; nothing from this route appears in this one. | Reconsider only with a standalone verifier having explicit directed rounding, complete domain coverage, deterministic fingerprints, and mutations that exercise every essential coefficient, orientation, and domain edge; exact input bytes only after provenance and license review, with SHA-256 values and generation origin recorded beside each input. |
 | **rewrite** | Small exact worked cases | Add an example only when it exercises a public definition or theorem boundary. | Include exact input, selected code, and intended comparison. |
@@ -42,10 +42,12 @@ keep those differences visible.
 
 The certificate-free binary factor-nine theorem requires a self-contained paper
 proof, an accurate claim ledger, and the audited public Lean theorem and its
-admitted dependencies. The exact binary stochastic optimum is presented at
-`paper proof`, with its Lean targets stated and unproved. The sharper
-factor-five argument and its interval certificate are deferred to a later
-release and do not appear in this one.
+admitted dependencies. The binary factor-two theorem is `kernel-verified`, with
+its prose proof at `paper proof`. The exact binary stochastic optimum is
+presented at `paper proof`; its value on full support with nonnegative
+determinant is `kernel-verified`, and its other Lean targets are stated and
+unproved. The sharper factor-five argument and its interval certificate are
+deferred to a later release and do not appear in this one.
 
 ## Artifact status and remaining work
 

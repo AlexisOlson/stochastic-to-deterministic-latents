@@ -16,9 +16,9 @@ label compression, so every zero-count cell receives label zero.  The final
 integer-key comparison retains the constant code on equality.
 
 The elementary score identity connecting these natural-number keys to the
-real deterministic score is a deferred proof obligation.  Consequently this
-module supplies an executable draft and structural lemmas, not yet a proved
-refinement theorem for `Binary.selector`.
+real deterministic score is not proved here.  This module supplies executable
+definitions and structural lemmas; the refinement theorem for
+`Binary.selector` is open.
 
 ## Attribution
 
@@ -136,9 +136,9 @@ The executable law-only selector for natural count tables.
 
 For positive total, the deferred score-key identity says that the sign of
 `D_p(singleton) - D_p(constant)` is the sign of the logarithm of
-`singletonScoreNumerator / singletonScoreDenominator`.  Thus a smaller
-numerator selects the singleton; equality and a larger numerator select the
-constant.  Natural powers supply the required convention `0^0 = 1`.
+`singletonScoreNumerator / singletonScoreDenominator`.  Thus a numerator
+strictly below the denominator selects the singleton; otherwise the constant
+code is selected.  Natural powers supply the required convention `0^0 = 1`.
 -/
 def selector (q : CountTable) : BinaryCode :=
   match q.activeCell? with

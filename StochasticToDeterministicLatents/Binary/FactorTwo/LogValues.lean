@@ -77,7 +77,7 @@ theorem log_seven_bounds :
   norm_num at hs1 hs2
   constructor <;> linarith [Real.log_two_gt_d9, Real.log_two_lt_d9]
 
-/-- `Real.log 11` to eight places. -/
+/-- `Real.log 11` to within two units in the eighth place. -/
 theorem log_eleven_bounds :
     (239789526 : ℝ) / 10 ^ 8 ≤ Real.log 11 ∧
       Real.log 11 ≤ (239789528 : ℝ) / 10 ^ 8 := by

@@ -9,12 +9,14 @@ T(p) \le 2\,\tau(p),
 ```
 
 where $`T`$ is the deterministic optimum and $`\tau`$ is the stochastic
-optimum. On full support it also names the code: the constant code or one of
-the four singleton codes has score at most $`2\,\tau(p)`$. The weaker
+optimum. On full support, one of five explicit codes, the constant code or one
+of the four singleton codes, has score at most $`2\,\tau(p)`$; the Lean
+statement does not say which. The weaker
 $`T(p) \le 9\,\tau(p)`$ is proved by an independent route. Both proofs are
-kernel-verified in the public Lean library and certificate-free: every analytic
-step is an exact rational-logarithm bound proved in Lean, with nothing
-delegated to a numerical certificate. Neither constant is claimed to be sharp.
+kernel-verified in the public Lean library and certificate-free: every
+numerical comparison is an exact rational bound on logarithms proved in Lean,
+with nothing delegated to an interval certificate. Neither constant is claimed
+to be sharp.
 
 Here $`p`$ is the joint law of two observations $`(X,Y)`$. A finite stochastic
 latent $`L`$ coupled to them has score
@@ -28,8 +30,8 @@ the notation.
 | To begin | Read |
 |---|---|
 | Understand the construction | [Constructive blueprint](docs/blueprint.md), including the [selector recipe](docs/blueprint.md#5-recover-the-code-from-the-law) |
-| Follow the complete proof | [Binary factor nine](docs/binary-factor-nine.md) |
-| Follow the factor-two proof | [Binary factor two](docs/binary-factor-two.md) |
+| Follow the headline proof | [Binary factor two](docs/binary-factor-two.md) |
+| Follow the independent factor-nine proof and the law-only selector | [Binary factor nine](docs/binary-factor-nine.md) |
 | Inspect the Lean statements | [Existing endpoints and target contracts](docs/lean-contracts.md) |
 | Check the verification | [Verification procedure](verification/README.md) |
 | Pick a problem | [Open problems](docs/open-problems.md), with the standing of each target and where a contribution lands |
@@ -39,9 +41,9 @@ the notation.
 
 | Scope | Bound | Construction | Current evidence |
 |---|---:|---|---|
-| Binary $`2 \times 2`$ | $`T(p) \le 9\,\tau(p)`$ | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
-| Binary $`2 \times 2`$ | $`\tau(p)`$ exactly, from one cubic root; every optimal latent has at most two component laws | [Binary stochastic optimum](docs/binary-stochastic-optimum.md) | `paper proof` |
 | Binary $`2 \times 2`$ | $`T(p) \le 2\,\tau(p)`$ | [Binary factor two](docs/binary-factor-two.md): on full support, the constant code or a singleton code, compared with the exact optimum along each contact chord; sparse laws by the kernel-verified transfer | `kernel-verified` in this repository; certificate-free |
+| Binary $`2 \times 2`$ | $`T(p) \le 9\,\tau(p)`$ | Law-only selector on full support; attained code on sparse laws | `kernel-verified` in this repository; certificate-free |
+| Binary $`2 \times 2`$ | $`\tau(p)`$ exactly, from one cubic root; every optimal latent has at most two component laws | [Binary stochastic optimum](docs/binary-stochastic-optimum.md) | `paper proof`; the value on full support with nonnegative determinant is also `kernel-verified` |
 | Arbitrary finite alphabets | $`T(p) \le 9\,\tau(p)`$ | Open | `conjecture` |
 
 For a full-support binary law, the deterministic witness can be chosen from the
@@ -97,10 +99,14 @@ conjecture remain open.
 With Lean's `elan` installed, from the repository root:
 
 ```sh
-lake exe cache get          # fresh clone only: fetch the Mathlib oleans
-lake build                  # the root library; ends with "Build completed successfully"
-lake env lean Verify.lean   # the audit; prints nothing and exits 0 on success
+lake exe cache get
+lake build StochasticToDeterministicLatents
+lake env lean -DrelaxedAutoImplicit=false Verify.lean
 ```
+
+The first command fetches the Mathlib cache on a fresh clone. The build ends
+with "Build completed successfully", and the audit prints nothing and exits 0
+on success.
 
 `Verify.lean` carries, for each of the 754 public theorem endpoints, an
 `assert_no_sorry` check and a `#print axioms` result pinned with `#guard_msgs`.
@@ -126,9 +132,9 @@ naming the problem before starting anything large.
 ## Reference
 
 - [Blueprint](docs/blueprint.md): notation, pricing, and the selector recipe.
-- [Binary factor nine](docs/binary-factor-nine.md): the complete proof, with every analytic step an exact rational-logarithm bound.
+- [Binary factor nine](docs/binary-factor-nine.md): the independent factor-nine proof, which also bounds the law-only selector.
 - [Binary stochastic optimum](docs/binary-stochastic-optimum.md): $`\tau(p)`$ in closed form for every binary law, at `paper proof`.
-- [Binary factor two](docs/binary-factor-two.md): the binary constant two, from two deterministic scores compared with the exact stochastic optimum along each contact chord. The prose derivation on that page; the theorem itself is `kernel-verified`.
+- [Binary factor two](docs/binary-factor-two.md): the binary constant two, from two deterministic scores compared with the exact stochastic optimum along each contact chord. The page gives the prose derivation at `paper proof`; the theorem itself is `kernel-verified`.
 - [Claim ledger](docs/claims.md) and [Lean contracts](docs/lean-contracts.md): statements, scope, and existing or proposed signatures.
 - [Verification](verification/README.md): commands, trust model, and admission requirements.
 - [Examples](examples/README.md): exact inputs, branch calculations, and selected partitions.

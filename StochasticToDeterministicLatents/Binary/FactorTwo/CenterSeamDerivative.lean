@@ -592,7 +592,7 @@ private theorem hasDerivAt_seamHeight (hr : r ∈ Set.Ioo ((1 : ℝ) / 2) 1)
 /-! ## The margin's derivative -/
 
 /-- **The isolating code's margin at the seam, differentiated in the radius.**
-Its derivative is the squared imbalance's derivative, over four times the
+Its derivative is the squared imbalance's derivative, over `32` times the
 imbalance, times the logarithm `seam_logRatio_pos` puts above zero. -/
 theorem hasDerivAt_seamSingletonScalar (hr : r ∈ Set.Ioo ((1 : ℝ) / 2) 1)
     (hh : 0 < seamImbalanceSq r) :

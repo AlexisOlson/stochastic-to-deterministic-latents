@@ -17,8 +17,18 @@ function Invoke-Logged {
         }
     }
     $timer = [Diagnostics.Stopwatch]::StartNew()
-    & $Executable @Arguments 2>&1 | Tee-Object -FilePath (Join-Path $taskLogRoot "$Label.log")
-    $code = $LASTEXITCODE
+    # Under 'Stop', Windows PowerShell 5.1 turns the first stderr line of a
+    # native command into a terminating error. Judge the command by its exit
+    # code instead, and log stderr lines as plain text.
+    $previous = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        & $Executable @Arguments 2>&1 | ForEach-Object { "$_" } |
+            Tee-Object -FilePath (Join-Path $taskLogRoot "$Label.log")
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previous
+    }
     $timer.Stop()
     [ordered]@{
         command = "$Executable $($Arguments -join ' ')"

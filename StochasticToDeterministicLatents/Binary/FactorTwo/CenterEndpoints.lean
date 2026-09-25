@@ -32,8 +32,7 @@ nonnegative.  So the margin is at least
 because that numerator is strict: the mass at any radius strictly inside the
 ray is strictly below its value at the critical radius.  **It does not come
 from the far endpoint**, which is only known to be nonnegative, so the
-positivity the page states there is still not proved anywhere in this tree and
-is still not needed.
+positivity the page states there is not proved in this tree and is not needed.
 
 **Units.**  `constantMargin` and `singletonMargin` are in bits, so every bound
 below is in bits; the ray scalars they come from are in natural-log units, and

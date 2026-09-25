@@ -1,7 +1,8 @@
 # Binary factor nine
 
-This is the binary proof. Every analytic step is an exact rational-logarithm
-bound proved in Lean; no step is delegated to a numerical certificate, which
+This page proves the binary factor-nine theorem, by a route independent of the
+factor-two proof. Every numerical comparison is an exact rational bound on
+logarithms proved in Lean; none is delegated to an interval certificate, which
 is what "certificate-free" means throughout this repository.
 
 Let $`p`$ be a probability law on $`\{0,1\} \times \{0,1\}`$. With the notation
@@ -30,10 +31,9 @@ section 6 transfers the bound on $`T`$;
 The sparse conclusion includes no $`\mathrm{W3}`$ estimate and no bound for the
 named selector.
 
-The proof uses exact rational-log bounds and no interval certificate. See the
-[verification procedure](../verification/README.md) and the
-[admission record](../verification/admissions.md) for its audits and discovered
-axiom sets.
+See the [verification procedure](../verification/README.md) and the
+[admission record](../verification/admissions.md) for the proof's audits and
+discovered axiom sets.
 
 For the construction, start with the [blueprint's selector recipe](blueprint.md#5-recover-the-code-from-the-law)
 and [section 7](#7-pricing-and-recovery-from-the-law), which connects the chart
@@ -48,9 +48,10 @@ witness to the code chosen from the law. For the full proof, follow these steps:
 
 ## 1. Binary normal form
 
-For a full-support binary law, the optimizer-selection theorem supplies an
-attained $`\tau`$-optimal latent with at most two distinct active
-component laws.
+For a full-support binary law, the optimizer-selection theorem
+`Binary.selectedOptimizerNormalForm` supplies an attained $`\tau`$-optimal
+latent with at most two distinct active component laws. Attainment itself is
+`exists_optimalLatent`, which holds for every finite law.
 
 If there is one active component, the latent is constant. The constant code has
 $`\mathrm{W3Cost} = 0`$, so $`\mathrm{W3}(L) = 0`$.
@@ -96,8 +97,26 @@ e &= r + \pi\,(1-r), \\
 
 The observable law on the chart is $`(A,\ell,e,D)\text{/}Q`$.
 
-The exact binary code reduction applies to the global minimum over all
-deterministic codes. It leaves two candidates: the constant code and the
+The constraint on $`AD`$ is the contact equation. It is the cubic of the
+[stochastic-optimum page](binary-stochastic-optimum.md#6-the-cubic) in these
+coordinates: after the $`Y`$ labels are exchanged the law is
+$`(\ell,A,D,e)\text{/}Q`$, whose diagonal mass, off-diagonal mass and
+off-diagonal product (that page's $`s`$, $`v`$ and $`w`$) are $`(1+r)\text{/}Q`$,
+$`s\text{/}Q`$ and $`AD\text{/}Q^2`$. Substituting these into display (6.1) of
+that page gives
+
+```math
+Q^3\,f_p(x^2\text{/}Q) = x^4\,(x^2-s) - AD\,(1+x^2+r).
+```
+
+So the constraint says that $`x^2\text{/}Q`$ is the positive root $`u_0`$ of
+Lemma 6.1 of the stochastic-optimum page. The lower bound on $`s`$ is AM-GM: $`A+D=s`$ gives
+$`s^2 \ge 4AD`$, that is $`s^2\,(1+x^2+r) + 4rs - 4rx^2 \ge 0`$. The left side
+increases in $`s \ge 0`$ and vanishes at $`s=2m`$, where $`A=D=m`$.
+
+The exact binary code reduction applies to the minimum over the canonical
+four-label codes (`BinaryCode`) on the chart. It leaves two candidates: the
+constant code and the
 singleton isolating the high likelihood-ratio cell.
 
 ## 2. The two-arm identity
@@ -206,7 +225,7 @@ b'(z) &= \beta(z) = \log(1 + C\text{/}U(z)).
 
 Hence $`b`$ is nonnegative, increasing, and concave, while $`\beta`$ is
 nonnegative, decreasing, and convex. Nonnegative, not positive: at $`\pi = 0`$
-the contact mass $`C`$ vanishes and $`\beta`$ is identically zero. Strict
+the mixing parameter $`C`$ vanishes and $`\beta`$ is identically zero. Strict
 positivity needs extra hypotheses on the chart, and the argument below never
 uses it.
 
@@ -220,8 +239,8 @@ put $`y=(u-1)\text{/}(u+1)`$. Then $`\lvert y \rvert<1`$ and
 \end{aligned}
 ```
 
-Taking $`n=100`$ and comparing the rational partial sum and remainder proves
-each displayed fixed logarithm inequality below without floating-point input.
+A partial sum of at most ten terms, with this remainder bound, proves each
+displayed fixed logarithm inequality below in exact rational arithmetic.
 
 ## 4. The nonpositive phase
 
@@ -264,9 +283,14 @@ The reward moves in the opposite direction:
 \frac{d \bar R}{ds} &= -3\,\log Q - \log(\ell+s) \\
 &+4\,(1-\pi)\,\log(1+s) \\
 &+4\,\pi\,\log(r+s) \\
-&< 0.
+&\le 3\,\log\left(\frac{\ell+s}{Q}\right) < 0.
 \end{aligned}
 ```
+
+The first inequality is concavity of $`\log`$: since
+$`(1-\pi)\,(1+s) + \pi\,(r+s) = \ell+s`$, one has
+$`(1-\pi)\,\log(1+s) + \pi\,\log(r+s) \le \log(\ell+s)`$. The second holds
+because $`\ell \le 1 < 1+r`$, so $`\ell+s < Q`$.
 
 It remains to prove $`\bar K \le 16\,b(m)`$.
 
@@ -361,28 +385,56 @@ Substitution yields
 f(9\text{/}100) > 900483\text{/}1250000000 > 20241\text{/}100000000
 ```
 
-at balance. Strict concavity in $`\pi`$ makes the reward positive throughout
-the interval between $`10r`$ and $`1\text{/}2`$, contradicting reward monotonicity
-in $`s`$.
+at balance. For fixed $`x`$ and $`s`$ the reward $`\bar R = E(e,\ell+s) - 4A_H`$
+is concave in $`\pi`$: $`e+\ell+s = Q`$ does not depend on $`\pi`$, so
+$`E(e,\ell+s)`$ is $`Q`$ times the binary entropy of $`e\text{/}Q`$, which is affine
+in $`\pi`$, and $`A_H`$ is affine in $`\pi`$. So at $`s=x^2`$ the reward is
+positive for every $`\pi`$ in $`[10r,1\text{/}2]`$. The chart has $`s<x^2`$ and
+$`\bar R`$ decreases in $`s`$, so for such $`\pi`$ the reward at the chart point
+is positive too, contradicting $`R_H \le 0`$. Hence $`\pi<10r`$.
+
+The comparison of the two integrals rests on one lemma, used again below.
+
+**Lemma 4.1 (rational kernel).** If $`0<\sigma\le\omega`$, $`\mu>0`$, and
+$`\sigma^3\omega \le (9\mu)^4`$, then
+
+```math
+\int_0^\infty \frac{dz}{(z+\sigma)\,(z+\omega)} \le 16\int_0^\mu \frac{dz}{(z+\sigma)\,(z+\omega)}.
+```
+
+*Proof.* If $`\sigma=\omega`$, the hypothesis gives $`\sigma\le9\mu`$, and the
+claim reads $`\mu+\sigma \le 16\mu`$. If $`\sigma<\omega`$, both integrals are
+explicit, and the claim is equivalent to
+
+```math
+16\,\log\left(\frac{\mu+\omega}{\mu+\sigma}\right) \le 15\,\log(\omega\text{/}\sigma).
+```
+
+Put $`\kappa = (\omega\text{/}\sigma)^{1\text{/}16} > 1`$, so
+$`\omega = \sigma\kappa^{16}`$. The claim becomes
+$`(\mu+\omega)\text{/}(\mu+\sigma) \le \kappa^{15}`$, that is
+$`\sigma\kappa^{15} \le \mu\,\sum_{j<15}\kappa^j`$. The hypothesis says
+$`(\sigma\kappa^4)^4 \le (9\mu)^4`$, so $`\sigma\kappa^4 \le 9\mu`$, and it is
+enough that $`9\kappa^{11} \le \sum_{j<15}\kappa^j`$ for $`\kappa \ge 1`$.
+Multiplied by $`\kappa-1`$, this is
+$`\varphi(\kappa) = \kappa^{15} - 9\kappa^{12} + 9\kappa^{11} - 1 \ge 0`$. Now
+$`\varphi(1)=0`$ and $`\varphi'(\kappa) = \kappa^{10}\,(15\kappa^4 - 108\kappa + 99)`$.
+On $`\kappa>0`$ the quartic is least where $`\kappa^3 = 9\text{/}5`$, with value
+$`99 - 81\kappa`$. That value is positive because
+$`(9\text{/}5)^{1\text{/}3} < 11\text{/}9`$, which is $`6561 < 6655`$. $`\square`$
 
 For each $`c`$ in $`[0,C]`$, let $`e_c \le \ell_c`$ have sum $`1+r`$ and
-product $`r+c`$. The inequalities
+product $`r+c`$, so that $`U(z)+c = (z+e_c)\,(z+\ell_c)`$. The smaller root
+$`e_c`$ increases with $`c`$ and $`e_C = e`$, so $`e_c \le e < 11r`$ because
+$`\pi<10r`$. Also $`\ell_c \le 1`$, and $`1+x+x^2 \le 7\text{/}5`$ gives
+$`m \ge 5x^3\text{/}7`$. Hence
 
 ```math
-\begin{aligned}
-e_c &\le 11r, \\
-\ell_c &\le 1, \\
-1+x+x^2 &\le 7\text{/}5
-\end{aligned}
+e_c^3\,\ell_c \le 1331\,x^{12} \le \left(\tfrac{45}{7}\,x^3\right)^4 \le (9m)^4,
 ```
 
-and
-
-```math
-6561 \cdot 625 > 1331 \cdot 2401
-```
-
-give
+the middle step being $`1331 \cdot 2401 < 6561 \cdot 625`$. Lemma 4.1 with
+$`\sigma=e_c`$, $`\omega=\ell_c`$, $`\mu=m`$ gives
 
 ```math
 16\int_0^m \frac{1}{(z+e_c)\,(z+\ell_c)}\,dz \ge \int_0^\infty \frac{1}{(z+e_c)\,(z+\ell_c)}\,dz.
@@ -417,20 +469,49 @@ k &= \frac{1+r}{1+r+2m},
 \end{aligned}
 ```
 
-exposes positive odd-power series whose coefficient ratios $`k^{2n+1}`$
-decrease with $`n`$. Differentiating and pairing terms shows that the quotient
-decreases with $`\zeta`$. Since $`\zeta`$ decreases with $`\pi`$, $`G'`$ can change
+with $`0<k<1`$, shows that the quotient decreases with $`\zeta`$ on $`(0,1)`$: its
+derivative in $`\zeta`$ is $`-\Gamma(k)`$ divided by
+$`(1-\zeta^2)\,(1-k^2\zeta^2)\,\mathrm{atanh}(\zeta)^2`$, where
+
+```math
+\Gamma(k) = (1-k^2\zeta^2)\,\mathrm{atanh}(k\,\zeta) - k\,(1-\zeta^2)\,\mathrm{atanh}(\zeta).
+```
+
+Here $`\Gamma(0) = \Gamma(1) = 0`$, and $`\Gamma`$ is concave on $`[0,1]`$ because
+$`\Gamma'(k) = \zeta - (1-\zeta^2)\,\mathrm{atanh}(\zeta) - 2\zeta^2\,k\,\mathrm{atanh}(k\,\zeta)`$
+and $`k\,\mathrm{atanh}(k\,\zeta)`$ increases with $`k`$. So $`\Gamma \ge 0`$.
+Since $`\zeta`$ decreases with $`\pi`$, $`G'`$ can change
 sign only from positive to negative. Thus $`G`$ has no interior minimum. At
 $`\pi=0`$, $`G=0`$.
 
-At $`\pi=1\text{/}2`$ and $`3\text{/}10 \le x \le 1\text{/}2`$,
+At $`\pi=1\text{/}2`$ one has $`1 + C\text{/}U(m) = (1+x^3)^2\text{/}(4x^3)`$, and
+$`\beta`$ decreases, so for $`3\text{/}10 \le x \le 1\text{/}2`$
 
 ```math
-b(m) \ge m\,\log\left(\frac{(1+x^3)^2}{4x^3}\right).
+b(m) \ge m\,\beta(m) = m\,\log\left(\frac{(1+x^3)^2}{4x^3}\right).
 ```
 
-The product on the right has no interior minimum. Its endpoint comparisons
-reduce to the integer inequalities
+The product on the right has no interior minimum in $`x`$: its derivative is
+$`m'(x)`$ times
+
+```math
+\log\left(\frac{(1+x^3)^2}{4x^3}\right) - \frac{3\,(1+x+x^2)\,(1-x^3)}{(1+x^3)\,(3+2x+x^2)},
+```
+
+where $`m'>0`$ and this factor strictly decreases on $`[3\text{/}10,1\text{/}2]`$. Its
+derivative is $`-3N(x)\text{/}(x\,(1+x^3)^2\,(3+2x+x^2)^2)`$ with
+
+```math
+N(x) = (1-x^6)\,(3+2x+x^2)^2 - 6x^3\,(1+x+x^2)\,(3+2x+x^2) + x\,(1-x^6)\,(1+4x+x^2),
+```
+
+and $`N>0`$ there because the first term is at least $`(63\text{/}64) \cdot 9`$
+and the second at most $`6 \cdot (1\text{/}8) \cdot (7\text{/}4) \cdot (17\text{/}4) < 6`$.
+At $`x=3\text{/}10`$, $`16m = 216\text{/}695 > 9\text{/}29`$ and
+$`(1+x^3)^2\text{/}(4x^3) = 1054729\text{/}108000 > 39\text{/}4`$. At $`x=1\text{/}2`$,
+$`16m = 8\text{/}7`$ and $`(1+x^3)^2\text{/}(4x^3) = 81\text{/}32`$. The endpoint
+comparisons $`\tfrac{9}{29}\,\log(39\text{/}4) \ge \log 2`$ and
+$`\tfrac{8}{7}\,\log(81\text{/}32) \ge \log 2`$ are the integer inequalities
 
 ```math
 \begin{aligned}
@@ -439,10 +520,13 @@ reduce to the integer inequalities
 \end{aligned}
 ```
 
-They imply $`16\,b(m) \ge \log 2 \ge \bar K`$.
+So $`16\,b(m) \ge \log 2`$. Also $`e=\ell=(1+r)\text{/}2`$ at $`\pi=1\text{/}2`$, so
+$`\bar K = (1+r)\,\log 2 - E(r,1)`$, and
+$`E(r,1) = r\,\log((1+r)\text{/}r) + \log(1+r) \ge r\,\log 2`$. Hence
+$`16\,b(m) \ge \log 2 \ge \bar K`$.
 
-For $`1\text{/}2 \le x < 1`$, put $`y=(1+r)\text{/}2`$. The same rational-kernel comparison used
-for small $`x`$ applies whenever
+For $`1\text{/}2 \le x < 1`$, put $`y=(1+r)\text{/}2`$. Lemma 4.1, with
+$`\sigma=e_c`$, $`\omega=\ell_c`$ and $`\mu=m`$, applies whenever
 
 ```math
 e_c^3\,\ell_c \le (9m)^4.
@@ -467,7 +551,7 @@ imply
 y^3 \le \left(\tfrac{144}{119}\,y\right)^4 \le (9m)^4.
 ```
 
-The rational-kernel estimate therefore gives $`\bar K \le 16\,b(m)`$ after
+Lemma 4.1 therefore gives $`\bar K \le 16\,b(m)`$ after
 integration in $`c`$, completing the balanced-prior endpoint. The endpoint
 minimum in $`\pi`$ then gives the same bound for every prior in $`[0,1\text{/}2]`$.
 
@@ -554,10 +638,49 @@ A_H \le \tfrac{5}{2}\,F.
 
 ### Reduction to two seam endpoints
 
-Reward monotonicity in $`s`$ reduces phase exclusion to the seam $`s=2m`$. An
-exact Bernoulli-entropy comparison at $`x=2\text{/}5`$ gives $`\bar R<0`$. For larger
-$`x`$, the seam channel is an affine garbling of the $`x=2\text{/}5`$ channel. Its
-mutual information decreases while its conditional entropy increases. Therefore
+Since $`\bar R`$ decreases in $`s`$ (section 4), $`R_H \ge 0`$ at the chart point
+gives $`\bar R \ge 0`$ at the seam $`s=2m`$ with the same $`x`$ and $`\pi`$. There
+$`A=D=m`$ and $`Q=1+r+2m`$. Let $`h(w)=E(w,1-w)`$ be the binary entropy in nats,
+and put $`w_0=r\text{/}Q`$ and $`w_1=1\text{/}Q`$: the high singleton's cell has
+probability $`w_0`$ under the component of weight $`1-\pi`$ and $`w_1`$ under the
+other. Then
+
+```math
+\begin{aligned}
+\bar R\text{/}Q &= \mathrm{MI} - 3\,\mathrm{CE}, \\
+\mathrm{CE} &= (1-\pi)\,h(w_0) + \pi\,h(w_1), \\
+\mathrm{MI} &= h((1-\pi)\,w_0 + \pi\,w_1) - \mathrm{CE},
+\end{aligned}
+```
+
+Here $`\mathrm{MI}`$ is the mutual information between the component and the
+indicator of the cell, and $`\mathrm{CE}`$ is the conditional entropy of the
+indicator given the component. At $`x=2\text{/}5`$,
+$`w_0 = 624\text{/}26999`$ and $`w_1 = 24375\text{/}26999`$. As $`x`$ grows to $`1`$,
+$`w_0`$ increases to at most $`3\text{/}8`$ and $`w_1`$ decreases to at least $`3\text{/}8`$.
+So for $`x \ge 2\text{/}5`$ the pair $`(w_0,w_1)`$ is the image of the pair at
+$`x=2\text{/}5`$ under an affine map of $`[0,1]`$ into itself: a binary channel
+applied to the indicator. The channel preserves the mixture, so
+by data processing $`\mathrm{MI}`$ does not increase. The binary entropy increases on
+$`[0,1\text{/}2]`$ and is concave, so $`h(w_0)`$ does not decrease, and $`h(w_1)`$ is
+at least the smaller of $`h(3\text{/}8)`$ and $`h(24375\text{/}26999)`$, which is the
+latter: $`\mathrm{CE}`$ does not decrease. Hence $`\bar R\text{/}Q`$ at $`x`$ is at most
+its value at $`x=2\text{/}5`$ with the same $`\pi`$.
+
+That value is negative for every $`\pi \in [0,1\text{/}2]`$. Put
+$`\lambda = 107996\text{/}118755`$, so that $`\lambda > 9\text{/}10`$,
+$`\lambda\,(w_1-w_0) = 4\text{/}5`$ and $`\lambda w_0 < 1\text{/}40`$ at $`x=2\text{/}5`$.
+For every $`w`$, $`h(w) - \lambda w \le \log(1+\exp(-\lambda))`$, and
+$`\exp(9\text{/}10) > 12\text{/}5`$ gives $`\log(1+\exp(-\lambda)) < \log(17\text{/}12) < 3\text{/}8`$.
+Hence
+
+```math
+h((1-\pi)\,w_0 + \pi\,w_1) < \tfrac{2}{5} + \tfrac{4}{5}\,\pi < 4\,\mathrm{CE},
+```
+
+the second step by $`h(w_0) > 1\text{/}10`$ and $`h(w_1) > 3\text{/}10`$. Since
+$`\bar R\text{/}Q = h((1-\pi)\,w_0 + \pi\,w_1) - 4\,\mathrm{CE}`$, the reward is
+negative. Therefore
 
 ```math
 R_H \ge 0 \implies x < 2\text{/}5.
@@ -580,14 +703,21 @@ that tangent is
 T(\pi) = -3\,H_0 + \pi\,((1-r)\,L + 4\,H_0 - 4\,H_1).
 ```
 
-Here $`0 \le s \le 1`$, since the strict chart has $`s < x^2 < 1`$. Under these
-bounds, the inequalities $`H_0 \ge rL`$ and $`H_1 \ge rL`$ imply
+Here $`0 \le s \le 1`$, since the strict chart has $`s < x^2 < 1`$. Both
+$`H_0 \ge rL`$ and $`H_1 \ge rL`$ hold. The first holds because
+$`H_0 = r\,\log((1+r+s)\text{/}r) + (1+s)\,\log((1+r+s)\text{/}(1+s))`$ and the
+second term is nonnegative, while $`(1+r+s)\text{/}r > (1+s)\text{/}r`$. For the second, $`y \mapsto y\,\log(1+1\text{/}y)`$
+increases, so
+$`H_1 = \log(1+r+s) + (r+s)\,\log(1+1\text{/}(r+s)) \ge \log(1+s) + r\,\log((1+r)\text{/}r)`$,
+which exceeds $`rL`$ by $`(1-r)\,\log(1+s) + r\,\log(1+r) \ge 0`$. Since
+$`T(3r) = -3\,(1-4r)\,H_0 + 3r\,(1-r)\,L - 12r\,H_1`$ and $`1-4r>0`$, they imply
 
 ```math
 T(3r) \le -3r^2 L < 0.
 ```
 
-Thus
+The tangent is affine in $`\pi`$ and negative at $`\pi=0`$ and $`\pi=3r`$, so
+$`\bar R \le T < 0`$ on $`[0,3r]`$. Thus
 
 ```math
 R_H \ge 0 \implies \pi > 3r.
@@ -621,7 +751,23 @@ On $`x<2\text{/}5`$ and $`\pi\ge3r`$, one has
 \end{aligned}
 ```
 
-Hence $`J_s \ge 0`$. The function $`J`$ is concave in $`\pi`$, so its minimum
+For the first, $`t`$ decreases in $`s`$ and equals $`1\text{/}x^2`$ at $`s=x^2`$,
+so $`t > 25\text{/}4 > 6`$. Also $`(1-r)^2\text{/}U(s) = (t-1)^2\text{/}t`$, so
+
+```math
+\tfrac{3}{2}\,\beta(s) - \pi\,\log t = \tfrac{3}{2}\,\log\left(1 + \pi\,(1-\pi)\,\frac{(t-1)^2}{t}\right) - \pi\,\log t.
+```
+
+The right side is concave in $`\pi`$ and vanishes at $`\pi=0`$. At
+$`\pi=1\text{/}2`$ it equals $`\tfrac{1}{2}\,\log\left((t+1)^6\text{/}(64\,t^4)\right)`$, which
+increases in $`t`$ for $`t>2`$ and is positive at $`t=6`$ because
+$`7^6 > 64 \cdot 6^4`$. So the first inequality holds for every
+$`\pi \in [0,1\text{/}2]`$. The second is equivalent to $`C \ge r\,(r+s)`$. On
+$`[3r,1\text{/}2]`$ the concave $`\pi\,(1-\pi)`$ is at least
+$`\min(3r\,(1-3r), 1\text{/}4) \ge 3r\text{/}2`$, and $`r+s \le r+x^2 < 1\text{/}5 < \tfrac{3}{2}\,(1-r)^2`$,
+so $`C \ge \tfrac{3}{2}\,r\,(1-r)^2 \ge r\,(r+s)`$.
+
+Hence $`J_s \ge \left(\tfrac{5}{2} - \tfrac{3}{2} - 1\right)\beta(s) = 0`$. The function $`J`$ is concave in $`\pi`$, so its minimum
 on $`[3r,1\text{/}2]`$ occurs at an endpoint. The positive phase is reduced to
 
 ```math
@@ -645,12 +791,30 @@ An entropy upper bound gives $`A_H \le U_{\mathrm{bal}}`$, where
 U_{\mathrm{bal}} = \tfrac{1}{2}\,\left( r\,(1+\log(Q\text{/}r)) + (r+2m)\,\left(1+\log\left(\frac{Q}{r+2m}\right)\right) \right).
 ```
 
-After division by $`m`$, it is enough to prove positivity of the
-decreasing function
+So $`A_H \le (5\text{/}2)\,F`$ follows from $`U_{\mathrm{bal}} \le 5m\,\beta(m)`$. The
+argument proves the stronger $`U_{\mathrm{bal}} < 4m\,\beta(m)`$, which gives
+$`A_H < 2F`$. After division by $`m`$, it is enough to prove that the following
+function is positive on $`0<x\le2\text{/}5`$:
 
 ```math
 g_{\mathrm{half}}(x) = 4\,\log\left(\frac{(1+x^3)^2}{4x^3}\right) - U_{\mathrm{bal}}\text{/}m.
 ```
+
+It decreases there. With $`\alpha = r\text{/}m = x+x^2+x^3`$,
+$`\nu = 4\,(1+x)\,(1+x^2)\text{/}(1+x^3)`$ and $`\beta_{\mathrm{h}} = \beta(m)`$ at
+$`\pi = 1\text{/}2`$, one has $`\beta_{\mathrm{h}} + \log\nu = \log(Q\text{/}m)`$ and
+
+```math
+\begin{aligned}
+g_{\mathrm{half}} &= (3-\alpha)\,\beta_{\mathrm{h}} - (1+\alpha)\,(1+\log\nu) + \tfrac{1}{2}\,\left(\alpha\log\alpha + (\alpha+2)\log(\alpha+2)\right), \\
+g_{\mathrm{half}}' &= (3-\alpha)\,\beta_{\mathrm{h}}' - (1+\alpha)\,(\log\nu)' + \alpha'\,\left(\tfrac{1}{2}\,\log(\alpha\,(\alpha+2)) - \log(Q\text{/}m)\right).
+\end{aligned}
+```
+
+Each term is negative for $`0<x\le2\text{/}5`$:
+$`\beta_{\mathrm{h}}' = -3\,(1-x^3)\text{/}(x\,(1+x^3)) < 0`$ and $`\alpha<1`$;
+$`(\log\nu)' = (1-x^2)\text{/}((1+x^2)\,(1-x+x^2)) > 0`$; and
+$`\alpha\,(\alpha+2) < 3 < 4 < (Q\text{/}m)^2`$.
 
 At $`x=2\text{/}5`$, the required exact logarithm bounds are
 
@@ -669,7 +833,7 @@ The resulting margin is
 3597\text{/}62500 > 0.
 ```
 
-In fact this proves the stronger estimate $`A_H < 2F`$.
+This proves $`A_H < 2F`$ at the balanced endpoint.
 
 ### Endpoint `pi=3r`
 
@@ -685,7 +849,27 @@ t &= s\text{/}r, \\
 \end{aligned}
 ```
 
-The kernel lower bound and entropy upper bound give
+At $`\pi=3r`$ the mixing parameter is $`C = 3r\,(1-3r)\,(1-r)^2`$. On
+$`0<x\le2\text{/}5`$,
+
+```math
+3\,(1-3r)\,(1-r)^2 \ge \tfrac{12}{5}\,(1+2m),
+```
+
+because the left side decreases and the right side increases with $`x`$, and at
+$`x=2\text{/}5`$ their difference is $`103747643\text{/}3173828125 > 0`$. So for
+$`0 \le z \le s = 2m`$ one has $`C\text{/}U(z) \ge (12\text{/}5)\,r\text{/}(z+r)`$, that is
+
+```math
+\beta(z) \ge \log\left(\frac{z + 17r\text{/}5}{z+r}\right),
+```
+
+which is where $`17\text{/}5 = 1 + 12\text{/}5`$ comes from. Integrating over
+$`[0,s]`$ and substituting $`z = r\eta`$ gives
+$`F = b(s) \ge r\,\Lambda(t)`$, because
+$`\Lambda(t) = \int_0^t \log((\eta+17\text{/}5)\text{/}(\eta+1))\,d\eta`$. For
+$`A_H`$, use $`E(u,v) \le u\,(1+\log((u+v)\text{/}u))`$, which holds because
+$`v\,\log(1+u\text{/}v) \le u`$. Together:
 
 ```math
 \begin{aligned}
@@ -743,13 +927,20 @@ The negative tail is at most
 
 Thus $`(5\text{/}2)\,\Lambda'(t)\,t' \le -4\text{/}x \le U'`$, which proves $`G'\le0`$.
 
-At $`x=2\text{/}5`$, a four-panel midpoint bound gives
+At $`x=2\text{/}5`$, $`t = 125\text{/}39`$. The integrand
+$`\log((\eta+17\text{/}5)\text{/}(\eta+1))`$ of $`\Lambda`$ is convex, so on each of
+four panels of width $`125\text{/}156`$ its integral is at least the width
+times the midpoint value. This gives
 
 ```math
 \Lambda(125\text{/}39) \ge \tfrac{125}{156}\,\log(1157525834384227\text{/}69564432491875),
 ```
 
-and the rational inside the logarithm is greater than $`16`$. The endpoint
+and the rational inside the logarithm is greater than $`16`$. With
+$`\log 2 \ge 56\text{/}81`$ this gives $`\tfrac{5}{2}\,\Lambda(125\text{/}39) \ge 17500\text{/}3159`$.
+For the envelope, $`Q\text{/}r = 26999\text{/}624 < 44`$ and
+$`Q\text{/}q = 26999\text{/}2624 < 11`$, and $`\log 44 < 19\text{/}5`$ and
+$`\log 11 < 12\text{/}5`$ give $`U(2\text{/}5) \le 224632\text{/}40625`$. The endpoint
 comparison is
 
 ```math
@@ -781,10 +972,10 @@ that argument.
 This section closes the gap by transferring the deterministic bound itself from
 full-support laws to all laws. The transfer is stated for a general constant,
 is proved by an explicit smoothing construction, and uses no subsequence
-extraction and no limit latent. It does use the attainment half of the
-optimizer-selection theorem quoted in section 1: for the sparse law $`p`$ there
-is a finite stochastic latent whose score equals $`\tau(p)`$. Only that
-existence is used here, not the two-component normal form.
+extraction and no limit latent. It does use attainment, `exists_optimalLatent`,
+which holds for every finite law: for the sparse law $`p`$ there is a finite
+stochastic latent whose score equals $`\tau(p)`$. The two-component normal form
+is not used here.
 
 Everything below is on four observable cells, but nothing in the argument uses
 binarity: only that the observable alphabets are finite and nonempty. What is
@@ -1191,5 +1382,5 @@ $`\mathrm{W3}`$ estimate.
 
 The real-valued selector is defined by classical exact comparisons. The count
 and rational implementations still need their refinement proofs before the
-verified bound can be asserted for those implementations. The proof uses no
-interval certificate and establishes no arbitrary-finite-alphabet bound.
+verified bound can be asserted for those implementations. The proof
+establishes no arbitrary-finite-alphabet bound.

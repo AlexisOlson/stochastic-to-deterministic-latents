@@ -7,7 +7,7 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.Contact
 `Contact` reduces the majorant property of the tangent certificate at a law `q`
 to `NormBound q`, a Hölder-type inequality over the two marginals.  This module
 proves `NormBound q` from `PositivityGate q`, which is the analytic half of the
-factor-two argument and the only place where a non-rational inequality is used.
+stochastic-optimum part of the factor-two argument.
 
 The route is the one the gate is named for.  The gate expressions are the
 coefficients of the norm-gate quartic, which `Shape.normGateQuartic_nonneg`

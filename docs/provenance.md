@@ -89,11 +89,13 @@ locally kernel-verified result.
 ## Contribution and evidence
 
 This repository provides a constructive explanation, a claim ledger, and a
-Lean library organized by mathematical dependency. Its certificate-free
-binary factor-nine proof gives an all-law deterministic bound, together with
-full-support selector and selected-latent guarantees. The four public
-headlines and their dependencies are locally audited; the general-alphabet
-conjectures retain their separate evidence tier.
+Lean library organized by mathematical dependency. Its certificate-free binary
+proofs give $`T(p) \le 2\,\tau(p)`$ and $`T(p) \le 9\,\tau(p)`$ for every
+binary law. On full support they also give a five-code witness at factor two,
+the law-only selector at factor nine, and a selected optimal latent with
+$`\mathrm{W3}(L) \le 8\,\tau(p)`$. Every headline theorem and its dependencies
+are audited in `Verify.lean`; the general-alphabet conjectures retain their
+separate evidence tier.
 
 Attribution must distinguish rewrites, adaptations, and exact imports, and
 identify the repository in which a claim was verified. A report, numerical

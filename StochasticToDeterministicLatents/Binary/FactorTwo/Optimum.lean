@@ -13,8 +13,9 @@ squeeze and reads off `tau` exactly.
 
 The answer has two branches, selected by whether the top root of the cubic has
 reached the geometric mean of the diagonal.  Below it the optimum is the
-contact pair and `tau p = Psi p - Phi (contactAt p u)`; at it the optimum is
-constant and `tau p = Psi p - Phi p`.  Both are `Psi` minus the value of `Phi`
+contact pair and `tau p = Psi p - Phi (contactAt p u)`; at or above it the
+optimum is constant and `tau p = Psi p - Phi p`.  Both are `Psi` minus the
+value of `Phi`
 at the law where the certificate touches, so the two branches differ only in
 which law that is.
 
@@ -74,7 +75,8 @@ theorem tau_eq_contact (hp : IsPMF p) (hpos : FullSupport p) (hu : 0 < u)
   have h := tau_ge_of_majorizes hp hmaj
   rwa [tangentCert_contact_pairing_law hp hpos hu hnc hroot] at h
 
-/-- At the geometric mean of the diagonal the optimum is constant. -/
+/-- When the top root is at or above the geometric mean of the diagonal, the
+optimum is constant. -/
 theorem tau_eq_self (hp : IsPMF p) (hpos : FullSupport p)
     (hdet : 0 ≤ determinant p) (htop : IsTopRoot p u)
     (hnc : ¬ Nonconstant p u) : tau p = Psi p - Phi p := by

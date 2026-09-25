@@ -19,8 +19,8 @@ sixteenth, so the upper contact is above thirteen sixteenths and its two cell
 ratios are together below `2/13`.  Nineteen against `15 log 3` and change
 leaves `3 * chordBottom p u / 208 < Real.log 2 * constantMargin p u
 (fixedCut p u)`, which is `fixedCut_constantMargin_gt`.  It is stated
-multiplied through by `Real.log 2` so that no statement of the public tree
-divides by it.
+multiplied through by `Real.log 2` rather than divided by it; other margin
+bounds in the tree, such as `center_singletonMargin_ge`, divide instead.
 
 ## Attribution
 

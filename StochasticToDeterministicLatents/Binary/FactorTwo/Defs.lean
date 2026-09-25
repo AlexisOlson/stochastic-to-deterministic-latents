@@ -105,8 +105,9 @@ noncomputable def mixingWeight (p : RealTable) (u : ℝ) : ℝ :=
 def swapDiagonal (q : RealTable) : RealTable := fun z =>
   if z = (0, 0) then q (1, 1) else if z = (1, 1) then q (0, 0) else q z
 
-/-- The optimum is non-constant exactly when the top root falls below
-`sqrt (a d)`. -/
+/-- `u` lies below `sqrt (a d)`, the geometric mean of the diagonal.  At the top
+root, `tau_eq_at_topRoot` reads the branch of the stochastic optimum from this
+test. -/
 def Nonconstant (p : RealTable) (u : ℝ) : Prop :=
   u < √(diagonalProduct p)
 
@@ -251,8 +252,7 @@ noncomputable def swapContact (p : RealTable) : RealTable :=
 
 Below the top root, the two diagonal contacts are strictly positive laws and
 `p` is a proper convex combination of them.  Each lemma carries exactly the
-hypotheses it uses; the private material collected all four in a section, which
-the unused-section-variable linter rightly objects to.
+hypotheses it uses.
 -/
 
 theorem cell_pos {p : RealTable} (hpos : FullSupport p) :

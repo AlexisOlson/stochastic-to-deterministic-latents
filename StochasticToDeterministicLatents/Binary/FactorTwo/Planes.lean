@@ -33,9 +33,9 @@ namespace StochasticToDeterministicLatents.Binary
 
 /-! ## An explicit table -/
 
-/-- The binary table with the four given cells, in row-major order.  The tree
-writes this pattern inline wherever it builds a table from cells; it is named
-here because the four reference laws below all need it. -/
+/-- The binary table with the four given cells, in row-major order.  It has the
+values of the public `tableOfEntries` of `Chart`; the four reference laws below
+use it. -/
 noncomputable def cellTable (a b c d : ℝ) : RealTable := fun z =>
   if z = (0, 0) then a else if z = (0, 1) then b else if z = (1, 0) then c else d
 

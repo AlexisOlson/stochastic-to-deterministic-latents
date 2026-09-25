@@ -224,8 +224,7 @@ theorem chartContactSecondOrder_eq_logKDeriv (h : ChartDomain r omega) :
       - 2 * hweight
 
 /-- The page's display (3.8): the contact correction's second-order coefficient
-is strictly below the ratio of off-diagonal to diagonal mass, the difference
-being an explicit positive quantity. -/
+is strictly below the ratio of off-diagonal to diagonal mass. -/
 theorem chartContactSecondOrder_lt (h : ChartDomain r omega) :
     chartContactSecondOrder r omega
       < chartOffDiagonalMass r omega / chartDiagonalMass r omega := by

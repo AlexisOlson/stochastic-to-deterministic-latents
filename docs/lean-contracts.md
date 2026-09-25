@@ -214,7 +214,9 @@ be a "make public" task, not a proof task, and no row asks for it.
 The four rows `BIN-CONSTANT-TEST`, `BIN-TWO-COMPONENTS`, `BIN-TAU-EXACT`,
 and `BIN-DISAGREEMENT-BAND` are `paper proof` in the
 [binary stochastic optimum](binary-stochastic-optimum.md) page. No public
-declaration states any of them.
+declaration states any of them in full; `Binary.tau_eq_at_topRoot` states the
+value of $`\tau`$ in `BIN-TAU-EXACT` on full support with nonnegative
+determinant, as recorded below.
 
 **Existing declarations the proofs rest on.** `latent_score_eq` (the score
 decomposition), `exists_optimalLatent` (attainment), `tau_le_score`, and
@@ -224,8 +226,9 @@ decomposition), `exists_optimalLatent` (attainment), `tau_le_score`, and
 binary marginals `Binary.rowMarginal` and `Binary.columnMarginal` are defined
 in [`Binary/TransposeNormalForm.lean`](../StochasticToDeterministicLatents/Binary/TransposeNormalForm.lean).
 
-**Unimplemented targets.** The quantities $`A, E, V, M`$ and the cubic are new
-definitions; the signatures below name them without fixing their placement.
+**Unimplemented targets.** The quantities $`A, E, V, M`$ are new definitions;
+the signatures below name them without fixing their placement. The cubic and
+its root are already defined, as recorded below.
 
 ```lean
 noncomputable def Binary.normA (p : Binary.RealTable) : ℝ
@@ -269,8 +272,8 @@ theorem Binary.tau_eq_mutualInfo_of_disagreementBand
 definition requires `Binary.cubicRoot`, which is the largest nonnegative root
 of $`u^3 - (b+c)u^2 - bcu - bc(a+d)`$.
 
-**`Binary.tau_eq_of_mixedBranch` is proved on full support**, and is listed
-above only for its unrestricted shape.
+**The full-support case of `Binary.tau_eq_of_mixedBranch` is supplied**, and
+the target is listed above only for its unrestricted shape.
 `StochasticToDeterministicLatents.Binary.tau_eq_at_topRoot` is
 `kernel-verified` and audited, and its first disjunct is that statement. Both
 identifications are definitional: the hypothesis
@@ -300,7 +303,7 @@ branch concludes $`\tau(p) = \Psi(p) - \Phi(p)`$ rather than naming the mutual
 information. Closing the gap to the signatures above needs the sparse case and
 that identification.
 
-**A formalization route.** The two-contact chart of
+**The chart carries the cubic.** The two-contact chart of
 [`Binary/NormalForm.lean`](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
 already carries the cubic. Its `contact_root_identity`,
 
@@ -314,9 +317,10 @@ $`Q = 1 + x^4 + A_0 + D_0`$: substituting the exchanged chart law into the
 cubic and clearing $`Q^3`$ gives
 $`x^4\,(x^2 - A_0 - D_0) - (1 + x^2 + x^4)\,A_0\,D_0`$, the identity with its
 two sides subtracted. This is an identity check, not a theorem of the library.
-It suggests proving `Binary.tau_eq_of_mixedBranch` on full support by
-identifying the selected optimizer's chart with the diagonal-swap pair, and
-proving the constant branch through the rational test. The sparse cases need
+The full-support case of `Binary.tau_eq_of_mixedBranch` was proved without this
+identity, by the tangent-certificate squeeze of
+[`Binary/FactorTwo/Optimum.lean`](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean).
+The sparse cases need
 the support-face argument of the page, which the library's full-support seed
 setup does not supply.
 
@@ -429,9 +433,11 @@ theorem Binary.fixedCut_singletonMargin_gt
 ```
 
 The page also uses the closed form of the contact potential $`-\Phi(q^+)`$
-and its gradient (Lemmas 3.1 and 3.2), which a formalization would state about
-`Binary.swapContact p`; they are consequences of the tangent identity behind
-`Binary.tau_eq_of_mixedBranch` and need no separate row.
+and its gradient (Lemmas 3.1 and 3.2). Both are supplied in the library's own
+forms and need no separate row: `Binary.log_two_mul_phi_contact` gives
+$`\Phi`$ at a contact law in closed form, in natural-log units, and
+`Binary.hasDerivAt_chartHeight` differentiates the chart's height, which is the
+contact potential in nats, along a path in chart coordinates.
 
 **What the chord modules supply.** The chord law and the two margins are
 defined in
@@ -482,8 +488,10 @@ places it strictly inside the segment. The two fixed-cut estimates are
 `Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`
 at that point, with one further difference of shape: each is stated multiplied
 through by `Real.log 2`, as `3 * Binary.chordBottom p u / 208 < Real.log 2 *
-...`, rather than dividing by it, so that no public statement carries
-`Real.log 2` in a denominator.
+...`, rather than dividing by it. Other public bounds divide by it:
+`Binary.center_singletonMargin_ge`, `Binary.center_constantMargin_ge` and
+`Binary.seam_singletonMargin_gt` state a margin in bits as a quantity over
+`Real.log 2`.
 
 `Binary.centerSingletonMargin_ge` and `Binary.centerConstantMargin_pos` are
 supplied as `Binary.center_singletonMargin_ge` and
@@ -549,9 +557,9 @@ in this table. Their public theorems are audited in
 | Finite information and latent objectives | [Information](../StochasticToDeterministicLatents/Information.lean), [Latent](../StochasticToDeterministicLatents/Latent.lean), [Deterministic](../StochasticToDeterministicLatents/Deterministic.lean), [Bridge](../StochasticToDeterministicLatents/Bridge.lean) | Objectives, finite deterministic minima, stochastic attainment, and contact setup |
 | Binary tables and selectors | [Table](../StochasticToDeterministicLatents/Binary/Table.lean), [Selector](../StochasticToDeterministicLatents/Binary/Selector.lean), [CountSelector](../StochasticToDeterministicLatents/Binary/CountSelector.lean) | Mathematical selector and executable definitions; refinement remains open |
 | Pricing | [Pricing](../StochasticToDeterministicLatents/Pricing.lean) | Exact pricing identity and `PRICE(c)` |
-| Relabeling and charts | [Symmetry](../StochasticToDeterministicLatents/Binary/Symmetry.lean), [Chart](../StochasticToDeterministicLatents/Binary/Chart.lean), [ContactChart](../StochasticToDeterministicLatents/Binary/ContactChart.lean) | Transport, transpose chart, and strict determinant gap |
+| Relabeling and charts | [Symmetry](../StochasticToDeterministicLatents/Binary/Symmetry.lean), [Chart](../StochasticToDeterministicLatents/Binary/Chart.lean), [ContactChart](../StochasticToDeterministicLatents/Binary/ContactChart.lean) | Transport, transpose chart, and contact-chart geometry |
 | Selected optimizer | [TransposeNormalForm](../StochasticToDeterministicLatents/Binary/TransposeNormalForm.lean), [NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean) | Unary or contact presentation of a selected optimal quotient |
-| Catalog witness | [CatalogRecovery](../StochasticToDeterministicLatents/Binary/CatalogRecovery.lean) | A literal law-catalog code with the chart-selected cost |
+| Catalog witness | [CatalogRecovery](../StochasticToDeterministicLatents/Binary/CatalogRecovery.lean) | A literal law-catalog code with the chart-selected cost, and the contact chart's strict determinant gap |
 | Scalar estimates | [ScalarEstimates](../StochasticToDeterministicLatents/Binary/ScalarEstimates.lean) | One-variable inequalities used by the analytic phases |
 | Nonpositive arm | [FactorNine.NonpositivePhase](../StochasticToDeterministicLatents/Binary/FactorNine/NonpositivePhase.lean) | The nonpositive scalar bound |
 | Positive arm | [FactorNine.PositivePhase](../StochasticToDeterministicLatents/Binary/FactorNine/PositivePhase.lean) | The positive scalar bound conditional on seam positivity |

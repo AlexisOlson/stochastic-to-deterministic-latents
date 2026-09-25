@@ -28,7 +28,7 @@ about seventy linter warnings of its own, which are distinct from elaboration
 or audit failures and are not changed here.
 
 The root build and audit run in continuous integration on every change that
-touches Lean, and last passed in the prepared local checkout on 2026-09-04.
+touches Lean.
 A fresh-machine replay has not been performed. Do not change the pinned
 toolchain or dependencies, or run `lake update`, as part of a verification run.
 
@@ -45,7 +45,8 @@ Each public theorem in Verify has both an `assert_no_sorry` check and a
 Lean after compilation. A mismatch must be investigated; changing the expected
 set to silence a failure is not an audit.
 
-The four binary C9 headlines each report
+The two factor-two headlines, `Binary.T_le_two_mul_tau` and
+`Binary.exists_witnessCode`, and the four factor-nine headlines each report
 `[propext, Classical.choice, Quot.sound]`. Two supporting theorems use smaller
 sets, listed in the [axiom exceptions](admissions.md#axiom-sets). The audit
 does not require every theorem to use the same set.
@@ -60,7 +61,7 @@ selector; the missing refinement signatures are labelled in the
 Scan the repository's Lean files for trust shortcuts as well:
 
 ```sh
-grep -rn -E '\b(sorry|admit|native_decide|unsafe)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean
+grep -rn -E '\b(sorry|admit|native_decide|unsafe|bv_decide|implemented_by|extern|skipKernelTC)\b|decide \+native|^\s*(local |scoped )?(syntax|macro|macro_rules|elab|elab_rules|notation|infix|infixl|infixr|prefix|postfix)\b|^\s*(@\[[^]]*\]\s*)?(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean
 ```
 
 The scan should print nothing. `grep` exits with code 1 when it finds no
@@ -91,7 +92,10 @@ For a new or changed theorem module:
    artifacts. Correct substantive mismatches before root admission.
 4. Add the root import, theorem assertions, and discovered pins as needed.
    Update the admission record, the claim ledger, and the
-   [Lean contracts](../docs/lean-contracts.md) page in the same change.
+   [Lean contracts](../docs/lean-contracts.md) page in the same change. A
+   promotion also adds a dated entry under *Claim promotions* in the admission
+   record, sets the blueprint chapter's `tags :=`, and lists the row in
+   `LEDGER_IDS` in `blueprint/scripts/check_tiers.py`.
 5. Run the full root build and Verify. Check theorem coverage, local links,
    the Markdown math check from CLAUDE.md, private paths, generated
    artifacts, and `git diff --check`.

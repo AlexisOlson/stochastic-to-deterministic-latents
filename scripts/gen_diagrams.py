@@ -13,9 +13,9 @@ Read from `StochasticToDeterministicLatents.lean` (the root) and every `*.lean`
 file under `StochasticToDeterministicLatents/`. Only lines matching
 `^import\\s+<Name>\\s*$` count (the anchor matters: `Binary/Table.lean` has a
 docstring line beginning with the word "important"). Local modules are nodes,
-labelled by the last component of their name (the `Binary/` subgraph and one
-subgraph per directory beneath it supply the rest); the root file is the node
-`root`. Every `stoch_to_det.*` import collapses into one boundary node and
+labelled by the last component of their name (one subgraph per top-level
+directory and one per directory beneath it supply the rest); the root file is
+the node `root`. Every `stoch_to_det.*` import collapses into one boundary node and
 every `Mathlib.*` import into another. Any other import prefix is an error.
 Edge direction is "imports": `A --> B` means A imports B.
 
@@ -47,12 +47,11 @@ picture. The rules, so a change to the text is caught rather than misread:
     `PRICE(8)` and `PRICE(4)` become `PRICE(c)` with the instantiation shown
     as an edge label). Any other claim ID without a ledger row is an error.
   * Ledger rows come from the table under `## Ledger`: lines starting with
-    "| `ID` |" and having exactly four cells. A row's tier is the first
-    backticked token in its "Mathematical status" cell that is one of
-    `kernel-verified`, `paper proof`, `interval-certified`, `conjecture` and
-    is not immediately preceded by the word "not". A row with no such token
-    must mention `native_decide` (an external compiler-backed certificate)
-    and is drawn with the class `external`; otherwise the parse fails.
+    "| `ID` |" and having exactly four cells. A row's status cell opens with
+    its backticked tier, `kernel-verified`, `paper proof` or `conjecture`, or
+    with "External " for an external certificate, drawn with the class
+    `external`; otherwise the parse fails (the same rule as
+    `blueprint/scripts/check_tiers.py`).
   * Ledger rows absent from the picture are still drawn, as isolated nodes,
     with a warning on stderr.
 
@@ -73,14 +72,12 @@ MATHLIB_PREFIX = "Mathlib."
 TIERS = {
     "kernel-verified": "kernel",
     "paper proof": "paper",
-    "interval-certified": "interval",
     "conjecture": "conjecture",
 }
 
 CLASSDEFS = """\
 classDef kernel fill:#d9f2d9,stroke:#2e7d32,color:#111;
 classDef paper fill:#fff3cd,stroke:#b8860b,color:#111;
-classDef interval fill:#dbe9ff,stroke:#1e5aa8,color:#111;
 classDef conjecture fill:#f5f5f5,stroke:#777,stroke-dasharray:5 3,color:#111;
 classDef external fill:#f8d7da,stroke:#a33,color:#111;
 classDef aux fill:none,stroke:#999,stroke-dasharray:2 2,color:#333;"""
@@ -105,7 +102,7 @@ def node_id(name: str) -> str:
 
 # ---------------------------------------------------------------- imports ---
 
-IMPORT_RE = re.compile(r"^import\s+(\S+)\s*$")
+IMPORT_RE = re.compile(r"^import\s+(\S+(?:\s+\S+)*)\s*$")
 
 
 def module_name(path: Path, root: Path) -> str:
@@ -130,7 +127,7 @@ def parse_imports(root: Path) -> dict[str, list[str]]:
         for i, line in enumerate(lines, start=1):
             m = IMPORT_RE.match(line)
             if m:
-                imports.append(m.group(1))
+                imports.extend(m.group(1).split())
                 matched_lines.append(i)
         if matched_lines:
             manifest.append(
@@ -173,23 +170,26 @@ def imports_mermaid(graph: dict[str, list[str]]) -> str:
     def decl(mod: str) -> str:
         return f'  {node_id(mod)}["{mod.rsplit(".", 1)[-1]}"]'
 
-    top = sorted(m for m in local if not m.startswith("Binary."))
-    binary = sorted(m for m in local if m.startswith("Binary.") and m.count(".") == 1)
-    groups: dict[str, list[str]] = {}
+    top = sorted(m for m in local if "." not in m)
+    dirs: dict[str, dict[str, list[str]]] = {}
     for m in sorted(local):
         parts = m.split(".")
-        if parts[0] == "Binary" and len(parts) == 3:
-            groups.setdefault(parts[1], []).append(m)
-        elif parts[0] == "Binary" and len(parts) > 3:
-            fail(f"{m} sits deeper than the one directory level the diagram groups")
+        if len(parts) == 1:
+            continue
+        if len(parts) > 3:
+            fail(f"{m} sits deeper than the two directory levels the diagram groups")
+        sub = parts[1] if len(parts) == 3 else ""
+        dirs.setdefault(parts[0], {}).setdefault(sub, []).append(m)
     out.extend(decl(m) for m in top)
-    out.append('  subgraph BINARY["Binary/"]')
-    out.extend("  " + decl(m) for m in binary)
-    for sub, members in sorted(groups.items()):
-        out.append(f'    subgraph {node_id(sub).upper()}["Binary/{sub}/"]')
-        out.extend("    " + decl(m) for m in members)
-        out.append("    end")
-    out.append("  end")
+    for d, subs in sorted(dirs.items()):
+        out.append(f'  subgraph {node_id(d).upper()}["{d}/"]')
+        out.extend("  " + decl(m) for m in subs.get("", []))
+        for sub, members in sorted((k, v) for k, v in subs.items() if k):
+            gid = node_id(sub).upper() if d == "Binary" else node_id(f"{d}_{sub}").upper()
+            out.append(f'    subgraph {gid}["{d}/{sub}/"]')
+            out.extend("    " + decl(m) for m in members)
+            out.append("    end")
+        out.append("  end")
     if used_upstream:
         out.append('  UPSTREAM[("stoch_to_det.* (pinned upstream)")]')
     if used_mathlib:
@@ -300,16 +300,15 @@ def parse_ledger(lines: list[str]) -> tuple[dict[str, str], tuple[int, int]]:
         cid, status = cells[0].strip("`"), cells[2]
         if cid in tiers:
             fail(f"line {i + 1}: duplicate ledger row {cid}")
-        tier = None
-        for tm in TIER_TOKEN.finditer(status):
-            tok = tm.group(1)
-            if tok in TIERS and not status[: tm.start()].rstrip().endswith("not"):
-                tier = TIERS[tok]
-                break
-        if tier is None:
-            if "native_decide" not in status:
-                fail(f"line {i + 1}: no tier found in status cell of {cid}: {status!r}")
+        # Same rule as blueprint/scripts/check_tiers.py: the status cell opens
+        # with its backticked tier, or with "External " for a certificate row.
+        if status.startswith("External "):
             tier = "external"
+        else:
+            tm = re.match(r"\x60(kernel-verified|paper proof|conjecture)\x60", status)
+            if not tm:
+                fail(f"line {i + 1}: status cell of {cid} does not open with a tier: {status!r}")
+            tier = TIERS[tm.group(1)]
         tiers[cid] = tier
         first = i + 1 if first is None else first
         last = i + 1
@@ -374,7 +373,7 @@ def claims_mermaid(root: Path) -> str:
     out.append('  subgraph LEGEND["Tier (from the ledger)"]')
     out.append("    direction LR")
     legend = [("kernel", "kernel-verified"), ("paper", "paper proof"),
-              ("interval", "interval-certified"), ("conjecture", "conjecture"),
+              ("conjecture", "conjecture"),
               ("external", "external certificate (not a tier)")]
     for cls, text in legend:
         if cls in nodes.values():
