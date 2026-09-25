@@ -58,7 +58,7 @@ jobs:
     timeout-minutes: 180
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # Full history so the change detection below can diff against the
           # pull request base or the previous push.
