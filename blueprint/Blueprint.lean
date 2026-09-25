@@ -10,6 +10,7 @@ import Chapters.Phases
 import Chapters.Boundary
 import Chapters.Recovery
 import Chapters.FactorTwo
+import Chapters.BinaryRow
 import Chapters.Open
 
 open Verso.Genre
@@ -18,7 +19,7 @@ open Informal
 
 #doc (Manual) "Binary factor two and factor nine: dependency blueprint" =>
 
-This graph links the definitions and dependency steps of the public binary factor-nine and factor-two proofs to their compiled Lean declarations, and records the paper-proof and conjecture rows of the ledger as nodes without declarations. The [claim ledger](https://github.com/AlexisOlson/stochastic-to-deterministic-latents/blob/main/docs/claims.md) is authoritative for evidence tiers; this site records a checked projection of it.
+This graph links the definitions and dependency steps of the public binary factor-nine, factor-two and binary-row proofs to their compiled Lean declarations, and records the paper-proof and conjecture rows of the ledger as nodes without declarations. The [claim ledger](https://github.com/AlexisOlson/stochastic-to-deterministic-latents/blob/main/docs/claims.md) is authoritative for evidence tiers; this site records a checked projection of it.
 
 {include 0 Chapters.Foundations}
 
@@ -33,6 +34,8 @@ This graph links the definitions and dependency steps of the public binary facto
 {include 0 Chapters.Recovery}
 
 {include 0 Chapters.FactorTwo}
+
+{include 0 Chapters.BinaryRow}
 
 {include 0 Chapters.Open}
 

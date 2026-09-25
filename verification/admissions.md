@@ -12,7 +12,7 @@ exact result scopes.
 ## Module coverage
 
 Module names are relative to `StochasticToDeterministicLatents`. The table
-contains 72 modules and 754 theorem endpoints. Definitions, including
+contains 99 modules and 947 theorem endpoints. Definitions, including
 proposition-valued definitions, are not counted as theorem evidence.
 
 | Module | Admitted | Public theorems | Verified role |
@@ -89,6 +89,33 @@ proposition-valued definitions, are not counted as theorem evidence.
 | [Binary.FactorTwo.ContactPositive](../StochasticToDeterministicLatents/Binary/FactorTwo/ContactPositive.lean) | 2026-09-08 | 2 | A positive mutual information at the contact |
 | [Binary.FactorTwo.Witness](../StochasticToDeterministicLatents/Binary/FactorTwo/Witness.lean) | 2026-09-08 | 2 | Five codes suffice for the factor-two bound |
 | [Binary.FactorTwo](../StochasticToDeterministicLatents/Binary/FactorTwo.lean) | 2026-09-08 | 2 | The factor-two theorem |
+| [BinaryRow.Shannon](../StochasticToDeterministicLatents/BinaryRow/Shannon.lean) | 2026-09-25 | 9 | Chain rules, transport of conditional information, and relabelled latents |
+| [BinaryRow.Contact](../StochasticToDeterministicLatents/BinaryRow/Contact.lean) | 2026-09-25 | 21 | Row cube parameters of the contacts of a feasible kernel on `Bit × Y` |
+| [BinaryRow.Optimizer](../StochasticToDeterministicLatents/BinaryRow/Optimizer.lean) | 2026-09-25 | 14 | The one-class or two-contact dichotomy on full support |
+| [BinaryRow.Moments](../StochasticToDeterministicLatents/BinaryRow/Moments.lean) | 2026-09-25 | 11 | Contact cells and the kernel moments of two contacts |
+| [BinaryRow.Foundation](../StochasticToDeterministicLatents/BinaryRow/Foundation.lean) | 2026-09-25 | 18 | Latents from joint laws, transposition, and elementary bounds |
+| [BinaryRow.Presentation](../StochasticToDeterministicLatents/BinaryRow/Presentation.lean) | 2026-09-25 | 16 | The oriented two-contact presentation and its parameter bounds |
+| [BinaryRow.Bernoulli](../StochasticToDeterministicLatents/BinaryRow/Bernoulli.lean) | 2026-09-25 | 12 | Pinsker and Ordentlich–Weinberger bounds on the Bernoulli divergence |
+| [BinaryRow.Posterior](../StochasticToDeterministicLatents/BinaryRow/Posterior.lean) | 2026-09-25 | 6 | Row parameters, the row-one posterior, and the gap |
+| [BinaryRow.Purification](../StochasticToDeterministicLatents/BinaryRow/Purification.lean) | 2026-09-25 | 6 | Purified codes: every latent has one, and each scores at most the latent's score plus three times its label entropy given the pair, which bounds `T` |
+| [BinaryRow.Replica](../StochasticToDeterministicLatents/BinaryRow/Replica.lean) | 2026-09-25 | 13 | The row replica and its information bound |
+| [BinaryRow.Balance](../StochasticToDeterministicLatents/BinaryRow/Balance.lean) | 2026-09-25 | 5 | The variance split and the balance coefficient |
+| [BinaryRow.Interfaces](../StochasticToDeterministicLatents/BinaryRow/Interfaces.lean) | 2026-09-25 | 5 | Constant-code and row-code interfaces of a latent |
+| [BinaryRow.ComponentInfo](../StochasticToDeterministicLatents/BinaryRow/ComponentInfo.lean) | 2026-09-25 | 4 | Component information as a Bernoulli average |
+| [BinaryRow.ReplicaCells](../StochasticToDeterministicLatents/BinaryRow/ReplicaCells.lean) | 2026-09-25 | 7 | The replica's row law and the two-contact cells |
+| [BinaryRow.EntropyVariance](../StochasticToDeterministicLatents/BinaryRow/EntropyVariance.lean) | 2026-09-25 | 3 | Binary entropy against Bernoulli variance |
+| [BinaryRow.ConcaveSign](../StochasticToDeterministicLatents/BinaryRow/ConcaveSign.lean) | 2026-09-25 | 1 | The sign of a concave function with two zeros |
+| [BinaryRow.EntropySums](../StochasticToDeterministicLatents/BinaryRow/EntropySums.lean) | 2026-09-25 | 6 | Entropies of a two-label latent as finite sums |
+| [BinaryRow.JensenGap](../StochasticToDeterministicLatents/BinaryRow/JensenGap.lean) | 2026-09-25 | 4 | The Jensen gap of binary entropy on a band |
+| [BinaryRow.SeparationBand](../StochasticToDeterministicLatents/BinaryRow/SeparationBand.lean) | 2026-09-25 | 6 | Separation bands and the component information on a band |
+| [BinaryRow.ReplicaInfo](../StochasticToDeterministicLatents/BinaryRow/ReplicaInfo.lean) | 2026-09-25 | 3 | The replica information against a variance ratio |
+| [BinaryRow.BandConstants](../StochasticToDeterministicLatents/BinaryRow/BandConstants.lean) | 2026-09-25 | 8 | Rational bounds on the constants of six bands |
+| [BinaryRow.ModerateSeparation](../StochasticToDeterministicLatents/BinaryRow/ModerateSeparation.lean) | 2026-09-25 | 1 | The balance bound on one band |
+| [BinaryRow.ModerateBands](../StochasticToDeterministicLatents/BinaryRow/ModerateBands.lean) | 2026-09-25 | 1 | The factor `27/4` for separation ratio at most 16 |
+| [BinaryRow.HomEntropy](../StochasticToDeterministicLatents/BinaryRow/HomEntropy.lean) | 2026-09-25 | 7 | Homogeneous binary entropy and its separation inequality |
+| [BinaryRow.EntropyScaling](../StochasticToDeterministicLatents/BinaryRow/EntropyScaling.lean) | 2026-09-25 | 1 | Scaling of homogeneous binary entropy |
+| [BinaryRow.LargeSeparation](../StochasticToDeterministicLatents/BinaryRow/LargeSeparation.lean) | 2026-09-25 | 1 | The label-entropy bound for separation ratio at least 16 |
+| [BinaryRow.FactorTwentySevenQuarters](../StochasticToDeterministicLatents/BinaryRow/FactorTwentySevenQuarters.lean) | 2026-09-25 | 4 | All-law `T p <= 27/4 * tau p` on `Bit × Y` and `Y × Bit`; on full support over `Bit × Y`, one of three named codes meets the bound; injective recoding keeps a code's score |
 
 ## Axiom sets
 
@@ -159,6 +186,18 @@ declaration locates the singleton from the law. The proof of
 `Binary.T_le_two_mul_tau` uses the full-support value of $`\tau`$ from
 `Binary.tau_eq_at_topRoot`, not the `paper proof` row `BIN-TAU-EXACT`, and it
 does not use ContactPositive.
+
+On 2026-09-25, FactorTwentySevenQuarters added the row `BIN-ROW-C27-4` at
+`kernel-verified` in both clauses: `BinaryRow.T_le_twentySevenQuarters_mul_tau`
+and `BinaryRow.T_le_twentySevenQuarters_mul_tau_col` for every law on
+`Bit × Y` and on `Y × Bit`, and `BinaryRow.exists_rowWitnessCode` for the
+full-support clause that the constant code, the row code, or a purified code
+of a `tau`-optimal latent with positive weights and distinct components meets
+the bound on `Bit × Y`. No code is named for a law with a zero cell or in the
+column orientation, and the constant is not claimed to be least. Its
+blueprint node is `BIN-ROW-C27-4` in `blueprint/Chapters/BinaryRow.lean`,
+tagged `kernel-verified`, and the row is listed in `LEDGER_IDS` in
+`blueprint/scripts/check_tiers.py`.
 
 ## How the binary admissions compose
 
@@ -1188,3 +1227,137 @@ sparse-law transfer preserves the two optima but not a code.
 With this and ContactPositive, `BIN-C2` is `kernel-verified` in both of
 its clauses.  The endpoints move from 750 to 754: `chordMargin_witness`,
 `of_oriented`, and the module's own two.
+
+## BinaryRow
+
+**Admitted 2026-09-25.**  Twenty-seven modules under `BinaryRow` prove
+`T p <= 27/4 * tau p` for every probability law `p` on `Bit × Y`, with `Y`
+any finite type in `Type`, as `BinaryRow.T_le_twentySevenQuarters_mul_tau`, and for
+every law on `Y × Bit`, as `BinaryRow.T_le_twentySevenQuarters_mul_tau_col`.
+`Bit` is `Fin 2`.  On full support over `Bit × Y`,
+`BinaryRow.exists_rowWitnessCode` names the codes that meet the bound.  At
+`Y = Bit` the bound is weaker than `Binary.T_le_two_mul_tau`; what is new is a
+binary alphabet paired with one of three or more letters.
+
+**Origin.**  Eight modules -- Bernoulli, Balance, EntropyVariance,
+ConcaveSign, JensenGap, BandConstants, HomEntropy and EntropyScaling --
+import nothing from the library outside `BinaryRow`, and their headers say
+that they are original to this repository; Bernoulli credits the
+Ordentlich–Weinberger refinement of Pinsker's inequality to its authors.
+The other nineteen name
+the upstream repository and its license.  Six of those record that part of
+a proof follows or restates an existing one.  Contact, Optimizer and Moments
+follow the two-column proofs of `Binary/TransposeNormalForm.lean` with sums
+over `Y`.  Foundation's component construction for zero-mass labels follows
+the upstream conditioned components.  ComponentInfo restates an inline step
+of the upstream proof that conditional mutual information is nonnegative.
+Shannon's `condMutualInfo_chain_pair` and `mutualInfo_sub_mutualInfo`, with
+two private helpers, restate with the same proofs four lemmas that stay
+private in `Pricing`, so those four proofs now appear twice in the tree.  Purification, Replica and
+ReplicaCells use the upstream latent structure, and state that the
+purification argument, the replica construction and its bound, and the
+replica cell table are original to this repository.
+Presentation and Posterior credit the upstream `Feasible`, `IsContact` and
+`Latent` their statements use.  The remaining eight are original to this
+repository, on the upstream entropy or latent interface.
+
+**Route.**  `T_le_mul_tau_of_forall_fullSupport` reduces the bound to laws
+with every cell positive; an empty `Y` carries no probability law, by
+`univ_nonempty_of_isPMF`.  There the code clause, `exists_rowWitnessCode`,
+gives the bound through `T_le_detScore`; both bounds on `T` are derived from
+it, and their statements are unchanged.  On full support
+`rowOptimizer_dichotomy` gives two cases.  Either `tau p` is the mutual
+information `I(X;Y)`, which is the constant code's score by
+`detScore_constantCode_eq`, or an optimal latent labelled by `Bit` has two
+distinct contacts of one feasible kernel as its components, with positive
+priors.  Their row parameters differ, and relabelling puts them in the order
+`s < t`.  The ratio `t / s` then splits the argument at 16, both sides
+closed.  At most 16, the constant code scores `I(X;Y)` and the row code
+`H(X | Y)`, and `twoContact_min_le_twentySevenQuarters` bounds the smaller of
+the two by `27/4` times the score, over six bands.  At least 16, a purified
+code scores at most `score + 3 H(W | X, Y)` by `IsPurifiedCode.score_le`,
+`condEntropy_label_le` gives `H(W | X, Y) <= H(W | X)`, and
+`twoContact_condEntropy_label_le_score` bounds `H(W | X)` by `325/173` times
+the score.  So the purified code scores at most `(1148/173) * score`, and
+`1148/173` is below `27/4`.  The column form is the row form of the
+transposed law, by `T_swap` and `tau_swap`.  JensenGap bounds the
+normalized Jensen gap by a sign argument along the segment between the two
+row means, not by the page's
+divided-difference argument; its header records the difference.
+
+**The code clause.**  `exists_rowWitnessCode` names three codes through the
+`Prop`-valued definitions `IsRowWitnessCode`, `IsRowCode` and
+`IsOptimalPurifiedCode`: the constant code; the row code `g(x, y) = x`,
+relabelled by an injection of `Bit` into the canonical code alphabet; and a
+purified code of a latent whose score is `tau p`, relabelled by an injection
+of the latent's labels.  Positive weights and distinct components are
+required of that latent.  A purified code, `IsPurifiedCode` in Purification,
+picks at each cell of positive mass a label of positive joint mass there that
+minimises `purifyObjective` among such labels, and any label at a cell of zero
+mass; the Lean accepts any minimising label and fixes no tie-break.  It is the
+purified code of the replica page's Lemma 4.1: that lemma's cell objective
+exceeds `purifyObjective` by `3 log p(z)` in natural-log units, a term
+constant in the label, so the two select the same labels.  The clause does
+not say which of the three codes is used and does not claim the optimal
+latent is unique.
+
+A purified code labels the cells by the latent's own labels and is not itself
+a `Code`.  `detScore_comp_injective` states that recoding a labelling `f` by
+an injection into the canonical code alphabet gives a code whose score is
+`I(X;Y | f) + H(f | X) + H(f | Y)`; it turns the bound of
+`IsPurifiedCode.score_le`, which is stated for that expression, into a bound
+on `detScore`, as the page's Lemma 2.1(3) does in prose.  It also gives the
+row code's score.
+
+**Promotions.**  The code clause needed Purification's argmin step, which was
+private.  `purifyObjective` is now a public definition, and the new
+definition `IsPurifiedCode` and theorems `exists_isPurifiedCode` and
+`IsPurifiedCode.score_le` expose the existence of a purified code and its
+bound; the private score-form lemma is now derived from them, and the
+statements of Purification's other public theorems are unchanged.  These are
+promoted here rather than restated, like the promotions recorded under
+ContactPositive.
+
+**Scope.**  The alphabet `Y` is taken in `Type`, universe zero, while `T`
+and `tau` are defined for `Type*`.  The constant is the rational `27/4` that
+the coarse band constants reach; ModerateBands states that it is not the
+exact maximum of the band relaxation, and no sharper constant is formalized.
+Laws with zero cells go through this repository's sparse-law transfer, not
+through a smoothing argument of their own.  The constant is not claimed to
+be least, no code is named for a law with a zero cell or on `Y × Bit`, and
+nothing bounds a law whose two alphabets are both larger than two.
+
+**Hypotheses.**  Four general identities carry no probability hypothesis,
+because they hold for any real weights: `entropyOf_pushforward_comp` and
+`condMutualInfo_pushforward_comp` in Shannon, `condEntropy_pushforward_comp`
+in EntropySums, and `condMutualInfo_eq_condEntropy_sub` in ReplicaCells.
+Two statements carry a hypothesis their other hypotheses already imply, and
+keep it: `twoContact_replica_info_ge` asks for `0 < s`, which `RowCubeParam`
+gives, and `twoContact_condEntropy_label_le_score` asks for `s < t`, which
+follows from `16 <= t / s` and the same `0 < s`.
+
+**Ledger.**  The new row `BIN-ROW-C27-4` records this result at
+`kernel-verified` in both clauses, through `T_le_twentySevenQuarters_mul_tau`,
+`T_le_twentySevenQuarters_mul_tau_col` and `exists_rowWitnessCode`; no
+existing row changes tier.  The endpoints move from 754 to 947: the 193
+public theorems of the twenty-seven modules.  Of those, 189 were pinned when
+the modules were first admitted; the promotions in Purification and the code
+clause in FactorTwentySevenQuarters added four.
+
+**Pages.**  The prose derivation is on two pages,
+[the optimal latent and the replica](../docs/binary-rows-replica.md) and
+[factor 27/4](../docs/binary-rows-27-4.md), both at `paper proof`.  An earlier
+version of the two pages had a fidelity read against the research proof they
+distil, a cold read of the public tree, and a check of the edits made after
+those reads.  The present version adds the status sentences, Lemma 4.1 without
+a tie-break, and the purified-code wording of the code clause.  On 2026-09-25
+an independent read checked each of those changes against the Lean it cites,
+re-derived the relation between the page's cell objective and
+`purifyObjective`, confirmed that the proof of Lemma 4.1 does not use a
+tie-break, and read both pages cold for scope and rendering.  Two sentences
+were edited after that read: the status of Lemma 4.1 in the public inputs of
+the factor-27/4 page, and the relation between the two cell objectives in the
+formalization paragraph of the replica page.  A second independent read the
+same day re-derived that relation and its sign from `purifyObjective` and
+`IsPurifiedCode`, and located the replica page's statement of Lemma 4.1's
+status, which the link now targets.

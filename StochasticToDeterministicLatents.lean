@@ -70,14 +70,41 @@ import StochasticToDeterministicLatents.Binary.FactorTwo.CenterEndpoints
 import StochasticToDeterministicLatents.Binary.FactorTwo.ContactPositive
 import StochasticToDeterministicLatents.Binary.FactorTwo
 import StochasticToDeterministicLatents.Binary.FactorTwo.Witness
+import StochasticToDeterministicLatents.BinaryRow.Shannon
+import StochasticToDeterministicLatents.BinaryRow.Contact
+import StochasticToDeterministicLatents.BinaryRow.Optimizer
+import StochasticToDeterministicLatents.BinaryRow.Moments
+import StochasticToDeterministicLatents.BinaryRow.Foundation
+import StochasticToDeterministicLatents.BinaryRow.Presentation
+import StochasticToDeterministicLatents.BinaryRow.Bernoulli
+import StochasticToDeterministicLatents.BinaryRow.Posterior
+import StochasticToDeterministicLatents.BinaryRow.Purification
+import StochasticToDeterministicLatents.BinaryRow.Replica
+import StochasticToDeterministicLatents.BinaryRow.Balance
+import StochasticToDeterministicLatents.BinaryRow.Interfaces
+import StochasticToDeterministicLatents.BinaryRow.ComponentInfo
+import StochasticToDeterministicLatents.BinaryRow.ReplicaCells
+import StochasticToDeterministicLatents.BinaryRow.EntropyVariance
+import StochasticToDeterministicLatents.BinaryRow.ConcaveSign
+import StochasticToDeterministicLatents.BinaryRow.EntropySums
+import StochasticToDeterministicLatents.BinaryRow.JensenGap
+import StochasticToDeterministicLatents.BinaryRow.SeparationBand
+import StochasticToDeterministicLatents.BinaryRow.ReplicaInfo
+import StochasticToDeterministicLatents.BinaryRow.BandConstants
+import StochasticToDeterministicLatents.BinaryRow.ModerateSeparation
+import StochasticToDeterministicLatents.BinaryRow.ModerateBands
+import StochasticToDeterministicLatents.BinaryRow.HomEntropy
+import StochasticToDeterministicLatents.BinaryRow.EntropyScaling
+import StochasticToDeterministicLatents.BinaryRow.LargeSeparation
+import StochasticToDeterministicLatents.BinaryRow.FactorTwentySevenQuarters
 
 /-!
 # Stochastic-to-Deterministic Latents
 
 The root exports the finite-information and latent interfaces, deterministic
 codes and pricing, binary normal forms, scalar phase estimates, catalog
-recovery, the sparse-law transfer, and the contact-chord apparatus of
-`Binary.FactorTwo`.
+recovery, the sparse-law transfer, the contact-chord apparatus of
+`Binary.FactorTwo`, and the binary-row modules of `BinaryRow`.
 
 `Binary.T_le_two_mul_tau` proves `T p ≤ 2 * tau p` for every binary
 probability law, and `Binary.exists_witnessCode` narrows the code on full
@@ -91,6 +118,13 @@ deterministic witness. On full support,
 selector and `Binary.exists_optimalLatent_w3_le_eight_of_fullSupport` supplies
 an attained optimal latent with determinization cost at most eight times
 `tau p`.
+
+`BinaryRow.T_le_twentySevenQuarters_mul_tau` proves `T p ≤ 27/4 * tau p`
+for every probability law on `Bit × Y` with `Y` any finite type in `Type`, and
+`BinaryRow.T_le_twentySevenQuarters_mul_tau_col` proves it on `Y × Bit`.
+On full support over `Bit × Y`, `BinaryRow.exists_rowWitnessCode` names the
+code: the constant code, the row code, or a purified code of an optimal
+latent. The constant is not claimed to be least.
 
 The arbitrary-alphabet factor-nine conjecture retains its separate evidence
 tier. See `docs/claims.md` for the claim ledger, `verification/README.md`

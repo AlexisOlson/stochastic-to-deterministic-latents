@@ -67,7 +67,11 @@ explicitly. For binary laws the stochastic optimum is computed exactly in the
 [binary stochastic optimum](binary-stochastic-optimum.md) page, and the
 [binary factor two](binary-factor-two.md) page proves $`T(p) \le 2\,\tau(p)`$
 for every binary law. The exact optimum is at `paper proof`; the factor-two
-theorem is `kernel-verified` here.
+theorem is `kernel-verified` here. When only one alphabet is binary, the pages
+[binary rows: the optimal latent and the replica](binary-rows-replica.md) and
+[binary rows: factor 27/4](binary-rows-27-4.md) prove
+$`T(p) \le (27\text/4)\,\tau(p)`$, and that theorem is `kernel-verified` here
+too.
 
 The deterministic optimum is the attained finite minimum
 

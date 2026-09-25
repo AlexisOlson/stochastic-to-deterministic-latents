@@ -1,8 +1,9 @@
 # Verify the Lean library
 
-The public library proves the binary factor-two and factor-nine theorems. Its
-root exports 72 modules, and [Verify.lean](../Verify.lean) audits all 754
-public theorem endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
+The public library proves the binary factor-two and factor-nine theorems and
+the factor 27/4 for laws with one binary alphabet. Its root exports 99
+modules, and [Verify.lean](../Verify.lean) audits all 947 public theorem
+endpoints. Thirty public `lemma` declarations in TransposeNormalForm are
 not pinned separately; they are used only inside audited proofs, where the
 audit covers them transitively, and pinning or privatizing them is pending. The [admission record](admissions.md) lists the modules, dates,
 discovered axiom sets, and exact claim promotions.
@@ -46,7 +47,10 @@ Lean after compilation. A mismatch must be investigated; changing the expected
 set to silence a failure is not an audit.
 
 The two factor-two headlines, `Binary.T_le_two_mul_tau` and
-`Binary.exists_witnessCode`, and the four factor-nine headlines each report
+`Binary.exists_witnessCode`, the four factor-nine headlines, and the three
+binary-row headlines, `BinaryRow.T_le_twentySevenQuarters_mul_tau`,
+`BinaryRow.T_le_twentySevenQuarters_mul_tau_col` and
+`BinaryRow.exists_rowWitnessCode`, each report
 `[propext, Classical.choice, Quot.sound]`. Two supporting theorems use smaller
 sets, listed in the [axiom exceptions](admissions.md#axiom-sets). The audit
 does not require every theorem to use the same set.
