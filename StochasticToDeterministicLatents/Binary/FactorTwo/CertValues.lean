@@ -15,7 +15,7 @@ four marginals collapse to `certDiagonal`, a function of the diagonal mass and
 `u` alone, and off the diagonal the marginal product collapses to
 `u ^ 2 + b - b c`, giving `certOffDiagonal`.
 
-This is what makes an explicit reference law usable as an affine minorant of
+This is what makes an explicit reference law usable as an affine majorant of
 `Phi` elsewhere: its certificate is the logarithms of three rational numbers,
 computable from the cells, rather than four logarithms of an implicit
 optimum.  `log_two_mul_phi_contact` is the same closed form

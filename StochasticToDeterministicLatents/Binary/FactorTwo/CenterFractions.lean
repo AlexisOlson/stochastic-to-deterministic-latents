@@ -39,7 +39,8 @@ positive on the chart's domain, which is the page's own list, and that is
 `chartFactors_pos`.
 
 Nothing here bounds anything.  The comparison that makes the centre's margins
-concave is the next step and is not stated.
+concave, the page's display (3.8), is `chartContactSecondOrder_lt` in
+`CenterCurvature`.
 
 ## Attribution
 

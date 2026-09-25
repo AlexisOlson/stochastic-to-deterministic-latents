@@ -18,8 +18,10 @@ brackets by `norm_num`, and combine with Mathlib's enclosure of `Real.log 2`.
 
 The points here are coarser than the sibling's -- 3581 needs `t` near `0.27`,
 where 11 needed `3/19` -- so the six-term tail is the wider of the two error
-sources for the last of them and the enclosure is three units in the eighth
-place rather than one.  Six terms still suffice at every point: the widest
+sources for the last of them, whose enclosure is three units in the eighth
+place.  Those of `Real.log 19` and `Real.log 313` are two units, like the
+sibling's `Real.log 11`, and the rest one.  Six terms still suffice at every
+point: the widest
 tail is `7.6e-9`.
 
 ## Attribution
@@ -51,7 +53,7 @@ theorem log_seventeen_bounds :
   norm_num at hs1 hs2
   constructor <;> linarith [Real.log_two_gt_d9, Real.log_two_lt_d9]
 
-/-- `Real.log 19` to eight places. -/
+/-- `Real.log 19` to within two units in the eighth place. -/
 theorem log_nineteen_bounds :
     (294443897 : ℝ) / 10 ^ 8 ≤ Real.log 19 ∧
       Real.log 19 ≤ (294443899 : ℝ) / 10 ^ 8 := by
@@ -146,7 +148,7 @@ theorem log_onehundredseventynine_bounds :
   norm_num at hs1 hs2
   constructor <;> linarith [Real.log_two_gt_d9, Real.log_two_lt_d9]
 
-/-- `Real.log 313` to eight places. -/
+/-- `Real.log 313` to within two units in the eighth place. -/
 theorem log_threehundredthirteen_bounds :
     (574620318 : ℝ) / 10 ^ 8 ≤ Real.log 313 ∧
       Real.log 313 ≤ (574620320 : ℝ) / 10 ^ 8 := by

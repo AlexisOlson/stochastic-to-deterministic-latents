@@ -1,20 +1,20 @@
 # Continuous verification for the Lean 4 / Mathlib library.
-# Intended location: .github/workflows/ci.yml
 #
 # The job reproduces the local verification procedure from CLAUDE.md and
 # verification/README.md, in this order:
 #   1. install elan and the toolchain pinned by `lean-toolchain`
 #   2. `lake exe cache get`      -- Mathlib oleans through the inherited dependency
-#   3. `lake build`              -- the root library (default target)
-#   4. `lake env lean Verify.lean` -- kernel audit: assert_no_sorry + pinned axiom sets
-#   5. the trust-shortcut grep   -- must print nothing
+#   3. `lake build`              -- the root library (default target), then staged modules
+#   4. `lake env lean -DrelaxedAutoImplicit=false Verify.lean` -- kernel audit;
+#      must exit 0 and print nothing
+#   5. the Verify pin pairing and the trust-shortcut grep
 # Before those, on pull requests it checks that the squash subject (the title,
 # or the single commit's subject) is at most 50 characters, and on every event
 # it checks that Markdown math uses only the backtick inline form and math
 # fences (CLAUDE.md, Mathematical notation in Markdown).
 # Nothing here runs `lake update` or touches the pins, so the Mathlib oleans
 # stay valid across runs and no rebuild of Mathlib is triggered by the workflow
-# itself (see "Do not trigger a Mathlib rebuild" in CLAUDE.md).
+# itself (see "Build discipline" in CLAUDE.md).
 #
 # The Lean steps (2 to 4) run only when the change touches something Lean
 # reads: a `.lean` file outside `blueprint/`, the toolchain, the lakefile,
@@ -97,15 +97,27 @@ jobs:
       # Plain-dollar math is Markdown-processed before GitHub renders it and
       # breaks silently, so CLAUDE.md allows only the backtick inline form and
       # math fences: every dollar sign in Markdown must touch a backtick.
+      # git grep exits 0 on a match, 1 on none, and >1 on an error; only 1
+      # passes. (xargs folded every grep status from 1 to 125 into 123, so an
+      # error looked like a clean run.) An empty file list would also pass, so
+      # it is checked first.
       - name: Check Markdown math syntax
         shell: bash
         run: |
-          set -euo pipefail
-          if git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'; then
-            echo "::error::Plain-dollar math or a bare dollar sign in Markdown; use the backtick inline form or a math fence (CLAUDE.md, Mathematical notation in Markdown)."
+          set -uo pipefail
+          if [ "$(git ls-files '*.md' | wc -l)" -eq 0 ]; then
+            echo "::error::no tracked Markdown files found"
             exit 1
           fi
-          echo "Markdown math syntax: clean"
+          status=0
+          git grep -nP '(?<!`)\x24(?!`)' -- '*.md' || status=$?
+          case "$status" in
+            1) echo "Markdown math syntax: clean" ;;
+            0) echo "::error::Plain-dollar math or a bare dollar sign in Markdown; use the backtick inline form or a math fence (CLAUDE.md, Mathematical notation in Markdown)."
+               exit 1 ;;
+            *) echo "::error::git grep failed with status $status"
+               exit 1 ;;
+          esac
 
       # Decide whether the Lean steps are needed. Outputs `lean=true` unless
       # every changed file is outside the Lean-relevant set. Any doubt (no
@@ -131,7 +143,10 @@ jobs:
             echo "lean=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          changed="$(git diff --name-only "$base" "${{ github.sha }}")"
+          # --no-renames lists both sides of a rename, so a .lean file moved to
+          # another extension still counts; -z disables path quoting, so a
+          # non-ASCII .lean path still matches the pattern.
+          changed="$(git diff --no-renames --name-only -z "$base" "${{ github.sha }}" | tr '\0' '\n')"
           echo "changed files:"
           echo "$changed"
           if echo "$changed" | grep -v '^blueprint/' | grep -E '(^|/)[^/]*\.lean$|^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^\.github/workflows/ci\.yml$' > /dev/null; then
@@ -176,16 +191,16 @@ jobs:
       # transitively through the pinned `stoch_to_det` git dependency, and
       # `lake exe cache get` finds Mathlib's `cache` executable through that
       # inherited entry (confirmed on the first run: 8681 files decompressed).
-      # If it ever fails, this step only warns; the following `lake build`
-      # then compiles Mathlib from source, which takes hours on a 4-vCPU
-      # runner and will not finish inside `timeout-minutes` (GitHub-hosted
-      # jobs are capped at 360 minutes regardless). Fix the cache invocation
+      # If it fails, the job stops here: the following `lake build` would
+      # compile Mathlib from source, which takes hours on a 4-vCPU runner and
+      # will not finish inside `timeout-minutes`. Fix the cache invocation
       # rather than raising the timeout.
       - if: steps.changes.outputs.lean == 'true'
         name: Fetch Mathlib oleans
         run: |
           if ! lake exe cache get; then
-            echo "::warning::lake exe cache get failed; lake build will compile Mathlib from source"
+            echo "::error::lake exe cache get failed; stopping before lake build would compile Mathlib from source"
+            exit 1
           fi
 
       # Fetch first so Lake has cloned stoch_to_det before restoring its build
@@ -202,37 +217,128 @@ jobs:
             lake-build-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}-
 
       # Builds the default target (the root library) with the leanOptions from
-      # lakefile.toml. Prints `Build completed successfully` on success; lint
-      # warnings replayed from cached upstream jobs are not failures.
+      # lakefile.toml. Prints `Build completed successfully` on success. The
+      # pinned upstream replays about seventy linter warnings, which are not
+      # failures; a warning in this library's own modules is a regression
+      # (verification/README.md), so it fails the step.
       - if: steps.changes.outputs.lean == 'true'
         name: Build the root library
-        run: lake build
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build 2>&1 | tee "$RUNNER_TEMP/root-build.log"
+          if grep -E '^warning: (\./)*StochasticToDeterministicLatents(/|\.lean:)' "$RUNNER_TEMP/root-build.log"; then
+            echo "::error::a library module emitted the warnings above"
+            exit 1
+          fi
+
+      # CLAUDE.md keeps a new module out of the root until it passes its own
+      # build and review, and `lake build` builds only root-imported modules,
+      # so a staged module would otherwise merge unbuilt. Build each tracked
+      # module under StochasticToDeterministicLatents/ that the root does not
+      # import, by its full name.
+      - if: steps.changes.outputs.lean == 'true'
+        name: Build staged modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$(grep -E '^import StochasticToDeterministicLatents\.' StochasticToDeterministicLatents.lean | awk '{print $2}' | sort)"
+          all="$(git ls-files 'StochasticToDeterministicLatents/*.lean' | sed -e 's/\.lean$//' -e 's#/#.#g' | sort)"
+          staged="$(comm -23 <(echo "$all") <(echo "$root"))"
+          if [ -z "$staged" ]; then
+            echo "no staged modules"
+            exit 0
+          fi
+          for m in $staged; do
+            echo "building staged module $m"
+            lake build "$m" 2>&1 | tee -a "$RUNNER_TEMP/staged-build.log"
+          done
+          if grep -E '^warning: (\./)*StochasticToDeterministicLatents/' "$RUNNER_TEMP/staged-build.log"; then
+            echo "::error::a staged module emitted the warnings above"
+            exit 1
+          fi
 
       # Kernel audit. Every public theorem endpoint has an `assert_no_sorry`
       # and a `#print axioms` result pinned with `#guard_msgs`. A passing run
       # prints nothing and exits 0; any output or a nonzero exit is a failed
-      # admission. Must run after `lake build`, since it reads the root olean.
-      # (verification/README.md adds `-DrelaxedAutoImplicit=false` to this
-      # command; CLAUDE.md gives it without. The flag only tightens
-      # auto-implicit binding for Verify.lean itself.)
+      # admission, so both are checked. Must run after `lake build`, since it
+      # reads the root olean. The flag matches CLAUDE.md and
+      # verification/README.md: an unbound multi-character identifier in
+      # Verify.lean is an error, not an auto-bound variable.
       - if: steps.changes.outputs.lean == 'true'
         name: Kernel audit (Verify.lean)
-        run: lake env lean Verify.lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          out="$(lake env lean -DrelaxedAutoImplicit=false Verify.lean 2>&1)" || status=$?
+          if [ "$status" -ne 0 ]; then
+            echo "$out"
+            echo "::error::Verify.lean exited with status $status"
+            exit 1
+          fi
+          if [ -n "$out" ]; then
+            echo "$out"
+            echo "::error::Verify.lean printed output; a passing audit is silent"
+            exit 1
+          fi
+          echo "Verify.lean: silent, exit 0"
 
       - if: steps.changes.outputs.lean != 'true'
         name: Lean steps skipped
         run: echo "No Lean-relevant file changed; toolchain install, build, and kernel audit were skipped."
 
-      # Trust-shortcut scan, verbatim from CLAUDE.md. `grep` exits 1 when it
-      # finds nothing, which is the passing case, so the exit code cannot be
-      # used directly: the step fails if and only if the scan prints anything.
-      # (`assert_no_sorry` is not matched because `_` is a word character.)
-      - name: Scan for trust shortcuts
+      # Every audited endpoint is one block of four lines, in this order:
+      #   assert_no_sorry X / docstring naming X / #guard_msgs ... in / #print axioms X
+      # A `#print axioms` without its guard, or an assert without its pin,
+      # breaks the pairing. Counts are reported for the admission record.
+      - name: Check Verify.lean pin pairing
+        shell: bash
         run: |
-          out="$(grep -rn -E '\b(sorry|admit|native_decide|unsafe)\b|^\s*(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || true)"
-          if [ -n "$out" ]; then
-            echo "trust-shortcut scan found matches:"
-            echo "$out"
-            exit 1
-          fi
-          echo "trust-shortcut scan printed nothing"
+          set -euo pipefail
+          python3 - <<'PY'
+          import re, sys
+          lines = open("Verify.lean", encoding="utf-8").read().splitlines()
+          asserts = [i for i, l in enumerate(lines) if l.startswith("assert_no_sorry ")]
+          guards = [i for i, l in enumerate(lines) if l.startswith("#guard_msgs")]
+          prints = [i for i, l in enumerate(lines) if l.startswith("#print axioms ")]
+          bad = []
+          for i in asserts:
+              name = lines[i].split()[1]
+              block = lines[i + 1:i + 4]
+              ok = (len(block) == 3
+                    and block[0].startswith(f"/-- info: '{name}' depends on axioms: [")
+                    and block[1].startswith("#guard_msgs")
+                    and block[2] == f"#print axioms {name}")
+              if not ok:
+                  bad.append(f"line {i + 1}: {name}")
+          if not (len(asserts) == len(guards) == len(prints)):
+              bad.append(f"counts differ: assert {len(asserts)}, guard {len(guards)}, print {len(prints)}")
+          for msg in bad:
+              print(f"::error::{msg}")
+          print(f"pins: {len(asserts)} assert_no_sorry, {len(guards)} #guard_msgs, {len(prints)} #print axioms")
+          sys.exit(1 if bad else 0)
+          PY
+
+      # Trust-shortcut scan, the same pattern as verification/README.md.
+      # `grep` exits 1 when it finds nothing (the passing case), 0 on a match,
+      # and 2 on an error such as a missing path; only 1 passes.
+      # (`assert_no_sorry` is not matched because `_` is a word character.)
+      # Beyond sorry/admit/axioms the pattern catches: kernel-check bypass
+      # (skipKernelTC), compiler-trusted decision (native_decide, decide
+      # +native, bv_decide), foreign or replaced implementations
+      # (implemented_by, extern), attribute-prefixed axioms, and library-level
+      # syntax extensions that could shadow the audit commands.
+      - name: Scan for trust shortcuts
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          grep -rn -E '\b(sorry|admit|native_decide|unsafe|bv_decide|implemented_by|extern|skipKernelTC)\b|decide \+native|^\s*(local |scoped )?(syntax|macro|macro_rules|elab|elab_rules|notation|infix|infixl|infixr|prefix|postfix)\b|^\s*(@\[[^]]*\]\s*)?(private |protected |noncomputable )*axiom\b' --include='*.lean' StochasticToDeterministicLatents StochasticToDeterministicLatents.lean Verify.lean || status=$?
+          case "$status" in
+            1) echo "trust-shortcut scan: no matches" ;;
+            0) echo "::error::trust-shortcut scan found the matches above"
+               exit 1 ;;
+            *) echo "::error::trust-shortcut scan failed with status $status (a scanned path may be missing)"
+               exit 1 ;;
+          esac

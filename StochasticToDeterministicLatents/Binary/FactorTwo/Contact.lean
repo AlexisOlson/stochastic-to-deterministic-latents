@@ -123,7 +123,7 @@ theorem tangentCert_self (q : RealTable) (hq : IsPMF q) :
 /-! ## Cell formulas for the two marginals
 
 The row and column marginals of a binary law are sums of two cells.  These are
-stated here because every later module in the lane needs them.
+stated here because the later factor-two modules need them.
 -/
 
 theorem marginalX_zero (q : RealTable) :

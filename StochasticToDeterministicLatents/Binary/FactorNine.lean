@@ -25,7 +25,9 @@ namespace StochasticToDeterministicLatents.Binary
 
 noncomputable section
 
-/-- An optimal latent and a law-defined catalog code with cost at most eight times `tau`. -/
+/-- The statement that, for every full-support binary probability law, some
+optimal latent and some law-defined catalog code have `w3Cost` at most eight
+times `tau`. -/
 def SmallCatalogFactorEightWitness : Prop :=
   ∀ (p : RealTable), IsPMF p → (∀ z, 0 < p z) →
     ∃ L : Latent p, ∃ g : BinaryCode,

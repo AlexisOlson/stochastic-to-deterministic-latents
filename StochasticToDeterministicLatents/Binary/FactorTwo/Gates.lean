@@ -13,8 +13,8 @@ sufficient conditions, each checkable at one or two points:
   most once and its slope vanishes at the midpoint;
 * the isolating margin is nonnegative at both ends -- then it is nonnegative
   throughout, because it is concave;
-* the isolating margin is nonnegative at the midpoint and at some interior
-  point where the constant margin is also nonnegative -- then the two together
+* the isolating margin is nonnegative at the midpoint and at some point of the
+  segment where the constant margin is also nonnegative -- then the two together
   cover the segment.
 
 Nothing here proves that a gate holds.  Given one of them at every chord
@@ -204,8 +204,8 @@ theorem chordMargin_of_singletonEnds (h : ChordDomain p u)
     ⟨le_rfl, (chordMidpoint_lt_chordTop h).le⟩
     ⟨(chordMidpoint_lt_chordTop h).le, le_rfl⟩ ht
 
-/-- Third gate: the isolating margin nonnegative at the midpoint and at an
-interior point where the constant margin is nonnegative too. -/
+/-- Third gate: the isolating margin nonnegative at the midpoint and at a point
+of the segment where the constant margin is nonnegative too. -/
 theorem chordMargin_of_crossover (h : ChordDomain p u) (t₀ : ℝ)
     (ht₀ : t₀ ∈ Set.Icc (chordMidpoint p) (chordTop p u))
     (hmid : 0 ≤ singletonMargin p u (chordMidpoint p))
@@ -242,8 +242,8 @@ theorem T_le_two_mul_tau_of_centerGate (h : ChordDomain p u)
   T_le_two_tau_of_chordMargin h (chordMargin_of_constantCentre h h0)
 
 /-- The cut gates at one law: an isolating margin that is nonnegative at the
-midpoint and at an interior point where the constant margin is nonnegative too
-bounds that law's deterministic optimum. -/
+midpoint and at a point of the chord where the constant margin is nonnegative
+too bounds that law's deterministic optimum. -/
 theorem T_le_two_mul_tau_of_cutGates (h : ChordDomain p u) (t₀ : ℝ)
     (ht₀ : t₀ ∈ Set.Icc (chordMidpoint p) (chordTop p u))
     (hmid : 0 ≤ singletonMargin p u (chordMidpoint p))
@@ -255,7 +255,7 @@ theorem T_le_two_mul_tau_of_cutGates (h : ChordDomain p u) (t₀ : ℝ)
 /-- `T p ≤ 2 * tau p` for every probability law, given the three gates on every
 chord domain.  The hypothesis is one-dimensional: it compares two explicit
 scalar functions with zero at the midpoint, at the upper contact, and at one
-interior point. -/
+point of the chord. -/
 theorem T_le_two_tau_of_gates
     (hgates : ∀ (q : RealTable) (w : ℝ), ChordDomain q w →
       0 ≤ constantMargin q w (chordMidpoint q)

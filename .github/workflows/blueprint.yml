@@ -9,6 +9,9 @@ on:
       - '**/*.lean'
       - 'lake-manifest.json'
       - 'lean-toolchain'
+      - 'lakefile.toml'
+      # check_tiers.py compares the ledger with the blueprint's tier tags.
+      - 'docs/claims.md'
   pull_request:
     branches: [main]
     paths:
@@ -17,6 +20,8 @@ on:
       - '**/*.lean'
       - 'lake-manifest.json'
       - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'docs/claims.md'
   workflow_dispatch:
 
 permissions:

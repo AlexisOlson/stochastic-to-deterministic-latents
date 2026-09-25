@@ -16,7 +16,8 @@ the mass increases strictly from the centre out to the critical radius.
 That monotonicity is what lets a law be located on its ray by its off-diagonal
 mass: the radius is recovered from the mass, so the seam, where the mass is one
 eighth, meets each ray at most once.  That it meets each ray *at all* needs the
-critical mass to reach one eighth, which is not proved here.
+critical mass to reach one eighth, which `exists_raySeamRadius` in
+`CenterRaySeam` proves.
 
 Nothing here is analytic.  The margins, their logarithms and their derivatives
 belong to the modules above this one.

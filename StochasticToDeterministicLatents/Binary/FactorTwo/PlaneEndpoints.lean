@@ -25,9 +25,9 @@ the off-diagonal cells `Real.log ((1 + z)/16)` and `Real.log ((1 - z)/16)`, the
 two marginals `Real.log ((8 + z)/16)` and `Real.log ((8 - z)/16)`, and the
 plane its three values `K`, `L_b`, `L_c`.
 
-Every one of those rationals factors over the fourteen primes enclosed by
-`LogValues` and `CenterLogValues` -- all fourteen are used, and none other
-occurs.  The private table below rewrites each logarithm into that basis
+Every one of those rationals factors over fourteen primes: `2`, whose logarithm
+Mathlib encloses, and the thirteen enclosed by `LogValues` and
+`CenterLogValues` -- all fourteen are used, and none other occurs.  The private table below rewrites each logarithm into that basis
 **exactly**, and `linarith` then applies the enclosures once, at the end.  This
 is why the table holds equations rather than enclosures: bounding each of eight
 terms separately would compound the enclosure error eight times over, where

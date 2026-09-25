@@ -1,14 +1,12 @@
 # Binary factor two
 
-This page proves the binary constant two. The page itself is a complete
-rigorous prose derivation with no unresolved step, in the sense of the
-[claim ledger](claims.md#status-vocabulary). The theorem it proves is since
-2026-09-08 also `kernel-verified` in this repository, by a route that follows
-this page in outline without reproducing all of it; section 7 says what the
-library does not state, and the [claim ledger](claims.md#ledger) records where
-the Lean argument takes a different route from the one given here.
-Where a kernel-verified declaration supplies an input, it is quoted in its own
-words.
+This page proves the binary constant two at `paper proof` (see the
+[claim ledger](claims.md#status-vocabulary)). The inequality and the five-code
+witness are also `kernel-verified` here, by a Lean route that follows this page
+in outline; [section 7](#7-scope-and-formalization) lists what the library does
+not state, and the [claim ledger](claims.md#ledger) records where the Lean
+route differs. Where a kernel-verified declaration supplies an input, nothing
+stronger than its statement is attributed to it.
 
 Write a binary law as $`p = (a,b,c,d) = (p_{00},p_{01},p_{10},p_{11})`$ and put
 $`\Delta = ad - bc`$.
@@ -19,25 +17,27 @@ $`\Delta = ad - bc`$.
 > T(p) \le 2\,\tau(p).
 > ```
 >
-> If $`p`$ has full support, the witness can be read off the law: either the
-> constant code or one of the four singleton codes (the code whose only
-> nontrivial class is one cell) has $`D_p(g) \le 2\,\tau(p)`$; when
-> $`\Delta > 0`$ the singleton may be taken at a lightest diagonal cell, and when
-> $`\Delta < 0`$ at a lightest off-diagonal cell.
+> If $`p`$ has full support, the constant code or one of the four singleton
+> codes (a singleton code separates one cell from the other three) has
+> $`D_p(g) \le 2\,\tau(p)`$; when $`\Delta > 0`$ the singleton may be taken at a
+> lightest diagonal cell, and when $`\Delta < 0`$ at a lightest off-diagonal cell.
 
-The inequality is the ledger row [`BIN-C2`](claims.md#ledger). Its right-hand
+The inequality and the five-code clause are `kernel-verified`; the location of
+the singleton is proved on this page only, at `paper proof`. The inequality is
+the ledger row [`BIN-C2`](claims.md#ledger). Its right-hand
 side is the exact stochastic optimum of the
 [binary stochastic optimum](binary-stochastic-optimum.md) page: $`\tau(p)`$ is
 either $`I_p(X;Y)`$, in which case there is nothing to prove, or
 $`\Psi(p) - \Phi(q^+)`$ with $`q^+`$ one of the two diagonal-swap contacts
 located by one cubic root. The proof compares two deterministic scores with
 that value along each contact chord. On the chord, the singleton margin is
-concave and the constant margin has no interior minimum on any subinterval, so
-one point at which both margins are nonnegative, together with a nonnegative
-singleton margin at the chord center, settles the whole chord. That
-point is the chord center when the disagreement mass $`b + c`$ is at least
-$`1\text/8`$, and a fixed cut at three times the smaller contact mass when it is
-smaller. Laws with a zero cell inherit the bound from the kernel-verified
+concave and the constant margin has no interior minimum on any subinterval. So
+a nonnegative constant margin at the chord center settles the whole chord, and
+so does one point at which both margins are nonnegative, together with a
+nonnegative singleton margin at the center. The first case holds when the
+disagreement mass $`b + c`$ is at least $`1\text/8`$; the second holds when it
+is smaller, at a fixed cut at three times the smaller contact mass. Laws with a
+zero cell inherit the bound from the kernel-verified
 transfer theorem of [`SparseLimit`](../StochasticToDeterministicLatents/SparseLimit.lean).
 
 The constant is not claimed to be sharp, and nothing here identifies the laws
@@ -51,7 +51,7 @@ that maximize $`T(p)\text/\tau(p)`$. See [section 7](#7-scope-and-formalization)
 | The center theorem | [4](#4-the-center) |
 | The fixed cut at three times the smaller contact mass | [5](#5-the-fixed-cut) |
 | Assembly on full support, then every law | [6](#6-assembly) |
-| Scope and Lean targets | [7](#7-scope-and-formalization) |
+| Scope and formalization | [7](#7-scope-and-formalization) |
 
 ## 1. Setting
 
@@ -83,9 +83,7 @@ with $`\eta(0) = 0`$. For a law $`p'`$ on the four cells,
 
 **Public inputs.** The proof uses the following results of the
 [binary stochastic optimum](binary-stochastic-optimum.md) page, all at
-`paper proof`, and three kernel-verified declarations. This list is what the
-prose derivation below quotes, not the extent of the formal backing: the
-theorem itself is kernel-verified, and section 7 says so.
+`paper proof`, and three kernel-verified declarations.
 
 - [Theorem 6.6](binary-stochastic-optimum.md#6-the-cubic) (the cubic decides
   and locates the optimum), with [Lemma 6.1](binary-stochastic-optimum.md#6-the-cubic)
@@ -1215,8 +1213,8 @@ functions), and finitely many rational-logarithm comparisons decided by the
 series of Lemma 1.3. The ledger rows
 are `BIN-C2` (Theorems 6.1 and 6.2), `BIN-CHORD-CUT` (Theorem 2.5 with Lemmas
 2.2 to 2.4), `BIN-CENTER` (Theorem 4.1), and `BIN-FIXED-CUT` (Lemma 5.1 with
-Theorems 5.2 and 5.3). All four have since been `kernel-verified` in the
-library, and the derivation above remains their prose proof. Two things stated
+Theorems 5.2 and 5.3). All four are also `kernel-verified` in the library, and
+the derivation above is their prose proof. Two things stated
 here are not in the library: Theorem 2.5's conclusion at every point of the
 chord, where each declaration concludes at the law itself, and the *location*
 of the singleton witness given at the head of this page, where the Lean
@@ -1253,20 +1251,13 @@ $`\tau \ge \Psi + k`$ is needed for the final comparison. A formalization may
 therefore prove each block about the formal expressions and invoke the exact
 optimum once.
 
-**Formalization.** The public library contains the root and the contact pair
-in chart coordinates (`contact_root_identity` in
-[NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean)), the
-generic transfer theorem, the constant and singleton codes, and the
-cell-symmetry transports of
-[Symmetry](../StochasticToDeterministicLatents/Binary/Symmetry.lean), but no
-declaration computing $`\tau`$ from a law and none of the four blocks above.
-The target declarations are listed in the
-[Lean contracts](lean-contracts.md#binary-factor-two); the endpoint is a
-theorem `Binary.T_le_two_mul_tau` for every binary law, together with a
-full-support witness theorem naming the code. The natural order is the
-stochastic-optimum targets first (the cubic and the formula for $`\tau`$),
-then the chord calculus, then the two seam and two cut estimates, then the
-assembly.
+**Formalization.** The theorem is `Binary.T_le_two_mul_tau`, for every binary
+law, and the full-support witness clause is `Binary.exists_witnessCode`; both
+are `kernel-verified`. `Binary.tau_eq_at_topRoot` supplies $`\tau(p)`$ for a
+full-support law with $`\Delta \ge 0`$. The [claim ledger](claims.md#ledger)
+names the declarations for each block and records where the Lean route
+differs from this page; the [Lean contracts](lean-contracts.md#binary-factor-two)
+map each supplied declaration to its target signature.
 
 `scripts/check_factor_two_identities.py` performs 127 checks over the
 identities and constants of this page. Of these, 124 are exact: a symbolic

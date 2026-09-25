@@ -89,10 +89,11 @@ dollar sign that does not touch a backtick. The check is not aware of code
 spans, fences, or prose: a shell variable or a price also fails unless the
 dollar sign touches a backtick, and exempting shell fences is the follow-up if
 that ever bites. Run the same command locally, from Git Bash on Windows, where
-no output and exit status 123 is the passing case:
+no output and exit status 1 is the passing case; 0 means a match and anything
+else an error:
 
 ```sh
-git ls-files -z '*.md' | xargs -0 grep -nP '(?<!`)\x24(?!`)'
+git grep -nP '(?<!`)\x24(?!`)' -- '*.md'
 ```
 
 Measured rules, from the rendering tests behind pull requests #9 and #10:

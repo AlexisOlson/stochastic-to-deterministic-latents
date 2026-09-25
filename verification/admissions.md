@@ -123,12 +123,42 @@ public declaration.
 
 On 2026-09-04, FactorNine promoted `BIN-W3-8` for full-support binary laws and
 `BIN-C9` for every binary law. It also proves the mathematical selector's
-factor-nine bound on full support. All other admissions in the table changed
-no ledger tier. The count/rational refinement and the general-alphabet
+factor-nine bound on full support. No other admission up to that date changed
+a ledger tier. The count/rational refinement and the general-alphabet
 conjectures retain their stated evidence tiers. The `BIN-CATALOG-RECOVERY`
 row was narrowed on 2026-09-04 to the supplied-presentation recovery that
 `CatalogRecovery`'s two audited theorems state, and reads `kernel-verified`
 through them; it was not re-audited, and no declaration changed.
+
+On 2026-09-07, Strip, ConstantBound and SingletonBound promoted
+`BIN-FIXED-CUT` through `Binary.contactMass_lt_half_disagreement`,
+`Binary.fixedCut_constantMargin_gt` and `Binary.fixedCut_singletonMargin_gt`,
+each on a supplied `ChordDomain`. The two margin bounds are stated multiplied
+through by `Real.log 2`; the row's constants are in nats.
+
+On 2026-09-08, CenterEndpoints promoted `BIN-CENTER` through
+`Binary.center_singletonMargin_ge` and `Binary.center_constantMargin_pos`,
+each on a supplied `ChordDomain`. The route differs from the page's on the
+second part: the value at the far end of a center ray is proved nonnegative,
+not positive, and only nonnegativity is used. The page's concavity in the mass
+is not stated.
+
+On 2026-09-08, ContactPositive promoted `BIN-CHORD-CUT`. Its two shape facts,
+`Binary.singletonMargin_concaveOn` and `Binary.constantMargin_min_le`, and the
+gate implications `Binary.T_le_two_mul_tau_of_centerGate`,
+`Binary.T_le_two_mul_tau_of_cutGates` and `Binary.T_le_two_tau_of_gates` were
+audited on 2026-09-07. The row waited for `Binary.constantMargin_chordTop_pos`,
+the strict positivity of the constant margin at the upper contact. Theorem
+2.5's conclusion at every point of the chord is not stated; each declaration
+concludes at the law itself.
+
+On 2026-09-08, FactorTwo and Witness promoted `BIN-C2` in both clauses:
+`Binary.T_le_two_mul_tau` for every binary law, and `Binary.exists_witnessCode`
+for the full-support clause that one of the five codes meets the bound. No
+declaration locates the singleton from the law. The proof of
+`Binary.T_le_two_mul_tau` uses the full-support value of $`\tau`$ from
+`Binary.tau_eq_at_topRoot`, not the `paper proof` row `BIN-TAU-EXACT`, and it
+does not use ContactPositive.
 
 ## How the binary admissions compose
 

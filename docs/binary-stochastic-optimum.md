@@ -3,10 +3,11 @@
 This page computes $`\tau(p)`$ exactly for every binary $`2 \times 2`$ law
 $`p`$, together with the optimal latent. The results are `paper proof` in the
 sense of the [claim ledger](claims.md#status-vocabulary): complete prose
-derivations, not formalized. No Lean declaration in this repository states
-them. Where the library's kernel-verified normal form already covers a special
-case, that declaration is quoted in its own words and nothing stronger is
-attributed to it.
+derivations. One case is also `kernel-verified`: `Binary.tau_eq_at_topRoot`
+gives the value of $`\tau(p)`$ in Theorem 6.6 for a full-support law with
+nonnegative determinant; [section 8](#8-scope-and-formalization) lists what is
+not formalized. Kernel-verified declarations are cited by name, and nothing
+stronger than their statements is attributed to them.
 
 Write a binary law as $`p = (a,b,c,d) = (p_{00},p_{01},p_{10},p_{11})`$ and put
 $`\Delta = ad - bc`$.
@@ -856,7 +857,7 @@ roles of the two diagonal cells exchanged. Hence $`\ell_q = \ell_{q'}`$ on
 $`\Delta_S`$. Since $`\ell_q \ge \Phi`$ on $`\Delta_S`$ and
 $`\ell_{q'}(q') = \Phi(q')`$, the law $`q'`$ is a contact of $`\ell_q`$.
 
-If $`a = d`$, then $`u = a`$, $`X = a^2`$, and $`f_q(a) = 0`$ reads
+If $`a = d`$, then $`u = a`$, $`\xi = a^2`$, and $`f_q(a) = 0`$ reads
 $`a^2\,(b+c) + 2abc = a\,(a^2 - bc)`$, that is, $`3bc = a\,(a - b - c)`$. A
 direct computation then gives $`\mu_0\,\mu_1 = \nu_0\,\nu_1 = 2\,(ad - bc)`$,
 so $`M_q = 4V_q`$, and by (4.5) and (4.6),
@@ -1030,8 +1031,9 @@ latent is optimal, as the rational test found.
 ## 8. Scope and formalization
 
 **What is proved here.** Everything above is a complete prose derivation
-from the definitions in [section 1](#1-setting-and-public-inputs), the two
-library facts quoted there (the score decomposition and attainment), and
+from the definitions in [section 1](#1-setting-and-public-inputs), the
+library facts quoted there (the score decomposition, attainment, and the
+comparison of codes with latents), and
 standard finite-dimensional analysis (the supporting-hyperplane theorem, the
 Gibbs variational identity, Young's inequality). It is `paper proof` in the
 ledger's sense. The ledger rows are `BIN-CONSTANT-TEST` (Theorem 4.1),
@@ -1061,13 +1063,16 @@ than through Theorem 6.6 on a three-cell support. The
 [open-problems page](open-problems.md#21-the-binary-constant-2-bin-c2) records
 this standing.
 
-**Formalization.** The public Lean already contains the ingredients of a
-special case: the two-contact chart of
-[NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
-parametrizes a full-support contact pair by chart coordinates, and its
-`contact_root_identity` is the cubic (6.1) written in those coordinates, after
-the `Y`-label exchange that orients the chart's determinant. The
-target declarations for the four rows are listed in the
-[Lean contracts](lean-contracts.md#binary-stochastic-optimum). The natural
-order is the rational test (a finite algebraic statement once Theorem 3.2
-is formalized), then the two-component bound, then the cubic.
+**Formalization.** For a full-support law with $`\Delta \ge 0`$,
+`Binary.tau_eq_at_topRoot` in
+[Optimum](../StochasticToDeterministicLatents/Binary/FactorTwo/Optimum.lean)
+is `kernel-verified` and states $`\tau(p)`$ in both branches of Theorem 6.6, at
+the top root of (6.1). The general-support statement, the equivalence in
+Theorem 6.6, the uniqueness of Theorem 6.7, Theorems 4.1 and 5.1, and
+Corollary 7.1 are not formalized; their target declarations are listed in the
+[Lean contracts](lean-contracts.md#binary-stochastic-optimum). The two-contact
+chart of [NormalForm](../StochasticToDeterministicLatents/Binary/NormalForm.lean)
+also carries the cubic: after the `Y`-label exchange that orients the chart's
+determinant, its `contact_root_identity` corresponds to (6.1) on that chart, by
+a substitution recorded in the [Lean contracts](lean-contracts.md#binary-stochastic-optimum)
+that is not a library theorem.

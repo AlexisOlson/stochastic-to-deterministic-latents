@@ -30,7 +30,7 @@ carried out here and no declaration in this tree states the concavity.
 
 `rayConstantScalar_gt_of_seam` and `raySeam_margins_gt`: at a radius where the
 mass is `1 / 8`, the two margins of the centre exceed `1 / 100` and `1 / 250`.
-These are the seam bounds already admitted for an arbitrary chord domain,
+These are the seam bounds proved for an arbitrary chord domain,
 read at the ray's own law through the coordinate identities of
 `CenterDictionary`.
 
@@ -40,7 +40,6 @@ stated as `1/100 < Real.log 2 * constantMargin ...`, in natural-log units, so
 the constant arm needs no conversion at all.  `seam_singletonMargin_gt` is
 stated as `1/(250 * Real.log 2) < singletonMargin ...`, in bits, so the
 isolating arm carries the step `1/250 = Real.log 2 * (1/(250 * Real.log 2))`.
-Both were checked as scratch examples before this module was written.
 -/
 
 namespace StochasticToDeterministicLatents.Binary
@@ -144,7 +143,7 @@ private theorem rayLaw_radius (hz : z ∈ Set.Ico (0 : ℝ) 1)
 /-! ## The two margins at a seam radius -/
 
 /-- **At a seam radius the constant code's margin exceeds one hundredth.**
-The bound is the one already admitted for every chord domain of mass `1 / 8`,
+The bound is the one proved for every chord domain of mass `1 / 8`,
 read at the ray's own law.  Both sides are in natural-log units. -/
 theorem rayConstantScalar_gt_of_seam (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) (hv : rayMass z r = 1 / 8) :
@@ -158,7 +157,7 @@ theorem rayConstantScalar_gt_of_seam (hz : z ∈ Set.Ico (0 : ℝ) 1)
   exact seam_constantMargin_center_gt hchord hmass
 
 /-- At a seam radius the isolating code's margin exceeds one part in two
-hundred and fifty.  The admitted bound is in bits, so this one carries the
+hundred and fifty.  The seam bound is in bits, so this one carries the
 conversion factor explicitly. -/
 private theorem raySingletonScalar_gt_of_seam (hz : z ∈ Set.Ico (0 : ℝ) 1)
     (hr : r ∈ Set.Ioo (0 : ℝ) (criticalRadius z)) (hv : rayMass z r = 1 / 8) :

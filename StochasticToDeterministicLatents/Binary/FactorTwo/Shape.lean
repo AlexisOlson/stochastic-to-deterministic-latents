@@ -225,7 +225,8 @@ theorem constantCurvature_sign_switch (s b c A : ‚Ñù) (hs : 0 < s) (hA : s / 2 ‚
 
 /-! ## From derivative signs to shape
 
-The five lemmas below carry no mathematics of their own: each converts a
+Apart from `min_endpoints_le_of_curvature_switch`, the lemmas below carry no
+mathematics of their own: each converts a
 `HasDerivAt` hypothesis stated on the open interval into the
 `HasDerivWithinAt` or `deriv` form that the corresponding Mathlib lemma
 expects.

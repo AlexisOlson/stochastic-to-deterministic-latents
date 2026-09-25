@@ -28,8 +28,7 @@ noncomputable section
 /-- The public catalog written with its off-support default made explicit.
 Both sides are the public `catalog`; the equality is `canonicalizeRealCode`
 agreeing with `constantCode` off support.  It is stated so that the catalog's
-two arms can be read without unfolding `canonicalizeRealCode`, and it makes no
-comparison with any construction outside this repository. -/
+two arms can be read without unfolding `canonicalizeRealCode`. -/
 theorem catalog_eq_zeroSupportForm (p : RealTable) :
     catalog p =
       match activeCell? p with
@@ -50,8 +49,7 @@ theorem catalog_eq_zeroSupportForm (p : RealTable) :
 
 /-- The public selector written with its private score comparison unfolded.
 This exhibits the public catalog order and the left-biased final score tie
-without unfolding `pickLowerScore`; it compares the selector with nothing
-outside this repository. -/
+without unfolding `pickLowerScore`. -/
 theorem selector_eq_zeroSupportForm (p : RealTable) :
     selector p =
       match activeCell? p with

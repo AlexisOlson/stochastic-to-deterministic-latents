@@ -11,8 +11,9 @@ binary code, and the minimum of the two chart-code costs has the same bound.
 The root exports this result as `BIN-REDUCE`; the factor-nine proof does not
 depend on it. A factor-eight upper bound needs only `w3 L <= w3Cost L g` at
 the phase-selected code, which `w3_le_w3Cost` already gives. The dominance
-proved here supplies the reverse inequality needed to identify the infimum
-with the selected cost. The arbitrary-code reward bound is used internally
+proved here is the reverse comparison; no public theorem states the resulting
+identification of the infimum with the selected cost. The arbitrary-code reward
+bound is used internally
 by the phase-selector cost bound.
 
 ## Attribution

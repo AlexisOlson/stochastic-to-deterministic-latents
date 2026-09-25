@@ -397,7 +397,7 @@ theorem cornerInfo_pos {a b c : ℝ} (ha : 0 < a) (hb : 0 < b) (hc : 0 < c) :
     0 < cornerInfo a b c :=
   lt_of_lt_of_le (by positivity) (cornerInfo_bounds ha hb hc).1
 
-/-- A tangent bound on the binary entropy at a small mass. -/
+/-- A tangent bound on the binary entropy, for every `d < 1`. -/
 theorem binaryEntropyNat_ge {d : ℝ} (hd1 : d < 1) :
     d * (-Real.log d + 1 - d) ≤ binaryEntropyNat d := by
   have hp : 0 < 1 - d := sub_pos.mpr hd1

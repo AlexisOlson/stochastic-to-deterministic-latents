@@ -2,8 +2,7 @@
 Adapted from `DLorell/stoch_to_det` (Apache-2.0).  Modified: the plane index is
 produced existentially rather than by a nested conditional, the pairing step is
 stated for any chord domain rather than only on the seam, and the bound is
-stated multiplied through by `Real.log 2`, as every other margin bound in this
-tree is.
+stated multiplied through by `Real.log 2`, as the two fixed-cut bounds are.
 -/
 import StochasticToDeterministicLatents.Binary.FactorTwo.PlaneEndpoints
 
@@ -17,8 +16,7 @@ constant code's margin at the centre of the contact chord is bounded below:
 1/100 < Real.log 2 * constantMargin p u (chordMidpoint p)
 ```
 
-This is the first bound on a margin in the reference-plane route.  Everything
-before it was about numbers.
+This is the first bound on a margin in the reference-plane route.
 
 ## The three steps
 

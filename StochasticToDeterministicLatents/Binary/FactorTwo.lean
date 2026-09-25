@@ -16,8 +16,9 @@ the stochastic one.
 `Gates.lean` reduces this to a one-dimensional question at each contact chord:
 it is enough that, for every chord domain, either the constant code's margin is
 nonnegative at the midpoint of the chord, or the isolating code's margin is
-nonnegative at both ends, or there is one interior point where both margins are
-nonnegative and the isolating margin is nonnegative at the midpoint as well.
+nonnegative at both ends, or there is one point of the chord,
+`[chordMidpoint p, chordTop p u]`, where both margins are nonnegative and the
+isolating margin is nonnegative at the midpoint as well.
 `gates_of_chordDomain` supplies that disjunction at every chord domain, by a
 case split on the off-diagonal mass:
 
